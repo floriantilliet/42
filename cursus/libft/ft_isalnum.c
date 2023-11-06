@@ -6,13 +6,13 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 11:21:50 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/06 14:45:08 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/06 16:04:03 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isalnum(unsigned char str)
+int	ft_isalnum(int c)
 {
-	if (str < 30 || (str > 57 && str < 65) || (str > 90 && str < 97) || str > 122)
+	if (c < 30 || (c > 57 && c < 65) || (c > 90 && c < 97) || c > 122)
 	{
 		return 0;
 	}

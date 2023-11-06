@@ -6,13 +6,13 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 11:22:01 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/06 14:55:52 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/06 16:04:31 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isdigit(unsigned char str)
+int	ft_isdigit(int c)
 {
-	if (str < 48 || str > 57)
+	if (c < 48 || c > 57)
 	{
 		return 0;
 	}
