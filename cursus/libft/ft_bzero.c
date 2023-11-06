@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 11:21:44 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/06 16:14:21 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/06 17:54:09 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void ft_bzero(void *s, size_t n)
 
     if (!s)
         return;
+    i = 0;
     while (i < n)
     {
         *(char*)(s+i) = 0;
