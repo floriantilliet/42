@@ -6,11 +6,11 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 09:28:37 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/07 14:52:31 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/07 15:32:39 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include "libft.h"
 
 int	count_words(char *str, char c)
 {

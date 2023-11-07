@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:36:12 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/07 14:53:44 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/07 15:29:29 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ char			*ft_strchr(const char *s, int c);
 
 char			*ft_strdup(const char *src);
 
+void			ft_striteri(char *s, void (*f)(unsigned int, char*));
+
 char			*ft_strjoin(char const *s1, char const *s2);
 
 size_t			ft_strlcat(char *dest, const char *src, size_t size);
@@ -65,8 +67,6 @@ size_t			ft_strlcat(char *dest, const char *src, size_t size);
 size_t			ft_strlcpy(char *dest, const char *src, size_t size);
 
 size_t			ft_strlen(const char *str);
-
-char			*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
 

@@ -6,11 +6,11 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 09:28:51 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/07 14:52:14 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/07 15:32:54 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include "libft.h"
 
 void	ft_putendl_fd(char *str, int fd)
 {

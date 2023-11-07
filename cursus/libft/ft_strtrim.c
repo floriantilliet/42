@@ -6,11 +6,11 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 09:28:59 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/07 14:53:28 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/07 15:32:01 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include "libft.h"
 
 int	is_sep(char c, const char *charset)
 {

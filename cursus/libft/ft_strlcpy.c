@@ -6,11 +6,11 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 11:22:25 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/07 14:53:01 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/07 15:32:17 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include "libft.h"
 
 size_t	*ft_strlcpy(char *dest, char *src, size_t n)
 {

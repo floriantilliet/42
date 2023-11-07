@@ -6,11 +6,11 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 11:22:07 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/07 14:51:53 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/07 15:33:11 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include "libft.h"
 
 void ft_memcmp(const void *s1, const void *s2, size_t n)
 {
