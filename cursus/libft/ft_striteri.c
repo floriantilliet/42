@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 09:28:35 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/07 15:31:27 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/07 15:49:54 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,18 @@ void ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
     size_t  i;
 
-    while (s[i])
+    i = 0;
+    while (s[i] && f)
     {
-        f(i, s);
+        f(i, &s[i]);
+        i++;
     }
 }
 
-void caca(unsigned int i , char* s)
+/* 
+void test(unsigned int i , char* s)
 {
-    s[i] = '!';
+    *s = '!';
 }
 
 #include <stdio.h>
@@ -32,5 +35,7 @@ void caca(unsigned int i , char* s)
 int main(int argc, char** argv)
 {
     argc++;
-    printf("%s\n%s\n", argv[1], ft_striteri(argv[1], caca));
-}
+    printf("%s\n", argv[1]);
+    ft_striteri(argv[1], test);
+    printf("%s\n", argv[1]);
+} */
