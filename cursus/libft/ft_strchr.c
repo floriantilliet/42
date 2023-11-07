@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 11:22:17 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/07 15:32:29 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/07 17:43:47 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,13 @@
 char	*ft_strchr(const char *s, int c)
 {
 	int			i;
-	int			j;
-	char		*ptr;
-
-	ptr = NULL;
 
 	i = 0;
 	while (s[i] != '\0')
 	{
 		if (s[i] == c)
 		{
-			ptr = &s[i];
-			return (ptr);
+			return ((char*)&s[i]);
 		}
 		i++;
 	}

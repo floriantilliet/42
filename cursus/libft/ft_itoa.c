@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 09:28:53 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/07 15:33:17 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/07 17:25:54 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	get_malloc(int nbr)
 
 void	getnbr(int nbr, char *nb, int *i)
 {
-	int					len_base;
 	int					s;
 
 	s = 1;

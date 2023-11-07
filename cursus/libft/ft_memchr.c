@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 11:22:05 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/07 15:33:14 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/07 17:30:07 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void *ft_memchr(const void *s, int c, size_t n)
     while (i < n)
     {
         if (*(char*)(s + i) == c)
-			ptr = (s + i);
+			ptr = (void*)(s + i);
             return (ptr);
 		i++;
 	}

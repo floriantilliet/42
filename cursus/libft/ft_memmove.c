@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 11:22:12 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/07 15:33:04 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/07 17:32:31 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void *ft_memmove(void *dest, const void *src, size_t n)
         i = 0;
         while (i < n)
         {
-            *(char*)(dest+i) = (char)(src+i);
+            *(char*)(dest+i) = *(char*)(src+i);
             i++;
         }
     }
@@ -32,7 +32,7 @@ void *ft_memmove(void *dest, const void *src, size_t n)
         i = n;
         while (i < 0)
         {
-            *(char*)(dest+i) = (char)(src+i);
+            *(char*)(dest+i) = *(char*)(src+i);
             i--;
         }
     }

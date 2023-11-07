@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 11:22:32 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/07 15:32:07 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/07 17:55:52 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	int			i;
+	size_t			i;
 	int			j;
 	int			l;
 	char		*ptr;
@@ -32,7 +32,7 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 			while (big[i + j] == little[j] && j < l)
 				j++;
 			if (j == l)
-				ptr = &big[i];
+				ptr = (char*)&big[i];
 			return (ptr);
 		}
 		i++;

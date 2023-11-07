@@ -6,13 +6,13 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 09:28:37 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/07 15:32:39 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/07 17:36:18 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	count_words(char *str, char c)
+int	count_words(char const *str, char c)
 {
 	int	i;
 	int	count;
@@ -28,7 +28,7 @@ int	count_words(char *str, char c)
 	return (count);
 }
 
-void	write_word(char *dest, char *from, char c)
+void	write_word(char *dest, char const *from, char c)
 {
 	int	i;
 
@@ -41,7 +41,7 @@ void	write_word(char *dest, char *from, char c)
 	dest[i] = '\0';
 }
 
-void	write_split(char **tab, char *str, char c)
+void	write_split(char **tab, char const *str, char c)
 {
 	int		i;
 	int		j;
@@ -66,7 +66,7 @@ void	write_split(char **tab, char *str, char c)
 	}
 }
 
-char	**ft_split(char *str, char c)
+char	**ft_split(char const *str, char c)
 {
 	char	**res;
 	int		words;

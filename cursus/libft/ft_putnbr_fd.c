@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 09:28:43 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/07 15:32:48 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/07 17:33:25 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_putnbr_fd(int nb, int fd)
 		write(1, "-", 1);
 	}
 	if (nbr > 9)
-		ft_putnbr(nbr / 10);
+		ft_putnbr_fd(nbr / 10, fd);
 	temp = '0' + (char)(nbr % 10);
 	write(fd, &temp, 1);
 }
