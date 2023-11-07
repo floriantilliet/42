@@ -6,11 +6,13 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 11:22:27 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/06 15:08:37 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/07 14:53:06 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strlen(char *str)
+#include <libft.h>
+
+size_t	ft_strlen(const char *str)
 {
 	int	len;
 

@@ -6,11 +6,11 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 11:22:12 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/06 17:40:59 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/07 14:52:00 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include <libft.h>
 
 void *ft_memmove(void *dest, const void *src, size_t n)
 {

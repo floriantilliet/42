@@ -6,13 +6,13 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 11:22:21 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/06 15:06:29 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/07 14:52:46 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include <libft.h>
 
-char	*ft_strdup(char *src)
+char	*ft_strdup(const char *src)
 {
 	int			i;
 	char		*dest;

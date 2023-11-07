@@ -1,30 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/06 11:21:48 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/07 14:51:28 by ftilliet         ###   ########.fr       */
+/*   Created: 2023/11/07 09:29:01 by ftilliet          #+#    #+#             */
+/*   Updated: 2023/11/07 14:53:34 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 
-void *ft_calloc(size_t nmemb, size_t size)
+int get_malloc(char const *s, unsigned int start, size_t len)
 {
-    void    *ptr;
-    size_t  i;
-
-    ptr = malloc(nmemb * size);
-    if (!ptr)
-        return (NULL);
-    i = 0;
-    while (i < size)
+    while (s[start] != '\0' || start < len)
     {
-        *(char*)(ptr+i) = 0;
-        i++;
+        start++;
     }
-    return (ptr);
+    return(start);
+}
+
+char *ft_substr(char const *s, unsigned int start, size_t len)
+{
+    char	*res;
+    size_t  i;
+    
+    res = malloc(sizeof(char) * get_malloc(s, start, len) + 1);
+    i = 0;
+    while (s[start] != '\0' && i < len)
+    {
+        res[i] = s[start];
+        i++;
+        start++;
+    }
+    res[i] = '\0';
+    return(res);
 }

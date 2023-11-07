@@ -6,11 +6,11 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 11:22:32 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/06 15:39:25 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/07 14:53:15 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include <libft.h>
 
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {

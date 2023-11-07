@@ -6,13 +6,13 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 11:22:39 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/06 15:14:12 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/07 14:50:05 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	ft_toupper(unsigned char str)
+char	ft_toupper(int c)
 {
-	if (str >= 97 && str <= 122)
-			str = str - 32;
-	return (str);
+	if (c >= 97 && c <= 122)
+			c = c - 32;
+	return (c);
 }

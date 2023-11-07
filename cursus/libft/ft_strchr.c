@@ -6,11 +6,11 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 11:22:17 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/06 15:38:47 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/07 14:52:42 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include <libft.h>
 
 char	*ft_strchr(const char *s, int c)
 {

@@ -6,11 +6,11 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 11:22:14 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/06 17:31:31 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/07 14:52:05 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include <libft.h>
 
 void *ft_memset(void *s, int c, size_t n)
 {
