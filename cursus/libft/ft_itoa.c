@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 09:28:53 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/07 17:25:54 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/07 18:30:42 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	get_malloc(int nbr)
 
 void	getnbr(int nbr, char *nb, int *i)
 {
-	int					s;
+	int	s;
 
 	s = 1;
 	if (nbr < 0)
@@ -52,8 +52,8 @@ void	getnbr(int nbr, char *nb, int *i)
 
 char	*ft_itoa(int nbr)
 {
-	char	*nb;
-	int		i;
+	char *nb;
+	int i;
 
 	i = 0;
 

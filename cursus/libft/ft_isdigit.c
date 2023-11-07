@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 11:22:01 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/06 16:04:31 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/07 18:30:37 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@ int	ft_isdigit(int c)
 {
 	if (c < 48 || c > 57)
 	{
-		return 0;
+		return (0);
 	}
-	return 1;
+	return (1);
 }

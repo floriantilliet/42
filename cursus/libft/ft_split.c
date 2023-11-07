@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 09:28:37 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/07 17:36:18 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/07 18:31:06 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ void	write_word(char *dest, char const *from, char c)
 
 void	write_split(char **tab, char const *str, char c)
 {
-	int		i;
-	int		j;
-	int		word;
+	int	i;
+	int	j;
+	int	word;
 
 	word = 0;
 	i = 0;
@@ -80,8 +80,8 @@ char	**ft_split(char const *str, char c)
 /*
 int	main(int argc, char **argv)
 {
-	char **tab;
-	int i;
+	char	**tab;
+	int		i;
 
 	i = 0;
 	argc++;

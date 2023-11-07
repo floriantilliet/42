@@ -6,20 +6,20 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 11:20:16 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/07 14:39:28 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/07 18:30:21 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_atoi(const char *str)
 {
-	int	signe;
-	int	result;
+	int signe;
+	int result;
 
 	signe = 1;
 	result = 0;
 	while ((*str <= 13 && *str >= 9) || *str == ' ')
 		str++;
-    if (*str == '+' || *str == '-')
+	if (*str == '+' || *str == '-')
 	{
 		if (*str == '-')
 			signe *= -1;

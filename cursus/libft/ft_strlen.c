@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 11:22:27 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/07 15:32:14 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/07 18:31:22 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 size_t	ft_strlen(const char *str)
 {
-	int	len;
+	int len;
 
 	len = 0;
 	while (*str != '\0')

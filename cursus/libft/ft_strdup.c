@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 11:22:21 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/07 15:58:39 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/07 18:31:11 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char	*ft_strdup(const char *src)
 {
-	int			i;
-	char		*dest;
+	int i;
+	char *dest;
 
 	i = 0;
 	while (src[i])
