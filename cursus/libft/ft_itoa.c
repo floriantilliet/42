@@ -34,12 +34,8 @@ int	get_malloc(int nbr)
 
 void	getnbr(int nbr, char *nb, int *i)
 {
-	int	s;
-
-	s = 1;
 	if (nbr < 0)
 	{
-		s = -1;
 		nb[*i] = '-';
 		*i = *i + 1;
 		nbr = -nbr;
