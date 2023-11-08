@@ -9,6 +9,11 @@ SRC			= ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
 
 OBJS		= ${SRC:.c=.o}
 
+BONUS			=	ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c \
+					ft_lstdelone.c ft_lstiter.c ft_lstlast.c \
+					ft_lstmap.c ft_lstnew.c ft_lstsize.c
+BONUS_OBJS		= $(BONUS:.c=.o)
+
 NAME		= libft.a
 
 RM			= rm -f
@@ -38,4 +43,7 @@ fclean:		clean
 
 re:			fclean all
 
-.PHONY:		all clean fclean re
+bonus:			$(OBJS) $(BONUS_OBJS)
+				ar rcs $(NAME) $(OBJS) $(BONUS_OBJS)
+
+.PHONY:		all clean fclean re bonus

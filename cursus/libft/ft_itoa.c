@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 09:28:53 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/08 10:59:05 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/08 12:09:29 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,14 @@ char	*ft_itoa(int nbr)
 	i = 0;
 	nb = malloc(sizeof(char) * (get_malloc(nbr) + 1));
 	getnbr(nbr, nb, &i);
-	nb[i + 1] = '\0';
+	nb[i] = '\0';
 	return (nb);
 }
+
+/* 
+#include <stdio.h>
+
+int main(void)
+{
+	printf("%s\n", ft_itoa(-42));
+} */
