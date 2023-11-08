@@ -36,7 +36,7 @@ ${NAME}:	${OBJS}
 			${LIB} ${NAME}
 
 clean:
-			rm -f ${OBJS}
+			rm -f ${OBJS} $(BONUS_OBJS)
 
 fclean:		clean
 			rm -f ${NAME}
