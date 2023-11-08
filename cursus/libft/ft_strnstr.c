@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 11:22:32 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/07 18:31:28 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/08 10:54:27 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	size_t i;
-	int j;
-	int l;
-	char *ptr;
+	size_t	i;
+	int		j;
+	int		l;
+	char	*ptr;
 
 	ptr = NULL;
 	l = 0;

@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 11:22:23 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/07 18:31:17 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/08 10:52:02 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 size_t	ft_strlcat(char *dest, const char *src, size_t size)
 {
-	unsigned int i;
-	unsigned int j;
-	unsigned int res;
+	unsigned int	i;
+	unsigned int	j;
+	unsigned int	res;
 
 	i = 0;
 	j = 0;

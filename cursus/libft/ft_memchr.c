@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 11:22:05 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/07 18:30:44 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/08 10:55:39 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {
-	size_t i;
-	void *ptr;
+	size_t	i;
+	void	*ptr;
 
 	if (!s)
 		return (NULL);

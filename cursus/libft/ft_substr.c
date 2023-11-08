@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 09:29:01 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/07 18:31:34 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/08 10:55:59 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int	get_malloc(char const *s, unsigned int start, size_t len)
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char *res;
-	size_t i;
+	char	*res;
+	size_t	i;
 
 	res = malloc(sizeof(char) * get_malloc(s, start, len) + 1);
 	i = 0;

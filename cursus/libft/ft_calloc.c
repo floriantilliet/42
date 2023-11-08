@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 11:21:48 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/07 18:30:27 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/08 10:55:03 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {
-	void *ptr;
-	size_t i;
+	void	*ptr;
+	size_t	i;
 
 	ptr = malloc(nmemb * size);
 	if (!ptr)

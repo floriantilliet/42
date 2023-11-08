@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 11:22:14 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/07 18:30:55 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/08 10:50:53 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	*ft_memset(void *s, int c, size_t n)
 {
-	size_t i;
+	size_t	i;
 
 	if (!s)
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 09:28:59 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/07 18:31:32 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/08 10:56:53 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ int	is_sep(char c, const char *charset)
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	char *str;
-	size_t i;
-	size_t start;
-	size_t end;
+	char	*str;
+	size_t	i;
+	size_t	start;
+	size_t	end;
 
 	start = 0;
 	while (s1[start] && is_sep(s1[start], set))

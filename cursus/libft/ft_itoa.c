@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 09:28:53 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/07 18:30:42 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/08 10:59:05 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,10 @@ void	getnbr(int nbr, char *nb, int *i)
 
 char	*ft_itoa(int nbr)
 {
-	char *nb;
-	int i;
+	char	*nb;
+	int		i;
 
 	i = 0;
-
 	nb = malloc(sizeof(char) * (get_malloc(nbr) + 1));
 	getnbr(nbr, nb, &i);
 	nb[i + 1] = '\0';
