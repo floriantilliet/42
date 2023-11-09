@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 09:28:37 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/07 18:31:06 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/09 17:26:45 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int	count_words(char const *str, char c)
 			count++;
 		i++;
 	}
+	if (!count)
+		count++;
 	return (count);
 }
 
@@ -77,7 +79,8 @@ char	**ft_split(char const *str, char c)
 	write_split(res, str, c);
 	return (res);
 }
-/*
+
+/* #include<stdio.h>
 int	main(int argc, char **argv)
 {
 	char	**tab;
@@ -85,11 +88,11 @@ int	main(int argc, char **argv)
 
 	i = 0;
 	argc++;
-	tab = ft_split(argv[1], argv[2]);
+	tab = ft_split(argv[1], *argv[2]);
 	while(tab[i])
 	{
 		printf("%s\n", tab[i]);
 		i++;
 	}
 }
-*/
+ */

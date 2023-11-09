@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 09:28:53 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/08 12:09:29 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/09 16:51:12 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	get_malloc(int nbr)
 		i++;
 	}
 	if (nbr == 0)
-		return (0);
+		return (1);
 	while (nbr > 10)
 	{
 		nbr /= 10;
@@ -52,16 +52,18 @@ char	*ft_itoa(int nbr)
 	int		i;
 
 	i = 0;
+	if (nbr == -2147483648)
+		return (ft_strdup("-2147483648"));
 	nb = malloc(sizeof(char) * (get_malloc(nbr) + 1));
 	getnbr(nbr, nb, &i);
 	nb[i] = '\0';
 	return (nb);
 }
 
-/* 
-#include <stdio.h>
+/* #include <stdio.h>
+#include <limits.h>
 
-int main(void)
+int	main(void)
 {
-	printf("%s\n", ft_itoa(-42));
+	printf("%s\n", ft_itoa(INT_MIN));
 } */
