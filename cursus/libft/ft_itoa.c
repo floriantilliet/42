@@ -24,7 +24,7 @@ int	get_malloc(int nbr)
 	}
 	if (nbr == 0)
 		return (1);
-	while (nbr > 10)
+	while (nbr >= 10)
 	{
 		nbr /= 10;
 		i++;

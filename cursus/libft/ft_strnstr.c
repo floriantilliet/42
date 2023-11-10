@@ -31,7 +31,7 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 		if (big[i] == little[0])
 		{
 			j = 0;
-			while (big[i + j] == little[j] && j < l)
+			while (big[i + j] == little[j] && (size_t)j + i < len)
 				j++;
 			if (j == l)
 				return ((char *)&big[i]);
@@ -40,6 +40,7 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	}
 	return (NULL);
 }
+
 /*
 #include <stdio.h>
 

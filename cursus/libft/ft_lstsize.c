@@ -14,8 +14,8 @@
 
 int ft_lstsize(t_list *lst)
 {
-    size_t size;
-    t_list *current;
+    size_t  size;
+    t_list  *current;
 
     if (!lst)
         return (0);

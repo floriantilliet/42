@@ -14,7 +14,7 @@
 
 void    ft_lstadd_back(t_list **head, t_list *new)
 {
-    t_list *last;
+    t_list  *last;
 
     if (head)
     {
