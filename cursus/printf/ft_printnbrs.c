@@ -49,7 +49,7 @@ int	ft_printunbr(unsigned int nb)
 
 #include <stdio.h>
 
-int	ft_printhex(unsigned int nbr, char *base)
+int	ft_printhex(unsigned long int nbr, char *base)
 {
 	char		temp;
 	int			count;

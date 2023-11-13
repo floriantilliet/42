@@ -31,6 +31,6 @@ int	ft_printnbr(int nb);
 
 int	ft_printunbr(unsigned int nb);
 
-int	ft_printhex(unsigned int nbr, char* base);
+int	ft_printhex(unsigned long int nbr, char* base);
 
 #endif
