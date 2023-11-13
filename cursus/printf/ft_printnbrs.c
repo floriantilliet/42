@@ -40,11 +40,6 @@ int	ft_printunbr(unsigned int nb)
 
 	count = 0;
 	nbr = nb;
-	if (nbr < 0)
-	{
-		nbr *= -1;
-		write(1, "-", 1);
-	}
 	if (nbr > 9)
 		count += ft_printunbr(nbr / 10);
 	temp = '0' + (char)(nbr % 10);
@@ -56,17 +51,10 @@ int	ft_printunbr(unsigned int nb)
 
 int	ft_printhex(unsigned int nbr, char *base)
 {
-	long int	nb;
 	char		temp;
 	int			count;
 
 	count = 0;
-	nb = nbr;
-	if (nbr < 0)
-	{
-		nbr *= -1;
-		write(1, "-", 1);
-	}
 	if (nbr > 15)
 		count += ft_printhex(nbr / 16, base);
 	temp = (char)base[(nbr % 16)];
