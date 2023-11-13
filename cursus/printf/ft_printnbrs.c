@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 15:22:06 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/13 17:53:46 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/13 18:33:13 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ int	ft_printnbr(int nb)
 {
 	long int		nbr;
 	unsigned char	temp;
-    int count;
+	int				count;
 
-    count = 0;
+	count = 0;
 	nbr = nb;
 	if (nbr < 0)
 	{
@@ -29,16 +29,16 @@ int	ft_printnbr(int nb)
 		ft_printnbr(nbr / 10);
 	temp = '0' + (char)(nbr % 10);
 	count += ft_printchar(temp);
-    return (count);
+	return (count);
 }
 
 int	ft_printunbr(unsigned int nb)
 {
-	unsigned long int		nbr;
-	unsigned char	temp;
-    int count;
+	unsigned long int	nbr;
+	unsigned char		temp;
+	int					count;
 
-    count = 0;
+	count = 0;
 	nbr = nb;
 	if (nbr < 0)
 	{
@@ -49,20 +49,19 @@ int	ft_printunbr(unsigned int nb)
 		ft_printunbr(nbr / 10);
 	temp = '0' + (char)(nbr % 10);
 	count += ft_printchar(temp);
-    return (count);
+	return (count);
 }
 
 #include <stdio.h>
 
-int	ft_printhex(unsigned int nbr, char* base)
+int	ft_printhex(unsigned int nbr, char *base)
 {
-	long int		nb;
-	char			temp;
-    int             count;
+	long int	nb;
+	char		temp;
+	int			count;
 
-    count = 0;
+	count = 0;
 	nb = nbr;
-
 	if (nbr < 0)
 	{
 		nbr *= -1;
@@ -72,5 +71,5 @@ int	ft_printhex(unsigned int nbr, char* base)
 		ft_printhex(nbr / 16, base);
 	temp = (char)base[(nbr % 16)];
 	count += ft_printchar(temp);
-    return (count);
+	return (count);
 }
