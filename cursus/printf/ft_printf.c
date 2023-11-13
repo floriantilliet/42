@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 12:45:41 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/13 18:33:19 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/13 18:40:11 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,13 @@ int	main(void)
 			NULL, d, i, u, x, x);
 	printf("\n");
 	printf("%d", c);
+
+    /* int c = 0;
+    int d = 123;
+    c = ft_printf("%d", d);
+    printf("\n");
+	printf("%d", c);
+	printf("\n"); */
 
 	return (0);
 }
