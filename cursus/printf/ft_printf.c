@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 12:45:41 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/13 18:40:11 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/13 18:41:57 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	ft_conversion(va_list args, const char format)
 	else if (format == 's')
 		count += ft_printstr(va_arg(args, char *));
 	else if (format == 'p')
-		count += ft_printptr(va_arg(args, unsigned int));
+		count += ft_printptr(va_arg(args, unsigned long int));
 	else if (format == 'u')
 		count += ft_printunbr(va_arg(args, unsigned int));
 	return (count);
@@ -70,13 +70,13 @@ int	main(void)
 	unsigned int u = 3147483647;
 	unsigned int x = 42;
 
-	c = ft_printf("%c %s %p %p %d %i %u %x %X %%", '?', "salut c florian", ptr,
+	c = ft_printf("%c%%%s %p %p %d %i %u %x %X %%", '?', "salut c florian", ptr,
 			NULL, d, i, u, x, x);
 	printf("\n");
 	printf("%d", c);
 	printf("\n");
 	printf("\n");
-	c = printf("%c %s %p %p %d %i %u %x %X %%", '?', "salut c florian", ptr,
+	c = printf("%c%%%s %p %p %d %i %u %x %X %%", '?', "salut c florian", ptr,
 			NULL, d, i, u, x, x);
 	printf("\n");
 	printf("%d", c);

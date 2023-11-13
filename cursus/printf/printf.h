@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 17:12:05 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/13 17:24:26 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/13 18:42:26 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int ft_printchar(int c);
 
 int ft_printstr(char* str);
 
-int ft_printptr(unsigned int ptr);
+int ft_printptr(unsigned long int ptr);
 
 int	ft_printnbr(int nb);
 
