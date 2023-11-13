@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 15:22:01 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/13 17:24:24 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/13 17:42:40 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int ft_printptr(unsigned int ptr)
     count = 0;
     if (ptr == 0)
     {
-        count += ft_printstr("nil");
+        count += ft_printstr("(nil)");
     }
     else
     {   count += ft_printstr("0x");

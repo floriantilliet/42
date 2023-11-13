@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 12:45:41 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/13 17:33:17 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/13 17:53:30 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,21 @@ int ft_printf(const char *format, ...)
 int main (void)
 {
     int c = 0;
-    c = ft_printf("%s c %s", "salut", "florian");
+    int var = 42;
+    int *ptr = &var;
+    int d = 1245514;
+    int i = 1432553;
+    unsigned int u = 3147483647;
+    unsigned int x = 42;
+    
+    c = ft_printf("%c %s %p %p %d %i %u %x %X %%", '?', "salut c florian", ptr, NULL, d, i, u, x, x);
     printf("\n");
     printf("%d", c);
+    printf("\n");
+    printf("\n");
+    c = printf("%c %s %p %p %d %i %u %x %X %%", '?', "salut c florian", ptr, NULL, d, i, u, x, x);
+    printf("\n");
+    printf("%d", c);
+
     return (0);
 }
