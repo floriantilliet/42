@@ -6,13 +6,13 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 09:28:53 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/15 14:58:02 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/15 16:43:04 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	get_malloc(int nbr)
+static int	get_malloc(int nbr)
 {
 	int	i;
 
@@ -32,7 +32,7 @@ int	get_malloc(int nbr)
 	return (i);
 }
 
-void	getnbr(int nbr, char *nb, int *i)
+static void	getnbr(int nbr, char *nb, int *i)
 {
 	if (nbr < 0)
 	{

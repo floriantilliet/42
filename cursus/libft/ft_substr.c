@@ -6,13 +6,13 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 09:29:01 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/09 16:51:00 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/15 16:44:11 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	get_malloc(char const *s, unsigned int start, size_t len)
+static size_t	get_malloc(char const *s, unsigned int start, size_t len)
 {
 	size_t	i;
 
