@@ -6,13 +6,20 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 11:22:37 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/09 11:40:16 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/15 17:37:25 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 char	ft_tolower(int c)
 {
-	if (c >= 65 && c <= 90)
+	if (c >= 'A' && c <= 'Z')
 		c = c + 32;
 	return (c);
 }
+
+/* #include <stdio.h>
+
+int main(void)
+{
+	printf("%c", ft_tolower('Z'));
+} */

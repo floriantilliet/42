@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 09:28:53 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/15 16:43:04 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/15 17:27:54 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ char	*ft_itoa(int nbr)
 	if (nbr == -2147483648)
 		return (ft_strdup("-2147483648"));
 	nb = malloc(sizeof(char) * (get_malloc(nbr) + 1));
+	if (!nb)
+		return (0);
 	getnbr(nbr, nb, &i);
 	nb[i] = '\0';
 	return (nb);
