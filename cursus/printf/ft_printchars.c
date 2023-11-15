@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 15:22:01 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/15 14:56:30 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/15 16:12:53 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@ int	ft_printstr(char *str)
 	int	count;
 
 	count = 0;
+	if (!str)
+	{
+		count += ft_printstr("(null)");
+		return (count);
+	}
 	while (*str != '\0')
 	{
 		count += ft_printchar(*str);
