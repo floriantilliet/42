@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 15:22:06 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/15 15:14:28 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/15 16:47:49 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ int	ft_printunbr(unsigned int nb)
 	count += ft_printchar(temp);
 	return (count);
 }
-
-#include <stdio.h>
 
 int	ft_printhex(unsigned long int nbr, char *base)
 {

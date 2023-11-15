@@ -6,13 +6,13 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 12:45:41 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/15 14:56:25 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/15 16:47:38 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_conversion(va_list args, const char format)
+static int	ft_conversion(va_list args, const char format)
 {
 	int	count;
 
@@ -58,6 +58,7 @@ int	ft_printf(const char *format, ...)
 	return (count);
 }
 
+/* 
 #include <stdio.h>
 
 int	main(void)
@@ -81,12 +82,12 @@ int	main(void)
 	printf("\n");
 	printf("%d", c);
 
-    /* int c = 0;
+    int c = 0;
     int d = 123;
     c = ft_printf("%d", d);
     printf("\n");
 	printf("%d", c);
-	printf("\n"); */
+	printf("\n");
 
 	return (0);
-}
+} */
