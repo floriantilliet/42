@@ -20,8 +20,6 @@ RM			= rm -f
 
 AR			= ar rcs
 
-LIB			= ranlib
-
 CC			= cc
 
 CFLAGS		= -Wall -Wextra -Werror
@@ -33,7 +31,6 @@ all:		${NAME}
 
 ${NAME}:	${OBJS}
 			${AR} ${NAME} ${OBJS}
-			${LIB} ${NAME}
 
 clean:
 			rm -f ${OBJS} $(BONUS_OBJS)
