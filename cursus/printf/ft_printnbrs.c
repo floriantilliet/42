@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 15:22:06 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/15 14:56:35 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/15 15:14:28 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_printnbr(int nb)
 	if (nbr < 0)
 	{
 		nbr *= -1;
-		write(1, "-", 1);
+		count += ft_printchar('-');
 	}
 	if (nbr > 9)
 		count += ft_printnbr(nbr / 10);
