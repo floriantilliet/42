@@ -17,7 +17,11 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	size_t	i;
 	char	*res;
 
+	if (!s)
+		return (0);
 	res = ft_strdup(s);
+	if (!res)
+		return (0);
 	i = 0;
 	while (res[i] && f)
 	{
