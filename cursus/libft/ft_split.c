@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 09:28:37 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/09 18:28:04 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/22 18:00:39 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,60 +33,73 @@ static int	count_words(const char *str, char c)
 	return (i);
 }
 
-static char	*word_dup(const char *str, int start, int finish)
+void	write_word(char *dest, char const *from, char c)
 {
-	char	*word;
-	int		i;
+	int	i;
 
 	i = 0;
-	word = malloc((finish - start + 1) * sizeof(char));
-	while (start < finish)
-		word[i++] = str[start++];
-	word[i] = '\0';
-	return (word);
-}
-
-char	**ft_split(char const *s, char c)
-{
-	size_t	i;
-	size_t	j;
-	int		index;
-	char	**split;
-
-	if (!s)
-		return (0);
-	split = malloc((count_words(s, c) + 1) * sizeof(char *));
-	if (!split)
-		return (0);
-	i = 0;
-	j = 0;
-	index = -1;
-	while (i <= ft_strlen(s))
+	while (from[i] != c && from[i])
 	{
-		if (s[i] != c && index < 0)
-			index = i;
-		else if ((s[i] == c || i == ft_strlen(s)) && index >= 0)
-		{
-			split[j++] = word_dup(s, index, i);
-			index = -1;
-		}
+		dest[i] = from[i];
 		i++;
 	}
-	split[j] = 0;
-	return (split);
+	dest[i] = '\0';
 }
 
-/*
-#include <stdio.h>
+void	write_split(char **tab, char const *str, char c)
+{
+	int	i;
+	int	j;
+	int	word;
 
-int	main(int argc, char **argv)
+	word = 0;
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == c)
+			i++;
+		else
+		{
+			j = 0;
+			while (str[i + j] != c && str[i + j])
+				j++;
+			tab[word] = malloc(sizeof(char) * (j + 1));
+			write_word(tab[word], str + i, c);
+			i += j;
+			word++;
+		}
+	}
+}
+
+char	**ft_split(char const *str, char c)
+{
+	char	**res;
+	int		words;
+
+	if (!str)
+	{
+		res = malloc(sizeof(char *));
+		res[0] = NULL;
+		return (res);
+	}
+	words = count_words(str, c);
+	res = malloc((words + 1) * sizeof(char *));
+	if (!res)
+		return (0);
+	res[words] = NULL;
+	write_split(res, str, c);
+	return (res);
+}
+
+/* #include <stdio.h>
+
+int	main(void)
 {
 	char	**tab;
 	int		i;
 
 	i = 0;
-	argc++;
-	tab = ft_split(argv[1], *argv[2]);
+	tab = ft_split("chinimala", ' ');
 	while(tab[i])
 	{
 		printf("%s\n", tab[i]);
