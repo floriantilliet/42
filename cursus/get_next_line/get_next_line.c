@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 15:00:58 by florian           #+#    #+#             */
-/*   Updated: 2023/11/26 15:03:36 by florian          ###   ########.fr       */
+/*   Updated: 2023/11/27 11:57:55 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ size_t	ft_strlcat(char *dest, char *src, size_t dstsize)
 		return (dstsize + ft_strlen(src));
 	c = ft_strlen(dest);
 	d = 0;
-	while (src[d] != '\0' && c + 1 < dstsize)
+	while (src[d] && c + 1 < dstsize)
 	{
 		dest[c] = src[d];
 		c++;
@@ -46,11 +46,14 @@ size_t	ft_strlcat(char *dest, char *src, size_t dstsize)
 
 int	new_line(char *str)
 {
-	while (*str)
+	int	i;
+
+	i = 0;
+	while (str[i])
 	{
-		if (*str == '\n')
+		if (str[i] == '\n')
 			return (1);
-		str++;
+		i++;
 	}
 	return (0);
 }
@@ -62,12 +65,13 @@ char	*clean(char *str)
 	char	*stash;
 
 	i = 0;
-	while (str[i] != '\n' || str[i])
+	while (str[i] != '\n' && str[i])
 	{
 		if (!str[i])
 			return (str);
 		i++;
 	}
+	i++;
 	j = 0;
 	while (str[i + j])
 	{
@@ -89,13 +93,17 @@ char	*get_new_line(char *str)
 	int		i;
 
 	i = 0;
-	while (str[i] != '\n')
+	while (str[i] != '\n' && str[i])
 	{
 		i++;
 	}
+	if (i == 0)
+		return(NULL);
 	line = malloc(sizeof(char) * i);
+	if (!line)
+		return(NULL);
 	i = 0;
-	while (str[i] != '\n')
+	while (str[i] != '\n' && str[i])
 	{
 		line[i] = str[i];
 		i++;
@@ -109,12 +117,18 @@ char	*get_next_line(int fd)
 	static char	*stash;
 	char		*line;
 	char		*buffer;
+	ssize_t		bytes_read;
 
-	buffer = malloc(sizeof(char) * 6);
-	while (buffer != 0 || !new_line(stash))
+	buffer = malloc(sizeof(char) * 5);
+	if (!stash)
+		stash = malloc(sizeof(char) * 50);
+	while (!new_line(stash))
 	{
-		read(fd, buffer, 5);
-		ft_strlcat(stash, buffer, ft_strlen(buffer));
+		bytes_read = read(fd, buffer, 5);
+		if (bytes_read <= 0)
+			break;
+		buffer[bytes_read] = '\0';
+		ft_strlcat(stash, buffer, ft_strlen(stash) + ft_strlen(buffer) + 1);
 	}
 	line = get_new_line(stash);
 	stash = clean(stash);
@@ -135,6 +149,6 @@ int	main(void)
 		line = get_next_line(fd);
 		if (line == NULL)
 			break ;
-		printf("%s", line);
+		printf("%s\n", line);
 	}
 }
