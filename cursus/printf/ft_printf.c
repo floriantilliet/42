@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 12:45:41 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/15 16:47:38 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/27 18:02:21 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ int	ft_printf(const char *format, ...)
 
 	count = 0;
 	va_start(args, format);
+	if (!format)
+		return(-1);
 	while (*format)
 	{
 		if (*format == '%')
