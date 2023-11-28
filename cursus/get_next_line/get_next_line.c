@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 15:00:58 by florian           #+#    #+#             */
-/*   Updated: 2023/11/27 17:29:58 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/28 12:57:26 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,32 +57,34 @@ char	*get_new_line(char *str)
 {
 	char	*line;
 	int		i;
-	int		j;
 
 	i = 0;
 	while (str[i] != '\n' && str[i])
 	{
 		i++;
 	}
-	if (i == 0)
-	{	
-		if (str[i] == '\n')
-			return(str);
-		else
-			return (NULL);
-	}
-		
-	line = malloc(sizeof(char) * i + 2);
+	line = malloc(sizeof(char) * (i + 2));
 	if (!line)
 		return (NULL);
-	j = 0;
-	while (j <= i && str[j])
+	if (i == 0)
 	{
-		line[j] = str[j];
-		j++;
+		if (str[i] == '\n')
+			return (just_new_line(line));
+		else
+		{
+			free(line);
+			return (NULL);
+		}
 	}
-	line[j] = '\0';
+	copy_until_new_line(&line, &str, &i);
 	return (line);
+}
+
+void	return_new_line(char **line, char **temp, char **stash)
+{
+	*line = get_new_line(*stash);
+	*temp = *stash;
+	*stash = clean(*stash);
 }
 
 char	*get_next_line(int fd)
@@ -110,14 +112,11 @@ char	*get_next_line(int fd)
 		stash = ft_strjoin(stash, buffer);
 		free(temp);
 	}
-	line = get_new_line(stash);
-	temp = stash;
-	stash = clean(stash);
-	free(temp);
-	return (free(buffer), line);
+	return_new_line(&line, &temp, &stash);
+	return (free(temp), free(buffer), line);
 }
 
-#include <fcntl.h>
+/* #include <fcntl.h>
 #include <stdio.h>
 
 int	main(void)
@@ -135,4 +134,4 @@ int	main(void)
 		free(line);
 	}
 	close(fd);
-}
+} */

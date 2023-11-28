@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 12:45:41 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/27 18:12:42 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/28 11:31:59 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ int	ft_printf(const char *format, ...)
 	{
 		if (*format == '%')
 		{
-			format++;
+			/* format++;
 			if (*format == '\0')
-				return (-1);
+				return (-1); */
 			count += ft_conversion(args, *format);
 		}
 		else

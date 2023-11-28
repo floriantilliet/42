@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 12:31:48 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/27 15:18:24 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/28 13:03:22 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,24 @@ char	*ft_strjoin(char *s1, char *s2)
 	}
 	res[i] = '\0';
 	return (res);
+}
+
+char	*just_new_line(char *line)
+{
+	line[0] = '\n';
+	line[1] = '\0';
+	return (line);
+}
+
+void	copy_until_new_line(char **line, char **str, int *i)
+{
+	int	j;
+
+	j = 0;
+	while (j <= *i && (*str)[j])
+	{
+		(*line)[j] = (*str)[j];
+		j++;
+	}
+	(*line)[j] = '\0';
 }
