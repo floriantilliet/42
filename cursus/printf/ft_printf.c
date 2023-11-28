@@ -6,13 +6,13 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 12:45:41 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/28 11:31:59 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/28 15:06:51 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	ft_conversion(va_list args, const char format)
+int	ft_conversion(va_list args, const char format)
 {
 	int	count;
 
@@ -44,14 +44,16 @@ int	ft_printf(const char *format, ...)
 	count = 0;
 	va_start(args, format);
 	if (!format)
-		return(-1);
+		return (-1);
 	while (*format)
 	{
 		if (*format == '%')
 		{
-			/* format++;
+			format++;
+			while ((*format <= 13 && *format >= 9) || *format == ' ')
+				count += ft_printchar(*format++);
 			if (*format == '\0')
-				return (-1); */
+				return (-1);
 			count += ft_conversion(args, *format);
 		}
 		else
@@ -62,8 +64,7 @@ int	ft_printf(const char *format, ...)
 	return (count);
 }
 
-/* 
-#include <stdio.h>
+/* #include <stdio.h>
 
 int	main(void)
 {
@@ -75,21 +76,21 @@ int	main(void)
 	unsigned int u = 3147483647;
 	unsigned int x = 42;
 
-	c = ft_printf("%c%%%s %p %p %d %i %u %x %X %%", '?', "salut c florian", ptr,
-			NULL, d, i, u, x, x);
+	c = ft_printf("%c%%%s %p %p %d % d %i %u %x %X %%", '?', "salut c florian",
+			ptr, NULL, d, i, u, x, x);
 	printf("\n");
 	printf("%d", c);
 	printf("\n");
 	printf("\n");
-	c = printf("%c%%%s %p %p %d %i %u %x %X %%", '?', "salut c florian", ptr,
+	c = printf("%c%%%s %p %p %d % d %i %u %x %X %%", '?', "salut c florian", ptr,
 			NULL, d, i, u, x, x);
 	printf("\n");
 	printf("%d", c);
 
-    int c = 0;
-    int d = 123;
-    c = ft_printf("%d", d);
-    printf("\n");
+	int c = 0;
+	int d = 123;
+	c = ft_printf("%d", d);
+	printf("\n");
 	printf("%d", c);
 	printf("\n");
 
