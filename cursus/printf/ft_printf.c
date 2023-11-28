@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 12:45:41 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/28 15:06:51 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/11/28 15:38:24 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,35 @@ int	ft_conversion(va_list args, const char format)
 	return (count);
 }
 
+int	ft_strchr(const char *str, int character)
+{
+	while (*str && *str != (unsigned char)character)
+		str++;
+	if (*str == (unsigned char)character)
+		return (1);
+	return (0);
+}
+
+int	ft_check(const char *format)
+{
+	const char	*str;
+
+	str = format;
+	if (!format)
+		return (0);
+	while (*format)
+	{
+		if (*format == '%')
+		{
+			format++;
+			if (!(ft_strchr("cspdiuxX%", *format) && *format))
+				return (0);
+		}
+		format++;
+	}
+	return (1);
+}
+
 int	ft_printf(const char *format, ...)
 {
 	va_list	args;
@@ -43,15 +72,13 @@ int	ft_printf(const char *format, ...)
 
 	count = 0;
 	va_start(args, format);
-	if (!format)
+	if (!ft_check(format))
 		return (-1);
 	while (*format)
 	{
 		if (*format == '%')
 		{
 			format++;
-			while ((*format <= 13 && *format >= 9) || *format == ' ')
-				count += ft_printchar(*format++);
 			if (*format == '\0')
 				return (-1);
 			count += ft_conversion(args, *format);
@@ -76,13 +103,13 @@ int	main(void)
 	unsigned int u = 3147483647;
 	unsigned int x = 42;
 
-	c = ft_printf("%c%%%s %p %p %d % d %i %u %x %X %%", '?', "salut c florian",
+	c = ft_printf("%c%%%s %p %p %d % %i %u %x %X %%", '?', "salut c florian",
 			ptr, NULL, d, i, u, x, x);
 	printf("\n");
 	printf("%d", c);
 	printf("\n");
 	printf("\n");
-	c = printf("%c%%%s %p %p %d % d %i %u %x %X %%", '?', "salut c florian", ptr,
+	c = printf("%c%%%s %p %p %d % %i %u %x %X %%", '?', "salut c florian", ptr,
 			NULL, d, i, u, x, x);
 	printf("\n");
 	printf("%d", c);
