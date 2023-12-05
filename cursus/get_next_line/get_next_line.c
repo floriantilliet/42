@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 15:00:58 by florian           #+#    #+#             */
-/*   Updated: 2023/12/05 12:22:46 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/12/05 14:01:43 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,10 @@ void	return_new_line(char **line, char **temp, char **stash)
 	*temp = *stash;
 	*stash = clean(*stash);
 	if (*line == NULL)
+	{
 		free(*stash);
+		*stash = NULL;
+	}
 }
 
 char	*get_next_line(int fd)
@@ -117,8 +120,8 @@ char	*get_next_line(int fd)
 	return_new_line(&line, &temp, &stash);
 	return (free(temp), free(buffer), line);
 }
-
-/* #include <fcntl.h>
+/* 
+#include <fcntl.h>
 #include <stdio.h>
 
 int	main(void)
@@ -136,4 +139,5 @@ int	main(void)
 		free(line);
 	}
 	close(fd);
-} */
+}
+ */
