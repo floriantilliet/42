@@ -1,29 +1,46 @@
 #include <stdlib.h>
 #include "mlx/mlx.h"
 
-# define WINDOW_WIDTH 600
-# define WINDOW_HEIGHT 300
+typedef struct	s_data {
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}				t_data;
 
-#define MLX_ERROR 1
-
-int main(void)
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
-    void	*mlx_ptr;
-    void	*win_ptr;
+	char	*dst;
 
-    mlx_ptr = mlx_init();
-    if (mlx_ptr == NULL)
-        return (MLX_ERROR);
-    win_ptr = mlx_new_window(mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT, "My first window!");
-    mlx_pixel_put(mlx_ptr, win_ptr, WINDOW_WIDTH, WINDOW_HEIGHT, int color);
-    if (win_ptr == NULL)
+	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	*(unsigned int*)dst = color;
+}
+
+int	main(void)
+{
+	void	*mlx;
+	void	*mlx_win;
+	t_data	img;
+    int i;
+    int j;
+
+	mlx = mlx_init();
+	mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
+	img.img = mlx_new_image(mlx, 1920, 1080);
+	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
+								&img.endian);
+    i = 250;
+    while(i<500)
     {
-        free(win_ptr);
-        return (MLX_ERROR);
+        j = 250;
+        while(j<500)
+        {
+            my_mlx_pixel_put(&img, i, j, 0x00FF0000);
+            j++;
+        }
+        i++;
     }
-    while (1)
-        ;
-    mlx_destroy_window(mlx_ptr, win_ptr);
-    mlx_destroy_display(mlx_ptr);
-    free(mlx_ptr);
+	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
+	mlx_loop(mlx);
 }
