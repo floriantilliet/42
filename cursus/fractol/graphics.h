@@ -3,8 +3,11 @@
 
 #include <stdlib.h>
 #include "mlx/mlx.h"
+#include <X11/keysym.h>
 
 typedef struct	s_data {
+    void    *mlx;
+    void    *win;
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
