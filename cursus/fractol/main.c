@@ -1,6 +1,7 @@
 #include "graphics.h"
 
 #include "stdio.h"
+#include <time.h>
 
 #define KEY_ESC 53
 
@@ -12,13 +13,31 @@ int close(t_data *img)
     return (0);
 }
 
-int key_hook(int key_code, t_data *img)
+int key_press_hook(int key_code, t_data *img)
 {
-    printf("%d\n", key_code);
+    img->key_pressed = 1;
+    img->start = time(NULL);
     if (key_code == XK_Escape)
         close(img);
     return (0);
 }
+
+int key_release_hook(int key_code, t_data *img)
+{
+    if (img->key_pressed)
+    {
+        time_t end_time;
+        end_time = time(NULL);
+        double duration;
+        duration = difftime(end_time, img->start);
+        printf("%f", duration);
+        if (duration >= 3.0)
+            printf("Key held down for more than 3 seconds.\n");
+        img->key_pressed = 0;
+    }
+    return (0);
+}
+
 int	main(void)
 {
 	t_data	img;
@@ -47,7 +66,8 @@ int	main(void)
         }
         i++;
     }
-    mlx_key_hook(img.win, key_hook, &img);
+    mlx_hook(img.win, 2, 1L<<0, key_press_hook, &img);
+    mlx_hook(img.win, 3, 1L<<1, key_release_hook, &img);
 	mlx_put_image_to_window(img.mlx, img.win, img.img, 0, 0);
     mlx_hook(img.win, 17, 0L, close, &img);
 	mlx_loop(img.mlx);

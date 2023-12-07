@@ -13,6 +13,9 @@ typedef struct	s_data {
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	time_t	start;
+	time_t	end;
+	int	key_pressed;
 }				t_data;
 
 int	create_trgb(unsigned char t, unsigned char r, unsigned char g, unsigned char b);
