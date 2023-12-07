@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include "mlx/mlx.h"
 #include <X11/keysym.h>
+#include <math.h>
 
 typedef struct	s_data {
     void    *mlx;
