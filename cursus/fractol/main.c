@@ -53,9 +53,8 @@ int	render(t_data *data)
         }
         i++;
     }
-
+	draw_line(data, 50,50,100,100, color);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0, 0);
-
 	return (0);
 }
 
