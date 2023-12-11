@@ -40,6 +40,6 @@ int	ft_get_opposite(int trgb);
 int	ft_add_shade(double distance, int trgb);
 void    ft_pixel_put(t_img *img, int x, int y, int color);
 void	ft_draw_line(t_data *data, t_point P0, t_point P1, int color);
-void	ft_iso_projection(int *x, int *y, int z);
+void	ft_iso_projection(t_point *point);
 
 #endif

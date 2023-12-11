@@ -46,15 +46,15 @@ int	render(t_data *data)
 	t_point P7;
 	t_point P8;
 
-	P0.x = 300, P0.y = 300, P0.z = 0;
-	P1.x = 400, P1.y = 300, P1.z = 0;
-	P2.x = 500, P2.y = 300, P2.z = 0;
-	P3.x = 300, P3.y = 400, P3.z = 0;
-	P4.x = 400, P4.y = 400, P4.z = 200;
-	P5.x = 500, P5.y = 400, P5.z = 0;
-	P6.x = 300, P6.y = 500, P6.z = 0;
-	P7.x = 400, P7.y = 500, P7.z = 0;
-	P8.x = 500, P8.y = 500, P8.z = 0;
+	P0.x = 860, P0.y = 440, P0.z = 0;
+	P1.x = 960, P1.y = 440, P1.z = 0;
+	P2.x = 1060, P2.y = 440, P2.z = 0;
+	P3.x = 860, P3.y = 540, P3.z = 0;
+	P4.x = 960, P4.y = 540, P4.z = 300;
+	P5.x = 1060, P5.y = 540, P5.z = 0;
+	P6.x = 860, P6.y = 640, P6.z = 0;
+	P7.x = 960, P7.y = 640, P7.z = 0;
+	P8.x = 1060, P8.y = 640, P8.z = 0;
 
 	if (data->win_ptr == NULL)
 		return (1);
@@ -73,15 +73,15 @@ int	render(t_data *data)
     //     }
     //     i++;
     // }
-	ft_iso_projection(&P0.x, &P0.y, P0.z);
-	ft_iso_projection(&P1.x, &P1.y, P1.z);
-	ft_iso_projection(&P2.x, &P2.y, P2.z);
-	ft_iso_projection(&P3.x, &P3.y, P3.z);
-	ft_iso_projection(&P4.x, &P4.y, P4.z);
-	ft_iso_projection(&P5.x, &P5.y, P5.z);
-	ft_iso_projection(&P6.x, &P6.y, P6.z);
-	ft_iso_projection(&P7.x, &P7.y, P7.z);
-	ft_iso_projection(&P8.x, &P8.y, P8.z);
+	ft_iso_projection(&P0);
+	ft_iso_projection(&P1);
+	ft_iso_projection(&P2);
+	ft_iso_projection(&P3);
+	ft_iso_projection(&P4);
+	ft_iso_projection(&P5);
+	ft_iso_projection(&P6);
+	ft_iso_projection(&P7);
+	ft_iso_projection(&P8);
 
 	ft_draw_line(data, P0, P1, color);
 	ft_draw_line(data, P1, P2, color);
@@ -96,6 +96,15 @@ int	render(t_data *data)
 	ft_draw_line(data, P6, P7, color);
 	ft_draw_line(data, P7, P8, color);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0, 0);
+	// printf("P0: %d %d %d\n", P0.x, P0.y, P0.z);
+	// printf("P1: %d %d %d\n", P1.x, P1.y, P1.z);
+	// printf("P2: %d %d %d\n", P2.x, P2.y, P2.z);
+	// printf("P3: %d %d %d\n", P3.x, P3.y, P3.z);
+	// printf("P4: %d %d %d\n", P4.x, P4.y, P4.z);
+	// printf("P5: %d %d %d\n", P5.x, P5.y, P5.z);
+	// printf("P6: %d %d %d\n", P6.x, P6.y, P6.z);
+	// printf("P7: %d %d %d\n", P7.x, P7.y, P7.z);
+	// printf("P8: %d %d %d\n", P8.x, P8.y, P8.z);
 	return (0);
 }
 
