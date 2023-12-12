@@ -133,8 +133,16 @@ int	key_hook(int keycode, t_data *data)
 	{
     	for (int i = 0; i < 9; i++)
     	{
-        	ft_multiply_vector_by_matrix(&data->points[i], ft_get_rot_matrix(0.01, 'y'));
+        	ft_multiply_vector_by_matrix(&data->points[i], ft_get_rot_matrix(-0.01, 'y'));
     	}
+	}
+
+	if (keycode == XK_a)
+	{
+    	for (int i = 0; i < 9; i++)
+		{
+			ft_multiply_vector_by_matrix(&data->points[i], ft_get_rot_matrix(0.01, 'y'));
+		}
 	}
 
 	if (data->img.mlx_img) {
