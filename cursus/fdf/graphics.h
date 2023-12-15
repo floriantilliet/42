@@ -63,6 +63,6 @@ t_point ft_multiply_vector_by_matrix(t_point *v, t_matrix m);
 void ft_draw_image(t_data *data, t_data proj, int color);
 void draw_lines_recursive(t_data *data,t_data proj, int start, int end, int color);
 void	ft_pixel_grad(t_img *img, unsigned int x, unsigned int y, unsigned int z, int color);
-int color_grad(double z);
+int color_grad(double z);int compute_grad(t_point P0, t_point P1, t_point P);
 
 #endif
