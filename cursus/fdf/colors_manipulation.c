@@ -27,3 +27,14 @@ int	ft_add_shade(double distance, int trgb)
 	b = ft_get_b(trgb) * (1 - distance);
 	return (*(int *)(unsigned char [4]){b, g, r, t});
 }
+
+int color_grad(double z) {
+    // Calculer l'altitude z arrondie à l'entier le plus proche
+    int altitude = (int)round(z);
+
+    // Utiliser l'altitude pour déterminer la couleur
+    int color = altitude % 256;
+
+    // Retourner la couleur
+    return color;
+}

@@ -121,7 +121,7 @@ void	ft_draw_line(t_data *data, t_point P0, t_point P1, int color)
 	err = dx + dy;
 	while (1)
 	{
-		ft_pixel_grad(&data->img, P0.x, P0.y, P0.z, color);
+		ft_pixel_put(&data->img, P0.x, P0.y, color);
 		if (P0.x == P1.x && P0.y == P1.y)
 			break ;
 		e2 = 2 * err;
