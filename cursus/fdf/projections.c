@@ -91,6 +91,8 @@ t_data ft_iso_projection(t_data *data)
 	//rotation autour de l'axe Y
 	proj.points[i] = ft_multiply_vector_by_matrix(&proj.points[i], ft_get_rot_matrix(y_deg, 'y'));
 
+	proj.points[i].z = data->points[i].z;
+
 	proj.points[i].x += window_center_x;
     proj.points[i].y += window_center_y;
 	}
@@ -99,7 +101,22 @@ t_data ft_iso_projection(t_data *data)
 	return(proj);
 }
 
-void	ft_draw_line(t_data *data, t_point P0, t_point P1, int color)
+double interpolate_altitude(t_point start, t_point end, t_point current) {
+    // Calculer les distances entre les points de départ et d'arrivée
+    double dx = end.x - start.x;
+    double dy = end.y - start.y;
+    double dz = end.z - start.z;
+
+    // Calculer la distance horizontale entre le point de départ et le point intermédiaire
+    double distance = sqrt((current.x - start.x) * (current.x - start.x) + (current.y - start.y) * (current.y - start.y));
+
+    // Interpoler l'altitude en utilisant la distance horizontale
+    double interpolated_z = start.z + (distance / sqrt(dx * dx + dy * dy)) * dz;
+
+    return interpolated_z;
+}
+
+void	ft_draw_line(t_data *data, t_point P0, t_point P1)
 {
 	int	dx;
 	int	sx;
@@ -107,6 +124,9 @@ void	ft_draw_line(t_data *data, t_point P0, t_point P1, int color)
 	int	sy;
 	int	err;
 	int	e2;
+	t_point start = P0;
+	t_point end = P1;
+	t_point current;
 
 	dx = fabs(P0.x - P1.x);
 	if (P0.x < P1.x)
@@ -121,7 +141,10 @@ void	ft_draw_line(t_data *data, t_point P0, t_point P1, int color)
 	err = dx + dy;
 	while (1)
 	{
-		ft_pixel_put(&data->img, P0.x, P0.y, color);
+		current.x = P0.x;
+		current.y = P0.y;
+		current.z = interpolate_altitude(start, end, current);
+		ft_pixel_put(&data->img, P0.x, P0.y, get_altitude_color(current.z));
 		if (P0.x == P1.x && P0.y == P1.y)
 			break ;
 		e2 = 2 * err;
@@ -142,23 +165,23 @@ void ft_draw_image(t_data *data, t_data proj, int color)
 {
     for (int i = 0; i < NB_POINTS - 1; i++)
     {
-        ft_draw_line(data, proj.points[i], proj.points[i + 1], color);
+        ft_draw_line(data, proj.points[i], proj.points[i + 1]);
     }
     // Dessiner la dernière ligne entre le dernier point et le premier point pour fermer la forme
-    ft_draw_line(data, proj.points[NB_POINTS - 1], proj.points[0], color);
+    ft_draw_line(data, proj.points[NB_POINTS - 1], proj.points[0]);
 }
 
-void draw_lines_recursive(t_data *data,t_data proj, int start, int end, int color) {
-    // Condition de sortie de la récursion
-    if (start >= end) {
-        return;
-    }
+// void draw_lines_recursive(t_data *data,t_data proj, int start, int end, int color) {
+//     // Condition de sortie de la récursion
+//     if (start >= end) {
+//         return;
+//     }
 	
-    // Dessiner un trait entre les points start et end
-    ft_draw_line(data, proj.points[start], proj.points[end], color);
+//     // Dessiner un trait entre les points start et end
+//     ft_draw_line(data, proj.points[start], proj.points[end], color);
 
-    // Appel récursif pour les sous-ensembles de points
-    int mid = (start + end) / 2;
-    draw_lines_recursive(data, proj, start, mid, color);
-    draw_lines_recursive(data, proj, mid + 1, end, color);
-}
+//     // Appel récursif pour les sous-ensembles de points
+//     int mid = (start + end) / 2;
+//     draw_lines_recursive(data, proj, start, mid, color);
+//     draw_lines_recursive(data, proj, mid + 1, end, color);
+// }
