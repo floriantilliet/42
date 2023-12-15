@@ -6,6 +6,9 @@
 #include <X11/keysym.h>
 #include <X11/X.h>
 #include <math.h>
+#include <stdio.h>
+
+#define MLX_ERROR 1
 
 #define WINDOW_WIDTH 1920
 #define WINDOW_HEIGHT 1080
@@ -24,6 +27,7 @@ typedef struct	s_point
     double	x;
     double	y;
     double	z;
+    int     color;
 }	t_point;
 
 typedef struct	s_data
@@ -32,6 +36,7 @@ typedef struct	s_data
     void	*win_ptr;
     t_img	img;
     t_point points[9];
+    double  angle;
 }	t_data;
 
 typedef struct s_matrix
@@ -51,8 +56,8 @@ int	ft_get_opposite(int trgb);
 int	ft_add_shade(double distance, int trgb);
 void    ft_pixel_put(t_img *img, unsigned int x,  unsigned int y, int color);
 void	ft_draw_line(t_data *data, t_point P0, t_point P1, int color);
-void	ft_iso_projection(t_point *point);
+t_data ft_iso_projection(t_data *data);
 t_matrix	ft_get_rot_matrix(double deg, char axis);
-void ft_multiply_vector_by_matrix(t_point *v, t_matrix m);
+t_point ft_multiply_vector_by_matrix(t_point *v, t_matrix m);
 
 #endif

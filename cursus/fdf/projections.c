@@ -7,35 +7,38 @@ double	rad(double deg)
 	return (deg * M_PI / 180);
 }
 
-void ft_multiply_vector_by_matrix(t_point *v, t_matrix m)
+t_point ft_multiply_vector_by_matrix(t_point *v, t_matrix m)
 {
+	t_point res;
     // Utiliser des variables temporaires de type float ou double
     double temp_x, temp_y, temp_z;
 
-	//normalize the vectors before multiplying them
-	double length = sqrt(m.i.x * m.i.x + m.i.y * m.i.y + m.i.z * m.i.z);
-	m.i.x /= length;
-	m.i.y /= length;
-	m.i.z /= length;
+	// //normalize the vectors before multiplying them
+	// double length = sqrt(m.i.x * m.i.x + m.i.y * m.i.y + m.i.z * m.i.z);
+	// m.i.x /= length;
+	// m.i.y /= length;
+	// m.i.z /= length;
 
-	length = sqrt(m.j.x * m.j.x + m.j.y * m.j.y + m.j.z * m.j.z);
-	m.j.x /= length;
-	m.j.y /= length;
-	m.j.z /= length;
+	// length = sqrt(m.j.x * m.j.x + m.j.y * m.j.y + m.j.z * m.j.z);
+	// m.j.x /= length;
+	// m.j.y /= length;
+	// m.j.z /= length;
 
-	length = sqrt(m.k.x * m.k.x + m.k.y * m.k.y + m.k.z * m.k.z);
-	m.k.x /= length;
-	m.k.y /= length;
-	m.k.z /= length;
+	// length = sqrt(m.k.x * m.k.x + m.k.y * m.k.y + m.k.z * m.k.z);
+	// m.k.x /= length;
+	// m.k.y /= length;
+	// m.k.z /= length;
 
     temp_x = v->x * m.i.x + v->y * m.i.y + v->z * m.i.z;
     temp_y = v->x * m.j.x + v->y * m.j.y + v->z * m.j.z;
     temp_z = v->x * m.k.x + v->y * m.k.y + v->z * m.k.z;
 
     // Convertir les résultats en int avant de les assigner
-    v->x = (int)round(temp_x);
-    v->y = (int)round(temp_y);
-    v->z = (int)round(temp_z);	
+    res.x = (int)(temp_x);
+    res.y = (int)(temp_y);
+    res.z = (int)(temp_z);
+
+	return(res);
 }
 
 t_matrix	ft_get_rot_matrix(double deg, char axis)
@@ -65,16 +68,23 @@ t_matrix	ft_get_rot_matrix(double deg, char axis)
 	});
 }
 
-void ft_iso_projection(t_point *point)
-{
-    double z_deg = 45;
-    double x_deg = atan(sqrt(2));
+t_data ft_iso_projection(t_data *data)
+{	
+	t_data proj;
 
+    double z_deg = 45 + data->angle;
+    double x_deg = atan(sqrt(2)) + data->angle;
+
+	for (int i = 0; i < 9; i++)
+	{
     // Rotation autour de l'axe Z
-    ft_multiply_vector_by_matrix(point, ft_get_rot_matrix(z_deg, 'z'));
+    proj.points[i] = ft_multiply_vector_by_matrix(&data->points[i], ft_get_rot_matrix(z_deg, 'z'));
 
     // Rotation autour de l'axe X
-    ft_multiply_vector_by_matrix(point, ft_get_rot_matrix(x_deg, 'x'));
+    proj.points[i] = ft_multiply_vector_by_matrix(&proj.points[i], ft_get_rot_matrix(x_deg, 'x'));
+	}
+
+	return(proj);
 }
 
 void	ft_draw_line(t_data *data, t_point P0, t_point P1, int color)
@@ -115,3 +125,4 @@ void	ft_draw_line(t_data *data, t_point P0, t_point P1, int color)
 		}
 	}
 }
+
