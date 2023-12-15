@@ -13,7 +13,7 @@ t_point ft_multiply_vector_by_matrix(t_point *v, t_matrix m)
     // Utiliser des variables temporaires de type float ou double
     double temp_x, temp_y, temp_z;
 
-	// //normalize the vectors before multiplying them
+	// normalize the vectors before multiplying them
 	// double length = sqrt(m.i.x * m.i.x + m.i.y * m.i.y + m.i.z * m.i.z);
 	// m.i.x /= length;
 	// m.i.y /= length;
@@ -64,26 +64,38 @@ t_matrix	ft_get_rot_matrix(double deg, char axis)
 	return ((t_matrix){
 		(t_point){1., 0., 0.},
 		(t_point){0., 1., 0.},
-		(t_point){0., 0., 1.}
+		(t_point){0., 0., 1.},
 	});
 }
 
 t_data ft_iso_projection(t_data *data)
 {	
-	t_data proj;
+    t_data proj;
 
-    double z_deg = 45 + data->angle;
-    double x_deg = atan(sqrt(2)) + data->angle;
+    // Calculer le centre de la fenêtre de rendu
+    int window_center_x = WINDOW_WIDTH / 2;
+    int window_center_y = WINDOW_HEIGHT / 2;
 
-	for (int i = 0; i < 9; i++)
+    double z_deg = 45;
+    double x_deg = atan(sqrt(2)) + data->angle_x;
+	double y_deg = data->angle_y;
+
+	for (int i = 0; i < NB_POINTS; i++)
 	{
     // Rotation autour de l'axe Z
     proj.points[i] = ft_multiply_vector_by_matrix(&data->points[i], ft_get_rot_matrix(z_deg, 'z'));
 
     // Rotation autour de l'axe X
     proj.points[i] = ft_multiply_vector_by_matrix(&proj.points[i], ft_get_rot_matrix(x_deg, 'x'));
+
+	//rotation autour de l'axe Y
+	proj.points[i] = ft_multiply_vector_by_matrix(&proj.points[i], ft_get_rot_matrix(y_deg, 'y'));
+
+	proj.points[i].x += window_center_x;
+    proj.points[i].y += window_center_y;
 	}
 
+	// proj = *data;
 	return(proj);
 }
 
@@ -109,7 +121,7 @@ void	ft_draw_line(t_data *data, t_point P0, t_point P1, int color)
 	err = dx + dy;
 	while (1)
 	{
-		ft_pixel_put(&data->img, P0.x, P0.y, color);
+		ft_pixel_grad(&data->img, P0.x, P0.y, P0.z, color);
 		if (P0.x == P1.x && P0.y == P1.y)
 			break ;
 		e2 = 2 * err;
@@ -126,3 +138,27 @@ void	ft_draw_line(t_data *data, t_point P0, t_point P1, int color)
 	}
 }
 
+void ft_draw_image(t_data *data, t_data proj, int color)
+{
+    for (int i = 0; i < NB_POINTS - 1; i++)
+    {
+        ft_draw_line(data, proj.points[i], proj.points[i + 1], color);
+    }
+    // Dessiner la dernière ligne entre le dernier point et le premier point pour fermer la forme
+    ft_draw_line(data, proj.points[NB_POINTS - 1], proj.points[0], color);
+}
+
+void draw_lines_recursive(t_data *data,t_data proj, int start, int end, int color) {
+    // Condition de sortie de la récursion
+    if (start >= end) {
+        return;
+    }
+	
+    // Dessiner un trait entre les points start et end
+    ft_draw_line(data, proj.points[start], proj.points[end], color);
+
+    // Appel récursif pour les sous-ensembles de points
+    int mid = (start + end) / 2;
+    draw_lines_recursive(data, proj, start, mid, color);
+    draw_lines_recursive(data, proj, mid + 1, end, color);
+}

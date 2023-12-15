@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/15 10:09:14 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/12/15 11:16:05 by ftilliet         ###   ########.fr       */
+/*   Created: 2023/12/15 10:0NB_POINTS:14 by ftilliet          #+#    #+#             */
+/*   Updated: 2023/12/15 14:03:51 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,8 @@ int	render(t_data *data)
     color = ft_get_opposite(color);
     color = ft_add_shade(0.5,color);
 
-	ft_draw_line(data, proj.points[0], proj.points[1], color);
-    ft_draw_line(data, proj.points[1], proj.points[2], color);
-    ft_draw_line(data, proj.points[0], proj.points[3], color);
-    ft_draw_line(data, proj.points[3], proj.points[4], color);
-    ft_draw_line(data, proj.points[1], proj.points[4], color);
-    ft_draw_line(data, proj.points[4], proj.points[5], color);
-    ft_draw_line(data, proj.points[2], proj.points[5], color);
-    ft_draw_line(data, proj.points[3], proj.points[6], color);
-    ft_draw_line(data, proj.points[4], proj.points[7], color);
-    ft_draw_line(data, proj.points[5], proj.points[8], color);
-    ft_draw_line(data, proj.points[6], proj.points[7], color);
-    ft_draw_line(data, proj.points[7], proj.points[8], color);
-    
+    ft_draw_image(data, proj, color);
+
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0, 0);
 
 	return (0);
@@ -70,7 +59,7 @@ int	key_hook(int keycode, t_data *data)
 	if (keycode == XK_Up) // Remplace KEY_UP par la valeur correspondant à la touche souhaitée
 	{
 		// Déplace l'image vers le haut
-		for (int i = 0; i < 9; i++)
+		for (int i = 0; i < NB_POINTS; i++)
         {
 			data->points[i].y -= move_step;
             data->points[i].x -= move_step;
@@ -80,7 +69,7 @@ int	key_hook(int keycode, t_data *data)
 	else if (keycode == XK_Down) // Remplace KEY_DOWN par la valeur correspondant à la touche souhaitée
 	{
 		// Déplace l'image vers le bas
-		for (int i = 0; i < 9; i++)
+		for (int i = 0; i < NB_POINTS; i++)
         {
             data->points[i].y += move_step;
             data->points[i].x += move_step;
@@ -90,7 +79,7 @@ int	key_hook(int keycode, t_data *data)
 	if (keycode == XK_Left) // Remplace KEY_UP par la valeur correspondant à la touche souhaitée
 	{
 		// Déplace l'image vers le haut
-		for (int i = 0; i < 9; i++)
+		for (int i = 0; i < NB_POINTS; i++)
         {
             data->points[i].x -= move_step;
             data->points[i].y += move_step;
@@ -101,28 +90,44 @@ int	key_hook(int keycode, t_data *data)
 	if (keycode == XK_Right)
 	{
 		// Déplace l'image vers le haut
-		for (int i = 0; i < 9; i++)
+		for (int i = 0; i < NB_POINTS; i++)
         {
             data->points[i].x += move_step;
             data->points[i].y -= move_step;
         }
 	}
 
-	if (keycode == XK_s)
+	if (keycode == XK_d)
 	{
-    	for (int i = 0; i < 9; i++)
+    	for (int i = 0; i < NB_POINTS; i++)
     	{
-        	data->angle -= 0.001;
+        	data->angle_y -= 0.001;
     	}
 	}
 
-	if (keycode == XK_w)
+	if (keycode == XK_a)
 	{
-    	for (int i = 0; i < 9; i++)
+    	for (int i = 0; i < NB_POINTS; i++)
 		{
-			data->angle += 0.001;
+			data->angle_y += 0.001;
 		}
 	}
+
+    if (keycode == XK_w)
+    {
+    	for (int i = 0; i < NB_POINTS; i++)
+    	{
+        	data->angle_x += 0.001;
+    	}
+    }
+
+    if (keycode == XK_s)
+    {
+    	for (int i = 0; i < NB_POINTS; i++)
+    	{
+        	data->angle_x -= 0.001;
+    	}
+    }
 
 	if (data->img.mlx_img) {
         mlx_destroy_image(data->mlx_ptr, data->img.mlx_img); // Libère l'image précédente
@@ -155,25 +160,37 @@ int	main(void)
 	t_point P0, P1, P2, P3, P4, P5, P6, P7, P8;
     t_point proj0, proj1, proj2, proj3, proj4, proj5, proj6, proj7, proj8;
 
-	P0.x = 860, P0.y = 440, P0.z = 0;
-	P1.x = 960, P1.y = 440, P1.z = 0;
-	P2.x = 1060, P2.y = 440, P2.z = 0;
-	P3.x = 860, P3.y = 540, P3.z = 0;
-	P4.x = 960, P4.y = 540, P4.z = 200;
-	P5.x = 1060, P5.y = 540, P5.z = 0;
-	P6.x = 860, P6.y = 640, P6.z = 0;
-	P7.x = 960, P7.y = 640, P7.z = 0;
-	P8.x = 1060, P8.y = 640, P8.z = 0;
+    // t_point points[NB_POINTS] = {
+    // {-100.0, 100.0, 0.0},
+    // {0.0, 100.0, 0.0},
+    // {100.0, 100.0, 0.0},
+    // {-100.0, 0.0, 0.0},
+    // {0.0, 0.0, 200.0},
+    // {100.0, 0.0, 0.0},
+    // {-100.0, -100.0, 0.0},
+    // {0.0, -100.0, 0.0},
+    // {100.0, -100.0, 0.0}
+    // };
 
-    data.points[0] = P0;
-    data.points[1] = P1;
-    data.points[2] = P2;
-    data.points[3] = P3;
-    data.points[4] = P4;
-    data.points[5] = P5;
-    data.points[6] = P6;
-    data.points[7] = P7;
-    data.points[8] = P8;
+    t_point points[NB_POINTS] = {
+        {-1.0, 1.0, 0.0},
+        {0.0, -1.0, 0.0},
+        {0.0, 1.0, 0.0},
+        {1.0, 1.0, 0.0},
+        {-1.0, 0.0, 0.0},
+        {0.0, 0.0, 2.0},
+        {1.0, 0.0, 0.0},
+        {-1.0, -1.0, 0.0},
+        {1.0, -1.0, 0.0}
+    };
+
+    for (int i = 0; i < NB_POINTS; i++) {
+        points[i].x *= 100;
+        points[i].y *= 100;
+        points[i].z *= 100;
+    }
+    for (int i = 0; i < NB_POINTS; i++)
+        data.points[i] = points[i];
 
 	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.img.mlx_img, 0, 0);
 

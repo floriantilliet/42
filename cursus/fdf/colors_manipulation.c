@@ -27,4 +27,3 @@ int	ft_add_shade(double distance, int trgb)
 	b = ft_get_b(trgb) * (1 - distance);
 	return (*(int *)(unsigned char [4]){b, g, r, t});
 }
-
