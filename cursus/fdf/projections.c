@@ -161,7 +161,7 @@ void	ft_draw_line(t_data *data, t_point P0, t_point P1)
 	}
 }
 
-void ft_draw_image(t_data *data, t_data proj, int color)
+void ft_draw_image(t_data *data, t_data proj)
 {
     for (int i = 0; i < NB_POINTS - 1; i++)
     {

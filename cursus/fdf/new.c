@@ -44,7 +44,7 @@ int	render(t_data *data)
     color = ft_get_opposite(color);
     color = ft_add_shade(0.5,color);
 
-    ft_draw_image(data, proj, color);
+    ft_draw_image(data, proj);
 
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0, 0);
 
@@ -53,7 +53,6 @@ int	render(t_data *data)
 
 int	key_hook(int keycode, t_data *data)
 {
-	int color;
 	const int move_step = 10; // Tu peux ajuster la distance de déplacement
 
 	if (keycode == XK_Up) // Remplace KEY_UP par la valeur correspondant à la touche souhaitée
@@ -157,9 +156,6 @@ int	main(void)
 	data.img.addr = mlx_get_data_addr(data.img.mlx_img, &data.img.bpp,
 			&data.img.line_len, &data.img.endian);
 
-	t_point P0, P1, P2, P3, P4, P5, P6, P7, P8;
-    t_point proj0, proj1, proj2, proj3, proj4, proj5, proj6, proj7, proj8;
-
     // t_point points[NB_POINTS] = {
     // {-100.0, 100.0, 0.0},
     // {0.0, 100.0, 0.0},
@@ -189,8 +185,9 @@ int	main(void)
         points[i].y *= 100;
         points[i].z *= 100;
     }
+
     for (int i = 0; i < NB_POINTS; i++)
-        data.points[i] = points[i];
+		data.points[i] = points[i];
 
 	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.img.mlx_img, 0, 0);
 
