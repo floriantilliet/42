@@ -39,6 +39,8 @@ typedef struct	s_data
     double  angle_x;
     double  angle_y;
     double  angle_z;
+    double  offset_x;
+    double  offset_y;
 }	t_data;
 
 typedef struct s_matrix

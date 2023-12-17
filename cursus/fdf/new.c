@@ -53,15 +53,12 @@ int	render(t_data *data)
 
 int	key_hook(int keycode, t_data *data)
 {
-	const int move_step = 10; // Tu peux ajuster la distance de déplacement
-
 	if (keycode == XK_Up) // Remplace KEY_UP par la valeur correspondant à la touche souhaitée
 	{
 		// Déplace l'image vers le haut
 		for (int i = 0; i < NB_POINTS; i++)
         {
-			data->points[i].y -= move_step;
-            data->points[i].x -= move_step;
+			data->offset_y -= 0.5;
         }
 	}
 	
@@ -70,8 +67,7 @@ int	key_hook(int keycode, t_data *data)
 		// Déplace l'image vers le bas
 		for (int i = 0; i < NB_POINTS; i++)
         {
-            data->points[i].y += move_step;
-            data->points[i].x += move_step;
+			data->offset_y += 0.5;
         }
 	}
 
@@ -80,9 +76,7 @@ int	key_hook(int keycode, t_data *data)
 		// Déplace l'image vers le haut
 		for (int i = 0; i < NB_POINTS; i++)
         {
-            data->points[i].x -= move_step;
-            data->points[i].y += move_step;
-        
+			data->offset_x -= 0.5;
         }
 	}
 
@@ -91,8 +85,7 @@ int	key_hook(int keycode, t_data *data)
 		// Déplace l'image vers le haut
 		for (int i = 0; i < NB_POINTS; i++)
         {
-            data->points[i].x += move_step;
-            data->points[i].y -= move_step;
+			data->offset_x += 0.5;
         }
 	}
 
@@ -190,7 +183,7 @@ int	main(void)
         {0.0, 1.0, 0.0},
         {1.0, 1.0, 0.0},
         {-1.0, 0.0, 0.0},
-        {0.0, 0.0, 8.0},
+        {0.0, 0.0, 2.0},
         {1.0, 0.0, 0.0},
         {-1.0, -1.0, 0.0},
         {1.0, -1.0, 0.0}
