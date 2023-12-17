@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 13:09:10 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/11/28 14:25:22 by ftilliet         ###   ########.fr       */
+/*   Updated: 2023/12/05 14:05:56 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,11 @@ void	return_new_line(char **line, char **temp, char **stash)
 	*line = get_new_line(*stash);
 	*temp = *stash;
 	*stash = clean(*stash);
+	if (*line == NULL)
+	{
+		free(*stash);
+		*stash = NULL;
+	}
 }
 
 char	*get_next_line(int fd)
