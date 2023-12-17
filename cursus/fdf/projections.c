@@ -76,7 +76,7 @@ t_data ft_iso_projection(t_data *data)
     int window_center_x = WINDOW_WIDTH / 2;
     int window_center_y = WINDOW_HEIGHT / 2;
 
-    double z_deg = 45;
+    double z_deg = 45 + data->angle_z;
     double x_deg = atan(sqrt(2)) + data->angle_x;
 	double y_deg = data->angle_y;
 

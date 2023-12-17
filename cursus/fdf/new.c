@@ -128,6 +128,22 @@ int	key_hook(int keycode, t_data *data)
     	}
     }
 
+	if (keycode == XK_e)
+    {
+    	for (int i = 0; i < NB_POINTS; i++)
+    	{
+        	data->angle_z -= 0.1;
+    	}
+    }
+
+	if (keycode == XK_q)
+	{
+		for (int i = 0; i < NB_POINTS; i++)
+		{
+			data->angle_z += 0.1;
+		}
+	}
+
 	if (data->img.mlx_img) {
         mlx_destroy_image(data->mlx_ptr, data->img.mlx_img); // Libère l'image précédente
     }
@@ -174,7 +190,7 @@ int	main(void)
         {0.0, 1.0, 0.0},
         {1.0, 1.0, 0.0},
         {-1.0, 0.0, 0.0},
-        {0.0, 0.0, 2.0},
+        {0.0, 0.0, 8.0},
         {1.0, 0.0, 0.0},
         {-1.0, -1.0, 0.0},
         {1.0, -1.0, 0.0}

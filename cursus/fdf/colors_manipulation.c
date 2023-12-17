@@ -30,20 +30,13 @@ int	ft_add_shade(double distance, int trgb)
 
 int get_altitude_color(double z)
 {
-	int color;
+    int color;
+    int logz;
 
-	if (z < 0)
-		color = ft_create_trgb(0,0,0,0);
-	else if (z < 10)
-		color = ft_create_trgb(0,0,0,255);
-	else if (z < 20)
-		color = ft_create_trgb(0,0,255,0);
-	else if (z < 30)
-		color = ft_create_trgb(0,255,255,0);
-	else if (z < 40)
-		color = ft_create_trgb(0,255,0,0);
-	else
-		color = ft_create_trgb(0,255,0,255);
-	return (color);
+    logz = (int)(255 * log(1 + z) / log(256)); // Utilisez la fonction log pour obtenir une échelle logarithmique
+
+    color = ft_create_trgb(0, logz, 255 - logz, 255 - logz);
+
+    return (color);
 }
 

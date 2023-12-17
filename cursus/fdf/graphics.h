@@ -38,6 +38,7 @@ typedef struct	s_data
     t_point points[NB_POINTS];
     double  angle_x;
     double  angle_y;
+    double  angle_z;
 }	t_data;
 
 typedef struct s_matrix
