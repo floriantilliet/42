@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   new.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/15 10:0NB_POINTS:14 by ftilliet          #+#    #+#             */
-/*   Updated: 2023/12/15 14:03:51 by ftilliet         ###   ########.fr       */
+/*   Created: 2023/12/18 15:20:50 by florian           #+#    #+#             */
+/*   Updated: 2023/12/18 19:32:32 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "graphics.h"
 
@@ -33,16 +34,11 @@ int	handle_keypress(int keysym, t_data *data)
 int	render(t_data *data)
 {   
     t_data  proj;
-    int color;
 
 	if (data->win_ptr == NULL)
 		return (1);
 
     proj = ft_iso_projection(data);
-    
-    color = ft_create_trgb(0,255,0,0);
-    color = ft_get_opposite(color);
-    color = ft_add_shade(0.5,color);
 
     ft_draw_image(data, proj);
 
@@ -53,88 +49,75 @@ int	render(t_data *data)
 
 int	key_hook(int keycode, t_data *data)
 {
+
+	if (keycode == XK_Page_Up) // Remplace KEY_UP par la valeur correspondant à la touche souhaitée
+	{
+		data->zoom += 0.01;
+	}
+
+	if (keycode == XK_Page_Down) // Remplace KEY_UP par la valeur correspondant à la touche souhaitée
+	{
+		data->zoom -= 0.01;
+	}
+
 	if (keycode == XK_Up) // Remplace KEY_UP par la valeur correspondant à la touche souhaitée
 	{
-		// Déplace l'image vers le haut
-		for (int i = 0; i < NB_POINTS; i++)
-        {
-			data->offset_y -= 0.5;
-        }
+			data->offset_y -= 5;
 	}
 	
 	else if (keycode == XK_Down) // Remplace KEY_DOWN par la valeur correspondant à la touche souhaitée
 	{
-		// Déplace l'image vers le bas
-		for (int i = 0; i < NB_POINTS; i++)
-        {
-			data->offset_y += 0.5;
-        }
+			data->offset_y += 5;
 	}
 
 	if (keycode == XK_Left) // Remplace KEY_UP par la valeur correspondant à la touche souhaitée
 	{
-		// Déplace l'image vers le haut
-		for (int i = 0; i < NB_POINTS; i++)
-        {
-			data->offset_x -= 0.5;
-        }
+			data->offset_x -= 5;
 	}
 
 	if (keycode == XK_Right)
 	{
-		// Déplace l'image vers le haut
-		for (int i = 0; i < NB_POINTS; i++)
-        {
-			data->offset_x += 0.5;
-        }
+			data->offset_x += 5;
 	}
 
 	if (keycode == XK_d)
 	{
-    	for (int i = 0; i < NB_POINTS; i++)
-    	{
-        	data->angle_y -= 0.001;
-    	}
+        	data->angle_y -= 0.01;
 	}
 
 	if (keycode == XK_a)
 	{
-    	for (int i = 0; i < NB_POINTS; i++)
-		{
-			data->angle_y += 0.001;
-		}
+			data->angle_y += 0.01;
 	}
 
     if (keycode == XK_w)
     {
-    	for (int i = 0; i < NB_POINTS; i++)
-    	{
-        	data->angle_x += 0.001;
-    	}
+        	data->angle_x += 0.01;
     }
 
     if (keycode == XK_s)
     {
-    	for (int i = 0; i < NB_POINTS; i++)
-    	{
-        	data->angle_x -= 0.001;
-    	}
+        	data->angle_x -= 0.01;
     }
 
 	if (keycode == XK_e)
     {
-    	for (int i = 0; i < NB_POINTS; i++)
-    	{
-        	data->angle_z -= 0.1;
-    	}
+        	data->angle_z -= 1;
     }
 
 	if (keycode == XK_q)
 	{
-		for (int i = 0; i < NB_POINTS; i++)
-		{
-			data->angle_z += 0.1;
-		}
+			data->angle_z += 1;
+	}
+
+	if (keycode == XK_space)
+	{
+			data->angle_x = 0;
+			data->angle_y = 0;
+			data->angle_z = 0;
+			data->offset_x = 0;
+			data->offset_y = 0;
+			data->zoom = 1;
 	}
 
 	if (data->img.mlx_img) {
@@ -145,6 +128,81 @@ int	key_hook(int keycode, t_data *data)
 	return (0);
 }
 
+
+int	ft_mouse_down(int button, int x, int y, t_data *data)
+{	
+	if (button == 4)
+		data->zoom += 0.01;
+	
+	if (button == 5)
+		data->zoom -= 0.01;
+
+	if (button == 1)
+	{
+		data->prev_x = x;
+        data->prev_y = y;
+		data->mouse_button = 1;
+	}
+	
+	if (button == 3)
+	{
+		data->prev_x = x;
+		data->prev_y = y;
+		data->mouse_button = 3;
+	}
+	if (data->img.mlx_img) {
+        mlx_destroy_image(data->mlx_ptr, data->img.mlx_img); // Libère l'image précédente
+    }
+    data->img.mlx_img = mlx_new_image(data->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
+    mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0, 0);
+	return (0);
+}
+
+int	ft_mouse_up(int button, int x, int y, t_data *data)
+{
+
+	if (button == 1 || button == 3)
+	{
+		data->mouse_button = 0;
+		x++;
+		y++;
+	}
+	return (0);
+}
+
+int	ft_mouse_move(int x, int y, t_data *data)
+{
+	//print mouse button
+	printf("mouse button: %d\n", data->mouse_button);
+	if (data->mouse_button == 1)
+	{
+		// Update offsets based on mouse movement
+        data->offset_x += x - data->prev_x;
+        data->offset_y += y - data->prev_y;
+
+        // Store the current mouse position for the next movement event
+        data->prev_x = x;
+        data->prev_y = y;
+	}
+
+	if (data->mouse_button == 3) // Right mouse button
+    {	
+        // Update rotation angle based on mouse movement
+        data->angle_x -= (y - data->prev_y) * 0.01; // Adjust the multiplier as needed
+		data->angle_y -= (x - data->prev_x) * 0.01;
+		
+		// Store the current mouse position for the next movement event
+		data->prev_x = x;
+		data->prev_y = y;
+    }
+
+	if (data->img.mlx_img) {
+        mlx_destroy_image(data->mlx_ptr, data->img.mlx_img); // Libère l'image précédente
+    }
+    data->img.mlx_img = mlx_new_image(data->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
+    mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0, 0);
+	return (0);
+}
 
 int	main(void)
 {
@@ -198,10 +256,18 @@ int	main(void)
     for (int i = 0; i < NB_POINTS; i++)
 		data.points[i] = points[i];
 
+	data.zoom = 1.0;
+	data.mouse_button = 0;
+
 	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.img.mlx_img, 0, 0);
 
 	mlx_hook(data.win_ptr, KeyPress, KeyPressMask, &handle_keypress, &data);
     mlx_hook(data.win_ptr, 17, 0L, close, &data);
+
+	mlx_hook(data.win_ptr, 4, 1L<<2, ft_mouse_down, &data);
+	mlx_hook(data.win_ptr, 5, 1L<<3, ft_mouse_up, &data);
+	mlx_hook(data.win_ptr, 6, 1L<<6, ft_mouse_move, &data);
+
 	mlx_key_hook(data.win_ptr, key_hook, &data);
     mlx_loop_hook(data.mlx_ptr, &render, &data);
 

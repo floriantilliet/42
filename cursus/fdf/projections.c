@@ -93,10 +93,12 @@ t_data ft_iso_projection(t_data *data)
 
 	proj.points[i].z = data->points[i].z;
 
-	proj.points[i].x += window_center_x;
-    proj.points[i].y += window_center_y;
 	proj.points[i].y += data->offset_y;
 	proj.points[i].x += data->offset_x;
+	proj.points[i].x = round(proj.points[i].x * data->zoom);
+    proj.points[i].y = round(proj.points[i].y * data->zoom);
+	proj.points[i].x += window_center_x;
+    proj.points[i].y += window_center_y;
 	}
 
 	// proj = *data;

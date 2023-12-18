@@ -36,11 +36,19 @@ typedef struct	s_data
     void	*win_ptr;
     t_img	img;
     t_point points[NB_POINTS];
+
     double  angle_x;
     double  angle_y;
     double  angle_z;
+
     double  offset_x;
     double  offset_y;
+
+    int     mouse_button;
+    double  prev_x;
+    double  prev_y;
+
+    double  zoom;
 }	t_data;
 
 typedef struct s_matrix
