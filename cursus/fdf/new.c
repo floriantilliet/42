@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 15:20:50 by florian           #+#    #+#             */
-/*   Updated: 2023/12/18 19:32:32 by florian          ###   ########.fr       */
+/*   Updated: 2023/12/19 17:43:38 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@ int	render(t_data *data)
 
 	if (data->win_ptr == NULL)
 		return (1);
+
+	if (data->img.mlx_img) {
+        mlx_destroy_image(data->mlx_ptr, data->img.mlx_img); // Libère l'image précédente
+    }
+    data->img.mlx_img = mlx_new_image(data->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
 
     proj = ft_iso_projection(data);
 
@@ -120,11 +125,6 @@ int	key_hook(int keycode, t_data *data)
 			data->zoom = 1;
 	}
 
-	if (data->img.mlx_img) {
-        mlx_destroy_image(data->mlx_ptr, data->img.mlx_img); // Libère l'image précédente
-    }
-    data->img.mlx_img = mlx_new_image(data->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
-    mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0, 0);
 	return (0);
 }
 
@@ -132,10 +132,10 @@ int	key_hook(int keycode, t_data *data)
 int	ft_mouse_down(int button, int x, int y, t_data *data)
 {	
 	if (button == 4)
-		data->zoom += 0.01;
+		data->zoom += 0.1;
 	
 	if (button == 5)
-		data->zoom -= 0.01;
+		data->zoom -= 0.1;
 
 	if (button == 1)
 	{
@@ -150,11 +150,6 @@ int	ft_mouse_down(int button, int x, int y, t_data *data)
 		data->prev_y = y;
 		data->mouse_button = 3;
 	}
-	if (data->img.mlx_img) {
-        mlx_destroy_image(data->mlx_ptr, data->img.mlx_img); // Libère l'image précédente
-    }
-    data->img.mlx_img = mlx_new_image(data->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
-    mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0, 0);
 	return (0);
 }
 
@@ -172,8 +167,6 @@ int	ft_mouse_up(int button, int x, int y, t_data *data)
 
 int	ft_mouse_move(int x, int y, t_data *data)
 {
-	//print mouse button
-	printf("mouse button: %d\n", data->mouse_button);
 	if (data->mouse_button == 1)
 	{
 		// Update offsets based on mouse movement
@@ -195,12 +188,6 @@ int	ft_mouse_move(int x, int y, t_data *data)
 		data->prev_x = x;
 		data->prev_y = y;
     }
-
-	if (data->img.mlx_img) {
-        mlx_destroy_image(data->mlx_ptr, data->img.mlx_img); // Libère l'image précédente
-    }
-    data->img.mlx_img = mlx_new_image(data->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
-    mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0, 0);
 	return (0);
 }
 
