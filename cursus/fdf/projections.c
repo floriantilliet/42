@@ -76,30 +76,61 @@ t_data ft_iso_projection(t_data *data)
     int window_center_x = WINDOW_WIDTH / 2;
     int window_center_y = WINDOW_HEIGHT / 2;
 
+	int x;
+	int y;
+
     double z_deg = 45 + data->angle_z;
     double x_deg = atan(sqrt(2)) + data->angle_x;
 	double y_deg = data->angle_y;
 
-	for (int i = 0; i < NB_POINTS; i++)
+	proj.map = malloc(sizeof(t_point*) * 10);
+	x = 0;
+	while (x<10)
 	{
-    // Rotation autour de l'axe Z
-    proj.points[i] = ft_multiply_vector_by_matrix(&data->points[i], ft_get_rot_matrix(z_deg, 'z'));
-
-    // Rotation autour de l'axe X
-    proj.points[i] = ft_multiply_vector_by_matrix(&proj.points[i], ft_get_rot_matrix(x_deg, 'x'));
-
-	//rotation autour de l'axe Y
-	proj.points[i] = ft_multiply_vector_by_matrix(&proj.points[i], ft_get_rot_matrix(y_deg, 'y'));
-
-	proj.points[i].z = data->points[i].z;
-
-	proj.points[i].y += data->offset_y;
-	proj.points[i].x += data->offset_x;
-	proj.points[i].x = round(proj.points[i].x * data->zoom);
-    proj.points[i].y = round(proj.points[i].y * data->zoom);
-	proj.points[i].x += window_center_x;
-    proj.points[i].y += window_center_y;
+		proj.map[x] = malloc(sizeof(t_point) * 18);
+		x++;
 	}
+	
+
+	x = 0;
+	while (x < 10)
+	{
+		y = 0;
+		while (y < 18)
+		{	
+			proj.map[x][y] = ft_multiply_vector_by_matrix(&data->map[x][y], ft_get_rot_matrix(z_deg, 'z'));
+			proj.map[x][y] = ft_multiply_vector_by_matrix(&proj.map[x][y], ft_get_rot_matrix(x_deg, 'x'));
+			proj.map[x][y] = ft_multiply_vector_by_matrix(&proj.map[x][y], ft_get_rot_matrix(y_deg, 'y'));
+			proj.map[x][y].z = data->map[x][y].z;
+			proj.map[x][y].y += data->offset_y;
+			proj.map[x][y].x += data->offset_x;
+			proj.map[x][y].x = round(proj.map[x][y].x * data->zoom);
+			proj.map[x][y].y = round(proj.map[x][y].y * data->zoom);
+			proj.map[x][y].x += window_center_x;
+			proj.map[x][y].y += window_center_y;
+			y++;
+		}
+		x++;
+	}
+	// {
+    // // Rotation autour de l'axe Z
+    // proj.map[i][j] = ft_multiply_vector_by_matrix(&data->points[i], ft_get_rot_matrix(z_deg, 'z'));
+
+    // // Rotation autour de l'axe X
+    // proj.points[i] = ft_multiply_vector_by_matrix(&proj.points[i], ft_get_rot_matrix(x_deg, 'x'));
+
+	// //rotation autour de l'axe Y
+	// proj.points[i] = ft_multiply_vector_by_matrix(&proj.points[i], ft_get_rot_matrix(y_deg, 'y'));
+
+	// proj.points[i].z = data->points[i].z;
+
+	// proj.points[i].y += data->offset_y;
+	// proj.points[i].x += data->offset_x;
+	// proj.points[i].x = round(proj.points[i].x * data->zoom);
+    // proj.points[i].y = round(proj.points[i].y * data->zoom);
+	// proj.points[i].x += window_center_x;
+    // proj.points[i].y += window_center_y;
+	// }
 
 	// proj = *data;
 	return(proj);
@@ -149,6 +180,7 @@ void	ft_draw_line(t_data *data, t_point P0, t_point P1)
 		current.y = P0.y;
 		current.z = interpolate_altitude(start, end, current);
 		ft_pixel_put(&data->img, P0.x, P0.y, get_altitude_color(current.z));
+		// ft_pixel_put(&data->img, P0.x, P0.y, ft_create_trgb(0, 255, 0, 0));
 		if (P0.x == P1.x && P0.y == P1.y)
 			break ;
 		e2 = 2 * err;
@@ -165,14 +197,33 @@ void	ft_draw_line(t_data *data, t_point P0, t_point P1)
 	}
 }
 
-void ft_draw_image(t_data *data, t_data proj)
+// void ft_draw_image(t_data *data, t_data proj)
+// {
+//     for (int i = 0; i < NB_POINTS - 1; i++)
+//     {
+//         ft_draw_line(data, proj.points[i], proj.points[i + 1]);
+//     }
+//     // Dessiner la dernière ligne entre le dernier point et le premier point pour fermer la forme
+//     ft_draw_line(data, proj.points[NB_POINTS - 1], proj.points[0]);
+// }
+
+
+void	ft_draw(t_data *data, t_data proj)
 {
-    for (int i = 0; i < NB_POINTS - 1; i++)
-    {
-        ft_draw_line(data, proj.points[i], proj.points[i + 1]);
-    }
-    // Dessiner la dernière ligne entre le dernier point et le premier point pour fermer la forme
-    ft_draw_line(data, proj.points[NB_POINTS - 1], proj.points[0]);
+	int	x;
+	int	y;
+	x = 0;
+	while (x < 9)
+	{
+		y = 0;
+		while (y < 17)
+		{
+			ft_draw_line(data, proj.map[x][y], proj.map[x + 1][y]);
+			ft_draw_line(data, proj.map[x][y], proj.map[x][y + 1]);
+			y++;
+		}
+		x++;
+	}
 }
 
 // void draw_lines_recursive(t_data *data,t_data proj, int start, int end, int color) {

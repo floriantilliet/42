@@ -6,14 +6,14 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 15:20:50 by florian           #+#    #+#             */
-/*   Updated: 2023/12/19 17:43:38 by florian          ###   ########.fr       */
+/*   Updated: 2023/12/20 19:14:58 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "graphics.h"
 
-int close(t_data *img)
+int close_image(t_data *img)
 {
     mlx_destroy_window(img->mlx_ptr, img->win_ptr);
     exit(1);
@@ -24,7 +24,7 @@ int	handle_keypress(int keysym, t_data *data)
 {
 	if (keysym == XK_Escape)
 	{
-		close(data);
+		close_image(data);
 		data->win_ptr = NULL;
 	}
 	printf("Keypress: %d\n", keysym);
@@ -34,7 +34,7 @@ int	handle_keypress(int keysym, t_data *data)
 int	render(t_data *data)
 {   
     t_data  proj;
-
+	
 	if (data->win_ptr == NULL)
 		return (1);
 
@@ -45,7 +45,7 @@ int	render(t_data *data)
 
     proj = ft_iso_projection(data);
 
-    ft_draw_image(data, proj);
+    ft_draw(data, proj);
 
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0, 0);
 
@@ -155,7 +155,6 @@ int	ft_mouse_down(int button, int x, int y, t_data *data)
 
 int	ft_mouse_up(int button, int x, int y, t_data *data)
 {
-
 	if (button == 1 || button == 3)
 	{
 		data->mouse_button = 0;
@@ -167,6 +166,7 @@ int	ft_mouse_up(int button, int x, int y, t_data *data)
 
 int	ft_mouse_move(int x, int y, t_data *data)
 {
+	// printf("mouse button: %d\n", data->mouse_button);
 	if (data->mouse_button == 1)
 	{
 		// Update offsets based on mouse movement
@@ -191,7 +191,7 @@ int	ft_mouse_move(int x, int y, t_data *data)
 	return (0);
 }
 
-int	main(void)
+int	main(int ac, char **av)
 {
 	t_data	data;
 
@@ -222,34 +222,69 @@ int	main(void)
     // {100.0, -100.0, 0.0}
     // };
 
-    t_point points[NB_POINTS] = {
-        {-1.0, 1.0, 0.0},
-        {0.0, -1.0, 0.0},
-        {0.0, 1.0, 0.0},
-        {1.0, 1.0, 0.0},
-        {-1.0, 0.0, 0.0},
-        {0.0, 0.0, 2.0},
-        {1.0, 0.0, 0.0},
-        {-1.0, -1.0, 0.0},
-        {1.0, -1.0, 0.0}
-    };
+    // t_point points[NB_POINTS] = {
+    //     {-1.0, 1.0, 0.0},
+    //     {0.0, -1.0, 0.0},
+    //     {0.0, 1.0, 0.0},
+    //     {1.0, 1.0, 0.0},
+    //     {-1.0, 0.0, 0.0},
+    //     {0.0, 0.0, 2.0},
+    //     {1.0, 0.0, 0.0},
+    //     {-1.0, -1.0, 0.0},
+    //     {1.0, -1.0, 0.0}
+    // };
 
-    for (int i = 0; i < NB_POINTS; i++) {
-        points[i].x *= 100;
-        points[i].y *= 100;
-        points[i].z *= 100;
+    // for (int i = 0; i < NB_POINTS; i++) {
+    //     points[i].x *= 100;
+    //     points[i].y *= 100;
+    //     points[i].z *= 100;
+    // }
+
+    // for (int i = 0; i < NB_POINTS; i++)
+	// 	data.points[i] = points[i];
+
+	int fd;
+    char **tab;
+    char ***tabs;
+
+    if (ac != 2)
+        return (0);
+    fd = open(av[1], O_RDONLY);
+    if (fd == -1)
+        return (0);
+    tab = fd_to_tab(fd);
+    if (!tab)
+        return (0);
+    tabs = tab_to_tabs(tab);
+    if (!tabs)
+        return (0);
+    data.map = tabs_to_map(tabs);
+    if (!data.map)
+	{
+        return (0);
+	}
+	int i = 0;
+    int j;
+    while (data.map[i])
+    {
+        j = 0;
+        while (data.map[i][j].x != -1)
+        {
+            data.map[i][j].x *= 10;
+			data.map[i][j].y *= 10;
+			data.map[i][j].z *= 10;
+			printf("x: %f, y: %f, z: %f\n", data.map[i][j].x, data.map[i][j].y, data.map[i][j].z);
+            j++;
+        }
+        i++;
     }
-
-    for (int i = 0; i < NB_POINTS; i++)
-		data.points[i] = points[i];
-
 	data.zoom = 1.0;
 	data.mouse_button = 0;
 
 	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.img.mlx_img, 0, 0);
 
 	mlx_hook(data.win_ptr, KeyPress, KeyPressMask, &handle_keypress, &data);
-    mlx_hook(data.win_ptr, 17, 0L, close, &data);
+    mlx_hook(data.win_ptr, 17, 0L, close_image, &data);
 
 	mlx_hook(data.win_ptr, 4, 1L<<2, ft_mouse_down, &data);
 	mlx_hook(data.win_ptr, 5, 1L<<3, ft_mouse_up, &data);

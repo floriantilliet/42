@@ -8,6 +8,11 @@
 #include <math.h>
 #include <stdio.h>
 
+#include "stdio.h"
+#include "libft/libft.h"
+#include "get_next_line/get_next_line_bonus.h"
+#include <fcntl.h>
+
 #define MLX_ERROR 1
 
 #define WINDOW_WIDTH 1280
@@ -35,7 +40,7 @@ typedef struct	s_data
     void	*mlx_ptr;
     void	*win_ptr;
     t_img	img;
-    t_point points[NB_POINTS];
+    t_point **map;
 
     double  angle_x;
     double  angle_y;
@@ -75,6 +80,10 @@ void ft_draw_image(t_data *data, t_data proj);
 void draw_lines_recursive(t_data *data,t_data proj, int start, int end, int color);
 void	ft_pixel_grad(t_img *img, unsigned int x, unsigned int y, unsigned int z, int color);
 int get_altitude_color(double z);
-double interpolate_altitude(t_point start, t_point end, t_point current) ;
+double interpolate_altitude(t_point start, t_point end, t_point current);
+char** fd_to_tab(int fd);
+char*** tab_to_tabs(char **tab);
+t_point **tabs_to_map(char ***tabs);
+void	ft_draw(t_data *data, t_data proj);
 
 #endif
