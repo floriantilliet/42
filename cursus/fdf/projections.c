@@ -207,36 +207,22 @@ void	ft_draw_line(t_data *data, t_point P0, t_point P1)
 //     ft_draw_line(data, proj.points[NB_POINTS - 1], proj.points[0]);
 // }
 
-
 void	ft_draw(t_data *data, t_data proj)
 {
-	int	x;
-	int	y;
-	x = 0;
-	while (x < 9)
-	{
-		y = 0;
-		while (y < 17)
-		{
-			ft_draw_line(data, proj.map[x][y], proj.map[x + 1][y]);
-			ft_draw_line(data, proj.map[x][y], proj.map[x][y + 1]);
-			y++;
-		}
-		x++;
-	}
+    int	x;
+    int	y;
+    x = 0;
+    while (x < 10)
+    {
+        y = 0;
+        while (y < 18)
+        {
+            if (x < 9) // Check if it's not the last column
+                ft_draw_line(data, proj.map[x][y], proj.map[x + 1][y]);
+            if (y < 17) // Check if it's not the last row
+                ft_draw_line(data, proj.map[x][y], proj.map[x][y + 1]);
+            y++;
+        }
+        x++;
+    }
 }
-
-// void draw_lines_recursive(t_data *data,t_data proj, int start, int end, int color) {
-//     // Condition de sortie de la récursion
-//     if (start >= end) {
-//         return;
-//     }
-	
-//     // Dessiner un trait entre les points start et end
-//     ft_draw_line(data, proj.points[start], proj.points[end], color);
-
-//     // Appel récursif pour les sous-ensembles de points
-//     int mid = (start + end) / 2;
-//     draw_lines_recursive(data, proj, start, mid, color);
-//     draw_lines_recursive(data, proj, mid + 1, end, color);
-// }
