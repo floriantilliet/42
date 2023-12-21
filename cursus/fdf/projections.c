@@ -159,7 +159,8 @@ void	ft_draw_line(t_data *data, t_point P0, t_point P1)
 		current.x = P0.x;
 		current.y = P0.y;
 		current.z = interpolate_altitude(start, end, current);
-		ft_pixel_put(&data->img, P0.x, P0.y, get_altitude_color(current.z));
+		// ft_pixel_put(&data->img, P0.x, P0.y, get_altitude_color(current.z));
+		ft_pixel_put(&data->img, P0.x, P0.y, get_color(current.z, data->floor, data->ceiling));
 		// ft_pixel_put(&data->img, P0.x, P0.y, ft_create_trgb(0, 255, 0, 0));
 		if (P0.x == P1.x && P0.y == P1.y)
 			break ;

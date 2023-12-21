@@ -91,5 +91,6 @@ char*** tab_to_tabs(char **tab);
 t_point **tabs_to_map(char ***tabs);
 void	ft_draw(t_data *data, t_data proj);
 void get_limits(t_data *data);
+int get_color(double z, double min_altitude, double max_altitude);
 
 #endif

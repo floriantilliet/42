@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:20:08 by florian           #+#    #+#             */
-/*   Updated: 2023/12/21 17:22:12 by florian          ###   ########.fr       */
+/*   Updated: 2023/12/21 20:03:09 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,8 @@ void get_limits(t_data *data)
     }
 data->width += 1;
 data->height += 1;
+data->floor *= 10;
+data->ceiling *= 10;
 }
 
 // int main(int ac, char **av)
