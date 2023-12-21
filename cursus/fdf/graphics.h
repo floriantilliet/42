@@ -49,11 +49,16 @@ typedef struct	s_data
     double  offset_x;
     double  offset_y;
 
+    double  zoom;
+
     int     mouse_button;
     double  prev_x;
     double  prev_y;
 
-    double  zoom;
+    double ceiling;
+    double floor;
+    double height;
+    double width;
 }	t_data;
 
 typedef struct s_matrix
@@ -85,5 +90,6 @@ char** fd_to_tab(int fd);
 char*** tab_to_tabs(char **tab);
 t_point **tabs_to_map(char ***tabs);
 void	ft_draw(t_data *data, t_data proj);
+void get_limits(t_data *data);
 
 #endif

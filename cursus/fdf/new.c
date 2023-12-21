@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 15:20:50 by florian           #+#    #+#             */
-/*   Updated: 2023/12/20 19:14:58 by florian          ###   ########.fr       */
+/*   Updated: 2023/12/21 17:49:35 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	handle_keypress(int keysym, t_data *data)
 int	render(t_data *data)
 {   
     t_data  proj;
+	int x;
 	
 	if (data->win_ptr == NULL)
 		return (1);
@@ -46,6 +47,14 @@ int	render(t_data *data)
     proj = ft_iso_projection(data);
 
     ft_draw(data, proj);
+
+	x = 0;
+	while (x<data->width)
+	{
+		free(proj.map[x]);
+		x++;
+	}
+	free(proj.map);
 
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0, 0);
 
@@ -210,39 +219,6 @@ int	main(int ac, char **av)
 	data.img.addr = mlx_get_data_addr(data.img.mlx_img, &data.img.bpp,
 			&data.img.line_len, &data.img.endian);
 
-    // t_point points[NB_POINTS] = {
-    // {-100.0, 100.0, 0.0},
-    // {0.0, 100.0, 0.0},
-    // {100.0, 100.0, 0.0},
-    // {-100.0, 0.0, 0.0},
-    // {0.0, 0.0, 200.0},
-    // {100.0, 0.0, 0.0},
-    // {-100.0, -100.0, 0.0},
-    // {0.0, -100.0, 0.0},
-    // {100.0, -100.0, 0.0}
-    // };
-
-    // t_point points[NB_POINTS] = {
-    //     {-1.0, 1.0, 0.0},
-    //     {0.0, -1.0, 0.0},
-    //     {0.0, 1.0, 0.0},
-    //     {1.0, 1.0, 0.0},
-    //     {-1.0, 0.0, 0.0},
-    //     {0.0, 0.0, 2.0},
-    //     {1.0, 0.0, 0.0},
-    //     {-1.0, -1.0, 0.0},
-    //     {1.0, -1.0, 0.0}
-    // };
-
-    // for (int i = 0; i < NB_POINTS; i++) {
-    //     points[i].x *= 100;
-    //     points[i].y *= 100;
-    //     points[i].z *= 100;
-    // }
-
-    // for (int i = 0; i < NB_POINTS; i++)
-	// 	data.points[i] = points[i];
-
 	int fd;
     char **tab;
     char ***tabs;
@@ -263,6 +239,8 @@ int	main(int ac, char **av)
 	{
         return (0);
 	}
+	get_limits(&data);
+	printf("width: %f, height: %f, floor: %f, ceiling: %f\n", data.width, data.height, data.floor, data.ceiling);
 	int i = 0;
     int j;
     while (data.map[i])
@@ -273,7 +251,7 @@ int	main(int ac, char **av)
             data.map[i][j].x *= 10;
 			data.map[i][j].y *= 10;
 			data.map[i][j].z *= 10;
-			printf("x: %f, y: %f, z: %f\n", data.map[i][j].x, data.map[i][j].y, data.map[i][j].z);
+			// printf("x: %f, y: %f, z: %f\n", data.map[i][j].x, data.map[i][j].y, data.map[i][j].z);
             j++;
         }
         i++;

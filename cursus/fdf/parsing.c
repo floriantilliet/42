@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:20:08 by florian           #+#    #+#             */
-/*   Updated: 2023/12/20 19:10:13 by florian          ###   ########.fr       */
+/*   Updated: 2023/12/21 17:22:12 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,33 @@ t_point **tabs_to_map(char ***tabs)
     }
     map[i] = NULL;
     return (map);
+}
+
+void get_limits(t_data *data)
+{
+    int i;
+    int j;
+
+    i = 0;
+    while (data->map[i])
+    {
+        j = 0;
+        while (data->map[i][j].x != -1)
+        {
+            if (data->map[i][j].x > data->width)
+                data->width = data->map[i][j].x;
+            if (data->map[i][j].y > data->height)
+                data->height = data->map[i][j].y;
+            if (data->map[i][j].z < data->floor)
+                data->floor = data->map[i][j].z;
+            if (data->map[i][j].z > data->ceiling)
+                data->ceiling = data->map[i][j].z;
+            j++;
+        }
+        i++;
+    }
+data->width += 1;
+data->height += 1;
 }
 
 // int main(int ac, char **av)

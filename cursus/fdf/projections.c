@@ -83,20 +83,20 @@ t_data ft_iso_projection(t_data *data)
     double x_deg = atan(sqrt(2)) + data->angle_x;
 	double y_deg = data->angle_y;
 
-	proj.map = malloc(sizeof(t_point*) * 10);
+	proj.map = malloc(sizeof(t_point*) * data->width);
 	x = 0;
-	while (x<10)
+	while (x<data->width)
 	{
-		proj.map[x] = malloc(sizeof(t_point) * 18);
+		proj.map[x] = malloc(sizeof(t_point) * data->height);
 		x++;
 	}
 	
 
 	x = 0;
-	while (x < 10)
+	while (x < data->width)
 	{
 		y = 0;
-		while (y < 18)
+		while (y < data->height)
 		{	
 			proj.map[x][y] = ft_multiply_vector_by_matrix(&data->map[x][y], ft_get_rot_matrix(z_deg, 'z'));
 			proj.map[x][y] = ft_multiply_vector_by_matrix(&proj.map[x][y], ft_get_rot_matrix(x_deg, 'x'));
@@ -112,26 +112,6 @@ t_data ft_iso_projection(t_data *data)
 		}
 		x++;
 	}
-	// {
-    // // Rotation autour de l'axe Z
-    // proj.map[i][j] = ft_multiply_vector_by_matrix(&data->points[i], ft_get_rot_matrix(z_deg, 'z'));
-
-    // // Rotation autour de l'axe X
-    // proj.points[i] = ft_multiply_vector_by_matrix(&proj.points[i], ft_get_rot_matrix(x_deg, 'x'));
-
-	// //rotation autour de l'axe Y
-	// proj.points[i] = ft_multiply_vector_by_matrix(&proj.points[i], ft_get_rot_matrix(y_deg, 'y'));
-
-	// proj.points[i].z = data->points[i].z;
-
-	// proj.points[i].y += data->offset_y;
-	// proj.points[i].x += data->offset_x;
-	// proj.points[i].x = round(proj.points[i].x * data->zoom);
-    // proj.points[i].y = round(proj.points[i].y * data->zoom);
-	// proj.points[i].x += window_center_x;
-    // proj.points[i].y += window_center_y;
-	// }
-
 	// proj = *data;
 	return(proj);
 }
@@ -197,29 +177,19 @@ void	ft_draw_line(t_data *data, t_point P0, t_point P1)
 	}
 }
 
-// void ft_draw_image(t_data *data, t_data proj)
-// {
-//     for (int i = 0; i < NB_POINTS - 1; i++)
-//     {
-//         ft_draw_line(data, proj.points[i], proj.points[i + 1]);
-//     }
-//     // Dessiner la dernière ligne entre le dernier point et le premier point pour fermer la forme
-//     ft_draw_line(data, proj.points[NB_POINTS - 1], proj.points[0]);
-// }
-
 void	ft_draw(t_data *data, t_data proj)
 {
     int	x;
     int	y;
     x = 0;
-    while (x < 10)
+    while (x < data->width)
     {
         y = 0;
-        while (y < 18)
+        while (y < data->height)
         {
-            if (x < 9) // Check if it's not the last column
+            if (x < data->width - 1) // Check if it's not the last column
                 ft_draw_line(data, proj.map[x][y], proj.map[x + 1][y]);
-            if (y < 17) // Check if it's not the last row
+            if (y < data->height - 1) // Check if it's not the last row
                 ft_draw_line(data, proj.map[x][y], proj.map[x][y + 1]);
             y++;
         }
