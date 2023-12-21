@@ -81,7 +81,7 @@ t_data ft_iso_projection(t_data *data)
 
     double z_deg = 45 + data->angle_z;
     double x_deg = atan(sqrt(2)) + data->angle_x;
-	double y_deg = data->angle_y;
+	double y_deg =data->angle_y;
 
 	proj.map = malloc(sizeof(t_point*) * data->width);
 	x = 0;
