@@ -81,7 +81,7 @@ t_data ft_iso_projection(t_data *data)
 
     double z_deg = 45 + data->angle_z;
     double x_deg = atan(sqrt(2)) + data->angle_x;
-	double y_deg =data->angle_y;
+	double y_deg = - data->angle_y;
 
 	proj.map = malloc(sizeof(t_point*) * data->width);
 	x = 0;
@@ -102,6 +102,7 @@ t_data ft_iso_projection(t_data *data)
 			proj.map[x][y] = ft_multiply_vector_by_matrix(&proj.map[x][y], ft_get_rot_matrix(x_deg, 'x'));
 			proj.map[x][y] = ft_multiply_vector_by_matrix(&proj.map[x][y], ft_get_rot_matrix(y_deg, 'y'));
 			proj.map[x][y].z = data->map[x][y].z;
+			proj.map[x][y].x *= -1;
 			proj.map[x][y].y += data->offset_y;
 			proj.map[x][y].x += data->offset_x;
 			proj.map[x][y].x = round(proj.map[x][y].x * data->zoom);
