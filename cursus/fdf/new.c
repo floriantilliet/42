@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 15:20:50 by florian           #+#    #+#             */
-/*   Updated: 2023/12/22 13:08:48 by florian          ###   ########.fr       */
+/*   Updated: 2023/12/22 16:19:46 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,22 +96,22 @@ int	key_hook(int keycode, t_data *data)
 
 	if (keycode == XK_d)
 	{
-        	data->angle_y -= 0.01;
+        	data->angle_y -= 1;
 	}
 
 	if (keycode == XK_a)
 	{
-			data->angle_y += 0.01;
+			data->angle_y += 1;
 	}
 
     if (keycode == XK_w)
     {
-        	data->angle_x += 0.01;
+        	data->angle_x += 1;
     }
 
     if (keycode == XK_s)
     {
-        	data->angle_x -= 0.01;
+        	data->angle_x -= 1;
     }
 
 	if (keycode == XK_e)
@@ -190,9 +190,9 @@ int	ft_mouse_move(int x, int y, t_data *data)
 	if (data->mouse_button == 3) // Right mouse button
     {	
         // Update rotation angle based on mouse movement
-        data->angle_x -= (y - data->prev_y) * 0.01; // Adjust the multiplier as needed
-		data->angle_y -= (x - data->prev_x) * 0.01;
-		
+        data->angle_x -= (y - data->prev_y) * 0.1; // Adjust the multiplier as needed
+		data->angle_y -= (x - data->prev_x) * 0.1;
+		printf("angle_x: %f, angle_y: %f, angle_z: %f\n", data->angle_x, data->angle_y, data->angle_z);
 		// Store the current mouse position for the next movement event
 		data->prev_x = x;
 		data->prev_y = y;

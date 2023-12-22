@@ -46,14 +46,14 @@ t_matrix	ft_get_rot_matrix(double deg, char axis)
 	if (axis == 'x')
 		return ((t_matrix){
 			(t_point){1., 0., 0.},
-			(t_point){0., cos(deg), -sin(deg)},
-			(t_point){0., sin(deg), cos(deg)}
+			(t_point){0., cos(rad(deg)), -sin(rad(deg))},
+			(t_point){0., sin(rad(deg)), cos(rad(deg))}
 	});
 	if (axis == 'y')
 		return ((t_matrix){
-			(t_point){cos(deg), 0., -sin(deg)},
+			(t_point){cos(rad(deg)), 0., -sin(rad(deg))},
 			(t_point){0., 1., 0.},
-			(t_point){sin(deg), 0., cos(deg)}
+			(t_point){sin(deg), 0., cos(rad(deg))}
 	});
 	if (axis == 'z')
 		return ((t_matrix){
@@ -80,7 +80,7 @@ t_data ft_iso_projection(t_data *data)
 	int y;
 
     double z_deg = 45 + data->angle_z;
-    double x_deg = atan(sqrt(2)) + data->angle_x;
+    double x_deg = atan(sqrt(2)) + 45 + data->angle_x;
 	double y_deg = - data->angle_y;
 
 	proj.map = malloc(sizeof(t_point*) * data->width);
