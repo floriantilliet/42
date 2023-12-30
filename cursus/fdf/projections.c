@@ -144,7 +144,7 @@ void	ft_draw_line(t_data *data, t_point P0, t_point P1)
 	int	e2;
 	t_point start = P0;
 	t_point end = P1;
-	t_point current = {0, 0, 0};
+	t_point current;
 
 	dx = fabs(P0.x - P1.x);
 	if (P0.x < P1.x)
