@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:20:08 by florian           #+#    #+#             */
-/*   Updated: 2023/12/22 12:58:47 by florian          ###   ########.fr       */
+/*   Updated: 2023/12/30 14:49:00 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,14 @@ char** fd_to_tab(int fd)
         return (NULL);
     line = get_next_line(fd);
     if (!line)
-    {
+    {   
         return (NULL);
     }
 	while (line)
 	{   
         temp = str;
 		str = ft_strjoin(str, line);
+        free(line);
         if (!str)
             return (free(str), free(line), NULL);
 		line = get_next_line(fd);
@@ -51,6 +52,7 @@ char*** tab_to_tabs(char **tab)
     while (tab[i])
         i++;
     tabs = malloc(sizeof(char**) * (i + 1));
+    // tabs = ft_calloc(sizeof(char**), (i + 1));
     if (!tabs)
         return (NULL);
     i = 0;
@@ -59,10 +61,11 @@ char*** tab_to_tabs(char **tab)
         tabs[i] = ft_split(tab[i], ' ');
         if (!tabs[i])
             return (free(tabs), NULL);
+        free(tab[i]);
         i++;
     }
     tabs[i] = NULL;
-    return (tabs);
+    return (free(tab), tabs);
 }
 
 t_point **tabs_to_map(char ***tabs)
@@ -75,6 +78,7 @@ t_point **tabs_to_map(char ***tabs)
     while (tabs[i])
         i++;
     map = malloc(sizeof(t_point*) * (i + 1));
+    // map = ft_calloc(sizeof(t_point*), (i + 1));
     if (!map)
         return (NULL);
     i = 0;
@@ -84,6 +88,7 @@ t_point **tabs_to_map(char ***tabs)
         while (tabs[i][j])
             j++;
         map[i] = malloc(sizeof(t_point) * (j + 1));
+        // map[i] = ft_calloc(sizeof(t_point), (j + 1));
         if (!map[i])
             return (free(map), NULL);
         j = 0;
@@ -92,20 +97,25 @@ t_point **tabs_to_map(char ***tabs)
             map[i][j].x = i;
             map[i][j].y = j;
             map[i][j].z = ft_atoi(tabs[i][j]);
+            free(tabs[i][j]);
             j++;
         }
+        free(tabs[i]);
         map[i][j].x = -1;
         i++;
     }
     map[i] = NULL;
-    return (map);
+    return (free(tabs), map);
 }
 
 void get_limits(t_data *data)
 {
     int i;
     int j;
-
+    data->width = 0;
+    data->height = 0;
+    data->floor = 0;
+    data->ceiling = 0;
     i = 0;
     while (data->map[i])
     {

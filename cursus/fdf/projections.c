@@ -84,10 +84,12 @@ t_data ft_iso_projection(t_data *data)
 	double y_deg = - data->angle_y;
 
 	proj.map = malloc(sizeof(t_point*) * data->width);
+	// proj.map = ft_calloc(data->width, sizeof(t_point*));
 	x = 0;
 	while (x<data->width)
 	{
 		proj.map[x] = malloc(sizeof(t_point) * data->height);
+		// proj.map[x] = ft_calloc(data->height, sizeof(t_point));
 		x++;
 	}
 	

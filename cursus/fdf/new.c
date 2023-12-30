@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 15:20:50 by florian           #+#    #+#             */
-/*   Updated: 2023/12/22 16:19:46 by florian          ###   ########.fr       */
+/*   Updated: 2023/12/30 14:35:48 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,7 +192,7 @@ int	ft_mouse_move(int x, int y, t_data *data)
         // Update rotation angle based on mouse movement
         data->angle_x -= (y - data->prev_y) * 0.1; // Adjust the multiplier as needed
 		data->angle_y -= (x - data->prev_x) * 0.1;
-		printf("angle_x: %f, angle_y: %f, angle_z: %f\n", data->angle_x, data->angle_y, data->angle_z);
+		// printf("angle_x: %f, angle_y: %f, angle_z: %f\n", data->angle_x, data->angle_y, data->angle_z);
 		// Store the current mouse position for the next movement event
 		data->prev_x = x;
 		data->prev_y = y;
@@ -240,7 +240,7 @@ int	main(int ac, char **av)
         return (0);
 	}
 	get_limits(&data);
-	printf("width: %f, height: %f, floor: %f, ceiling: %f\n", data.width, data.height, data.floor, data.ceiling);
+	// printf("width: %f, height: %f, floor: %f, ceiling: %f\n", data.width, data.height, data.floor, data.ceiling);
 	int i = 0;
     int j;
     while (data.map[i])
@@ -259,6 +259,7 @@ int	main(int ac, char **av)
 	data.zoom = 1.0;
 	data.mouse_button = 0;
 
+	// exit(0);
 	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.img.mlx_img, 0, 0);
 
 	mlx_hook(data.win_ptr, KeyPress, KeyPressMask, &handle_keypress, &data);
@@ -271,8 +272,18 @@ int	main(int ac, char **av)
 	mlx_key_hook(data.win_ptr, key_hook, &data);
     mlx_loop_hook(data.mlx_ptr, &render, &data);
 
-	mlx_loop(data.mlx_ptr);
+	// mlx_loop(data.mlx_ptr);
 	mlx_destroy_image(data.mlx_ptr, data.img.mlx_img);
+	mlx_destroy_window(data.mlx_ptr, data.win_ptr);
 	mlx_destroy_display(data.mlx_ptr);
 	free(data.mlx_ptr);
+
+	int x;
+	x = 0;
+	while (x<data.width)
+	{
+		free(data.map[x]);
+		x++;
+	}
+	free(data.map);
 }
