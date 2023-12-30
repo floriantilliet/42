@@ -6,17 +6,30 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 15:20:50 by florian           #+#    #+#             */
-/*   Updated: 2023/12/30 18:21:26 by florian          ###   ########.fr       */
+/*   Updated: 2023/12/30 18:55:23 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "graphics.h"
 
-int close_image(t_data *img)
+int close_image(t_data *data)
 {
-    mlx_destroy_window(img->mlx_ptr, img->win_ptr);
-	img->win_ptr = NULL;
+    mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+	data->win_ptr = NULL;
+	mlx_destroy_image(data->mlx_ptr, data->img.mlx_img);
+	mlx_destroy_display(data->mlx_ptr);
+	free(data->mlx_ptr);
+
+	int x;
+	x = 0;
+	while (x<data->width)
+	{
+		free(data->map[x]);
+		x++;
+	}
+	free(data->map);
+	exit(0);
     return (0);
 }
 
@@ -265,25 +278,13 @@ int	main(int ac, char **av)
 	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.img.mlx_img, 0, 0);
 
 	mlx_hook(data.win_ptr, KeyPress, KeyPressMask, &handle_keypress, &data);
+	mlx_hook(data.win_ptr, 17, 0L, close_image, &data);
 	mlx_hook(data.win_ptr, 4, 1L<<2, ft_mouse_down, &data);
 	mlx_hook(data.win_ptr, 5, 1L<<3, ft_mouse_up, &data);
 	mlx_hook(data.win_ptr, 6, 1L<<6, ft_mouse_move, &data);
 
 	mlx_key_hook(data.win_ptr, key_hook, &data);
     mlx_loop_hook(data.mlx_ptr, &render, &data);
-	mlx_hook(data.win_ptr, 17, 0L, close_image, &data);
 
 	mlx_loop(data.mlx_ptr);
-	mlx_destroy_image(data.mlx_ptr, data.img.mlx_img);
-	mlx_destroy_display(data.mlx_ptr);
-	free(data.mlx_ptr);
-
-	int x;
-	x = 0;
-	while (x<data.width)
-	{
-		free(data.map[x]);
-		x++;
-	}
-	free(data.map);
 }
