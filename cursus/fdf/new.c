@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 15:20:50 by florian           #+#    #+#             */
-/*   Updated: 2023/12/30 17:22:09 by florian          ###   ########.fr       */
+/*   Updated: 2023/12/30 18:21:26 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 int close_image(t_data *img)
 {
     mlx_destroy_window(img->mlx_ptr, img->win_ptr);
+	img->win_ptr = NULL;
     return (0);
 }
 
@@ -24,9 +25,7 @@ int	handle_keypress(int keysym, t_data *data)
 	if (keysym == XK_Escape)
 	{
 		close_image(data);
-		data->win_ptr = NULL;
 	}
-	printf("Keypress: %d\n", keysym);
 	return (0);
 }
 
@@ -57,7 +56,6 @@ int	render(t_data *data)
 
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0, 0);
 
-	// exit(0);
 	return (0);
 }
 
@@ -267,14 +265,13 @@ int	main(int ac, char **av)
 	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.img.mlx_img, 0, 0);
 
 	mlx_hook(data.win_ptr, KeyPress, KeyPressMask, &handle_keypress, &data);
-    mlx_hook(data.win_ptr, 17, 0L, close_image, &data);
-
 	mlx_hook(data.win_ptr, 4, 1L<<2, ft_mouse_down, &data);
 	mlx_hook(data.win_ptr, 5, 1L<<3, ft_mouse_up, &data);
 	mlx_hook(data.win_ptr, 6, 1L<<6, ft_mouse_move, &data);
 
 	mlx_key_hook(data.win_ptr, key_hook, &data);
     mlx_loop_hook(data.mlx_ptr, &render, &data);
+	mlx_hook(data.win_ptr, 17, 0L, close_image, &data);
 
 	mlx_loop(data.mlx_ptr);
 	mlx_destroy_image(data.mlx_ptr, data.img.mlx_img);
