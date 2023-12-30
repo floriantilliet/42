@@ -83,13 +83,13 @@ t_data ft_iso_projection(t_data *data)
     double x_deg = atan(sqrt(2)) + 45 + data->angle_x;
 	double y_deg = - data->angle_y;
 
-	proj.map = malloc(sizeof(t_point*) * data->width);
-	// proj.map = ft_calloc(data->width, sizeof(t_point*));
+	// proj.map = malloc(sizeof(t_point*) * data->width);
+	proj.map = ft_calloc(data->width, sizeof(t_point*));
 	x = 0;
 	while (x<data->width)
 	{
-		proj.map[x] = malloc(sizeof(t_point) * data->height);
-		// proj.map[x] = ft_calloc(data->height, sizeof(t_point));
+		// proj.map[x] = malloc(sizeof(t_point) * data->height);
+		proj.map[x] = ft_calloc(data->height, sizeof(t_point));
 		x++;
 	}
 	
@@ -144,7 +144,7 @@ void	ft_draw_line(t_data *data, t_point P0, t_point P1)
 	int	e2;
 	t_point start = P0;
 	t_point end = P1;
-	t_point current;
+	t_point current = {0, 0, 0};
 
 	dx = fabs(P0.x - P1.x);
 	if (P0.x < P1.x)

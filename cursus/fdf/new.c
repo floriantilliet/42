@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 15:20:50 by florian           #+#    #+#             */
-/*   Updated: 2023/12/30 14:35:48 by florian          ###   ########.fr       */
+/*   Updated: 2023/12/30 17:22:09 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 int close_image(t_data *img)
 {
     mlx_destroy_window(img->mlx_ptr, img->win_ptr);
-    exit(1);
     return (0);
 }
 
@@ -58,6 +57,7 @@ int	render(t_data *data)
 
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0, 0);
 
+	// exit(0);
 	return (0);
 }
 
@@ -258,8 +258,12 @@ int	main(int ac, char **av)
     }
 	data.zoom = 1.0;
 	data.mouse_button = 0;
-
-	// exit(0);
+	data.angle_x = 0;
+	data.angle_y = 0;
+	data.angle_z = 0;
+	data.offset_x = 0;
+	data.offset_y = 0;
+	
 	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.img.mlx_img, 0, 0);
 
 	mlx_hook(data.win_ptr, KeyPress, KeyPressMask, &handle_keypress, &data);
@@ -272,9 +276,8 @@ int	main(int ac, char **av)
 	mlx_key_hook(data.win_ptr, key_hook, &data);
     mlx_loop_hook(data.mlx_ptr, &render, &data);
 
-	// mlx_loop(data.mlx_ptr);
+	mlx_loop(data.mlx_ptr);
 	mlx_destroy_image(data.mlx_ptr, data.img.mlx_img);
-	mlx_destroy_window(data.mlx_ptr, data.win_ptr);
 	mlx_destroy_display(data.mlx_ptr);
 	free(data.mlx_ptr);
 

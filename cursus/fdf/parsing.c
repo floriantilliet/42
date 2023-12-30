@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:20:08 by florian           #+#    #+#             */
-/*   Updated: 2023/12/30 14:49:00 by florian          ###   ########.fr       */
+/*   Updated: 2023/12/30 16:51:29 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ char*** tab_to_tabs(char **tab)
     i = 0;
     while (tab[i])
         i++;
-    tabs = malloc(sizeof(char**) * (i + 1));
-    // tabs = ft_calloc(sizeof(char**), (i + 1));
+    // tabs = malloc(sizeof(char**) * (i + 1));
+    tabs = ft_calloc(sizeof(char**), (i + 1));
     if (!tabs)
         return (NULL);
     i = 0;
@@ -77,8 +77,8 @@ t_point **tabs_to_map(char ***tabs)
     i = 0;
     while (tabs[i])
         i++;
-    map = malloc(sizeof(t_point*) * (i + 1));
-    // map = ft_calloc(sizeof(t_point*), (i + 1));
+    // map = malloc(sizeof(t_point*) * (i + 1));
+    map = ft_calloc(sizeof(t_point*), (i + 1));
     if (!map)
         return (NULL);
     i = 0;
@@ -87,8 +87,8 @@ t_point **tabs_to_map(char ***tabs)
         j = 0;
         while (tabs[i][j])
             j++;
-        map[i] = malloc(sizeof(t_point) * (j + 1));
-        // map[i] = ft_calloc(sizeof(t_point), (j + 1));
+        // map[i] = malloc(sizeof(t_point) * (j + 1));
+        map[i] = ft_calloc(sizeof(t_point), (j + 1));
         if (!map[i])
             return (free(map), NULL);
         j = 0;
