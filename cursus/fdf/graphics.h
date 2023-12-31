@@ -17,7 +17,7 @@
 
 #define WINDOW_WIDTH 1280
 #define WINDOW_HEIGHT 1024
-#define NB_POINTS 9
+#define DEG_TO_RAD 3.14159265358979323846 / 180.0
 
 typedef struct	s_img
 {

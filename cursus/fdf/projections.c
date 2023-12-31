@@ -2,9 +2,9 @@
 
 #include <stdio.h>
 
-double	rad(double deg)
+double rad(double deg)
 {
-	return (deg * M_PI / 180);
+    return deg * DEG_TO_RAD;
 }
 
 t_point ft_multiply_vector_by_matrix(t_point *v, t_matrix m)
@@ -12,22 +12,6 @@ t_point ft_multiply_vector_by_matrix(t_point *v, t_matrix m)
 	t_point res;
     // Utiliser des variables temporaires de type float ou double
     double temp_x, temp_y, temp_z;
-
-	// normalize the vectors before multiplying them
-	// double length = sqrt(m.i.x * m.i.x + m.i.y * m.i.y + m.i.z * m.i.z);
-	// m.i.x /= length;
-	// m.i.y /= length;
-	// m.i.z /= length;
-
-	// length = sqrt(m.j.x * m.j.x + m.j.y * m.j.y + m.j.z * m.j.z);
-	// m.j.x /= length;
-	// m.j.y /= length;
-	// m.j.z /= length;
-
-	// length = sqrt(m.k.x * m.k.x + m.k.y * m.k.y + m.k.z * m.k.z);
-	// m.k.x /= length;
-	// m.k.y /= length;
-	// m.k.z /= length;
 
     temp_x = v->x * m.i.x + v->y * m.i.y + v->z * m.i.z;
     temp_y = v->x * m.j.x + v->y * m.j.y + v->z * m.j.z;
@@ -76,47 +60,48 @@ t_data ft_iso_projection(t_data *data)
     int window_center_x = WINDOW_WIDTH / 2;
     int window_center_y = WINDOW_HEIGHT / 2;
 
-	int x;
-	int y;
+    int x;
+    int y;
 
     double z_deg = 45 + data->angle_z;
     double x_deg = atan(sqrt(2)) + 45 + data->angle_x;
-	double y_deg = - data->angle_y;
+    double y_deg = - data->angle_y;
 
-	// proj.map = malloc(sizeof(t_point*) * data->width);
-	proj.map = ft_calloc(data->width, sizeof(t_point*));
-	x = 0;
-	while (x<data->width)
-	{
-		// proj.map[x] = malloc(sizeof(t_point) * data->height);
-		proj.map[x] = ft_calloc(data->height, sizeof(t_point));
-		x++;
-	}
-	
+    // Calculer les matrices de rotation une seule fois
+    t_matrix rot_z = ft_get_rot_matrix(z_deg, 'z');
+    t_matrix rot_x = ft_get_rot_matrix(x_deg, 'x');
+    t_matrix rot_y = ft_get_rot_matrix(y_deg, 'y');
 
-	x = 0;
-	while (x < data->width)
-	{
-		y = 0;
-		while (y < data->height)
-		{	
-			proj.map[x][y] = ft_multiply_vector_by_matrix(&data->map[x][y], ft_get_rot_matrix(z_deg, 'z'));
-			proj.map[x][y] = ft_multiply_vector_by_matrix(&proj.map[x][y], ft_get_rot_matrix(x_deg, 'x'));
-			proj.map[x][y] = ft_multiply_vector_by_matrix(&proj.map[x][y], ft_get_rot_matrix(y_deg, 'y'));
-			proj.map[x][y].z = data->map[x][y].z;
-			proj.map[x][y].x *= -1;
-			proj.map[x][y].y += data->offset_y;
-			proj.map[x][y].x += data->offset_x;
-			proj.map[x][y].x = round(proj.map[x][y].x * data->zoom);
-			proj.map[x][y].y = round(proj.map[x][y].y * data->zoom);
-			proj.map[x][y].x += window_center_x;
-			proj.map[x][y].y += window_center_y;
-			y++;
-		}
-		x++;
-	}
-	// proj = *data;
-	return(proj);
+    proj.map = malloc(sizeof(t_point*) * data->width);
+    x = 0;
+    while (x<data->width)
+    {
+        proj.map[x] = malloc(sizeof(t_point) * data->height);
+        x++;
+    }
+    
+    x = 0;
+    while (x < data->width)
+    {
+        y = 0;
+        while (y < data->height)
+        {	
+            proj.map[x][y] = ft_multiply_vector_by_matrix(&data->map[x][y], rot_z);
+            proj.map[x][y] = ft_multiply_vector_by_matrix(&proj.map[x][y], rot_x);
+            proj.map[x][y] = ft_multiply_vector_by_matrix(&proj.map[x][y], rot_y);
+            proj.map[x][y].z = data->map[x][y].z;
+            proj.map[x][y].x *= -1;
+            proj.map[x][y].y += data->offset_y;
+            proj.map[x][y].x += data->offset_x;
+            proj.map[x][y].x = round(proj.map[x][y].x * data->zoom);
+            proj.map[x][y].y = round(proj.map[x][y].y * data->zoom);
+            proj.map[x][y].x += window_center_x;
+            proj.map[x][y].y += window_center_y;
+            y++;
+        }
+        x++;
+    }
+    return(proj);
 }
 
 double interpolate_altitude(t_point start, t_point end, t_point current) {
@@ -142,9 +127,9 @@ void	ft_draw_line(t_data *data, t_point P0, t_point P1)
 	int	sy;
 	int	err;
 	int	e2;
-	t_point start = P0;
-	t_point end = P1;
-	t_point current;
+	// t_point start = P0;
+	// t_point end = P1;
+	// t_point current;
 
 	dx = fabs(P0.x - P1.x);
 	if (P0.x < P1.x)
@@ -159,11 +144,12 @@ void	ft_draw_line(t_data *data, t_point P0, t_point P1)
 	err = dx + dy;
 	while (1)
 	{
-		current.x = P0.x;
-		current.y = P0.y;
-		current.z = interpolate_altitude(start, end, current);
+		// current.x = P0.x;
+		// current.y = P0.y;
+		// current.z = interpolate_altitude(start, end, current);
 		// ft_pixel_put(&data->img, P0.x, P0.y, get_altitude_color(current.z));
-		ft_pixel_put(&data->img, P0.x, P0.y, get_color(current.z, data->floor, data->ceiling));
+		// ft_pixel_put(&data->img, P0.x, P0.y, get_color(current.z, data->floor, data->ceiling));
+		ft_pixel_put(&data->img, P0.x, P0.y, 0x00FF00FF);
 		// ft_pixel_put(&data->img, P0.x, P0.y, ft_create_trgb(0, 255, 0, 0));
 		if (P0.x == P1.x && P0.y == P1.y)
 			break ;
