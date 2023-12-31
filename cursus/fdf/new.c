@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 15:20:50 by florian           #+#    #+#             */
-/*   Updated: 2023/12/31 17:29:02 by florian          ###   ########.fr       */
+/*   Updated: 2023/12/31 18:04:00 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,6 +213,10 @@ int	ft_mouse_move(int x, int y, t_data *data)
 
 int	main(int ac, char **av)
 {
+
+	if (ac != 2)
+        return (0);
+
 	t_data	data;
 
 	data.mlx_ptr = mlx_init();
@@ -234,8 +238,6 @@ int	main(int ac, char **av)
     char **tab;
     char ***tabs;
 
-    if (ac != 2)
-        return (0);
     fd = open(av[1], O_RDONLY);
     if (fd == -1)
         return (0);
