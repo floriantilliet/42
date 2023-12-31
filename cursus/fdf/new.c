@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 15:20:50 by florian           #+#    #+#             */
-/*   Updated: 2023/12/31 18:04:00 by florian          ###   ########.fr       */
+/*   Updated: 2023/12/31 18:44:48 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,6 @@ int close_image(t_data *data)
 	free(data->map);
 	exit(0);
     return (0);
-}
-
-int	handle_keypress(int keysym, t_data *data)
-{
-	if (keysym == XK_Escape)
-	{
-		close_image(data);
-	}
-	return (0);
 }
 
 int	render(t_data *data)
@@ -74,6 +65,10 @@ int	render(t_data *data)
 
 int	key_hook(int keycode, t_data *data)
 {
+	if (keycode == XK_Escape)
+	{
+		close_image(data);
+	}
 
 	if (keycode == XK_Page_Up) // Remplace KEY_UP par la valeur correspondant à la touche souhaitée
 	{
@@ -279,13 +274,11 @@ int	main(int ac, char **av)
 	
 	// mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.img.mlx_img, 0, 0);
 
-	mlx_hook(data.win_ptr, KeyPress, KeyPressMask, &handle_keypress, &data);
+	mlx_hook(data.win_ptr, KeyPress, KeyPressMask, &key_hook, &data);
 	mlx_hook(data.win_ptr, 17, 0L, close_image, &data);
 	mlx_hook(data.win_ptr, 4, 1L<<2, ft_mouse_down, &data);
 	mlx_hook(data.win_ptr, 5, 1L<<3, ft_mouse_up, &data);
 	mlx_hook(data.win_ptr, 6, 1L<<6, ft_mouse_move, &data);
-
-	mlx_key_hook(data.win_ptr, key_hook, &data);
     mlx_loop_hook(data.mlx_ptr, &render, &data);
 
 	mlx_loop(data.mlx_ptr);
