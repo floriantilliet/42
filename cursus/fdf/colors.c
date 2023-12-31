@@ -1,26 +1,39 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   colors.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/31 17:30:02 by florian           #+#    #+#             */
+/*   Updated: 2023/12/31 17:30:04 by florian          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "graphics.h"
 
-int ft_create_trgb(unsigned char t, unsigned char r, unsigned char g, unsigned char b)
+int	ft_create_trgb(unsigned char t, unsigned char r, unsigned char g,
+		unsigned char b)
 {
-    return (t << 24) | (r << 16) | (g << 8) | b;
+	return ((t << 24) | (r << 16) | (g << 8) | b);
 }
 
-unsigned char ft_get_t(int trgb)
+unsigned char	ft_get_t(int trgb)
 {
-    return (trgb >> 24) & 0xFF;
+	return ((trgb >> 24) & 0xFF);
 }
 
-unsigned char ft_get_r(int trgb)
+unsigned char	ft_get_r(int trgb)
 {
-    return (trgb >> 16) & 0xFF;
+	return ((trgb >> 16) & 0xFF);
 }
 
-unsigned char ft_get_g(int trgb)
+unsigned char	ft_get_g(int trgb)
 {
-    return (trgb >> 8) & 0xFF;
+	return ((trgb >> 8) & 0xFF);
 }
 
-unsigned char ft_get_b(int trgb)
+unsigned char	ft_get_b(int trgb)
 {
-    return trgb & 0xFF;
+	return (trgb & 0xFF);
 }

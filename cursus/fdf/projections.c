@@ -127,9 +127,9 @@ void	ft_draw_line(t_data *data, t_point P0, t_point P1)
 	int	sy;
 	int	err;
 	int	e2;
-	// t_point start = P0;
-	// t_point end = P1;
-	// t_point current;
+	t_point start = P0;
+	t_point end = P1;
+	t_point current;
 
 	dx = fabs(P0.x - P1.x);
 	if (P0.x < P1.x)
@@ -144,13 +144,11 @@ void	ft_draw_line(t_data *data, t_point P0, t_point P1)
 	err = dx + dy;
 	while (1)
 	{
-		// current.x = P0.x;
-		// current.y = P0.y;
-		// current.z = interpolate_altitude(start, end, current);
-		// ft_pixel_put(&data->img, P0.x, P0.y, get_altitude_color(current.z));
-		// ft_pixel_put(&data->img, P0.x, P0.y, get_color(current.z, data->floor, data->ceiling));
-		ft_pixel_put(&data->img, P0.x, P0.y, 0x00FF00FF);
-		// ft_pixel_put(&data->img, P0.x, P0.y, ft_create_trgb(0, 255, 0, 0));
+		current.x = P0.x;
+		current.y = P0.y;
+		current.z = interpolate_altitude(start, end, current);
+		ft_pixel_put(&data->img, P0.x, P0.y, get_color(current.z, data->floor, data->ceiling));
+		// ft_pixel_put(&data->img, P0.x, P0.y, 0x00FF00FF);
 		if (P0.x == P1.x && P0.y == P1.y)
 			break ;
 		e2 = 2 * err;
