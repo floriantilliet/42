@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 17:30:48 by florian           #+#    #+#             */
-/*   Updated: 2023/12/31 17:30:56 by florian          ###   ########.fr       */
+/*   Updated: 2024/01/06 15:56:43 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,13 @@ t_point			**tabs_to_map(char ***tabs);
 void			ft_draw(t_data *data, t_data proj);
 void			get_limits(t_data *data);
 int				get_color(double z, double min_altitude, double max_altitude);
+int				key_hook(int keycode, t_data *data);
+int				arrow_move_hook(int keycode, t_data *data);
+int				key_rotation_hook(int keycode, t_data *data);
+int				key_reset_and_close_hook(int keycode, t_data *data);
+int				close_image(t_data *data);
+int				ft_mouse_down(int button, int x, int y, t_data *data);
+int				ft_mouse_up(int button, int x, int y, t_data *data);
+int				ft_mouse_move(int x, int y, t_data *data);
 
 #endif

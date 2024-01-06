@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:20:08 by florian           #+#    #+#             */
-/*   Updated: 2023/12/31 17:30:33 by florian          ###   ########.fr       */
+/*   Updated: 2024/01/06 15:55:07 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ char	***tab_to_tabs(char **tab)
 	while (tab[i])
 		i++;
 	tabs = malloc(sizeof(char **) * (i + 1));
-	// tabs = ft_calloc(sizeof(char**), (i + 1));
 	if (!tabs)
 		return (NULL);
 	i = 0;
@@ -78,7 +77,6 @@ t_point	**tabs_to_map(char ***tabs)
 	while (tabs[i])
 		i++;
 	map = malloc(sizeof(t_point *) * (i + 1));
-	// map = ft_calloc(sizeof(t_point*), (i + 1));
 	if (!map)
 		return (NULL);
 	i = 0;
@@ -88,7 +86,6 @@ t_point	**tabs_to_map(char ***tabs)
 		while (tabs[i][j])
 			j++;
 		map[i] = malloc(sizeof(t_point) * (j + 1));
-		// map[i] = ft_calloc(sizeof(t_point), (j + 1));
 		if (!map[i])
 			return (free(map), NULL);
 		j = 0;
@@ -172,7 +169,7 @@ void	get_limits(t_data *data)
 //         while (map[i][j].x != -1)
 //         {
 //             printf("x: %f, y: %f, z: %f\n", map[i][j].x, map[i][j].y,
-	// map[i][j].z);
+// map[i][j].z);
 //             j++;
 //         }
 //         i++;

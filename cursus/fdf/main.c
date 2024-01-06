@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   new.c                                              :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 15:20:50 by florian           #+#    #+#             */
-/*   Updated: 2023/12/31 18:44:48 by florian          ###   ########.fr       */
+/*   Updated: 2024/01/06 15:53:28 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,149 +60,6 @@ int	render(t_data *data)
 
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0, 0);
 
-	return (0);
-}
-
-int	key_hook(int keycode, t_data *data)
-{
-	if (keycode == XK_Escape)
-	{
-		close_image(data);
-	}
-
-	if (keycode == XK_Page_Up) // Remplace KEY_UP par la valeur correspondant à la touche souhaitée
-	{
-		data->zoom += 0.01;
-	}
-
-	if (keycode == XK_Page_Down) // Remplace KEY_UP par la valeur correspondant à la touche souhaitée
-	{
-		data->zoom -= 0.01;
-	}
-
-	if (keycode == XK_Up) // Remplace KEY_UP par la valeur correspondant à la touche souhaitée
-	{
-			data->offset_y -= 5;
-	}
-	
-	else if (keycode == XK_Down) // Remplace KEY_DOWN par la valeur correspondant à la touche souhaitée
-	{
-			data->offset_y += 5;
-	}
-
-	if (keycode == XK_Left) // Remplace KEY_UP par la valeur correspondant à la touche souhaitée
-	{
-			data->offset_x -= 5;
-	}
-
-	if (keycode == XK_Right)
-	{
-			data->offset_x += 5;
-	}
-
-	if (keycode == XK_d)
-	{
-        	data->angle_y -= 1;
-	}
-
-	if (keycode == XK_a)
-	{
-			data->angle_y += 1;
-	}
-
-    if (keycode == XK_w)
-    {
-        	data->angle_x += 1;
-    }
-
-    if (keycode == XK_s)
-    {
-        	data->angle_x -= 1;
-    }
-
-	if (keycode == XK_e)
-    {
-        	data->angle_z -= 1;
-    }
-
-	if (keycode == XK_q)
-	{
-			data->angle_z += 1;
-	}
-
-	if (keycode == XK_space)
-	{
-			data->angle_x = 0;
-			data->angle_y = 0;
-			data->angle_z = 0;
-			data->offset_x = 0;
-			data->offset_y = 0;
-			data->zoom = 1;
-	}
-
-	return (0);
-}
-
-
-int	ft_mouse_down(int button, int x, int y, t_data *data)
-{	
-	if (button == 4)
-		data->zoom += 0.1;
-	
-	if (button == 5)
-		data->zoom -= 0.1;
-
-	if (button == 1)
-	{
-		data->prev_x = x;
-        data->prev_y = y;
-		data->mouse_button = 1;
-	}
-	
-	if (button == 3)
-	{
-		data->prev_x = x;
-		data->prev_y = y;
-		data->mouse_button = 3;
-	}
-	return (0);
-}
-
-int	ft_mouse_up(int button, int x, int y, t_data *data)
-{
-	if (button == 1 || button == 3)
-	{
-		data->mouse_button = 0;
-		x++;
-		y++;
-	}
-	return (0);
-}
-
-int	ft_mouse_move(int x, int y, t_data *data)
-{
-	// printf("mouse button: %d\n", data->mouse_button);
-	if (data->mouse_button == 1)
-	{
-		// Update offsets based on mouse movement
-        data->offset_x += x - data->prev_x;
-        data->offset_y += y - data->prev_y;
-
-        // Store the current mouse position for the next movement event
-        data->prev_x = x;
-        data->prev_y = y;
-	}
-
-	if (data->mouse_button == 3) // Right mouse button
-    {	
-        // Update rotation angle based on mouse movement
-        data->angle_x -= (y - data->prev_y) * 0.1; // Adjust the multiplier as needed
-		data->angle_y -= (x - data->prev_x) * 0.1;
-		// printf("angle_x: %f, angle_y: %f, angle_z: %f\n", data->angle_x, data->angle_y, data->angle_z);
-		// Store the current mouse position for the next movement event
-		data->prev_x = x;
-		data->prev_y = y;
-    }
 	return (0);
 }
 
