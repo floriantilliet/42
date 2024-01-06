@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 17:30:02 by florian           #+#    #+#             */
-/*   Updated: 2023/12/31 17:30:04 by florian          ###   ########.fr       */
+/*   Updated: 2024/01/06 16:13:18 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,19 @@ int	ft_create_trgb(unsigned char t, unsigned char r, unsigned char g,
 	return ((t << 24) | (r << 16) | (g << 8) | b);
 }
 
-unsigned char	ft_get_t(int trgb)
+int	get_color(double z, double min_altitude, double max_altitude)
 {
-	return ((trgb >> 24) & 0xFF);
-}
+	if (z < min_altitude)
+		return (0);
+	if (z > max_altitude)
+		return (255);
 
-unsigned char	ft_get_r(int trgb)
-{
-	return ((trgb >> 16) & 0xFF);
-}
+	double range = max_altitude - min_altitude;
+	double normalized_z = (z - min_altitude) / range;
 
-unsigned char	ft_get_g(int trgb)
-{
-	return ((trgb >> 8) & 0xFF);
-}
+	int red = 255 - (normalized_z * 255);
+	int green = normalized_z * 255;
+	int blue = 255;
 
-unsigned char	ft_get_b(int trgb)
-{
-	return (trgb & 0xFF);
+	return (ft_create_trgb(0, red, green, blue));
 }
