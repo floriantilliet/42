@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 17:30:48 by florian           #+#    #+#             */
-/*   Updated: 2024/01/06 15:56:43 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/01/06 17:57:01 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,5 +107,8 @@ int				close_image(t_data *data);
 int				ft_mouse_down(int button, int x, int y, t_data *data);
 int				ft_mouse_up(int button, int x, int y, t_data *data);
 int				ft_mouse_move(int x, int y, t_data *data);
+void			ft_project_point(t_point *point, t_matrix rot_z, t_matrix rot_x,
+					t_matrix rot_y);
+void			ft_offset_and_zoom(t_point *point, t_data *data, int x, int y);
 
 #endif

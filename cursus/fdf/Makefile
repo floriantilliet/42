@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g -pg
+CFLAGS = -Wall -Wextra -Werror -g3 -pg
 SRC = $(wildcard *.c)
 OBJ = $(SRC:.c=.o)
 EXECUTABLE = fdf
