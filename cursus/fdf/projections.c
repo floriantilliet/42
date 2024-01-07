@@ -91,7 +91,6 @@ t_data ft_iso_projection(t_data *data)
         }
         x++;
     }
-    printf("x: %f, y: %f, z: %f\n", proj.map[x][y].x, proj.map[x][y].y, proj.map[x][y].z);
     // exit(0);
     return(proj);
 }

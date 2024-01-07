@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hooks.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 15:39:40 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/01/06 15:48:33 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/01/07 18:13:56 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,17 @@ int	key_hook(int keycode, t_data *data)
 int	arrow_move_hook(int keycode, t_data *data)
 {
 	if (keycode == XK_Page_Up)
-		data->zoom += 0.01;
+		data->zoom += 0.05 * data->zoom;
 	if (keycode == XK_Page_Down)
-		data->zoom -= 0.01;
+		data->zoom -= 0.05 * data->zoom;
 	if (keycode == XK_Up)
-		data->offset_y -= 5;
+		data->offset_y -= 5 / data->zoom;
 	if (keycode == XK_Down)
-		data->offset_y += 5;
+		data->offset_y += 5 / data->zoom;
 	if (keycode == XK_Left)
-		data->offset_x -= 5;
+		data->offset_x -= 5 / data->zoom;
 	if (keycode == XK_Right)
-		data->offset_x += 5;
+		data->offset_x += 5 / data->zoom;
 	return (0);
 }
 
@@ -65,7 +65,7 @@ int	key_reset_and_close_hook(int keycode, t_data *data)
 		data->angle_z = 0;
 		data->offset_x = 0;
 		data->offset_y = 0;
-		data->zoom = 1;
+		data->zoom = data->ideal_zoom;
 	}
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 17:30:48 by florian           #+#    #+#             */
-/*   Updated: 2024/01/06 17:57:01 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/01/07 18:12:37 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct s_data
 	double		floor;
 	double		height;
 	double		width;
+	double		ideal_zoom;
 }				t_data;
 
 typedef struct s_matrix

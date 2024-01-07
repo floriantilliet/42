@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse_hooks.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 15:50:34 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/01/06 15:51:30 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/01/07 18:00:34 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 int	ft_mouse_down(int button, int x, int y, t_data *data)
 {
 	if (button == 4)
-		data->zoom += 0.1;
+		data->zoom += 0.05 * data->zoom;
 	if (button == 5)
-		data->zoom -= 0.1;
+		data->zoom -= 0.05 * data->zoom;
 	if (button == 1)
 	{
 		data->prev_x = x;
@@ -48,8 +48,8 @@ int	ft_mouse_move(int x, int y, t_data *data)
 {
 	if (data->mouse_button == 1)
 	{
-		data->offset_x += x - data->prev_x;
-		data->offset_y += y - data->prev_y;
+		data->offset_x += (x - data->prev_x) / data->zoom;
+		data->offset_y += (y - data->prev_y) / data->zoom;
 		data->prev_x = x;
 		data->prev_y = y;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:20:08 by florian           #+#    #+#             */
-/*   Updated: 2024/01/06 16:02:34 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/01/07 18:25:15 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,6 @@ void	get_limits(t_data *data)
 	int	i;
 	int	j;
 
-	data->width = 0;
-	data->height = 0;
 	data->floor = 0;
 	data->ceiling = 0;
 	i = 0;
@@ -120,10 +118,6 @@ void	get_limits(t_data *data)
 		j = 0;
 		while (data->map[i][j].x != -1)
 		{
-			if (data->map[i][j].x > data->width)
-				data->width = data->map[i][j].x;
-			if (data->map[i][j].y > data->height)
-				data->height = data->map[i][j].y;
 			if (data->map[i][j].z < data->floor)
 				data->floor = data->map[i][j].z;
 			if (data->map[i][j].z > data->ceiling)
@@ -132,10 +126,11 @@ void	get_limits(t_data *data)
 		}
 		i++;
 	}
-	data->width += 1;
-	data->height += 1;
-	data->floor *= 10;
-	data->ceiling *= 10;
+	data->width = i;
+	data->height = j;
+	data->ideal_zoom = fmin(WINDOW_WIDTH / data->width, WINDOW_HEIGHT
+			/ data->height) / 2;
+	data->zoom = data->ideal_zoom;
 }
 
 // int main(int ac, char **av)

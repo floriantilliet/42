@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 15:20:50 by florian           #+#    #+#             */
-/*   Updated: 2024/01/06 15:53:28 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/01/07 18:24:29 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,15 +113,14 @@ int	main(int ac, char **av)
         j = 0;
         while (data.map[i][j].x != -1)
         {
-            data.map[i][j].x *= 10;
-			data.map[i][j].y *= 10;
-			data.map[i][j].z *= 10;
+            // data.map[i][j].x *= 10;
+			// data.map[i][j].y *= 10;
+			// data.map[i][j].z *= 10;
 			// printf("x: %f, y: %f, z: %f\n", data.map[i][j].x, data.map[i][j].y, data.map[i][j].z);
             j++;
         }
         i++;
     }
-	data.zoom = 1.0;
 	data.mouse_button = 0;
 	data.angle_x = 0;
 	data.angle_y = 0;
