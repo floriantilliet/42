@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 17:30:48 by florian           #+#    #+#             */
-/*   Updated: 2024/01/08 16:38:21 by florian          ###   ########.fr       */
+/*   Updated: 2024/01/08 17:20:46 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,12 @@ typedef struct s_bresenham
 	t_point	end;
 }			t_bresenham;
 
+typedef struct s_rot_matrices {
+	t_matrix rot_z;
+	t_matrix rot_x;
+	t_matrix rot_y;
+} t_rot_matrices;
+
 int			ft_create_trgb(unsigned char t, unsigned char r, unsigned char g,
 				unsigned char b);
 void		ft_pixel_put(t_img *img, unsigned int x, unsigned int y, int color);
@@ -120,5 +126,10 @@ double		interpolate_altitude(t_point start, t_point end, t_point current);
 void		update_err(t_bresenham *bres, t_point *P0);
 void		draw_line_loop(t_data *data, t_point *P0, t_point P1,
 				t_bresenham *bres);
+void	ft_allocate_proj_map(t_data *proj, int width, int height);
+t_point	ft_apply_single_transformation(t_point point, t_rot_matrices *rots,
+		t_data *data);
+void	ft_apply_transformations(t_data *proj, t_data *data,
+		t_rot_matrices *rots);					
 
 #endif

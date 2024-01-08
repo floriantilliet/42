@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 15:20:50 by florian           #+#    #+#             */
-/*   Updated: 2024/01/07 18:24:29 by florian          ###   ########.fr       */
+/*   Updated: 2024/01/08 16:46:36 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,22 +105,6 @@ int	main(int ac, char **av)
         return (0);
 	}
 	get_limits(&data);
-	// printf("width: %f, height: %f, floor: %f, ceiling: %f\n", data.width, data.height, data.floor, data.ceiling);
-	int i = 0;
-    int j;
-    while (data.map[i])
-    {
-        j = 0;
-        while (data.map[i][j].x != -1)
-        {
-            // data.map[i][j].x *= 10;
-			// data.map[i][j].y *= 10;
-			// data.map[i][j].z *= 10;
-			// printf("x: %f, y: %f, z: %f\n", data.map[i][j].x, data.map[i][j].y, data.map[i][j].z);
-            j++;
-        }
-        i++;
-    }
 	data.mouse_button = 0;
 	data.angle_x = 0;
 	data.angle_y = 0;
