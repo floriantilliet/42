@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 16:09:09 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/01/06 16:10:34 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/01/08 16:38:25 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,53 +29,58 @@ double	interpolate_altitude(t_point start, t_point end, t_point current)
 	return (interpolated_z);
 }
 
-void	ft_draw_line(t_data *data, t_point P0, t_point P1)
+void	update_err(t_bresenham *bres, t_point *P0)
 {
-	int		dx;
-	int		sx;
-	int		dy;
-	int		sy;
-	int		err;
-	int		e2;
-	t_point	start;
-	t_point	end;
+	int	e2;
+
+	e2 = 2 * bres->err;
+	if (e2 >= bres->dy)
+	{
+		bres->err += bres->dy;
+		P0->x += bres->sx;
+	}
+	if (e2 <= bres->dx)
+	{
+		bres->err += bres->dx;
+		P0->y += bres->sy;
+	}
+}
+
+void	draw_line_loop(t_data *data, t_point *P0, t_point P1, t_bresenham *bres)
+{
 	t_point	current;
 
-	start = P0;
-	end = P1;
-	dx = fabs(P0.x - P1.x);
-	if (P0.x < P1.x)
-		sx = 1;
-	else
-		sx = -1;
-	dy = -fabs(P1.y - P0.y);
-	if (P0.y < P1.y)
-		sy = 1;
-	else
-		sy = -1;
-	err = dx + dy;
 	while (1)
 	{
-		current.x = P0.x;
-		current.y = P0.y;
-		current.z = interpolate_altitude(start, end, current);
-		ft_pixel_put(&data->img, P0.x, P0.y, get_color(current.z, data->floor,
+		current.x = P0->x;
+		current.y = P0->y;
+		current.z = interpolate_altitude(bres->start, bres->end, current);
+		ft_pixel_put(&data->img, P0->x, P0->y, get_color(current.z, data->floor,
 				data->ceiling));
-		// ft_pixel_put(&data->img, P0.x, P0.y, 0x00FF00FF);
-		if (P0.x == P1.x && P0.y == P1.y)
+		if (P0->x == P1.x && P0->y == P1.y)
 			break ;
-		e2 = 2 * err;
-		if (e2 >= dy)
-		{
-			err += dy;
-			P0.x += sx;
-		}
-		if (e2 <= dx)
-		{
-			err += dx;
-			P0.y += sy;
-		}
+		update_err(bres, P0);
 	}
+}
+
+void	ft_draw_line(t_data *data, t_point P0, t_point P1)
+{
+	t_bresenham	bres;
+
+	bres.dx = fabs(P0.x - P1.x);
+	if (P0.x < P1.x)
+		bres.sx = 1;
+	else
+		bres.sx = -1;
+	bres.dy = -fabs(P1.y - P0.y);
+	if (P0.y < P1.y)
+		bres.sy = 1;
+	else
+		bres.sy = -1;
+	bres.err = bres.dx + bres.dy;
+	bres.start = P0;
+	bres.end = P1;
+	draw_line_loop(data, &P0, P1, &bres);
 }
 
 void	ft_draw(t_data *data, t_data proj)
