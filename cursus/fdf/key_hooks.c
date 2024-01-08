@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 15:39:40 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/01/07 18:13:56 by florian          ###   ########.fr       */
+/*   Updated: 2024/01/08 12:56:02 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ int	key_rotation_hook(int keycode, t_data *data)
 	if (keycode == XK_s)
 		data->angle_x -= 1;
 	if (keycode == XK_e)
-		data->angle_z -= 1;
-	if (keycode == XK_q)
 		data->angle_z += 1;
+	if (keycode == XK_q)
+		data->angle_z -= 1;
 	return (0);
 }
 

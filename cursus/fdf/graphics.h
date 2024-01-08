@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 17:30:48 by florian           #+#    #+#             */
-/*   Updated: 2024/01/07 18:12:37 by florian          ###   ########.fr       */
+/*   Updated: 2024/01/08 12:40:23 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,6 @@ typedef struct s_matrix
 
 int				ft_create_trgb(unsigned char t, unsigned char r,
 					unsigned char g, unsigned char b);
-unsigned char	ft_get_t(int trgb);
-unsigned char	ft_get_r(int trgb);
-unsigned char	ft_get_g(int trgb);
-unsigned char	ft_get_b(int trgb);
 void			ft_pixel_put(t_img *img, unsigned int x, unsigned int y,
 					int color);
 void			ft_draw_line(t_data *data, t_point P0, t_point P1);
