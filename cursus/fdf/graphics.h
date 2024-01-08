@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 17:30:48 by florian           #+#    #+#             */
-/*   Updated: 2024/01/08 18:33:02 by florian          ###   ########.fr       */
+/*   Updated: 2024/01/08 18:42:50 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,11 +135,11 @@ t_point			ft_apply_single_transformation(t_point point,
 					t_rot_matrices *rots, t_data *data);
 void			ft_apply_transformations(t_data *proj, t_data *data,
 					t_rot_matrices *rots);
-char	*read_file_into_str(int fd);
-void	free_map(t_point **map);
-void	free_tabs(char ***tabs);
-void	free_tab(char **tab);
-t_point	*allocate_and_init_line(char **tab_line, int i);
-t_point	create_point_from_tab(char **tab, int i, int j);
+char			*read_file_into_str(int fd);
+void			free_map(t_point **map);
+void			free_tabs(char ***tabs);
+void			free_tab(char **tab);
+t_point			*allocate_and_init_line(char **tab_line, int i);
+t_point			create_point_from_tab(char **tab, int i, int j);
 
 #endif
