@@ -1,46 +1,51 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:20:08 by florian           #+#    #+#             */
-/*   Updated: 2024/01/07 18:25:15 by florian          ###   ########.fr       */
+/*   Updated: 2024/01/08 18:31:35 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graphics.h"
 
-char	**fd_to_tab(int fd)
+char	*read_file_into_str(int fd)
 {
 	char	*line;
 	char	*str;
 	char	*temp;
-	char	**tab;
 
 	str = ft_strdup("");
 	if (!str)
 		return (NULL);
 	line = get_next_line(fd);
-	if (!line)
-	{
-		return (NULL);
-	}
 	while (line)
 	{
 		temp = str;
 		str = ft_strjoin(str, line);
 		free(line);
 		if (!str)
-			return (free(str), free(line), NULL);
+			return (free(str), NULL);
 		line = get_next_line(fd);
 		free(temp);
 	}
+	return (str);
+}
+
+char	**fd_to_tab(int fd)
+{
+	char	*str;
+	char	**tab;
+
+	str = read_file_into_str(fd);
+	if (!str)
+		return (NULL);
 	tab = ft_split(str, '\n');
-	if (!tab)
-		return (free(str), free(line), NULL);
-	return (free(str), free(line), tab);
+	free(str);
+	return (tab);
 }
 
 char	***tab_to_tabs(char **tab)
@@ -71,10 +76,9 @@ t_point	**tabs_to_map(char ***tabs)
 {
 	t_point	**map;
 	int		i;
-	int		j;
 
 	i = 0;
-	while (tabs[i])
+	while (tabs && tabs[i])
 		i++;
 	map = malloc(sizeof(t_point *) * (i + 1));
 	if (!map)
@@ -82,27 +86,15 @@ t_point	**tabs_to_map(char ***tabs)
 	i = 0;
 	while (tabs[i])
 	{
-		j = 0;
-		while (tabs[i][j])
-			j++;
-		map[i] = malloc(sizeof(t_point) * (j + 1));
+		map[i] = allocate_and_init_line(tabs[i], i);
 		if (!map[i])
-			return (free(map), NULL);
-		j = 0;
-		while (tabs[i][j])
-		{
-			map[i][j].x = i;
-			map[i][j].y = j;
-			map[i][j].z = ft_atoi(tabs[i][j]);
-			free(tabs[i][j]);
-			j++;
-		}
-		free(tabs[i]);
-		map[i][j].x = -1;
+			return (free_map(map), NULL);
+		free_tab(tabs[i]);
 		i++;
 	}
 	map[i] = NULL;
-	return (free(tabs), map);
+	free(tabs);
+	return (map);
 }
 
 void	get_limits(t_data *data)
@@ -132,43 +124,3 @@ void	get_limits(t_data *data)
 			/ data->height) / 2;
 	data->zoom = data->ideal_zoom;
 }
-
-// int main(int ac, char **av)
-// {
-//     int fd;
-//     char **tab;
-//     char ***tabs;
-//     t_point **map;
-
-//     printf("salut");
-//     if (ac != 2)
-//         return (0);
-//     fd = open(av[1], O_RDONLY);
-//     if (fd == -1)
-//         return (0);
-//     tab = fd_to_tab(fd);
-//     if (!tab)
-//         return (0);
-//     tabs = tab_to_tabs(tab);
-//     if (!tabs)
-//         return (0);
-//     map = tabs_to_map(tabs);
-//     if (!map)
-//         return (0);
-//     //print the coordinates of each point of the map
-//     int i = 0;
-//     int j;
-//     while (map[i])
-//     {
-//         j = 0;
-//         while (map[i][j].x != -1)
-//         {
-//             printf("x: %f, y: %f, z: %f\n", map[i][j].x, map[i][j].y,
-// map[i][j].z);
-//             j++;
-//         }
-//         i++;
-//     }
-
-//     return (0);
-// }
