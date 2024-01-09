@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:20:08 by florian           #+#    #+#             */
-/*   Updated: 2024/01/09 15:49:06 by florian          ###   ########.fr       */
+/*   Updated: 2024/01/09 15:50:38 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,9 @@ t_point	**tabs_to_map(char ***tabs)
 
 int	ft_get_map(t_data *data, char *path)
 {
-	int fd;
-	char **tab;
-	char ***tabs;
+	int		fd;
+	char	**tab;
+	char	***tabs;
 
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
