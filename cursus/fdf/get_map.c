@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:20:08 by florian           #+#    #+#             */
-/*   Updated: 2024/01/08 18:31:35 by florian          ###   ########.fr       */
+/*   Updated: 2024/01/09 15:15:38 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,30 +97,27 @@ t_point	**tabs_to_map(char ***tabs)
 	return (map);
 }
 
-void	get_limits(t_data *data)
+int	ft_get_map(t_data *data, char *path)
 {
-	int	i;
-	int	j;
+	int		fd;
+	char	**tab;
+	char	***tabs;
 
-	data->floor = 0;
-	data->ceiling = 0;
-	i = 0;
-	while (data->map[i])
+	fd = open(path, O_RDONLY);
+	if (fd == -1)
+		return (0);
+	tab = fd_to_tab(fd);
+	if (!tab)
+		return (0);
+	tabs = tab_to_tabs(tab);
+	if (!tabs)
+		return (0);
+	data->map = tabs_to_map(tabs);
+	if (!data->map)
 	{
-		j = 0;
-		while (data->map[i][j].x != -1)
-		{
-			if (data->map[i][j].z < data->floor)
-				data->floor = data->map[i][j].z;
-			if (data->map[i][j].z > data->ceiling)
-				data->ceiling = data->map[i][j].z;
-			j++;
-		}
-		i++;
+		return (0);
 	}
-	data->width = i;
-	data->height = j;
-	data->ideal_zoom = fmin(WINDOW_WIDTH / data->width, WINDOW_HEIGHT
-			/ data->height) / 2;
-	data->zoom = data->ideal_zoom;
+	get_limits(data);
+	init_shifts(data);
+	return (1);
 }

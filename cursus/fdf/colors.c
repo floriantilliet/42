@@ -3,14 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 17:30:02 by florian           #+#    #+#             */
-/*   Updated: 2024/01/06 16:13:18 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/01/09 14:47:53 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graphics.h"
+
+void	ft_pixel_put(t_img *img, unsigned int x, unsigned int y, int color)
+{
+	char	*dst;
+
+	if (x <= WINDOW_WIDTH - 1 && y <= WINDOW_HEIGHT - 1)
+	{
+		dst = img->addr + (y * img->line_len + x * (img->bpp / 8));
+		*(unsigned int *)dst = color;
+	}
+}
 
 int	ft_create_trgb(unsigned char t, unsigned char r, unsigned char g,
 		unsigned char b)

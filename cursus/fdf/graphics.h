@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 17:30:48 by florian           #+#    #+#             */
-/*   Updated: 2024/01/08 18:42:50 by florian          ###   ########.fr       */
+/*   Updated: 2024/01/09 15:12:22 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,5 +141,8 @@ void			free_tabs(char ***tabs);
 void			free_tab(char **tab);
 t_point			*allocate_and_init_line(char **tab_line, int i);
 t_point			create_point_from_tab(char **tab, int i, int j);
+int				render(t_data *data);
+int				ft_parsing(t_data *data, char *path);
+int				ft_init_image(t_data *data);
 
 #endif
