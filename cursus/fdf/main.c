@@ -6,19 +6,31 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 15:20:50 by florian           #+#    #+#             */
-/*   Updated: 2024/01/09 15:37:33 by florian          ###   ########.fr       */
+/*   Updated: 2024/01/09 15:44:43 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graphics.h"
 
+int	ft_file_name_error(char	*file_name)
+{
+	size_t	file_name_len;
+
+	file_name_len = ft_strlen(file_name);
+	if (file_name_len < 4)
+		return (0);
+	if (ft_strncmp(&file_name[file_name_len - 4], ".fdf", 4))
+		return (0);
+	return (1);
+}
+
 int	main(int ac, char **av)
 {
-
+	t_data	data;
 	if (ac != 2)
         return (0);
-
-	t_data	data;
+	if (!ft_file_name_error(av[1]))
+		return (0);
 	if (!ft_init_image(&data))
 		return (0);
 	if (!ft_get_map(&data, av[1]))

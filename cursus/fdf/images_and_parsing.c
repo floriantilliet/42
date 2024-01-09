@@ -6,26 +6,31 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:49:00 by florian           #+#    #+#             */
-/*   Updated: 2024/01/09 15:15:59 by florian          ###   ########.fr       */
+/*   Updated: 2024/01/09 15:41:06 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graphics.h"
 
-int ft_init_image(t_data *data)
+int	ft_init_image(t_data *data)
 {
-		data->mlx_ptr = mlx_init();
+	data->mlx_ptr = mlx_init();
 	if (data->mlx_ptr == NULL)
 		return (0);
-	data->win_ptr = mlx_new_window(data->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT, "my window");
+	data->win_ptr = mlx_new_window(data->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT,
+			"fdf");
 	if (data->win_ptr == NULL)
 	{
 		free(data->win_ptr);
 		return (0);
 	}
-
-	data->img.mlx_img = mlx_new_image(data->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
-	
+	data->img.mlx_img = mlx_new_image(data->mlx_ptr, WINDOW_WIDTH,
+			WINDOW_HEIGHT);
+	if (data->img.mlx_img == NULL)
+	{
+		free(data->img.mlx_img);
+		return (0);
+	}
 	data->img.addr = mlx_get_data_addr(data->img.mlx_img, &data->img.bpp,
 			&data->img.line_len, &data->img.endian);
 	return (1);
@@ -78,7 +83,7 @@ int	render(t_data *data)
 	return (0);
 }
 
-void init_shifts(t_data *data)
+void	init_shifts(t_data *data)
 {
 	data->mouse_button = 0;
 	data->angle_x = 0;
