@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:20:08 by florian           #+#    #+#             */
-/*   Updated: 2024/01/09 15:15:38 by florian          ###   ########.fr       */
+/*   Updated: 2024/01/09 15:48:44 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,9 +114,7 @@ int	ft_get_map(t_data *data, char *path)
 		return (0);
 	data->map = tabs_to_map(tabs);
 	if (!data->map)
-	{
 		return (0);
-	}
 	get_limits(data);
 	init_shifts(data);
 	return (1);
