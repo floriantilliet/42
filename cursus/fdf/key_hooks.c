@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 15:39:40 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/01/09 15:22:48 by florian          ###   ########.fr       */
+/*   Updated: 2024/01/09 15:49:12 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,13 @@ int	key_reset_and_close_hook(int keycode, t_data *data)
 	return (0);
 }
 
-void ft_loop_hooks(t_data *data)
+void	ft_loop_hooks(t_data *data)
 {
 	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, &key_hook, data);
 	mlx_hook(data->win_ptr, 17, 0L, close_image, data);
-	mlx_hook(data->win_ptr, 4, 1L<<2, ft_mouse_down, data);
-	mlx_hook(data->win_ptr, 5, 1L<<3, ft_mouse_up, data);
-	mlx_hook(data->win_ptr, 6, 1L<<6, ft_mouse_move, data);
-    mlx_loop_hook(data->mlx_ptr, &render, data);
+	mlx_hook(data->win_ptr, 4, 1L << 2, ft_mouse_down, data);
+	mlx_hook(data->win_ptr, 5, 1L << 3, ft_mouse_up, data);
+	mlx_hook(data->win_ptr, 6, 1L << 6, ft_mouse_move, data);
+	mlx_loop_hook(data->mlx_ptr, &render, data);
 	mlx_loop(data->mlx_ptr);
 }
