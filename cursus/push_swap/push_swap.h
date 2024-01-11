@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:18:53 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/01/11 14:54:37 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/01/11 17:10:04 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,3 +22,4 @@ typedef struct s_stack_node
     struct s_stack_node		*prev;
 }							t_stack_node;
 
+#endif
