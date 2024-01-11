@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:39:50 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/01/11 17:46:14 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/01/11 17:50:30 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void    rotate(t_stack_node **head)
 
     if (*head && (*head)->next)
     {
+        tmp = *head;
         while (tmp->next)
             tmp = tmp->next;
         tmp->next = *head;
