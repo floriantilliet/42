@@ -1,18 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/11 14:12:08 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/01/11 14:19:15 by ftilliet         ###   ########.fr       */
+/*   Created: 2023/11/06 11:22:23 by ftilliet          #+#    #+#             */
+/*   Updated: 2023/11/08 10:52:02 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int main(int ac, char **av)
+size_t	ft_strlcat(char *dest, const char *src, size_t dstsize)
 {
-    return (0);
+	size_t	c;
+	size_t	d;
+
+	if (!dest && dstsize == 0)
+		return (0);
+	if (dstsize <= ft_strlen(dest))
+		return (dstsize + ft_strlen(src));
+	c = ft_strlen(dest);
+	d = 0;
+	while (src[d] != '\0' && c + 1 < dstsize)
+	{
+		dest[c] = src[d];
+		c++;
+		d++;
+	}
+	dest[c] = '\0';
+	return (ft_strlen(dest) + ft_strlen(&src[d]));
 }

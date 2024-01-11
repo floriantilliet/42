@@ -1,18 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/11 14:12:08 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/01/11 14:19:15 by ftilliet         ###   ########.fr       */
+/*   Created: 2023/11/08 12:19:27 by ftilliet          #+#    #+#             */
+/*   Updated: 2023/11/13 12:28:58 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int main(int ac, char **av)
+t_list	*ft_lstlast(t_list *lst)
 {
-    return (0);
+	t_list	*current;
+
+	if (!lst)
+		return (NULL);
+	current = lst;
+	while (current->next)
+	{
+		current = current->next;
+	}
+	return (current);
 }

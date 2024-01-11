@@ -1,18 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/11 14:12:08 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/01/11 14:19:15 by ftilliet         ###   ########.fr       */
+/*   Created: 2024/01/11 14:18:53 by ftilliet          #+#    #+#             */
+/*   Updated: 2024/01/11 14:54:37 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#ifndef PUSH_SWAP_H
+# define PUSH_SWAP_H
+# include <stdlib.h>
 
-int main(int ac, char **av)
+
+typedef struct s_stack_node
 {
-    return (0);
-}
+    int						value;
+    struct s_stack_node		*next;
+    struct s_stack_node		*prev;
+}							t_stack_node;
+

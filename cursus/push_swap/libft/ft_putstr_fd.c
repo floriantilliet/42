@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/11 14:12:08 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/01/11 14:19:15 by ftilliet         ###   ########.fr       */
+/*   Created: 2023/11/07 09:28:40 by ftilliet          #+#    #+#             */
+/*   Updated: 2023/11/08 10:57:39 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int main(int ac, char **av)
+void	ft_putstr_fd(char *str, int fd)
 {
-    return (0);
+	if (fd != -1 && str != NULL)
+	{
+		while (*str != '\0')
+		{
+			ft_putchar_fd(*str, fd);
+			str++;
+		}
+	}
 }

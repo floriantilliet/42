@@ -1,18 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/11 14:12:08 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/01/11 14:19:15 by ftilliet         ###   ########.fr       */
+/*   Created: 2023/11/08 12:19:17 by ftilliet          #+#    #+#             */
+/*   Updated: 2023/11/13 12:28:37 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int main(int ac, char **av)
+void	ft_lstadd_back(t_list **head, t_list *new)
 {
-    return (0);
+	t_list	*last;
+
+	if (head)
+	{
+		if (*head)
+		{
+			last = ft_lstlast(*head);
+			last->next = new;
+		}
+		else
+			*head = new;
+	}
 }

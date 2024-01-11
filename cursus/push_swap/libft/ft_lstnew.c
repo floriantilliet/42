@@ -1,18 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/11 14:12:08 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/01/11 14:19:15 by ftilliet         ###   ########.fr       */
+/*   Created: 2023/11/08 12:19:33 by ftilliet          #+#    #+#             */
+/*   Updated: 2023/11/13 12:27:19 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int main(int ac, char **av)
+t_list	*ft_lstnew(void *content)
 {
-    return (0);
+	t_list	*new;
+
+	new = malloc(sizeof(t_list));
+	if (!new)
+	{
+		return (NULL);
+	}
+	new->content = content;
+	new->next = NULL;
+	return (new);
 }

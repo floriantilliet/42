@@ -1,18 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/11 14:12:08 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/01/11 14:19:15 by ftilliet         ###   ########.fr       */
+/*   Created: 2023/11/06 11:22:12 by ftilliet          #+#    #+#             */
+/*   Updated: 2023/11/09 10:48:12 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int main(int ac, char **av)
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-    return (0);
+	size_t	i;
+
+	if (!dest && !src)
+		return (dest);
+	if (dest < src)
+	{
+		i = 0;
+		while (i < n)
+		{
+			*(unsigned char *)(dest + i) = *(unsigned char *)(src + i);
+			i++;
+		}
+	}
+	else
+	{
+		while (n--)
+		{
+			*(unsigned char *)(dest + n) = *(unsigned char *)(src + n);
+		}
+	}
+	return (dest);
 }
