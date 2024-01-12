@@ -6,11 +6,30 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:39:50 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/01/12 13:12:05 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/01/12 14:42:48 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	ft_putchar_fd(char c, int fd)
+{
+	write(fd, &c, 1);
+}
+
+void	ft_putendl_fd(char *str, int fd)
+{
+	if (fd != -1 && str != NULL)
+	{
+		while (*str != '\0')
+		{
+			ft_putchar_fd(*str, fd);
+			str++;
+		}
+		ft_putchar_fd('\n', fd);
+	}
+}
+
 
 void	swap(t_stack_node **head)
 {
@@ -27,6 +46,25 @@ void	swap(t_stack_node **head)
 	}
 }
 
+void sa(t_stack_node **head)
+{
+    swap(head);
+    ft_putendl_fd("sa", 1);
+}
+
+void sb(t_stack_node **head)
+{
+    swap(head);
+    ft_putendl_fd("sb", 1);
+}
+
+void ss(t_stack_node **head, t_stack_node **head_b)
+{
+    swap(head);
+    swap(head_b);
+    ft_putendl_fd("ss", 1);
+}
+
 void	push(t_stack_node **head, t_stack_node **head_b)
 {
 	t_stack_node	*tmp;
@@ -38,6 +76,18 @@ void	push(t_stack_node **head, t_stack_node **head_b)
 		*head_b = *head;
 		*head = tmp;
 	}
+}
+
+void pa(t_stack_node **head, t_stack_node **head_b)
+{
+    push(head, head_b);
+    ft_putendl_fd("pa", 1);
+}
+
+void pb(t_stack_node **head, t_stack_node **head_b)
+{
+    push(head_b, head);
+    ft_putendl_fd("pb", 1);
 }
 
 void	rotate(t_stack_node **head)
@@ -54,6 +104,60 @@ void	rotate(t_stack_node **head)
 		tmp->next->next = NULL;
 		tmp->next->prev = tmp;
 	}
+}
+
+void ra(t_stack_node **head)
+{
+    rotate(head);
+    ft_putendl_fd("ra", 1);
+}
+
+void rb(t_stack_node **head)
+{
+    rotate(head);
+    ft_putendl_fd("rb", 1);
+}
+
+void rr(t_stack_node **head, t_stack_node **head_b)
+{
+    rotate(head);
+    rotate(head_b);
+    ft_putendl_fd("rr", 1);
+}
+
+void reverse_rotate(t_stack_node **head)
+{
+    t_stack_node	*tmp;
+
+    if (*head && (*head)->next)
+    {
+        tmp = *head;
+        while (tmp->next)
+            tmp = tmp->next;
+        tmp->next = *head;
+        tmp->prev->next = NULL;
+        tmp->prev = NULL;
+        *head = tmp;
+    }
+}
+
+void rra(t_stack_node **head)
+{
+    reverse_rotate(head);
+    ft_putendl_fd("rra", 1);
+}
+
+void rrb(t_stack_node **head)
+{
+    reverse_rotate(head);
+    ft_putendl_fd("rrb", 1);
+}
+
+void rrr(t_stack_node **head, t_stack_node **head_b)
+{
+    reverse_rotate(head);
+    reverse_rotate(head_b);
+    ft_putendl_fd("rrr", 1);
 }
 
 

@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:33:27 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/01/12 14:05:47 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/01/12 14:43:31 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,10 @@ void	radix_sort(t_stack_node **stackA, t_stack_node **stackB)
 		while (i < size)
 		{
 			if (((*stackA)->index >> shift) & 1)
-				rotate(stackA);
+				ra(stackA);
 					// Effectue une rotation si le bit correspondant est 1
 			else
-				push(stackA, stackB);
+				pb(stackA, stackB);
 					// Pousse sur stackB si le bit correspondant est 0
 			i++;
 		}
@@ -89,71 +89,71 @@ void	radix_sort(t_stack_node **stackA, t_stack_node **stackB)
 	}
 }
 
-// #include <time.h>
-// #include <stdio.h>
+#include <time.h>
+#include <stdio.h>
 
-// void	print_stack(t_stack_node *head)
-// {
-// 	while (head != NULL)
-// 	{
-// 		printf("%d ", head->value);
-// 		head = head->next;
-// 	}
-// 	printf("\n");
-// }
+void	print_stack(t_stack_node *head)
+{
+	while (head != NULL)
+	{
+		printf("%d ", head->value);
+		head = head->next;
+	}
+	printf("\n");
+}
 
-// void	print_indexes(t_stack_node *head)
-// {
-// 	while (head != NULL)
-// 	{
-// 		printf("%d ", head->index);
-// 		head = head->next;
-// 	}
-// 	printf("\n");
-// }
+void	print_indexes(t_stack_node *head)
+{
+	while (head != NULL)
+	{
+		printf("%d ", head->index);
+		head = head->next;
+	}
+	printf("\n");
+}
 
-// void	add_random_numbers(t_stack_node **stack, int count)
-// {
-// 	t_stack_node	*new_node;
+void add_random_numbers(t_stack_node **stack, int count)
+{
+    t_stack_node *new_node;
 
-// 	srand(time(NULL));
-// 	int numbers[21] = {0};   // Tableau pour suivre les nombres déjà générés
-// 	int generated_count = 0; // Compteur pour les nombres générés
-// 	while (generated_count < count)
-// 	{
-// 		int random_number = rand() % 21 - 10;
-// 			// Génère un nombre aléatoire entre -10 et 10
-// 		if (numbers[random_number + 10] == 0)
-// 			// Vérifie si le nombre n'a pas déjà été généré
-// 		{
-// 			new_node = malloc(sizeof(t_stack_node));
-// 			new_node->value = random_number;
-// 			new_node->next = *stack;
-// 			new_node->prev = NULL;
-// 			if (*stack)
-// 				(*stack)->prev = new_node;
-// 			*stack = new_node;
-// 			numbers[random_number + 10] = 1; // Marque le nombre comme généré
-// 			generated_count++;
-// 		}
-// 	}
-// }
+    srand(time(NULL));
+    int numbers[2001] = {0};   // Array to track the generated numbers
+    int generated_count = 0; // Counter for generated numbers
+    while (generated_count < count)
+    {
+        int random_number = rand() % 2001 - 1000;
+        // Generate a random number between -1000 and 1000
+        if (numbers[random_number + 1000] == 0)
+        {
+            // Check if the number has not been generated already
+            new_node = malloc(sizeof(t_stack_node));
+            new_node->value = random_number;
+            new_node->next = *stack;
+            new_node->prev = NULL;
+            if (*stack)
+                (*stack)->prev = new_node;
+            *stack = new_node;
+            numbers[random_number + 1000] = 1; // Mark the number as generated
+            generated_count++;
+        }
+    }
+}
 
-// int	main(void)
-// {
-// 	t_stack_node	*stack;
-// 	t_stack_node	*stack_b;
+int	main(void)
+{
+	t_stack_node	*stack;
+	t_stack_node	*stack_b;
 
-// 	stack = NULL;
-// 	stack_b = NULL;
-// 	add_random_numbers(&stack, 10);
-// 		// Modifier ici pour spécifier le nombre de nombres aléatoires à ajouter
-// 	assign_indexes(stack);
-// 	print_stack(stack);
-// 	print_indexes(stack);
-// 	printf("\n");
-// 	radix_sort(&stack, &stack_b);
-// 	print_stack(stack);
-// 	print_indexes(stack);
-// 	return (0);
-// }
+	stack = NULL;
+	stack_b = NULL;
+	add_random_numbers(&stack, 500);
+		// Modifier ici pour spécifier le nombre de nombres aléatoires à ajouter
+	assign_indexes(stack);
+	// print_stack(stack);
+	// print_indexes(stack);
+	// printf("\n");
+	radix_sort(&stack, &stack_b);
+	// print_stack(stack);
+	// print_indexes(stack);
+	return (0);
+}
