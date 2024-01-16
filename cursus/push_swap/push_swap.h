@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:18:53 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/01/12 14:42:15 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/01/16 17:54:42 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define PUSH_SWAP_H
 # include <stdlib.h>
 # include <unistd.h>
-
+# include "libft/libft.h"
 
 typedef struct s_stack_node
 {
@@ -41,6 +41,6 @@ void	rrb(t_stack_node **head);
 void	rrr(t_stack_node **head, t_stack_node **head_b);
 void	radix_sort(t_stack_node **stackA, t_stack_node **stackB);
 void	assign_indexes(t_stack_node *head);
-int		ft_lstsize(t_stack_node *lst);
+int		ft_double_lstsize(t_stack_node *lst);
 
 #endif

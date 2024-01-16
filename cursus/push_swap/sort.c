@@ -6,14 +6,14 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:33:27 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/01/12 14:43:31 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/01/16 17:57:10 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
 
-int	ft_lstsize(t_stack_node *lst)
+int	ft_double_lstsize(t_stack_node *lst)
 {
 	size_t			size;
 	t_stack_node	*current;
@@ -61,13 +61,13 @@ void	radix_sort(t_stack_node **stackA, t_stack_node **stackB)
 
 	// Calculer bit_max en fonction de la taille de la liste
 	bit_max = 0;
-	size = ft_lstsize(*stackA);
+	size = ft_double_lstsize(*stackA);
 	while (size > 1)
 	{
 		size /= 2;
 		bit_max++;
 	}
-	size = ft_lstsize(*stackA);
+	size = ft_double_lstsize(*stackA);
 	shift = 0;
 	while (shift <= bit_max)
 	{
@@ -76,21 +76,54 @@ void	radix_sort(t_stack_node **stackA, t_stack_node **stackB)
 		{
 			if (((*stackA)->index >> shift) & 1)
 				ra(stackA);
-					// Effectue une rotation si le bit correspondant est 1
+			// Effectue une rotation si le bit correspondant est 1
 			else
 				pb(stackA, stackB);
-					// Pousse sur stackB si le bit correspondant est 0
+			// Pousse sur stackB si le bit correspondant est 0
 			i++;
 		}
 		shift++;
 		while (*stackB)
 			push(stackB, stackA);
-				// Remet tous les éléments de stackB dans stackA
+		// Remet tous les éléments de stackB dans stackA
 	}
 }
 
-#include <time.h>
+void	sort_two(t_stack_node **stack_A)
+{
+	if ((*stack_A)->index > (*stack_A)->next->index)
+		sa(stack_A);
+}
+
+void	sort_three(t_stack_node **stack_A)
+{
+	if ((*stack_A)->index == 0 && (*stack_A)->next->index == 2
+		&& (*stack_A)->next->next->index == 1)
+	{
+		sa(stack_A);
+		ra(stack_A);
+	}
+	else if ((*stack_A)->index == 1)
+	{
+		if ((*stack_A)->next->index == 0)
+			sa(stack_A);
+		else
+			rra(stack_A);
+	}
+	else if ((*stack_A)->index == 2)
+	{
+		if ((*stack_A)->next->index == 0)
+			ra(stack_A);
+		else
+		{
+			sa(stack_A);
+			rra(stack_A);
+		}
+	}
+}
+
 #include <stdio.h>
+#include <time.h>
 
 void	print_stack(t_stack_node *head)
 {
@@ -112,48 +145,50 @@ void	print_indexes(t_stack_node *head)
 	printf("\n");
 }
 
-void add_random_numbers(t_stack_node **stack, int count)
+void	add_random_numbers(t_stack_node **stack, int count)
 {
-    t_stack_node *new_node;
+	t_stack_node	*new_node;
+	int				random_number;
 
-    srand(time(NULL));
-    int numbers[2001] = {0};   // Array to track the generated numbers
-    int generated_count = 0; // Counter for generated numbers
-    while (generated_count < count)
-    {
-        int random_number = rand() % 2001 - 1000;
-        // Generate a random number between -1000 and 1000
-        if (numbers[random_number + 1000] == 0)
-        {
-            // Check if the number has not been generated already
-            new_node = malloc(sizeof(t_stack_node));
-            new_node->value = random_number;
-            new_node->next = *stack;
-            new_node->prev = NULL;
-            if (*stack)
-                (*stack)->prev = new_node;
-            *stack = new_node;
-            numbers[random_number + 1000] = 1; // Mark the number as generated
-            generated_count++;
-        }
-    }
+	srand(time(NULL));
+	int numbers[2001] = {0}; // Array to track the generated numbers
+	int generated_count = 0; // Counter for generated numbers
+	while (generated_count < count)
+	{
+		random_number = rand() % 2001 - 1000;
+		// Generate a random number between -1000 and 1000
+		if (numbers[random_number + 1000] == 0)
+		{
+			// Check if the number has not been generated already
+			new_node = malloc(sizeof(t_stack_node));
+			new_node->value = random_number;
+			new_node->next = *stack;
+			new_node->prev = NULL;
+			if (*stack)
+				(*stack)->prev = new_node;
+			*stack = new_node;
+			numbers[random_number + 1000] = 1; // Mark the number as generated
+			generated_count++;
+		}
+	}
 }
 
-int	main(void)
-{
-	t_stack_node	*stack;
-	t_stack_node	*stack_b;
+// int	main(void)
+// {
+// 	t_stack_node	*stack;
+// 	t_stack_node	*stack_b;
 
-	stack = NULL;
-	stack_b = NULL;
-	add_random_numbers(&stack, 500);
-		// Modifier ici pour spécifier le nombre de nombres aléatoires à ajouter
-	assign_indexes(stack);
-	// print_stack(stack);
-	// print_indexes(stack);
-	// printf("\n");
-	radix_sort(&stack, &stack_b);
-	// print_stack(stack);
-	// print_indexes(stack);
-	return (0);
-}
+// 	stack = NULL;
+// 	stack_b = NULL;
+// 	add_random_numbers(&stack, 3);
+// 	// Modifier ici pour spécifier le nombre de nombres aléatoires à ajouter
+// 	assign_indexes(stack);
+// 	// print_stack(stack);
+// 	// print_indexes(stack);
+// 	// printf("\n");
+// 	radix_sort(&stack, &stack_b);
+// 	// sort_three(&stack);
+// 	// print_stack(stack);
+// 	// print_indexes(stack);
+// 	return (0);
+// }
