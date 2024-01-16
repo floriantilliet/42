@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:20:08 by florian           #+#    #+#             */
-/*   Updated: 2024/01/09 15:50:38 by florian          ###   ########.fr       */
+/*   Updated: 2024/01/16 16:08:08 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,14 +108,15 @@ int	ft_get_map(t_data *data, char *path)
 		return (0);
 	tab = fd_to_tab(fd);
 	if (!tab)
-		return (0);
+		return (close(fd), 0);
 	tabs = tab_to_tabs(tab);
 	if (!tabs)
-		return (0);
+		return (close(fd), 0);
 	data->map = tabs_to_map(tabs);
 	if (!data->map)
-		return (0);
+		return (close(fd), 0);
 	get_limits(data);
 	init_shifts(data);
+	close(fd);
 	return (1);
 }
