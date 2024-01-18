@@ -3,15 +3,68 @@
 /*                                                        :::      ::::::::   */
 /*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:33:27 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/01/16 17:57:10 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/01/18 12:15:11 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
+
+t_stack_node	*ft_double_lstnew(int content)
+{
+	t_stack_node	*new;
+
+	new = malloc(sizeof(t_stack_node));
+	if (!new)
+	{
+		return (NULL);
+	}
+	new->value = content;
+	new->next = NULL;
+	return (new);
+}
+
+t_stack_node	*ft_double_lstlast(t_stack_node *lst)
+{
+	t_stack_node	*current;
+
+	if (!lst)
+		return (NULL);
+	current = lst;
+	while (current->next)
+	{
+		current = current->next;
+	}
+	return (current);
+}
+
+void	ft_double_lstadd_back(t_stack_node **head, t_stack_node *new)
+{
+	t_stack_node	*last;
+
+	if (head)
+	{
+		if (*head)
+		{
+			last = ft_double_lstlast(*head);
+			last->next = new;
+		}
+		else
+			*head = new;
+	}
+}
+
+void	ft_double_lstadd_front(t_stack_node **head, t_stack_node *new)
+{
+	if (head)
+	{
+		new->next = *head;
+		*head = new;
+	}
+}
 
 int	ft_double_lstsize(t_stack_node *lst)
 {
@@ -125,25 +178,25 @@ void	sort_three(t_stack_node **stack_A)
 #include <stdio.h>
 #include <time.h>
 
-void	print_stack(t_stack_node *head)
-{
-	while (head != NULL)
-	{
-		printf("%d ", head->value);
-		head = head->next;
-	}
-	printf("\n");
-}
+// void	print_stack(t_stack_node *head)
+// {
+// 	while (head != NULL)
+// 	{
+// 		printf("%d ", head->value);
+// 		head = head->next;
+// 	}
+// 	printf("\n");
+// }
 
-void	print_indexes(t_stack_node *head)
-{
-	while (head != NULL)
-	{
-		printf("%d ", head->index);
-		head = head->next;
-	}
-	printf("\n");
-}
+// void	print_indexes(t_stack_node *head)
+// {
+// 	while (head != NULL)
+// 	{
+// 		printf("%d ", head->index);
+// 		head = head->next;
+// 	}
+// 	printf("\n");
+// }
 
 void	add_random_numbers(t_stack_node **stack, int count)
 {
