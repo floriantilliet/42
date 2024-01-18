@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:33:27 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/01/18 12:26:06 by florian          ###   ########.fr       */
+/*   Updated: 2024/01/18 16:08:24 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_stack_node	*ft_double_lstnew(int content)
 	}
 	new->value = content;
 	new->next = NULL;
+	new->prev = NULL;
 	return (new);
 }
 
@@ -175,6 +176,18 @@ void	sort_three(t_stack_node **stack_A)
 	}
 }
 
+void sort_stack(t_stack_node **stack_A, t_stack_node **stack_B)
+{
+	int size;
+
+	size = ft_double_lstsize(*stack_A);
+	if (size == 2)
+		sort_two(stack_A);
+	else if (size == 3)
+		sort_three(stack_A);
+	else
+		radix_sort(stack_A, stack_B);
+}
 #include <stdio.h>
 #include <time.h>
 
@@ -233,15 +246,19 @@ void	add_random_numbers(t_stack_node **stack, int count)
 
 // 	stack = NULL;
 // 	stack_b = NULL;
-// 	add_random_numbers(&stack, 3);
+// 	add_random_numbers(&stack, 500);
 // 	// Modifier ici pour spécifier le nombre de nombres aléatoires à ajouter
 // 	assign_indexes(stack);
 // 	// print_stack(stack);
+// 	// print_stack(stack_b);
 // 	// print_indexes(stack);
 // 	// printf("\n");
+// 	// pb(&stack, &stack_b);
 // 	radix_sort(&stack, &stack_b);
+// 	// sort_two(&stack);
 // 	// sort_three(&stack);
 // 	// print_stack(stack);
+// 	// print_stack(stack_b);
 // 	// print_indexes(stack);
 // 	return (0);
 // }

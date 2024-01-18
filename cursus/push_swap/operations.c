@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:39:50 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/01/18 11:14:56 by florian          ###   ########.fr       */
+/*   Updated: 2024/01/18 15:13:05 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,28 +65,29 @@ void ss(t_stack_node **head, t_stack_node **head_b)
     ft_putendl_fd("ss", 1);
 }
 
-void	push(t_stack_node **head, t_stack_node **head_b)
+void	push(t_stack_node **head_start, t_stack_node **head_end)
 {
 	t_stack_node	*tmp;
 
-	if (*head)
+	if (*head_start)
 	{
-		tmp = (*head)->next;
-		(*head)->next = *head_b;
-		*head_b = *head;
-		*head = tmp;
+		tmp = (*head_start)->next;
+		(*head_start)->next = *head_end;
+		*head_end = *head_start;
+		*head_start = tmp;
+	
 	}
 }
 
-void pa(t_stack_node **head, t_stack_node **head_b)
+void pa(t_stack_node **head_a, t_stack_node **head_b)
 {
-    push(head, head_b);
+    push(head_b, head_a);
     ft_putendl_fd("pa", 1);
 }
 
-void pb(t_stack_node **head, t_stack_node **head_b)
+void pb(t_stack_node **head_a, t_stack_node **head_b)
 {
-    push(head_b, head);
+    push(head_a, head_b);
     ft_putendl_fd("pb", 1);
 }
 

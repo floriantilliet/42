@@ -1,7 +1,8 @@
 {
     "files.associations": {
         "stdio.h": "c",
-        "push_swap.h": "c"
+        "push_swap.h": "c",
+        "time.h": "c"
     },
     "editor.defaultFormatter": "keyhr.42-c-format"
 }

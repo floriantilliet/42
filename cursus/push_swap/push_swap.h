@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:18:53 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/01/18 12:15:07 by florian          ###   ########.fr       */
+/*   Updated: 2024/01/18 16:05:24 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,11 @@ t_stack_node			*ft_double_lstnew(int content);
 void					ft_double_lstadd_back(t_stack_node **head,
 							t_stack_node *new);
 t_stack_node			*ft_double_lstlast(t_stack_node *lst);
-void					ft_double_lstadd_front(t_stack_node **head, t_stack_node *new);
+void					ft_double_lstadd_front(t_stack_node **head,
+							t_stack_node *new);
+void					sort_stack(t_stack_node **stack_A,
+							t_stack_node **stack_B);
+void					sort_three(t_stack_node **stack_A);
+void					sort_two(t_stack_node **stack_A);
 
 #endif
