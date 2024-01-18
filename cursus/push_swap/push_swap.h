@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:18:53 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/01/18 16:05:24 by florian          ###   ########.fr       */
+/*   Updated: 2024/01/18 18:35:43 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,12 @@ void					sort_stack(t_stack_node **stack_A,
 							t_stack_node **stack_B);
 void					sort_three(t_stack_node **stack_A);
 void					sort_two(t_stack_node **stack_A);
+int						is_stack_sorted(t_stack_node **head);
+int						check_args(int ac, char **av);
+void					sort_five(t_stack_node **stack_A,
+							t_stack_node **stack_B);
+void					sort_four(t_stack_node **stack_A,
+							t_stack_node **stack_B);
+int						get_distance(t_stack_node **stack, int val);
 
 #endif

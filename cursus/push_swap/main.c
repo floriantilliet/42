@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:12:08 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/01/18 16:46:49 by florian          ###   ########.fr       */
+/*   Updated: 2024/01/18 17:08:21 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,10 @@ int	main(int ac, char **av)
 	t_stack_node **stack_b;
 
 	if (ac < 2)
+    {
+        return (0);
 		ft_putendl_fd("Error", 2);
+    }
     if (!check_args(ac, av))
     {
         return (0);
@@ -112,6 +115,5 @@ int	main(int ac, char **av)
 	if (is_stack_sorted(stack_a))
 		return (0);
 	sort_stack(stack_a, stack_b);
-	print_stack(*stack_a);
 	return (0);
 }

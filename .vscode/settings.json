@@ -2,7 +2,9 @@
     "files.associations": {
         "stdio.h": "c",
         "push_swap.h": "c",
-        "time.h": "c"
+        "time.h": "c",
+        "chrono": "c",
+        "variant": "c"
     },
     "editor.defaultFormatter": "keyhr.42-c-format"
 }
