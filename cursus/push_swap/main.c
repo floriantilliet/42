@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:12:08 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/01/18 12:14:39 by florian          ###   ########.fr       */
+/*   Updated: 2024/01/18 12:25:17 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ int main(int ac, char **av)
             {
                 ft_double_lstadd_front(stack_a, ft_double_lstnew(ft_atoi(av[ac - 1])));
             }
-            print_stack(*stack_a);
             ac--;
         }
         assign_indexes(*stack_a);

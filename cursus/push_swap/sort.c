@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:33:27 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/01/18 12:15:11 by florian          ###   ########.fr       */
+/*   Updated: 2024/01/18 12:26:06 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,7 @@ void	radix_sort(t_stack_node **stackA, t_stack_node **stackB)
 		}
 		shift++;
 		while (*stackB)
-			push(stackB, stackA);
+			pa(stackA, stackB);
 		// Remet tous les éléments de stackB dans stackA
 	}
 }
