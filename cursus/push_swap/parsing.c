@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:29:53 by florian           #+#    #+#             */
-/*   Updated: 2024/01/22 16:39:50 by florian          ###   ########.fr       */
+/*   Updated: 2024/01/22 16:41:56 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	init_stack(t_stack_node **stack, int ac, char **av)
 
 int	check_args(int ac, char **av)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 1;
 	while (i < ac)

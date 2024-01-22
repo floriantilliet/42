@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:30:37 by florian           #+#    #+#             */
-/*   Updated: 2024/01/22 16:39:53 by florian          ###   ########.fr       */
+/*   Updated: 2024/01/22 16:54:24 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,21 @@ void	assign_indexes(t_stack_node *head)
 		current->index = index;
 		current = current->next;
 	}
+}
+
+void	sort_stack(t_stack_node **stack_A, t_stack_node **stack_B)
+{
+	int	size;
+
+	size = ft_double_lstsize(*stack_A);
+	if (size == 2)
+		sort_two(stack_A);
+	else if (size == 3)
+		sort_three(stack_A);
+	else if (size == 4)
+		sort_four(stack_A, stack_B);
+	else if (size == 5)
+		sort_five(stack_A, stack_B);
+	else
+		radix_sort(stack_A, stack_B);
 }

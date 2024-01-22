@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:18:53 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/01/22 16:39:51 by florian          ###   ########.fr       */
+/*   Updated: 2024/01/22 16:53:22 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,10 @@ void					ft_double_lstadd_front(t_stack_node **head,
 void					sort_stack(t_stack_node **stack_A,
 							t_stack_node **stack_B);
 void					sort_three(t_stack_node **stack_A);
+void					sort_case_1(t_stack_node **stack_A, int min,
+							int next_min);
+void					sort_case_2(t_stack_node **stack_A, int min);
+void					sort_case_3(t_stack_node **stack_A, int min);
 void					sort_two(t_stack_node **stack_A);
 int						is_stack_sorted(t_stack_node **head);
 int						check_args(int ac, char **av);

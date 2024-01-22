@@ -1,38 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push.c                                             :+:      :+:    :+:   */
+/*   sort_three_cases.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/22 13:37:47 by florian           #+#    #+#             */
-/*   Updated: 2024/01/22 16:42:23 by florian          ###   ########.fr       */
+/*   Created: 2024/01/22 16:51:20 by florian           #+#    #+#             */
+/*   Updated: 2024/01/22 16:56:42 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	push(t_stack_node **head_start, t_stack_node **head_end)
+void	sort_case_1(t_stack_node **stack_A, int min, int next_min)
 {
-	t_stack_node	*tmp;
-
-	if (*head_start)
+	if ((*stack_A)->index == min && (*stack_A)->next->index != next_min)
 	{
-		tmp = *head_start;
-		*head_start = (*head_start)->next;
-		tmp->next = *head_end;
-		*head_end = tmp;
+		sa(stack_A);
+		ra(stack_A);
 	}
 }
 
-void	pa(t_stack_node **head_a, t_stack_node **head_b)
+void	sort_case_2(t_stack_node **stack_A, int min)
 {
-	push(head_b, head_a);
-	ft_putendl_fd("pa", 1);
+	if ((*stack_A)->index == min)
+		sa(stack_A);
+	else
+		rra(stack_A);
 }
 
-void	pb(t_stack_node **head_a, t_stack_node **head_b)
+void	sort_case_3(t_stack_node **stack_A, int min)
 {
-	push(head_a, head_b);
-	ft_putendl_fd("pb", 1);
+	if ((*stack_A)->next->index == min)
+		ra(stack_A);
+	else
+	{
+		sa(stack_A);
+		rra(stack_A);
+	}
 }
