@@ -6,21 +6,37 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:12:08 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/01/18 17:08:21 by florian          ###   ########.fr       */
+/*   Updated: 2024/01/22 16:27:16 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
 
-void	print_stack(t_stack_node *head)
+void	free_stack(t_stack_node **head)
 {
-	while (head != NULL)
+	t_stack_node	*tmp;
+
+	while (*head)
 	{
-		printf("%d ", head->value);
-		head = head->next;
+		tmp = *head;
+		*head = (*head)->next;
+		free(tmp);
 	}
-	printf("\n");
+	free(head);
+}
+
+void	free_tab(char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i])
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
 }
 
 void	print_indexes(t_stack_node *head)
@@ -28,6 +44,16 @@ void	print_indexes(t_stack_node *head)
 	while (head != NULL)
 	{
 		printf("%d ", head->index);
+		head = head->next;
+	}
+	printf("\n");
+}
+
+void	print_stack(t_stack_node *head)
+{
+	while (head != NULL)
+	{
+		printf("%d ", head->value);
 		head = head->next;
 	}
 	printf("\n");
@@ -52,8 +78,8 @@ static void	init_stack(t_stack_node **stack, int ac, char **av)
 		i++;
 	}
 	assign_indexes(*stack);
-	// if (ac == 2)
-	// 	ft_free(args);
+	if (ac == 2)
+		free_tab(args);
 }
 
 int	is_stack_sorted(t_stack_node **head)
@@ -70,50 +96,79 @@ int	is_stack_sorted(t_stack_node **head)
 	return (1);
 }
 
-int check_args(int ac, char **av)
+int	check_args(int ac, char **av)
 {
-    int i;
-    int j;
+	int	i;
+	int	j;
 
-    i = 1;
-    while (i < ac)
-    {
-        j = 0;
-        while (av[i][j])
-        {
-            if (!ft_isdigit(av[i][j]) && av[i][j] != ' ')
-            {
-                ft_putendl_fd("Error", 2);
-                return (0);
-            }
-            j++;
-        }
-        i++;
-    }
-    return (1);
+	i = 1;
+	while (i < ac)
+	{
+		j = 0;
+		while (av[i][j])
+		{
+			if (!ft_isdigit(av[i][j]) && av[i][j] != ' ')
+			{
+				ft_putendl_fd("Error", 2);
+				return (0);
+			}
+			j++;
+		}
+		i++;
+	}
+	return (1);
 }
 
 int	main(int ac, char **av)
 {
-	t_stack_node **stack_a;
-	t_stack_node **stack_b;
+	t_stack_node	**stack_a;
+	t_stack_node	**stack_b;
 
 	if (ac < 2)
-    {
-        return (0);
+	{
+		return (0);
 		ft_putendl_fd("Error", 2);
-    }
-    if (!check_args(ac, av))
-    {
-        return (0);
-    }
+	}
+	if (!check_args(ac, av))
+	{
+		return (0);
+	}
 	stack_a = (t_stack_node **)malloc(sizeof(t_stack_node));
 	stack_b = (t_stack_node **)malloc(sizeof(t_stack_node));
 	*stack_a = NULL;
 	*stack_b = NULL;
 	init_stack(stack_a, ac, av);
 	if (is_stack_sorted(stack_a))
-		return (0);
+		return (free_stack(stack_a), free(stack_b), 0);
 	sort_stack(stack_a, stack_b);
-	return (0);
+	return (free_stack(stack_a), free(stack_b), 0);
 }
+
+// int	main(int ac, char **av)
+// {
+// 	t_stack_node **stack_a;
+// 	t_stack_node **stack_b;
+
+// 	if (ac < 2)
+//     {
+//         return (0);
+// 		ft_putendl_fd("Error", 2);
+//     }
+//     if (!check_args(ac, av))
+//     {
+//         return (0);
+//     }
+// 	stack_a = (t_stack_node **)malloc(sizeof(t_stack_node));
+// 	stack_b = (t_stack_node **)malloc(sizeof(t_stack_node));
+// 	*stack_a = NULL;
+// 	*stack_b = NULL;
+// 	init_stack(stack_a, ac, av);
+// 	print_stack(*stack_a);
+// 	print_indexes(*stack_a);
+// 	pb(stack_a, stack_b);
+// 	print_stack(*stack_a);
+// 	print_indexes(*stack_a);
+// 	print_stack(*stack_b);
+// 	print_indexes(*stack_b);
+// 	return (0);
+// }

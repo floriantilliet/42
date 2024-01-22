@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:33:27 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/01/18 18:38:52 by florian          ###   ########.fr       */
+/*   Updated: 2024/01/22 16:05:48 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,6 @@ void	radix_sort(t_stack_node **stackA, t_stack_node **stackB)
 	int	bit_max;
 	int	i;
 
-	// Calculer bit_max en fonction de la taille de la liste
 	bit_max = 0;
 	size = ft_double_lstsize(*stackA);
 	while (size > 1)
@@ -130,16 +129,13 @@ void	radix_sort(t_stack_node **stackA, t_stack_node **stackB)
 		{
 			if (((*stackA)->index >> shift) & 1)
 				ra(stackA);
-			// Effectue une rotation si le bit correspondant est 1
 			else
 				pb(stackA, stackB);
-			// Pousse sur stackB si le bit correspondant est 0
 			i++;
 		}
 		shift++;
 		while (*stackB)
 			pa(stackA, stackB);
-		// Remet tous les éléments de stackB dans stackA
 	}
 }
 
@@ -147,33 +143,6 @@ void	sort_two(t_stack_node **stack_A)
 {
 	if ((*stack_A)->index > (*stack_A)->next->index)
 		sa(stack_A);
-}
-
-void	sort_three(t_stack_node **stack_A)
-{
-	if ((*stack_A)->index == 0 && (*stack_A)->next->index == 2
-		&& (*stack_A)->next->next->index == 1)
-	{
-		sa(stack_A);
-		ra(stack_A);
-	}
-	else if ((*stack_A)->index == 1)
-	{
-		if ((*stack_A)->next->index == 0)
-			sa(stack_A);
-		else
-			rra(stack_A);
-	}
-	else if ((*stack_A)->index == 2)
-	{
-		if ((*stack_A)->next->index == 0)
-			ra(stack_A);
-		else
-		{
-			sa(stack_A);
-			rra(stack_A);
-		}
-	}
 }
 
 int	get_distance(t_stack_node **stack, int val)
@@ -206,6 +175,41 @@ int	get_min(t_stack_node **stack, int val)
 	}
 	return (min);
 }
+
+void	sort_three(t_stack_node **stack_A)
+{
+	int	min;
+	int	next_min;
+
+	min = get_min(stack_A, -1);
+	next_min = get_min(stack_A, min);
+	if (is_stack_sorted(stack_A))
+		return ;
+	if ((*stack_A)->index == min && (*stack_A)->next->index != next_min)
+	{
+		ra(stack_A);
+		sa(stack_A);
+		rra(stack_A);
+	}
+	else if ((*stack_A)->index == next_min)
+	{
+		if ((*stack_A)->next->index == min)
+			sa(stack_A);
+		else
+			rra(stack_A);
+	}
+	else
+	{
+		if ((*stack_A)->next->index == min)
+			ra(stack_A);
+		else
+		{
+			sa(stack_A);
+			rra(stack_A);
+		}
+	}
+}
+
 void	sort_four(t_stack_node **stack_a, t_stack_node **stack_b)
 {
 	int	distance;

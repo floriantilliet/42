@@ -7,7 +7,7 @@ EXECUTABLE = push_swap
 all: $(EXECUTABLE)
 
 $(EXECUTABLE): $(OBJ)
-	make -C libft all
+	make -C libft bonus
 	$(CC) $(CFLAGS) -o $@ $^ -Llibft -lft
 
 %.o: %.c
