@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:44:55 by florian           #+#    #+#             */
-/*   Updated: 2024/01/22 16:57:51 by florian          ###   ########.fr       */
+/*   Updated: 2024/01/22 17:30:50 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,8 @@ void	sort_three(t_stack_node **stack_A)
 
 	min = get_min(stack_A, -1);
 	next_min = get_min(stack_A, min);
-	if (is_stack_sorted(stack_A))
-		return ;
 	if ((*stack_A)->index == min && (*stack_A)->next->index != next_min)
-	{
-		ra(stack_A);
-		sa(stack_A);
-		rra(stack_A);
-	}
+		special_case_one(stack_A);
 	else if ((*stack_A)->index == next_min)
 	{
 		if ((*stack_A)->next->index == min)
@@ -45,10 +39,7 @@ void	sort_three(t_stack_node **stack_A)
 		if ((*stack_A)->next->index == min)
 			ra(stack_A);
 		else
-		{
-			sa(stack_A);
-			rra(stack_A);
-		}
+			special_case_two(stack_A);
 	}
 }
 
@@ -77,7 +68,8 @@ void	sort_four(t_stack_node **stack_a, t_stack_node **stack_b)
 
 void	sort_five(t_stack_node **stack_a, t_stack_node **stack_b)
 {
-	int distance;
+	int	distance;
+
 	distance = get_distance(stack_a, get_min(stack_a, -1));
 	if (distance == 1)
 		ra(stack_a);
