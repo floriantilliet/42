@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:18:53 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/01/22 15:29:58 by florian          ###   ########.fr       */
+/*   Updated: 2024/01/22 16:35:43 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,11 @@ void					sort_four(t_stack_node **stack_A,
 int						get_distance(t_stack_node **stack, int val);
 void					print_indexes(t_stack_node *head);
 void					print_stack(t_stack_node *head);
+int						get_min(t_stack_node **stack, int val);
+void					init_stack(t_stack_node **stack, int ac, char **av);
+void					free_stack(t_stack_node **stack);
+void					free_tab(char **tab);
+int						is_stack_sorted(t_stack_node **head);
+int						get_distance(t_stack_node **stack, int val);
+
 #endif
