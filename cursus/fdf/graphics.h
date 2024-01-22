@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 17:30:48 by florian           #+#    #+#             */
-/*   Updated: 2024/01/09 15:21:47 by florian          ###   ########.fr       */
+/*   Updated: 2024/01/22 17:44:15 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ typedef struct s_data
 	void		*win_ptr;
 	t_img		img;
 	t_point		**map;
+
+	int			projection;
 
 	double		angle_x;
 	double		angle_y;

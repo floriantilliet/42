@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 15:50:34 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/01/09 15:49:27 by florian          ###   ########.fr       */
+/*   Updated: 2024/01/22 17:58:33 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ int	ft_mouse_move(int x, int y, t_data *data)
 	}
 	if (data->mouse_button == 3)
 	{
+		if (data->projection == 0)
+			return (0);
 		data->angle_x -= (y - data->prev_y) * 0.1;
 		data->angle_y -= (x - data->prev_x) * 0.1;
 		data->prev_x = x;

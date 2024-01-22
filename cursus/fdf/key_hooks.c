@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 15:39:40 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/01/09 15:50:26 by florian          ###   ########.fr       */
+/*   Updated: 2024/01/22 18:04:41 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int	arrow_move_hook(int keycode, t_data *data)
 
 int	key_rotation_hook(int keycode, t_data *data)
 {
+	if (data->projection == 0)
+		return (0);
 	if (keycode == XK_d)
 		data->angle_y -= 1;
 	if (keycode == XK_a)
@@ -66,6 +68,10 @@ int	key_reset_and_close_hook(int keycode, t_data *data)
 		data->offset_x = 0;
 		data->offset_y = 0;
 		data->zoom = data->ideal_zoom;
+	}
+	if (keycode == XK_p)
+	{
+		init_shifts(data);
 	}
 	return (0);
 }

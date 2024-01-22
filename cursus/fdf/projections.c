@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 12:57:01 by florian           #+#    #+#             */
-/*   Updated: 2024/01/09 15:49:30 by florian          ###   ########.fr       */
+/*   Updated: 2024/01/22 17:57:46 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,18 @@ t_data	ft_iso_projection(t_data *data)
 	t_data			proj;
 	t_rot_matrices	rots;
 
-	rots.rot_z = ft_get_rot_matrix(45 + data->angle_z, 'z');
-	rots.rot_x = ft_get_rot_matrix(atan(sqrt(2)) + 45 + data->angle_x, 'x');
-	rots.rot_y = ft_get_rot_matrix(-data->angle_y, 'y');
+	if (data->projection == 1)
+	{
+		rots.rot_z = ft_get_rot_matrix(45 + data->angle_z, 'z');
+		rots.rot_x = ft_get_rot_matrix(atan(sqrt(2)) + 45 + data->angle_x, 'x');
+		rots.rot_y = ft_get_rot_matrix(-data->angle_y, 'y');
+	}
+	if (data->projection == 0)
+	{
+		rots.rot_z = ft_get_rot_matrix(90 + data->angle_z, 'z');
+		rots.rot_x = ft_get_rot_matrix(0 + data->angle_x, 'x');
+		rots.rot_y = ft_get_rot_matrix(0 + data->angle_y, 'y');
+	}
 	ft_allocate_proj_map(&proj, data->width, data->height);
 	ft_apply_transformations(&proj, data, &rots);
 	return (proj);

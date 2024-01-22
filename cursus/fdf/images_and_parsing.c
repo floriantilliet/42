@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:49:00 by florian           #+#    #+#             */
-/*   Updated: 2024/01/09 15:49:15 by florian          ###   ########.fr       */
+/*   Updated: 2024/01/22 18:04:00 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,10 @@ void	init_shifts(t_data *data)
 	data->angle_z = 0;
 	data->offset_x = 0;
 	data->offset_y = 0;
+	if (data->projection == 1)
+		data->projection = 0;
+	else
+		data->projection = 1;
 }
 
 void	get_limits(t_data *data)
