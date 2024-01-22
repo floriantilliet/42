@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:39:55 by florian           #+#    #+#             */
-/*   Updated: 2024/01/22 16:39:52 by florian          ###   ########.fr       */
+/*   Updated: 2024/01/22 16:40:23 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,15 @@ void	reverse_rotate(t_stack_node **head)
 	{
 		last = *head;
 		before_last = NULL;
-		// Trouver le dernier et l'avant-dernier nœud
 		while (last->next)
 		{
 			before_last = last;
 			last = last->next;
 		}
-		// Mettre à jour les liens pour la rotation
 		if (before_last)
-			before_last->next = NULL; // Détacher l'avant-dernier du dernier
-		last->next = *head;           // Ajouter le dernier au début
-		*head = last;                 // Mettre à jour la tête de la liste
+			before_last->next = NULL;
+		last->next = *head;
+		*head = last;
 	}
 }
 
