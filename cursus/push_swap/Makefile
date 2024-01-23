@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g3
+CFLAGS = -Wall -Wextra -Werror
 SRC = $(wildcard *.c)
 OBJ = $(SRC:.c=.o)
 EXECUTABLE = push_swap
