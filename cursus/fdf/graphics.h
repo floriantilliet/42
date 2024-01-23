@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 17:30:48 by florian           #+#    #+#             */
-/*   Updated: 2024/01/22 17:44:15 by florian          ###   ########.fr       */
+/*   Updated: 2024/01/23 13:20:32 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,10 @@
 # include "get_next_line/get_next_line_bonus.h"
 # include "libft/libft.h"
 # include "mlx/mlx.h"
-# include "stdio.h"
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include <fcntl.h>
 # include <math.h>
-# include <stdio.h>
 # include <stdlib.h>
 
 # define MLX_ERROR 1
