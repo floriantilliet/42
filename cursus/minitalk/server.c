@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 17:04:43 by florian           #+#    #+#             */
-/*   Updated: 2024/01/26 18:19:21 by florian          ###   ########.fr       */
+/*   Updated: 2024/01/29 15:16:05 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <signal.h>
+#include "minitalk.h"
 #include <stdio.h>
 
 void bin_to_char(int signum, char *c)
@@ -25,8 +24,8 @@ void bin_to_char(int signum, char *c)
 void sig_handler(int signum, siginfo_t* info, void* context)
 {
    static char c;
+   static char *str;
    static int i;
-   // static char *str;
 
    (void)context;
    (void)info;
@@ -34,19 +33,23 @@ void sig_handler(int signum, siginfo_t* info, void* context)
    if (i == 7)
    {
       i = 0;
-      write(1, &c, 1);
       if (c == '\0')
       {
+         write(1, str, ft_strlen(str));
          write(1, "\n", 1);
-         // free(str);
-         // str = NULL;
+         free(str);
+         str = NULL;
          kill(info->si_pid, SIGUSR1);
          return ;
       }
+      if (!str)
+			str = ft_strdup(&c);
+      else
+         str = ft_strjoin(str, &c);
    }
    else
       i++;
-   // kill(info->si_pid, SIGUSR1);
+   kill(info->si_pid, SIGUSR2);
 }
 
 int main(void)
@@ -56,7 +59,9 @@ int main(void)
    sigemptyset(&sa.sa_mask);
    sa.sa_flags = SA_RESTART | SA_SIGINFO;
    sa.sa_sigaction = sig_handler;
-   printf("pid: %d\n", getpid());
+   write(1, "PID: ", 5);
+   ft_putnbr_fd(getpid(), 1);
+   write(1, "\n", 1);
    sigaction(SIGUSR1, &sa, NULL);
    sigaction(SIGUSR2, &sa, NULL);
    while (1)
