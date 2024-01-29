@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 17:04:43 by florian           #+#    #+#             */
-/*   Updated: 2024/01/29 16:01:20 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/01/29 18:00:17 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,14 @@ void	sig_handler(int signum, siginfo_t *info, void *context)
 	(void)context;
 	(void)info;
 	bin_to_char(signum, &c);
-	if (i == 7)
+	if (++i == 8)
 	{
 		i = 0;
 		if (c == '\0')
 		{
-			write(1, str, ft_strlen(str));
+			ft_putstr_fd(str, 1);
 			write(1, "\n", 1);
-			free(str);
+			// free(str);
 			str = NULL;
 			kill(info->si_pid, SIGUSR1);
 			return ;
@@ -46,9 +46,9 @@ void	sig_handler(int signum, siginfo_t *info, void *context)
 			str = ft_strdup(&c);
 		else
 			str = ft_strjoin(str, &c);
+		c = 0;
 	}
-	else
-		i++;
+
 	kill(info->si_pid, SIGUSR2);
 }
 
