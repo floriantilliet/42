@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 17:04:43 by florian           #+#    #+#             */
-/*   Updated: 2024/01/29 18:00:17 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/01/30 11:26:35 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,16 @@ void	bin_to_char(int signum, char *c)
 		*c = (*c << 1) | 1;
 	else if (signum == SIGUSR2)
 		*c = (*c << 1) | 0;
+}
+
+void	reset_and_output(char **str, int *i, siginfo_t *info)
+{
+	ft_putstr_fd(*str, 1);
+	write(1, "\n", 1);
+	free(*str);
+	*str = NULL;
+	kill(info->si_pid, SIGUSR1);
+	*i = 0;
 }
 
 void	sig_handler(int signum, siginfo_t *info, void *context)
@@ -34,21 +44,12 @@ void	sig_handler(int signum, siginfo_t *info, void *context)
 	{
 		i = 0;
 		if (c == '\0')
-		{
-			ft_putstr_fd(str, 1);
-			write(1, "\n", 1);
-			// free(str);
-			str = NULL;
-			kill(info->si_pid, SIGUSR1);
-			return ;
-		}
+			reset_and_output(&str, &i, info);
 		if (!str)
 			str = ft_strdup(&c);
 		else
 			str = ft_strjoin(str, &c);
-		c = 0;
 	}
-
 	kill(info->si_pid, SIGUSR2);
 }
 

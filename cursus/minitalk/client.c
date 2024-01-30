@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:21:50 by florian           #+#    #+#             */
-/*   Updated: 2024/01/29 18:17:38 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/01/30 11:00:52 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,45 +29,46 @@ void	sig_handler(int signum, siginfo_t *info, void *context)
 	}
 }
 
+void	send_bit(int pid, char c, int *i)
+{
+	if ((c >> *i) & 1)
+		kill(pid, SIGUSR1);
+	else
+		kill(pid, SIGUSR2);
+	while (g_bit_received == 0)
+		usleep(100);
+	g_bit_received = 0;
+	(*i)--;
+}
+
+void	send_null_byte(int pid, int *i)
+{
+	while (*i)
+	{
+		kill(pid, SIGUSR2);
+		while (g_bit_received == 0)
+			usleep(100);
+		g_bit_received = 0;
+		(*i)--;
+	}
+}
+
 void	str_to_bin(int pid, char *str)
 {
 	int		i;
 	char	c;
 
-	// printf("g_bit_received = %d\n", g_bit_received);
 	while (*str)
 	{
 		i = 7;
 		c = *str++;
 		while (i >= 0)
-		{
-			if ((c >> i) & 1)
-				kill(pid, SIGUSR1);
-			else
-				kill(pid, SIGUSR2);
-			// usleep(1000);
-			while(g_bit_received == 0)
-			{
-				usleep(100);
-			}
-			g_bit_received = 0;
-			i--;
-		}
+			send_bit(pid, c, &i);
 	}
 	if (*str == '\0')
 	{
 		i = 8;
-		while (i--)
-		{
-			kill(pid, SIGUSR2);
-			// printf("Bit no %d sent for NULL BYTE\n", i);
-			// usleep(1000);
-			while(g_bit_received == 0)
-			{
-				usleep(100);
-			}
-			g_bit_received = 0;
-		}
+		send_null_byte(pid, &i);
 	}
 }
 
