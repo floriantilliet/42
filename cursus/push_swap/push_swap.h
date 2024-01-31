@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:18:53 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/01/23 13:18:57 by florian          ###   ########.fr       */
+/*   Updated: 2024/01/31 12:26:22 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,10 @@ void					sort_four(t_stack_node **stack_A,
 							t_stack_node **stack_B);
 int						get_distance(t_stack_node **stack, int val);
 int						get_min(t_stack_node **stack, int val);
-void					init_stack(t_stack_node **stack, int ac, char **av);
+int					init_stack(t_stack_node **stack, int ac, char **av);
 void					free_stack(t_stack_node **stack);
 void					free_tab(char **tab);
 int						is_stack_sorted(t_stack_node **head);
+int						check_duplicates(char **args);
 
 #endif

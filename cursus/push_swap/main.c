@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:12:08 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/01/31 10:58:20 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/01/31 12:28:48 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ int	main(int ac, char **av)
 	stack_b = malloc(sizeof(t_stack_node *));
 	*stack_a = NULL;
 	*stack_b = NULL;
-	init_stack(stack_a, ac, av);
+	if (!init_stack(stack_a, ac, av))
+		return (free_stack(stack_a), free(stack_b), 0);
 	if (is_stack_sorted(stack_a))
 		return (free_stack(stack_a), free(stack_b), 0);
 	sort_stack(stack_a, stack_b);
