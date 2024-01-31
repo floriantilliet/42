@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:21:50 by florian           #+#    #+#             */
-/*   Updated: 2024/01/31 09:20:26 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/01/31 10:57:54 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	main(int ac, char **av)
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = SA_RESTART | SA_SIGINFO;
 	sa.sa_sigaction = sig_handler;
-	pid = atoi(av[1]);
+	pid = ft_atoi(av[1]);
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);
 	str_to_bin(pid, av[2]);
