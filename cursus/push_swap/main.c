@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:12:08 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/01/22 16:41:34 by florian          ###   ########.fr       */
+/*   Updated: 2024/01/31 10:28:35 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ int	main(int ac, char **av)
 	{
 		return (0);
 	}
-	stack_a = (t_stack_node **)malloc(sizeof(t_stack_node));
-	stack_b = (t_stack_node **)malloc(sizeof(t_stack_node));
+	stack_a = malloc(sizeof(t_stack_node*));
+	stack_b = malloc(sizeof(t_stack_node*));
 	*stack_a = NULL;
 	*stack_b = NULL;
 	init_stack(stack_a, ac, av);
