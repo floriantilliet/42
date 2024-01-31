@@ -6,13 +6,14 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:18:53 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/01/31 12:26:22 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/01/31 18:07:37 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 # include "libft/libft.h"
+# include <limits.h>
 # include <stdlib.h>
 # include <unistd.h>
 
@@ -62,10 +63,14 @@ void					sort_four(t_stack_node **stack_A,
 							t_stack_node **stack_B);
 int						get_distance(t_stack_node **stack, int val);
 int						get_min(t_stack_node **stack, int val);
-int					init_stack(t_stack_node **stack, int ac, char **av);
+int						init_stack(t_stack_node **stack, int ac, char **av);
 void					free_stack(t_stack_node **stack);
 void					free_tab(char **tab);
 int						is_stack_sorted(t_stack_node **head);
-int						check_duplicates(char **args);
+// int						check_duplicates(char **args);
+// int						check_int_limits(char **args);
+int 					check_duplicates(int ac, char **av);
+int 					check_int_limits(int ac, char **av);
+long long int			ft_atoll(const char *str);
 
 #endif

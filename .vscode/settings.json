@@ -4,7 +4,8 @@
         "push_swap.h": "c",
         "time.h": "c",
         "chrono": "c",
-        "variant": "c"
+        "variant": "c",
+        "limits.h": "c"
     },
     "editor.defaultFormatter": "keyhr.42-c-format"
 }
