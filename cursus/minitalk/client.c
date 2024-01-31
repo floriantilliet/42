@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:21:50 by florian           #+#    #+#             */
-/*   Updated: 2024/01/31 10:57:54 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/01/31 11:29:07 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,5 @@ int	main(int ac, char **av)
 	sigaction(SIGUSR2, &sa, NULL);
 	str_to_bin(pid, av[2]);
 	str_to_bin(pid, "");
-	while (1)
-		sleep(1);
 	return (0);
 }
