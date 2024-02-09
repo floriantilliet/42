@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:28:46 by florian           #+#    #+#             */
-/*   Updated: 2024/01/22 16:39:47 by florian          ###   ########.fr       */
+/*   Updated: 2024/02/09 12:23:18 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,11 @@ void	free_tab(char **tab)
 		i++;
 	}
 	free(tab);
+}
+
+void	free_tab_and_print_error(char **args, int ac)
+{
+	if (ac == 2)
+		free_tab(args);
+	ft_putendl_fd("Error", 2);
 }
