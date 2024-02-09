@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:29:53 by florian           #+#    #+#             */
-/*   Updated: 2024/02/09 09:55:19 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/02/09 10:52:16 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,7 @@ int	check_args(int ac, char **av)
 		{
 			if (!ft_isdigit(av[i][j]) && av[i][j] != ' ' && av[i][j] != '-'
 				&& av[i][j] != '+')
-			{
-				ft_putendl_fd("Error", 2);
-				return (0);
-			}
+				return (ft_putendl_fd("Error", 2), 0);
 			j++;
 		}
 		i++;
