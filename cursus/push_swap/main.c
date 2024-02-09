@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:12:08 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/01/31 18:11:30 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/02/09 09:36:36 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,11 @@ int	main(int ac, char **av)
 		ft_putendl_fd("Error", 2);
 	}
 	if (!check_args(ac, av))
-	{
 		return (0);
-	}
 	if (!check_duplicates(ac, av))
-	{
 		return (0);
-	}
 	if (!check_int_limits(ac, av))
-	{
 		return (0);
-	}
 	stack_a = malloc(sizeof(t_stack_node *));
 	stack_b = malloc(sizeof(t_stack_node *));
 	*stack_a = NULL;

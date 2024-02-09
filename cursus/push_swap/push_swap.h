@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:18:53 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/01/31 18:07:37 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/02/09 09:55:15 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,7 @@ int						init_stack(t_stack_node **stack, int ac, char **av);
 void					free_stack(t_stack_node **stack);
 void					free_tab(char **tab);
 int						is_stack_sorted(t_stack_node **head);
-// int						check_duplicates(char **args);
-// int						check_int_limits(char **args);
-int 					check_duplicates(int ac, char **av);
-int 					check_int_limits(int ac, char **av);
-long long int			ft_atoll(const char *str);
+int						check_duplicates(int ac, char **av);
+int						check_int_limits(int ac, char **av);
 
 #endif
