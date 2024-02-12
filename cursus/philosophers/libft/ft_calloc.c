@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosophers.h                                     :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/12 17:24:13 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/02/12 17:33:06 by ftilliet         ###   ########.fr       */
+/*   Created: 2023/11/06 11:21:48 by ftilliet          #+#    #+#             */
+/*   Updated: 2023/11/08 18:20:21 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILOSOPHERS_H
-# define PHILOSOPHERS_H
+#include "libft.h"
 
-# include "libft/libft.h"
-# include <stdlib.h>
-# include <pthread.h>
-# include <unistd.h>
+void	*ft_calloc(size_t nmemb, size_t size)
+{
+	void	*ptr;
 
-#endif
+	if ((nmemb * size < nmemb || size > nmemb * size) && size && nmemb)
+		return (NULL);
+	ptr = malloc(nmemb * size);
+	if (!ptr)
+		return (NULL);
+	ft_bzero(ptr, size * nmemb);
+	return (ptr);
+}

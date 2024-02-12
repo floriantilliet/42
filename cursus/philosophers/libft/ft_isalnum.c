@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosophers.h                                     :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/12 17:24:13 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/02/12 17:33:06 by ftilliet         ###   ########.fr       */
+/*   Created: 2023/11/06 11:21:50 by ftilliet          #+#    #+#             */
+/*   Updated: 2023/11/09 11:37:49 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILOSOPHERS_H
-# define PHILOSOPHERS_H
-
-# include "libft/libft.h"
-# include <stdlib.h>
-# include <pthread.h>
-# include <unistd.h>
-
-#endif
+int	ft_isalnum(int c)
+{
+	if (c < 48 || (c > 57 && c < 65) || (c > 90 && c < 97) || c > 122)
+	{
+		return (0);
+	}
+	return (1);
+}

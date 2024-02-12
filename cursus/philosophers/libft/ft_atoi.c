@@ -1,21 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosophers.h                                     :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/12 17:24:13 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/02/12 17:33:06 by ftilliet         ###   ########.fr       */
+/*   Created: 2023/11/06 11:20:16 by ftilliet          #+#    #+#             */
+/*   Updated: 2023/11/08 10:54:41 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILOSOPHERS_H
-# define PHILOSOPHERS_H
+int	ft_atoi(const char *str)
+{
+	int	signe;
+	int	result;
 
-# include "libft/libft.h"
-# include <stdlib.h>
-# include <pthread.h>
-# include <unistd.h>
-
-#endif
+	signe = 1;
+	result = 0;
+	while ((*str <= 13 && *str >= 9) || *str == ' ')
+		str++;
+	if (*str == '+' || *str == '-')
+	{
+		if (*str == '-')
+			signe *= -1;
+		str++;
+	}
+	while (*str >= '0' && *str <= '9')
+	{
+		result = result * 10 + *str - '0';
+		str++;
+	}
+	return (result * signe);
+}

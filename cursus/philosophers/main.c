@@ -6,13 +6,13 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:09:06 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/02/12 17:23:58 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/02/12 17:35:58 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int parsing(int ac, char **av)
+int check_args(int ac, char **av)
 {
 	int	i;
 	int	j;
@@ -35,9 +35,11 @@ int parsing(int ac, char **av)
 
 int	main(int ac, char **av)
 {
-    if (ac != 4 || ac != 5)
-        return (ft_error("Error\n"));
-	(void)ac;
-	(void)av;
+    if (ac != 5 && ac != 6)
+        return (ft_putendl_fd("Error", 2), 0);
+    if (!check_args(ac, av))
+    {
+        return (0);
+    }
 	return (0);
 }
