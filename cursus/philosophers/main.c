@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:09:06 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/02/12 17:56:29 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/02/21 10:35:39 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int check_args(int ac, char **av)
 		j = 1;
 		while (av[i][j])
 		{
-			if (!ft_isdigit(av[i][j]) || ft_atoi(av[i]) < 0)
+			if (!ft_isdigit(av[i][j]) || ft_atoi(av[i]) <= 0)
 				return (ft_putendl_fd("Error", 2), 0);
 			j++;
 		}
