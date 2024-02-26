@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:09:06 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/02/21 10:35:39 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/02/26 17:26:20 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,32 @@ int check_args(int ac, char **av)
 	return (1);
 }
 
-int	main(int ac, char **av)
+void init_mutexes(pthread_mutex_t *mutex, int nb)
 {
+	mutex = malloc(sizeof(pthread_mutex_t) * nb);
+	int	i;
+
+	i = 0;
+	while (i < nb)
+	{
+		pthread_mutex_init(&mutex[i], NULL);
+		i++;
+	}
+}
+
+int	main(int ac, char **av)
+{	
+	pthread_mutex_t	*mutex;
+	pthread_t		*philo;
+	
     if (ac != 5 && ac != 6)
         return (ft_putendl_fd("Error", 2), 0);
     if (!check_args(ac, av))
     {
         return (0);
     }
+	mutex = NULL;
+	init_mutexes(mutex, ft_atoi(av[1]));
+	
 	return (0);
 }
