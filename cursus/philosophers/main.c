@@ -45,6 +45,19 @@ void init_mutexes(pthread_mutex_t *mutex, int nb)
 	}
 }
 
+void *routine(void *arg)
+{   
+    struct s_data *data = (struct s_data *)arg;
+
+    pthread_mutex_lock(data->);
+	pthread_mutex_lock(data->);
+	eat();
+    pthread_mutex_unlock(data->);
+	pthread_mutex_unlock(data->);
+	sleep();
+	think();
+}
+
 int	main(int ac, char **av)
 {	
 	pthread_mutex_t	*mutex;
