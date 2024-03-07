@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 17:24:13 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/02/26 12:02:43 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/03/07 10:29:17 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,26 @@
 # define PHILOSOPHERS_H
 
 # include "libft/libft.h"
-# include <stdlib.h>
 # include <pthread.h>
+# include <stdlib.h>
 # include <unistd.h>
 
 typedef struct s_philo
 {
-    
-}            t_philo;
+	int				meals_eaten;
+	pthread_mutex_t	*r_fork;
+	pthread_mutex_t	*l_fork;
+}					t_philo;
 
 typedef struct s_data
 {
-   
-}            t_data;
+    int time_to_eat;
+    int time_to_sleep;
+    int time_to_think;
+    int time_to_die;
+    int t0;
+
+    t_philo *philos;
+}					t_data;
 
 #endif
