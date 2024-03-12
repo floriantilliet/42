@@ -5,7 +5,8 @@
         "time.h": "c",
         "chrono": "c",
         "variant": "c",
-        "limits.h": "c"
+        "limits.h": "c",
+        "philosophers.h": "c"
     },
     "editor.defaultFormatter": "keyhr.42-c-format"
 }
