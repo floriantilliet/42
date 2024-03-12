@@ -7,19 +7,16 @@ EXECUTABLE = philo
 all: $(EXECUTABLE)
 
 $(EXECUTABLE): $(OBJ)
-	make -C libft bonus
-	$(CC) $(CFLAGS) -o $@ $^ -Llibft -lft
+	$(CC) $(CFLAGS) -o $@ $^ 
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OBJ)
-	make -C libft clean
 
 fclean: clean
 	rm -f $(EXECUTABLE)
-	make -C libft fclean
 
 re: fclean all
 

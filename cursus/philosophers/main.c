@@ -6,11 +6,52 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:09:06 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/03/12 17:00:05 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/03/12 17:12:24 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
+int	ft_atoi(const char *str)
+{
+	int	signe;
+	int	result;
+
+	signe = 1;
+	result = 0;
+	while ((*str <= 13 && *str >= 9) || *str == ' ')
+		str++;
+	if (*str == '+' || *str == '-')
+	{
+		if (*str == '-')
+			signe *= -1;
+		str++;
+	}
+	while (*str >= '0' && *str <= '9')
+	{
+		result = result * 10 + *str - '0';
+		str++;
+	}
+	return (result * signe);
+}
+
+int	ft_isdigit(int c)
+{
+	return (c >= '0' && c <= '9');
+}
+
+void	ft_putendl_fd(char *str, int fd)
+{
+	if (fd != -1 && str != NULL)
+	{
+		while (*str != '\0')
+		{
+			write(fd, str, 1);
+			str++;
+		}
+		write(fd, "\n", 1);
+	}
+}
 
 size_t	get_current_time(void)
 {

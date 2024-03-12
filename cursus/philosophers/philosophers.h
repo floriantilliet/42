@@ -6,14 +6,13 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 17:24:13 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/03/12 16:24:11 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/03/12 17:09:31 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILOSOPHERS_H
 # define PHILOSOPHERS_H
 
-# include "libft/libft.h"
 # include <pthread.h>
 # include <stdio.h>
 # include <stdlib.h>
