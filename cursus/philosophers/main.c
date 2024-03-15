@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:09:06 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/03/12 17:12:24 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/03/15 17:08:22 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,13 +114,12 @@ void	init_mutexes(pthread_mutex_t **mutexes, int nb)
 	}
 }
 
-#include <stdlib.h> // Add missing include statement
-
 void	init_philos(t_philo **philos, t_data data, int nb)
 {
 	int	i;
 
 	*philos = malloc(sizeof(t_philo) * nb);
+	data.nb_of_philos = nb;
 	i = 0;
 	while (i < nb)
 	{
@@ -150,7 +149,7 @@ void	dream(t_philo *philo)
 void	think(t_philo *philo)
 {
 	print_state("is thinking", philo);
-	// ft_usleep(philo->data->time_to_think);
+	ft_usleep(philo->data->time_to_think);
 }
 
 void	*routine(void *arg)
@@ -160,10 +159,20 @@ void	*routine(void *arg)
 	philo = (t_philo *)arg;
 	while (!(philo->data->is_dead))
 	{
-		pthread_mutex_lock(philo->r_fork);
-		print_state("has taken a fork", philo);
-		pthread_mutex_lock(philo->l_fork);
-		print_state("has taken a fork", philo);
+		if (philo->id == philo->data->nb_of_philos)
+		{
+			pthread_mutex_lock(philo->l_fork);
+			print_state("has taken a fork", philo);
+			pthread_mutex_lock(philo->r_fork);
+			print_state("has taken a fork", philo);
+		}
+		else
+		{
+			pthread_mutex_lock(philo->r_fork);
+			print_state("has taken a fork", philo);
+			pthread_mutex_lock(philo->l_fork);
+			print_state("has taken a fork", philo);
+		}
 		eat(philo);
 		pthread_mutex_unlock(philo->l_fork);
 		pthread_mutex_unlock(philo->r_fork);
@@ -179,7 +188,7 @@ void	*monitor(void *arg)
 	int i = 0;
 
 	philos = (t_philo *)arg;
-	philos->data->t0 = get_current_time();
+	// philos->data->t0 = get_current_time();
 
 	while (1)
 	{
@@ -187,12 +196,13 @@ void	*monitor(void *arg)
 		i = 0;
 		while (i < philos->data->nb_of_philos)
 		{
-			// if (get_current_time() - (&philos)[i]->time_last_meal >= philos->data->time_to_die)
-			// {
-			// 	print_state("died", &philos[i]);
-			// 	philos->data->is_dead = 1;
-			// 	return (NULL);
-			// }
+			if (get_current_time() - philos[i].time_last_meal >= philos[i].data->time_to_die)
+			{
+				// printf("%lu", get_current_time() - (&philos)[i]->time_last_meal);
+				print_state("died", &philos[i]);
+				philos->data->is_dead = 1;
+				return (NULL);
+			}
 			i++;
 		}
 	}
@@ -203,6 +213,13 @@ void	thread_create(t_philo *philos, int nb)
 	int	i;
 	pthread_t observer = 0;
 
+	philos->data->t0 = get_current_time();
+	i = 0;
+	while(i < nb)
+	{
+		philos[i].time_last_meal = philos->data->t0;
+		i++;
+	}
 	pthread_create(&observer , NULL, &monitor, philos);
 	i = 0;
 	while (i < nb)
@@ -228,7 +245,7 @@ void	init_data(t_data *data, char **av, int ac)
 	(*data).time_to_eat = ft_atoi(av[3]);
 	(*data).time_to_sleep = ft_atoi(av[4]);
 	(*data).time_to_die = ft_atoi(av[2]);
-	// (*data).time_to_think = 
+	(*data).time_to_think = (*data).time_to_sleep/ 2;
 	(*data).nb_of_philos = ft_atoi(av[1]);
 }
 
