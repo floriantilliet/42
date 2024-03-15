@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:09:06 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/03/15 17:08:22 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/03/15 18:02:21 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,9 @@ void	*routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
+	
+	while(!(philo->data->ready))
+		;
 	while (!(philo->data->is_dead))
 	{
 		if (philo->id == philo->data->nb_of_philos)
@@ -212,6 +215,7 @@ void	thread_create(t_philo *philos, int nb)
 {
 	int	i;
 	pthread_t observer = 0;
+	philos->data->ready = 0;
 
 	philos->data->t0 = get_current_time();
 	i = 0;
@@ -227,6 +231,7 @@ void	thread_create(t_philo *philos, int nb)
 		pthread_create(&philos[i].thread, NULL, &routine, &philos[i]);
 		i++;
 	}
+	philos->data->ready = 1;
 	pthread_join(observer, NULL);
 	i = 0;
 	while (i < nb)
@@ -245,7 +250,8 @@ void	init_data(t_data *data, char **av, int ac)
 	(*data).time_to_eat = ft_atoi(av[3]);
 	(*data).time_to_sleep = ft_atoi(av[4]);
 	(*data).time_to_die = ft_atoi(av[2]);
-	(*data).time_to_think = (*data).time_to_sleep/ 2;
+	(*data).time_to_think = ((*data).time_to_eat * 2 - (*data).time_to_sleep) * 0.42;
+	(*data).is_dead = 0;
 	(*data).nb_of_philos = ft_atoi(av[1]);
 }
 

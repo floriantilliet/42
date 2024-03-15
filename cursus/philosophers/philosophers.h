@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 17:24:13 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/03/12 17:09:31 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/03/15 17:50:04 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct s_philo
 	pthread_mutex_t	*l_fork;
 	pthread_t		thread;
 	int				id;
-	size_t				time_last_meal;
+	size_t			time_last_meal;
 	struct s_data	*data;
 }					t_philo;
 
@@ -35,11 +35,12 @@ typedef struct s_data
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				time_to_think;
-	size_t				time_to_die;
-	size_t				t0;
+	size_t			time_to_die;
+	size_t			t0;
 	int				nb_of_philos;
 	int				nb_of_meals;
 	int				is_dead;
+	int				ready;
 	t_philo			*philos;
 	pthread_mutex_t	*mutexes;
 }					t_data;
