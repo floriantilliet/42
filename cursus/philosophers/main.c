@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:09:06 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/03/18 16:04:05 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/03/18 16:36:36 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,17 +107,20 @@ int	check_args(int ac, char **av)
 	return (1);
 }
 
-void	init_mutexes(pthread_mutex_t **mutexes, int nb)
+void	init_mutexes(t_data *data, int nb)
 {
 	int	i;
 
-	*mutexes = malloc(sizeof(pthread_mutex_t) * nb);
+	data->mutexes = malloc(sizeof(pthread_mutex_t) * nb);
 	i = 0;
 	while (i < nb)
 	{
-		pthread_mutex_init(&(*mutexes)[i], NULL);
+		pthread_mutex_init(&(data->mutexes)[i], NULL);
 		i++;
 	}
+	pthread_mutex_init(&data->print, NULL);
+	pthread_mutex_init(&data->time, NULL);
+	pthread_mutex_init(&data->death, NULL);
 }
 
 void	init_philos(t_philo **philos, t_data data, int nb)
@@ -142,10 +145,9 @@ void	eat(t_philo *philo)
 {
 	print_state("is eating", philo);
 	ft_usleep(philo->data->time_to_eat);
-	if(philo->meals_to_eat > 0)
+	if (philo->meals_to_eat > 0)
 	{
 		philo->meals_to_eat--;
-		// printf("%d has %d meals to eat left \n", philo->id, philo->meals_to_eat);
 	}
 	pthread_mutex_lock(&philo->data->time);
 	philo->time_last_meal = get_current_time();
@@ -201,7 +203,7 @@ void	*monitor(void *arg)
 	t_philo	*philos;
 	int		i;
 	size_t	time;
-	int count;
+	int		count;
 
 	i = 0;
 	philos = (t_philo *)arg;
@@ -226,14 +228,14 @@ void	*monitor(void *arg)
 		}
 		i = 0;
 		count = 0;
-		while(i < philos->data->nb_of_philos)
+		while (i < philos->data->nb_of_philos)
 		{
 			if (philos[i].meals_to_eat == 0)
 			{
 				count++;
 				// printf("%d\n", count);
 			}
-			if(count == philos[i].data->nb_of_philos)
+			if (count == philos[i].data->nb_of_philos)
 			{
 				pthread_mutex_lock(&philos->data->death);
 				philos->data->is_dead = 1;
@@ -306,10 +308,7 @@ int	main(int ac, char **av)
 		return (0);
 	}
 	init_data(&data, av, ac);
-	init_mutexes(&data.mutexes, ft_atoi(av[1]));
-	pthread_mutex_init(&data.print, NULL);
-	pthread_mutex_init(&data.time, NULL);
-	pthread_mutex_init(&data.death, NULL);
+	init_mutexes(&data, ft_atoi(av[1]));
 	init_philos(&philos, data, ft_atoi(av[1]));
 	thread_create(philos, ft_atoi(av[1]));
 	return (0);
