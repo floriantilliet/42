@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:42:31 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/03/18 19:09:41 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/03/18 19:13:23 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	init_mutexes(t_data *data, int nb)
 	pthread_mutex_init(&data->print, NULL);
 	pthread_mutex_init(&data->time, NULL);
 	pthread_mutex_init(&data->death, NULL);
-    pthread_mutex_init(&data->readiness, NULL);
+	pthread_mutex_init(&data->readiness, NULL);
 }
 
 void	init_philos(t_philo **philos, t_data *data, int nb)

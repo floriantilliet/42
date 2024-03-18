@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 17:24:13 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/03/18 19:09:08 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/03/18 19:13:14 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef struct s_data
 	pthread_mutex_t	time;
 	pthread_mutex_t	print;
 	pthread_mutex_t	death;
-	pthread_mutex_t readiness;
+	pthread_mutex_t	readiness;
 }					t_data;
 
 void				eat(t_philo *philo);
