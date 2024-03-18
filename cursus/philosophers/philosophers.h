@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 17:24:13 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/03/15 17:50:04 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/03/18 15:42:06 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 typedef struct s_philo
 {
-	int				meals_eaten;
+	int				meals_to_eat;
 	pthread_mutex_t	*r_fork;
 	pthread_mutex_t	*l_fork;
 	pthread_t		thread;
@@ -43,6 +43,9 @@ typedef struct s_data
 	int				ready;
 	t_philo			*philos;
 	pthread_mutex_t	*mutexes;
+	pthread_mutex_t time;
+	pthread_mutex_t print;
+	pthread_mutex_t death;
 }					t_data;
 
 #endif
