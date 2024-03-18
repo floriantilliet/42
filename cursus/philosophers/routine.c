@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   routine.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/18 17:42:24 by ftilliet          #+#    #+#             */
+/*   Updated: 2024/03/18 17:46:24 by ftilliet         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philosophers.h"
 
 void	eat(t_philo *philo)
@@ -25,6 +37,15 @@ void	think(t_philo *philo)
 	ft_usleep(philo->data->time_to_think);
 }
 
+void	philo_actions(t_philo *philo)
+{
+	eat(philo);
+	pthread_mutex_unlock(philo->l_fork);
+	pthread_mutex_unlock(philo->r_fork);
+	dream(philo);
+	think(philo);
+}
+
 void	*routine(void *arg)
 {
 	t_philo	*philo;
@@ -48,11 +69,7 @@ void	*routine(void *arg)
 			pthread_mutex_lock(philo->l_fork);
 			print_state("has taken a fork", philo);
 		}
-		eat(philo);
-		pthread_mutex_unlock(philo->l_fork);
-		pthread_mutex_unlock(philo->r_fork);
-		dream(philo);
-		think(philo);
+		philo_actions(philo);
 	}
 	return (arg);
 }
