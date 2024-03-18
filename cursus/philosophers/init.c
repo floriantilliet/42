@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:42:31 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/03/18 17:42:32 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/03/18 18:56:24 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,20 +45,21 @@ void	init_mutexes(t_data *data, int nb)
 	pthread_mutex_init(&data->death, NULL);
 }
 
-void	init_philos(t_philo **philos, t_data data, int nb)
+void	init_philos(t_philo **philos, t_data *data, int nb)
 {
 	int	i;
 
 	*philos = malloc(sizeof(t_philo) * nb);
-	data.nb_of_philos = nb;
+	data->nb_of_philos = nb;
 	i = 0;
 	while (i < nb)
 	{
-		(*philos)[i].meals_to_eat = data.nb_of_meals;
-		(*philos)[i].r_fork = &data.mutexes[i];
-		(*philos)[i].l_fork = &data.mutexes[(i + 1) % nb];
-		(*philos)[i].data = &data;
+		(*philos)[i].meals_to_eat = data->nb_of_meals;
+		(*philos)[i].r_fork = &data->mutexes[i];
+		(*philos)[i].l_fork = &data->mutexes[(i + 1) % nb];
+		(*philos)[i].data = data;
 		(*philos)[i].id = i + 1;
+        (*philos)[i].time_last_meal = 0;
 		i++;
 	}
 }

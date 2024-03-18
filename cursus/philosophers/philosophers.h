@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 17:24:13 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/03/18 18:02:53 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/03/18 18:55:24 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,12 @@ typedef struct s_data
 void				eat(t_philo *philo);
 void				dream(t_philo *philo);
 void				think(t_philo *philo);
+void				philo_actions(t_philo *philo);
 void				*routine(void *arg);
 
 void				init_data(t_data *data, char **av, int ac);
 void				init_mutexes(t_data *data, int nb);
-void				init_philos(t_philo **philos, t_data data, int nb);
+void				init_philos(t_philo **philos, t_data *data, int nb);
 
 size_t				get_current_time(void);
 int					ft_usleep(size_t milliseconds);
@@ -70,6 +71,8 @@ int					death_checker(t_philo *philos);
 int					meal_checker(t_philo *philos);
 void				*monitor(void *arg);
 
+void				destroy_mutexes(t_data *data, int nb);
+void				free_all(t_data *data);
 void				thread_create(t_philo *philos, int nb);
 
 #endif

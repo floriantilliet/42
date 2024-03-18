@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:09:06 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/03/18 17:42:50 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/03/18 18:55:45 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	main(int ac, char **av)
 	}
 	init_data(&data, av, ac);
 	init_mutexes(&data, ft_atoi(av[1]));
-	init_philos(&philos, data, ft_atoi(av[1]));
+	init_philos(&philos, &data, ft_atoi(av[1]));
 	thread_create(philos, ft_atoi(av[1]));
 	return (0);
 }
