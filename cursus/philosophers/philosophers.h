@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 17:24:13 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/03/18 15:42:06 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/03/18 17:33:22 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,31 @@ typedef struct s_data
 	int				ready;
 	t_philo			*philos;
 	pthread_mutex_t	*mutexes;
-	pthread_mutex_t time;
-	pthread_mutex_t print;
-	pthread_mutex_t death;
+	pthread_mutex_t	time;
+	pthread_mutex_t	print;
+	pthread_mutex_t	death;
 }					t_data;
+
+void				eat(t_philo *philo);
+void				dream(t_philo *philo);
+void				think(t_philo *philo);
+void				*routine(void *arg);
+
+void				init_data(t_data *data, char **av, int ac);
+void				init_mutexes(t_data *data, int nb);
+void				init_philos(t_philo **philos, t_data data, int nb);
+
+size_t				get_current_time(void);
+int					ft_usleep(size_t milliseconds);
+
+int					ft_atoi(const char *str);
+int					ft_isdigit(int c);
+void				ft_putendl_fd(char *str, int fd);
+void				print_state(char *str, t_philo *philo);
+int					check_args(int ac, char **av);
+
+void				*monitor(void *arg);
+
+void				thread_create(t_philo *philos, int nb);
 
 #endif
