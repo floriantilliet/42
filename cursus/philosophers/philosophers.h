@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 17:24:13 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/03/18 17:42:54 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/03/18 18:02:53 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ void				ft_putendl_fd(char *str, int fd);
 void				print_state(char *str, t_philo *philo);
 int					check_args(int ac, char **av);
 
+int					death_checker(t_philo *philos);
+int					meal_checker(t_philo *philos);
 void				*monitor(void *arg);
 
 void				thread_create(t_philo *philos, int nb);
