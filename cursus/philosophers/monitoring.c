@@ -6,57 +6,69 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:42:43 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/03/18 17:42:44 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/03/18 17:58:34 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
+int	death_checker(t_philo *philos)
+{
+	int		i;
+	size_t	time;
+
+	i = 0;
+	while (i < philos->data->nb_of_philos)
+	{
+		pthread_mutex_lock(&philos->data->time);
+		time = get_current_time() - philos[i].time_last_meal;
+		pthread_mutex_unlock(&philos->data->time);
+		if (time >= philos[i].data->time_to_die)
+		{
+			pthread_mutex_lock(&philos->data->death);
+			print_state("died", &philos[i]);
+			philos->data->is_dead = 1;
+			pthread_mutex_unlock(&philos->data->death);
+			return (1);
+		}
+		i++;
+	}
+	return (0);
+}
+
+int	meal_checker(t_philo *philos)
+{
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (i < philos->data->nb_of_philos)
+	{
+		if (philos[i].meals_to_eat == 0)
+			count++;
+		if (count == philos[i].data->nb_of_philos)
+		{
+			pthread_mutex_lock(&philos->data->death);
+			philos->data->is_dead = 1;
+			pthread_mutex_unlock(&philos->data->death);
+			return (1);
+		}
+		i++;
+	}
+	return (0);
+}
+
 void	*monitor(void *arg)
 {
 	t_philo	*philos;
-	int		i;
-	size_t	time;
-	int		count;
 
-	i = 0;
 	philos = (t_philo *)arg;
-	// philos->data->t0 = get_current_time();
 	while (1)
 	{
-		i = 0;
-		while (i < philos->data->nb_of_philos)
-		{
-			pthread_mutex_lock(&philos->data->time);
-			time = get_current_time() - philos[i].time_last_meal;
-			pthread_mutex_unlock(&philos->data->time);
-			if (time >= philos[i].data->time_to_die)
-			{
-				pthread_mutex_lock(&philos->data->death);
-				print_state("died", &philos[i]);
-				philos->data->is_dead = 1;
-				pthread_mutex_unlock(&philos->data->death);
-				return (NULL);
-			}
-			i++;
-		}
-		i = 0;
-		count = 0;
-		while (i < philos->data->nb_of_philos)
-		{
-			if (philos[i].meals_to_eat == 0)
-			{
-				count++;
-				// printf("%d\n", count);
-			}
-			if (count == philos[i].data->nb_of_philos)
-			{
-				pthread_mutex_lock(&philos->data->death);
-				philos->data->is_dead = 1;
-				pthread_mutex_unlock(&philos->data->death);
-				return (NULL);
-			}
-			i++;
-		}
+		if (death_checker(philos))
+			return (NULL);
+		if (meal_checker(philos))
+			return (NULL);
 	}
 }
