@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 17:24:13 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/03/18 19:15:41 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/03/18 19:42:02 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ void				philo_actions(t_philo *philo);
 void				*routine(void *arg);
 
 void				init_data(t_data *data, char **av, int ac);
-void				init_mutexes(t_data *data, int nb);
-void				init_philos(t_philo **philos, t_data *data, int nb);
+int					init_mutexes(t_data *data, int nb);
+int					init_philos(t_philo **philos, t_data *data, int nb);
 
 size_t				get_current_time(void);
 int					ft_usleep(size_t milliseconds);
