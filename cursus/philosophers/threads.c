@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:42:46 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/03/18 19:13:03 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/03/18 20:12:10 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,15 @@ void	join_threads(t_philo *philos, pthread_t observer, int nb)
 	}
 }
 
+void	single_philo(t_philo *philo)
+{
+	ft_usleep(philo->data->time_to_die);
+	pthread_mutex_lock(&philo->data->death);
+	print_state("died", philo);
+	philo->data->is_dead = 1;
+	pthread_mutex_unlock(&philo->data->death);
+}
+
 void	thread_create(t_philo *philos, int nb)
 {
 	pthread_t	observer;
@@ -73,10 +82,15 @@ void	thread_create(t_philo *philos, int nb)
 	pthread_mutex_lock(&philos->data->time);
 	philos->data->t0 = get_current_time();
 	pthread_mutex_unlock(&philos->data->time);
-	create_threads(philos, observer, nb);
-	pthread_mutex_lock(&philos->data->readiness);
-	philos->data->ready = 1;
-	pthread_mutex_unlock(&philos->data->readiness);
+	if (nb == 1)
+		single_philo(philos);
+	else
+	{
+		create_threads(philos, observer, nb);
+		pthread_mutex_lock(&philos->data->readiness);
+		philos->data->ready = 1;
+		pthread_mutex_unlock(&philos->data->readiness);
+	}
 	join_threads(philos, observer, nb);
 	destroy_mutexes(philos->data, nb);
 	free(philos);
