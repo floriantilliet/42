@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:42:31 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/03/19 12:15:06 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/03/19 13:57:14 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	init_data(t_data *data, char **av, int ac)
 	(*data).is_dead = 0;
 	(*data).nb_of_philos = ft_atoi(av[1]);
 	if (ft_atoi(av[1]) % 2 != 0)
-		(*data).time_to_think = ((*data).time_to_eat * 2 - (*data).time_to_sleep)
-		* 0.42;
+		(*data).time_to_think = ((*data).time_to_eat * 2
+				- (*data).time_to_sleep) * 0.42;
 	else
 		(*data).time_to_think = 0;
 }
