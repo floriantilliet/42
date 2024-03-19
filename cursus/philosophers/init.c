@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:42:31 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/03/19 13:57:14 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/03/19 14:38:57 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	init_data(t_data *data, char **av, int ac)
 		(*data).time_to_think = ((*data).time_to_eat * 2
 				- (*data).time_to_sleep) * 0.42;
 	else
-		(*data).time_to_think = 0;
+		(*data).time_to_think = 2 * ft_atoi(av[1]) / 10;
 }
 
 int	init_mutexes(t_data *data, int nb)

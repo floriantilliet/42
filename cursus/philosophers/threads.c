@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:42:46 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/03/18 20:12:29 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/03/19 15:40:30 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	destroy_mutexes(t_data *data, int nb)
 	free(data->mutexes);
 }
 
-void	create_threads(t_philo *philos, pthread_t observer, int nb)
+void	create_threads(t_philo *philos, int nb)
 {
 	int	i;
 
@@ -39,7 +39,6 @@ void	create_threads(t_philo *philos, pthread_t observer, int nb)
 		philos[i].time_last_meal = philos->data->t0;
 		i++;
 	}
-	pthread_create(&observer, NULL, &monitor, philos);
 	i = 0;
 	while (i < nb)
 	{
@@ -52,7 +51,6 @@ void	join_threads(t_philo *philos, pthread_t observer, int nb)
 {
 	int	i;
 
-	i = 0;
 	pthread_join(observer, NULL);
 	i = 0;
 	while (i < nb)
@@ -86,7 +84,8 @@ void	thread_create(t_philo *philos, int nb)
 		single_philo(philos);
 	else
 	{
-		create_threads(philos, observer, nb);
+		pthread_create(&observer, NULL, &monitor, philos);
+		create_threads(philos, nb);
 		pthread_mutex_lock(&philos->data->readiness);
 		philos->data->ready = 1;
 		pthread_mutex_unlock(&philos->data->readiness);

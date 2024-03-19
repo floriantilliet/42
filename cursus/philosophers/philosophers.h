@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 17:24:13 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/03/18 20:12:52 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/03/19 15:40:29 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int					meal_checker(t_philo *philos);
 void				*monitor(void *arg);
 
 void				destroy_mutexes(t_data *data, int nb);
-void				create_threads(t_philo *philos, pthread_t observer, int nb);
+void				create_threads(t_philo *philos, int nb);
 void				join_threads(t_philo *philos, pthread_t observer, int nb);
 void				single_philo(t_philo *philo);
 void				thread_create(t_philo *philos, int nb);
