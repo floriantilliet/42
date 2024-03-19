@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:42:24 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/03/19 18:18:18 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/03/19 18:23:24 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ void	eat(t_philo *philo)
 void	dream(t_philo *philo)
 {
 	print_state("is sleeping", philo);
-	ft_usleep(philo->data->time_to_sleep);
+	// ft_smartusleep(philo->data->time_to_sleep, philo->data);
 }
 
 void	think(t_philo *philo)
 {
 	print_state("is thinking", philo);
-	ft_usleep(philo->data->time_to_think);
+	ft_smartusleep(philo->data->time_to_think, philo->data);
 }
 
 void	philo_actions(t_philo *philo)

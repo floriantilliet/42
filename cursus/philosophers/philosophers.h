@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 17:24:13 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/03/19 15:40:29 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/03/19 18:22:21 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int					init_philos(t_philo **philos, t_data *data, int nb);
 
 size_t				get_current_time(void);
 int					ft_usleep(size_t milliseconds);
+int					ft_smartusleep(size_t milliseconds, t_data *data);
 
 int					ft_atoi(const char *str);
 int					ft_isdigit(int c);
