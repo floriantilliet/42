@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:42:46 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/03/19 17:01:49 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/03/19 18:01:22 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,13 @@ void	create_threads(t_philo *philos, int nb)
 	int	i;
 
 	i = 0;
+	pthread_mutex_lock(&philos->data->time);
 	while (i < nb)
 	{
 		philos[i].time_last_meal = philos->data->t0;
 		i++;
 	}
+	pthread_mutex_unlock(&philos->data->time);
 	i = 0;
 	while (i < nb)
 	{
