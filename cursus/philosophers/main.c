@@ -21,9 +21,7 @@ int	main(int ac, char **av)
 	if (ac != 5 && ac != 6)
 		return (ft_putendl_fd("Error", 2), 0);
 	if (!check_args(ac, av))
-	{
 		return (0);
-	}
 	init_data(&data, av, ac);
 	if (!init_mutexes(&data, ft_atoi(av[1])))
 		return (ft_putendl_fd("Error", 2), 0);
