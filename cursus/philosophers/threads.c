@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:42:46 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/03/21 09:30:29 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/03/21 12:00:25 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,8 @@ void	thread_create(t_philo *philos, int nb)
 		pthread_mutex_lock(&philos->data->readiness);
 		philos->data->ready = 1;
 		pthread_mutex_unlock(&philos->data->readiness);
+		join_threads(philos, observer, nb);
 	}
-	join_threads(philos, observer, nb);
 	destroy_mutexes(philos->data, nb);
 	free(philos);
 }
