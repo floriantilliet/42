@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:49:37 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/03/19 18:21:57 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/03/21 09:36:57 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	ft_smartusleep(size_t milliseconds, t_data *data)
 	while ((get_current_time() - start) < milliseconds)
 	{
 		if (data->is_dead)
-			break;
+			break ;
 		usleep(500);
 	}
 	return (0);
