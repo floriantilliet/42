@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:42:46 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/03/19 18:01:22 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/03/21 09:30:29 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	join_threads(t_philo *philos, pthread_t observer, int nb)
 
 void	single_philo(t_philo *philo)
 {
-	ft_usleep(philo->data->time_to_die);
+	ft_smartusleep(philo->data->time_to_die, philo->data);
 	pthread_mutex_lock(&philo->data->death);
 	print_state("died", philo);
 	philo->data->is_dead = 1;
