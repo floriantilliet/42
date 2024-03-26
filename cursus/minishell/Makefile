@@ -7,7 +7,8 @@ EXECUTABLE = minishell
 all: $(EXECUTABLE)
 
 $(EXECUTABLE): $(OBJ)
-	$(CC) $(CFLAGS) -o $@ $^ -lreadline
+	make -C libft bonus
+	$(CC) $(CFLAGS) -o $@ $^ -lreadline -Llibft -lft
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
