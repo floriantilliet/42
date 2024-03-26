@@ -7,7 +7,8 @@
         "variant": "c",
         "limits.h": "c",
         "philosophers.h": "c",
-        "unistd.h": "c"
+        "unistd.h": "c",
+        "minishell.h": "c"
     },
     "editor.defaultFormatter": "keyhr.42-c-format"
 }

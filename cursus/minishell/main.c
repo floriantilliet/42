@@ -1,23 +1,34 @@
 #include "minishell.h"
 
-char **store_env(char **envp)
+t_env **store_env(char **envp)
 {
-    char **env;
+    t_env **env;
     int i;
-    int len;
 
-    len = 0;
-    while(envp[len])
-        len++;
-    env = (char **)malloc(sizeof(char *) * (len + 1));
     i = 0;
-    while(i < len)
-    {
-        env[i] = ft_strdup(envp[i]);
+    while(envp[i])
         i++;
+    env = malloc(sizeof(t_env *) * (i + 1));
+    if (!env)
+        return (NULL);
+    while(envp[i])
+    {
+        ft_envadd_back(env, ft_envnew(envp[i]));
+        printf("%s\n", env->value);
     }
-    env[i] = NULL;
     return (env);
+}
+
+void printenv(t_env **env)
+{
+    t_env *current;
+
+    current = *env;
+    while(current)
+    {
+        printf("%s\n", current->value);
+        current = current->next;
+    }
 }
 
 int	main(int ac, char **av, char **envp)
@@ -33,6 +44,12 @@ int	main(int ac, char **av, char **envp)
         printf("%s\n", *envp);
         envp++;
     }
+
+    printf("\n\n");
+    t_env **env = NULL;
+    env = store_env(envp);
+    printenv(env);
+
 
 	while (1)
 	{
