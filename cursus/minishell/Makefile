@@ -14,9 +14,11 @@ $(EXECUTABLE): $(OBJ)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
+	make -C libft clean
 	rm -f $(OBJ)
 
 fclean: clean
+	make -C libft fclean
 	rm -f $(EXECUTABLE)
 
 re: fclean all
