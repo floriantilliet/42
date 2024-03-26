@@ -59,15 +59,13 @@ int	main(int ac, char **av, char **envp)
 
 	(void)av;
 	(void)ac;
-    
-    char **temp = envp;
-    while(*temp)
-    {
-        printf("%s\n", *temp);
-        temp++;
-    }
 
-    printf("\n");
+
+    if(!*envp)
+    {
+        printf("No environment variables found\n");
+        return (1);
+    }
     
     t_env **env = NULL;
     env = store_env(envp);
@@ -81,6 +79,16 @@ int	main(int ac, char **av, char **envp)
 		if (line)
 		{
 			add_history(line);
+            if (ft_strncmp(line, "exit", 4) == 0)
+            {
+                free(line);
+                break;
+            }
+            else if (ft_strncmp(line, "env", 3) == 0)
+            {
+                printenv(env);
+            }
+            else
 			printf("%s\n", line);
 		}
 		free(line);
