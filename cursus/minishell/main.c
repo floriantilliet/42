@@ -69,7 +69,6 @@ int	main(int ac, char **av, char **envp)
     
     t_env **env = NULL;
     env = store_env(envp);
-    printenv(env);
 
 	while (1)
 	{
