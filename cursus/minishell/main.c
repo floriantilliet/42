@@ -34,7 +34,6 @@ t_env **store_env(char **envp)
             }
             current->next = new_node;
         }
-        
         envp++;
     }
     return (env);
@@ -52,6 +51,71 @@ void printenv(t_env **env)
     }
 }
 
+void free_env(t_env **env)
+{
+    t_env *current;
+    t_env *next;
+
+    current = *env;
+    while(current)
+    {
+        next = current->next;
+        free(current->key);
+        free(current->value);
+        free(current);
+        current = next;
+    }
+    free(env);
+}
+
+char *get_env_value(char *key, t_env **env)
+{
+    t_env *current;
+
+    current = *env;
+    while(current)
+    {
+        if (ft_strncmp(current->key, key, ft_strlen(key)) == 0)
+            return (current->value);
+        current = current->next;
+    }
+    return (NULL);
+}
+
+char* expander(char *line, t_env **env)
+{
+    char *res;
+    int i;
+    int j;
+
+    res = ft_strdup("");
+    i = 0;
+    printf("%s\n", line);
+    while (line[i])
+    {
+        if(line[i] == '$')
+        {
+            i++;
+            j = 0;
+            while (line[i+j] != ' ')
+                j++;
+            res = ft_strjoin(res, get_env_value(ft_substr(line, i, j), env));
+            i += j;
+        }
+        else
+        {
+            res = ft_strjoin(res, ft_substr(line, i, 1));
+            i++;
+        }
+    }
+    return(res);
+}
+
+void lexer(char *line, t_env **env)
+{
+    expander(line, env);
+}
+
 int	main(int ac, char **av, char **envp)
 {
 	char *line;
@@ -60,8 +124,7 @@ int	main(int ac, char **av, char **envp)
 	(void)av;
 	(void)ac;
 
-
-    if(!*envp)
+    if(!*envp || !envp)
     {
         printf("No environment variables found\n");
         return (1);
@@ -88,10 +151,10 @@ int	main(int ac, char **av, char **envp)
                 printenv(env);
             }
             else
-			printf("%s\n", line);
+			printf("%s\n", expander(line,env));
 		}
 		free(line);
 	}
-
+    free_env(env);
 	return (0);
 }
