@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 05:41:13 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/03/27 05:41:54 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/03/27 05:43:49 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ int	main(int ac, char **av, char **envp)
 	(void)av;
 	(void)ac;
 
-    if(!*envp || !envp)
-    {
-        printf("No environment variables found\n");
-        return (1);
-    }
-    
-    t_env **env = NULL;
-    env = store_env(envp);
+	if (!*envp || !envp)
+	{
+		printf("No environment variables found\n");
+		return (1);
+	}
+
+	t_env **env = NULL;
+	env = store_env(envp);
 
 	while (1)
 	{
@@ -37,20 +37,20 @@ int	main(int ac, char **av, char **envp)
 		if (line)
 		{
 			add_history(line);
-            if (ft_strncmp(line, "exit", 4) == 0)
-            {
-                free(line);
-                break;
-            }
-            else if (ft_strncmp(line, "env", 3) == 0)
-            {
-                printenv(env);
-            }
-            else
-			printf("%s\n", expander(line,env));
+			if (ft_strncmp(line, "exit", 4) == 0)
+			{
+				free(line);
+				break ;
+			}
+			else if (ft_strncmp(line, "env", 3) == 0)
+			{
+				printenv(env);
+			}
+			else
+				printf("%s\n", expander(line, env));
 		}
 		free(line);
 	}
-    free_env(env);
+	free_env(env);
 	return (0);
 }
