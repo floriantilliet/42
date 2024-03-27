@@ -73,13 +73,17 @@ char *get_env_value(char *key, t_env **env)
     t_env *current;
 
     current = *env;
+    if (ft_strlen(key) == 0)
+        return ("");
     while(current)
     {
-        if (ft_strncmp(current->key, key, ft_strlen(key)) == 0)
+        if (ft_strncmp(current->key, key, ft_strlen(key)) == 0 && current->key[ft_strlen(key)] == '\0')
+        {
             return (current->value);
+        }
         current = current->next;
     }
-    return (NULL);
+    return ("");
 }
 
 char* expander(char *line, t_env **env)
@@ -87,20 +91,33 @@ char* expander(char *line, t_env **env)
     char *res;
     int i;
     int j;
+    int expand;
 
     res = ft_strdup("");
     i = 0;
-    printf("%s\n", line);
+    expand = 1;
     while (line[i])
     {
-        if(line[i] == '$')
+        if (line[i] == '\'')
+        {
+            if (expand == 1)
+                expand = 0;
+            else
+                expand = 1;
+        }
+        if(line[i] == '$' && expand == 1)
         {
             i++;
             j = 0;
-            while (line[i+j] != ' ')
+            while (line[i+j] != ' ' && line[i+j] != '\0' && line[i+j] != '$' && line[i+j] != '"')
                 j++;
-            res = ft_strjoin(res, get_env_value(ft_substr(line, i, j), env));
-            i += j;
+            if (j == 0)
+                res = ft_strjoin(res, "$");
+            else
+            {
+                res = ft_strjoin(res, get_env_value(ft_substr(line, i, j), env));
+                i += j;
+            }
         }
         else
         {
