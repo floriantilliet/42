@@ -1,156 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/27 05:41:13 by ftilliet          #+#    #+#             */
+/*   Updated: 2024/03/27 05:41:54 by ftilliet         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
-
-t_env **store_env(char **envp)
-{
-    t_env **env;
-    t_env *current;
-    t_env *new_node;
-    int i;
-
-    i = 0;
-    env = (t_env **)malloc(sizeof(t_env *));
-    *env = NULL;
-    while(*envp)
-    {
-        current = *env;
-        new_node = (t_env *)malloc(sizeof(t_env));
-        char *equals_sign = strchr(*envp, '=');
-        size_t length = equals_sign - *envp;
-        new_node->key = malloc(length + 1);
-        strncpy(new_node->key, *envp, length);
-        new_node->key[length] = '\0';
-        new_node->value = ft_strdup(ft_strchr(*envp, '=') + 1);
-        new_node->next = NULL;
-        
-        if (current == NULL)
-        {
-            *env = new_node;
-        }
-        else
-        {
-            while (current->next != NULL)
-            {
-                current = current->next;
-            }
-            current->next = new_node;
-        }
-        envp++;
-    }
-    return (env);
-}
-
-void printenv(t_env **env)
-{
-    t_env *current;
-
-    current = *env;
-    while(current)
-    {
-        printf("%s=%s\n", current->key, current->value);
-        current = current->next;
-    }
-}
-
-void free_env(t_env **env)
-{
-    t_env *current;
-    t_env *next;
-
-    current = *env;
-    while(current)
-    {
-        next = current->next;
-        free(current->key);
-        free(current->value);
-        free(current);
-        current = next;
-    }
-    free(env);
-}
-
-char *get_env_value(char *key, t_env **env)
-{
-    t_env *current;
-
-    current = *env;
-    if (ft_strlen(key) == 0)
-        return ("");
-    while(current)
-    {
-        if (ft_strncmp(current->key, key, ft_strlen(key)) == 0 && current->key[ft_strlen(key)] == '\0')
-        {
-            return (current->value);
-        }
-        current = current->next;
-    }
-    return ("");
-}
-
-char* expander(char *line, t_env **env)
-{
-    char *res;
-    int i;
-    int j;
-    char current_quote;
-    int expand = 1;
-
-    res = ft_strdup("");
-    i = 0;
-    current_quote = '\0';
-    while (line[i])
-    {
-        if(line[i] == '\'' || line[i] == '"')
-        {
-            if (current_quote == '\0')
-            {
-                current_quote = line[i];
-                expand = (line[i] == '"');
-                i++;
-            }
-            else if (current_quote == line[i])
-            {
-                current_quote = '\0';
-                expand = 1;
-                i++;
-            }
-            else
-            {
-                res = ft_strjoin(res, ft_substr(line, i, 1));
-                i++;
-            }
-        }
-        else
-        {
-            if(line[i] == '$' && expand)
-            {
-                i++;
-                j = 0;
-                while (line[i+j] != ' ' && line[i+j] != '\0' && line[i+j] != '$' && line[i+j] != '\'' && line[i+j] != '"')
-                    j++;
-                if (j == 0)
-                    res = ft_strjoin(res, "$");
-                else
-                {
-                    res = ft_strjoin(res, get_env_value(ft_substr(line, i, j), env));
-                    i += j;
-                }
-            }
-            if (line[i] != current_quote)
-            {
-                res = ft_strjoin(res, ft_substr(line, i, 1));
-            }
-            i++;
-        }
-    }
-    if(current_quote != '\0')
-        return("Error: unclosed quote");
-    return(res);
-}
-
-void lexer(char *line, t_env **env)
-{
-    expander(line, env);
-}
 
 int	main(int ac, char **av, char **envp)
 {
