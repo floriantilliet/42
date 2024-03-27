@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 05:41:13 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/03/27 05:43:49 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/03/27 05:44:30 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,19 @@
 
 int	main(int ac, char **av, char **envp)
 {
-	char *line;
-	size_t len;
+	char	*line;
+	size_t	len;
+	t_env	**env;
 
 	(void)av;
 	(void)ac;
-
 	if (!*envp || !envp)
 	{
 		printf("No environment variables found\n");
 		return (1);
 	}
-
-	t_env **env = NULL;
+	env = NULL;
 	env = store_env(envp);
-
 	while (1)
 	{
 		len = 0;

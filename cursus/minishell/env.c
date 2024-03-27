@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 05:41:11 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/03/27 05:43:56 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/03/27 05:44:36 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	free_env(t_env **env)
 
 char	*get_env_value(char *key, t_env **env)
 {
-	t_env *current;
+	t_env	*current;
 
 	current = *env;
 	if (ft_strlen(key) == 0)
