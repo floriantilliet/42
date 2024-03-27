@@ -91,40 +91,59 @@ char* expander(char *line, t_env **env)
     char *res;
     int i;
     int j;
-    int expand;
+    char current_quote;
+    int expand = 1;
 
     res = ft_strdup("");
     i = 0;
-    expand = 1;
+    current_quote = '\0';
     while (line[i])
     {
-        if (line[i] == '\'')
+        if(line[i] == '\'' || line[i] == '"')
         {
-            if (expand == 1)
-                expand = 0;
-            else
+            if (current_quote == '\0')
+            {
+                current_quote = line[i];
+                expand = (line[i] == '"');
+                i++;
+            }
+            else if (current_quote == line[i])
+            {
+                current_quote = '\0';
                 expand = 1;
-        }
-        if(line[i] == '$' && expand == 1)
-        {
-            i++;
-            j = 0;
-            while (line[i+j] != ' ' && line[i+j] != '\0' && line[i+j] != '$' && line[i+j] != '"')
-                j++;
-            if (j == 0)
-                res = ft_strjoin(res, "$");
+                i++;
+            }
             else
             {
-                res = ft_strjoin(res, get_env_value(ft_substr(line, i, j), env));
-                i += j;
+                res = ft_strjoin(res, ft_substr(line, i, 1));
+                i++;
             }
         }
         else
         {
-            res = ft_strjoin(res, ft_substr(line, i, 1));
+            if(line[i] == '$' && expand)
+            {
+                i++;
+                j = 0;
+                while (line[i+j] != ' ' && line[i+j] != '\0' && line[i+j] != '$' && line[i+j] != '\'' && line[i+j] != '"')
+                    j++;
+                if (j == 0)
+                    res = ft_strjoin(res, "$");
+                else
+                {
+                    res = ft_strjoin(res, get_env_value(ft_substr(line, i, j), env));
+                    i += j;
+                }
+            }
+            if (line[i] != current_quote)
+            {
+                res = ft_strjoin(res, ft_substr(line, i, 1));
+            }
             i++;
         }
     }
+    if(current_quote != '\0')
+        return("Error: unclosed quote");
     return(res);
 }
 
