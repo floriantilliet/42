@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 05:41:11 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/03/27 05:44:36 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/03/28 12:56:47 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,7 @@ char	*get_env_value(char *key, t_env **env)
 	{
 		if (ft_strncmp(current->key, key, ft_strlen(key)) == 0
 			&& current->key[ft_strlen(key)] == '\0')
-		{
 			return (current->value);
-		}
 		current = current->next;
 	}
 	return ("");

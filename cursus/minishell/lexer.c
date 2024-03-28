@@ -6,7 +6,7 @@
 /*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 05:41:57 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/03/27 05:44:23 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/03/28 12:57:33 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,7 @@ char	*expander(char *line, t_env **env)
 				}
 			}
 			if (line[i] != current_quote)
-			{
 				res = ft_strjoin(res, ft_substr(line, i, 1));
-			}
 			i++;
 		}
 	}
