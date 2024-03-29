@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 05:41:11 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/03/28 12:56:47 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/03/28 18:28:01 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,9 @@ t_env	**store_env(char **envp)
 	t_env	**env;
 	t_env	*current;
 	t_env	*new_node;
-	int		i;
 	char	*equals_sign;
 	size_t	length;
 
-	i = 0;
 	env = (t_env **)malloc(sizeof(t_env *));
 	*env = NULL;
 	while (*envp)

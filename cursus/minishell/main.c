@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 05:41:13 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/03/27 05:44:30 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/03/28 18:37:05 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	main(int ac, char **av, char **envp)
 {
 	char	*line;
-	size_t	len;
 	t_env	**env;
 
 	(void)av;
@@ -27,11 +26,8 @@ int	main(int ac, char **av, char **envp)
 	}
 	env = NULL;
 	env = store_env(envp);
-	while (1)
+	while((line = readline("minishell $> ")) != NULL)
 	{
-		len = 0;
-		line = NULL;
-		line = readline("minishell $> ");
 		if (line)
 		{
 			add_history(line);
