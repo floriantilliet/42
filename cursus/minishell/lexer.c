@@ -5,25 +5,20 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/27 05:41:57 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/03/31 18:02:38 by florian          ###   ########.fr       */
+/*   Created: 2024/03/31 18:16:32 by florian           #+#    #+#             */
+/*   Updated: 2024/03/31 19:10:24 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*expander(char *line, t_env **env)
+int check_quote_problems(char *line)
 {
-	char	*res;
-	int		i;
-	int		j;
-	char	current_quote;
-	int		expand;
+	int i;
+	int current_quote;
 
-	expand = 1;
-	res = ft_strdup("");
 	i = 0;
-	current_quote = '\0';
+	current_quote = 0;
 	while (line[i])
 	{
 		if (line[i] == '\'' || line[i] == '"')
@@ -31,58 +26,110 @@ char	*expander(char *line, t_env **env)
 			if (current_quote == '\0')
 			{
 				current_quote = line[i];
-				expand = (line[i] == '"');
-				i++;
 			}
 			else if (current_quote == line[i])
 			{
 				current_quote = '\0';
-				expand = 1;
-				i++;
-			}
-			else
-			{
-				res = ft_strjoin(res, ft_substr(line, i, 1));
-				i++;
 			}
 		}
-		else
-		{
-			if (line[i] == '$' && expand)
-			{
-				i++;
-				j = 0;
-				while (line[i + j] != ' ' && line[i + j] != '\0' && line[i
-					+ j] != '$' && line[i + j] != '\'' && line[i + j] != '"')
-					j++;
-				if (j == 0)
-					res = ft_strjoin(res, "$");
-				else
-				{
-					res = ft_strjoin(res, get_env_value(ft_substr(line, i, j),
-								env));
-					i += j;
-				}
-			}
-			if (line[i] != current_quote)
-				res = ft_strjoin(res, ft_substr(line, i, 1));
-			i++;
-		}
+		i++;
 	}
 	if (current_quote != '\0')
-		return ("Error: unclosed quote");
-	return (res);
+			return (0);
+	return (1);
 }
 
-
-char	**splitter(char *line, t_env **env)
+int count_tokens(char *line)
 {
 	int i;
-	char **res;
+	int j;
+	int k;
+	int quote;
+	
+	i = 0;
+	j = 0;
+	quote = 0;
+	while (line[i])
+	{
+		if (line[i] == '\'' || line[i] == '"')
+		{
+			k = 0;
+			quote = line[i];
+			k++;
+			while (line[i+k] != quote)
+				k++;
+			k++;
+			j++;
+			i+=k;
+		}
+		if (line[i] == ' ')
+			i++;
+		else
+		{
+			k = 0;
+			while (line[i + k] && line[i + k] != ' ' && line[i + k] != '\'' && line[i + k] != '"')
+				k++;
+			j++;
+			i += k;
+		}
+	}
+	return (j);
+}
+
+char **lexer(char *line)
+{
+	char **tokens;
+	int i;
+	int j;
+	int k;
+	int quote;
+	int len;
+
+	len = count_tokens(line);
+	tokens = malloc(sizeof(char *) * (len + 1));
+	i = 0;
+	j = 0;
+	quote = 0;
+	while (line[i])
+	{
+		if (line[i] == '\'' || line[i] == '"')
+		{
+			k = 0;
+			quote = line[i];
+			k++;
+			while (line[i+k] != quote)
+				k++;
+			k++;
+			tokens[j] = ft_substr(line, i, k);
+			j++;
+			i+=k;
+		}
+		if (line[i] == ' ')
+			i++;
+		else
+		{
+			if (line[i] == '\0')
+				break;
+			k = 0;
+			while (line[i + k] && line[i + k] != ' ' && line[i + k] != '\'' && line[i + k] != '"')
+				k++;
+			tokens[j] = ft_substr(line, i, k);
+			i += k;
+			j++;
+		}
+	}
+	tokens[j] = NULL;
+	return (tokens);
+}
+
+void print_tokens(char **tokens)
+{
+	int i;
 
 	i = 0;
-	while(line[i])
+	while (tokens[i])
 	{
-
-	}		
+		printf("Token %d: %s\n", i, tokens[i]);
+		i++;
+	}
 }

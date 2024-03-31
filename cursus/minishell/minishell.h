@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 05:43:39 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/03/27 05:43:58 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/03/31 19:09:17 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,9 @@ void				printenv(t_env **env);
 void				free_env(t_env **env);
 char				*get_env_value(char *key, t_env **env);
 char				*expander(char *line, t_env **env);
+
+char				**lexer(char *line);
+void				print_tokens(char **tokens);
+int					check_quote_problems(char *line);
 
 #endif
