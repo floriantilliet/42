@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 05:41:57 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/03/28 12:57:33 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/03/31 18:02:38 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,15 @@ char	*expander(char *line, t_env **env)
 	return (res);
 }
 
-void	lexer(char *line, t_env **env)
+
+char	**splitter(char *line, t_env **env)
 {
-	expander(line, env);
+	int i;
+	char **res;
+
+	i = 0;
+	while(line[i])
+	{
+
+	}		
 }
