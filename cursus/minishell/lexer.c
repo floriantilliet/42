@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 18:16:32 by florian           #+#    #+#             */
-/*   Updated: 2024/03/31 19:10:24 by florian          ###   ########.fr       */
+/*   Updated: 2024/04/01 16:45:22 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,25 @@ int count_tokens(char *line)
 			j++;
 			i+=k;
 		}
+		if (line[i] == '|' || line[i] == '>' || line[i] == '<')
+		{
+			if (line[i + 1] == line[i])
+			{
+				j++;
+				i += 2;
+			}
+			else
+			{
+				j++;
+				i++;
+			}
+		}
 		if (line[i] == ' ')
 			i++;
 		else
 		{
 			k = 0;
-			while (line[i + k] && line[i + k] != ' ' && line[i + k] != '\'' && line[i + k] != '"')
+			while (line[i + k] && line[i + k] != ' ' && line[i + k] != '\'' && line[i + k] != '"' && line[i + k] != '|' && line[i + k] != '>' && line[i + k] != '<')
 				k++;
 			j++;
 			i += k;
@@ -104,14 +117,29 @@ char **lexer(char *line)
 			j++;
 			i+=k;
 		}
-		if (line[i] == ' ')
+		else if(line[i] == '|' || line[i] == '>' || line[i] == '<')
+		{
+			if(line[i + 1] == line[i])
+			{
+				tokens[j] = ft_substr(line, i, 2);
+				j++;
+				i += 2;
+			}
+			else
+			{
+				tokens[j] = ft_substr(line, i, 1);
+				j++;
+				i++;
+			}
+		}
+		else if (line[i] == ' ')
 			i++;
 		else
 		{
 			if (line[i] == '\0')
 				break;
 			k = 0;
-			while (line[i + k] && line[i + k] != ' ' && line[i + k] != '\'' && line[i + k] != '"')
+			while (line[i + k] && line[i + k] != ' ' && line[i + k] != '\'' && line[i + k] != '"' && line[i + k] != '|' && line[i + k] != '>' && line[i + k] != '<')
 				k++;
 			tokens[j] = ft_substr(line, i, k);
 			i += k;
