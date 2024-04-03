@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 05:41:13 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/03/31 19:08:17 by florian          ###   ########.fr       */
+/*   Updated: 2024/04/04 00:18:39 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	main(int ac, char **av, char **envp)
 	}
 	env = NULL;
 	env = store_env(envp);
-	while((line = readline("minishell $> ")) != NULL)
+	while ((line = readline("minishell $> ")) != NULL)
 	{
 		if (line)
 		{
@@ -41,7 +41,7 @@ int	main(int ac, char **av, char **envp)
 				printenv(env);
 			}
 			else
-				// printf("%s\n", expander(line, env));
+			// printf("%s\n", expander(line, env));
 			{
 				if (!check_quote_problems(line))
 					printf("Error: unclosed quote\n");

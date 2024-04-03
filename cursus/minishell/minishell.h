@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 05:43:39 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/04/01 16:52:28 by florian          ###   ########.fr       */
+/*   Updated: 2024/04/04 00:18:41 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_env
 typedef struct s_token
 {
 	char			*value;
-	int 			type;
+	int				type;
 	struct s_token	*next;
 }					t_token;
 

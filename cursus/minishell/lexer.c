@@ -6,16 +6,16 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 18:16:32 by florian           #+#    #+#             */
-/*   Updated: 2024/04/04 00:00:00 by florian          ###   ########.fr       */
+/*   Updated: 2024/04/04 00:18:35 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int check_quote_problems(char *line)
+int	check_quote_problems(char *line)
 {
-	int i;
-	int current_quote;
+	int	i;
+	int	current_quote;
 
 	i = 0;
 	current_quote = 0;
@@ -24,28 +24,24 @@ int check_quote_problems(char *line)
 		if (line[i] == '\'' || line[i] == '"')
 		{
 			if (current_quote == '\0')
-			{
 				current_quote = line[i];
-			}
 			else if (current_quote == line[i])
-			{
 				current_quote = '\0';
-			}
 		}
 		i++;
 	}
 	if (current_quote != '\0')
-			return (0);
+		return (0);
 	return (1);
 }
 
-int count_tokens(char *line)
+int	count_tokens(char *line)
 {
-	int i;
-	int j;
-	int k;
-	int quote;
-	
+	int	i;
+	int	j;
+	int	k;
+	int	quote;
+
 	i = 0;
 	j = 0;
 	quote = 0;
@@ -56,11 +52,11 @@ int count_tokens(char *line)
 			k = 0;
 			quote = line[i];
 			k++;
-			while (line[i+k] != quote)
+			while (line[i + k] != quote)
 				k++;
 			k++;
 			j++;
-			i+=k;
+			i += k;
 		}
 		if (line[i] == '|' || line[i] == '>' || line[i] == '<')
 		{
@@ -80,7 +76,9 @@ int count_tokens(char *line)
 		else
 		{
 			k = 0;
-			while (line[i + k] && line[i + k] != ' ' && line[i + k] != '\'' && line[i + k] != '"' && line[i + k] != '|' && line[i + k] != '>' && line[i + k] != '<')
+			while (line[i + k] && line[i + k] != ' ' && line[i + k] != '\''
+				&& line[i + k] != '"' && line[i + k] != '|' && line[i
+				+ k] != '>' && line[i + k] != '<')
 				k++;
 			j++;
 			i += k;
@@ -89,14 +87,14 @@ int count_tokens(char *line)
 	return (j);
 }
 
-char **lexer(char *line)
+char	**lexer(char *line)
 {
-	char **tokens;
-	int i;
-	int j;
-	int k;
-	int quote;
-	int len;
+	char	**tokens;
+	int		i;
+	int		j;
+	int		k;
+	int		quote;
+	int		len;
 
 	len = count_tokens(line);
 	tokens = malloc(sizeof(char *) * (len + 1));
@@ -110,16 +108,16 @@ char **lexer(char *line)
 			k = 0;
 			quote = line[i];
 			k++;
-			while (line[i+k] != quote)
+			while (line[i + k] != quote)
 				k++;
 			k++;
 			tokens[j] = ft_substr(line, i, k);
 			j++;
-			i+=k;
+			i += k;
 		}
-		else if(line[i] == '|' || line[i] == '>' || line[i] == '<')
+		else if (line[i] == '|' || line[i] == '>' || line[i] == '<')
 		{
-			if(line[i + 1] == line[i] && line[i] != '|')
+			if (line[i + 1] == line[i] && line[i] != '|')
 			{
 				tokens[j] = ft_substr(line, i, 2);
 				j++;
@@ -137,9 +135,11 @@ char **lexer(char *line)
 		else
 		{
 			if (line[i] == '\0')
-				break;
+				break ;
 			k = 0;
-			while (line[i + k] && line[i + k] != ' ' && line[i + k] != '\'' && line[i + k] != '"' && line[i + k] != '|' && line[i + k] != '>' && line[i + k] != '<')
+			while (line[i + k] && line[i + k] != ' ' && line[i + k] != '\''
+				&& line[i + k] != '"' && line[i + k] != '|' && line[i
+				+ k] != '>' && line[i + k] != '<')
 				k++;
 			tokens[j] = ft_substr(line, i, k);
 			i += k;
@@ -150,12 +150,11 @@ char **lexer(char *line)
 	return (tokens);
 }
 
-int get_token_type(char *token)
+int	get_token_type(char *token)
 {
-	int len;
+	int	len;
 
 	len = ft_strlen(token);
-	
 	if (len == 1)
 	{
 		if (token[0] == '|')
@@ -180,12 +179,12 @@ int get_token_type(char *token)
 		return (0);
 }
 
-t_token **tokenizer(char **tokens)
+t_token	**tokenizer(char **tokens)
 {
-	t_token **token_list;
-	t_token *current;
-	t_token *new_node;
-	int i;
+	t_token	**token_list;
+	t_token	*current;
+	t_token	*new_node;
+	int		i;
 
 	token_list = malloc(sizeof(t_token *));
 	*token_list = NULL;
@@ -198,15 +197,11 @@ t_token **tokenizer(char **tokens)
 		new_node->type = get_token_type(tokens[i]);
 		new_node->next = NULL;
 		if (current == NULL)
-		{
 			*token_list = new_node;
-		}
 		else
 		{
 			while (current->next != NULL)
-			{
 				current = current->next;
-			}
 			current->next = new_node;
 		}
 		i++;
@@ -214,7 +209,7 @@ t_token **tokenizer(char **tokens)
 	return (token_list);
 }
 
-void print_tokens(char **tokens)
+void	print_tokens(char **tokens)
 {
 	int i;
 

@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 05:41:11 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/03/28 18:28:01 by florian          ###   ########.fr       */
+/*   Updated: 2024/04/04 00:18:46 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,11 @@ t_env	**store_env(char **envp)
 		new_node->value = ft_strdup(ft_strchr(*envp, '=') + 1);
 		new_node->next = NULL;
 		if (current == NULL)
-		{
 			*env = new_node;
-		}
 		else
 		{
 			while (current->next != NULL)
-			{
 				current = current->next;
-			}
 			current->next = new_node;
 		}
 		envp++;
