@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 05:41:11 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/04/04 00:18:46 by florian          ###   ########.fr       */
+/*   Updated: 2024/04/04 12:15:01 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,20 @@ t_env	**store_env(char **envp)
 	size_t	length;
 
 	env = (t_env **)malloc(sizeof(t_env *));
+	if (!env)
+		return (NULL);
 	*env = NULL;
 	while (*envp)
 	{
 		current = *env;
 		new_node = (t_env *)malloc(sizeof(t_env));
+		if (!new_node)
+			return (NULL);
 		equals_sign = strchr(*envp, '=');
 		length = equals_sign - *envp;
 		new_node->key = malloc(length + 1);
+		if (!new_node->key)
+			return (NULL);
 		strncpy(new_node->key, *envp, length);
 		new_node->key[length] = '\0';
 		new_node->value = ft_strdup(ft_strchr(*envp, '=') + 1);
@@ -56,23 +62,6 @@ void	printenv(t_env **env)
 		printf("%s=%s\n", current->key, current->value);
 		current = current->next;
 	}
-}
-
-void	free_env(t_env **env)
-{
-	t_env	*current;
-	t_env	*next;
-
-	current = *env;
-	while (current)
-	{
-		next = current->next;
-		free(current->key);
-		free(current->value);
-		free(current);
-		current = next;
-	}
-	free(env);
 }
 
 char	*get_env_value(char *key, t_env **env)

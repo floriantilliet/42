@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 05:41:13 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/04/04 00:18:39 by florian          ###   ########.fr       */
+/*   Updated: 2024/04/04 12:16:39 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	main(int ac, char **av, char **envp)
 				if (!check_quote_problems(line))
 					printf("Error: unclosed quote\n");
 				else
-					print_tokens(lexer(line));
+					print_token_list(tokenizer(lexer(line)));
 			}
 		}
 		free(line);
