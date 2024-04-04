@@ -6,11 +6,18 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 18:16:32 by florian           #+#    #+#             */
-/*   Updated: 2024/04/04 12:28:30 by florian          ###   ########.fr       */
+/*   Updated: 2024/04/04 15:24:36 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int is_space(char c)
+{
+	if (c == ' ' || (c >= 9 && c <= 13))
+		return (1);
+	return (0);
+}
 
 int	check_quote_problems(char *line)
 {
@@ -71,12 +78,12 @@ int	count_tokens(char *line)
 				i++;
 			}
 		}
-		if (line[i] == ' ')
+		if (is_space(line[i]))
 			i++;
 		else
 		{
 			k = 0;
-			while (line[i + k] && line[i + k] != ' ' && line[i + k] != '\''
+			while (line[i + k] && !is_space(line[i + k]) && line[i + k] != '\''
 				&& line[i + k] != '"' && line[i + k] != '|' && line[i
 				+ k] != '>' && line[i + k] != '<')
 				k++;
@@ -132,14 +139,14 @@ char	**lexer(char *line)
 				i++;
 			}
 		}
-		else if (line[i] == ' ')
+		else if (is_space(line[i]))
 			i++;
 		else
 		{
 			if (line[i] == '\0')
 				break ;
 			k = 0;
-			while (line[i + k] && line[i + k] != ' ' && line[i + k] != '\''
+			while (line[i + k] && !is_space(line[i + k]) && line[i + k] != '\''
 				&& line[i + k] != '"' && line[i + k] != '|' && line[i
 				+ k] != '>' && line[i + k] != '<')
 				k++;

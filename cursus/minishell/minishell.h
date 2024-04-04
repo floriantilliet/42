@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 05:43:39 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/04/04 12:15:39 by florian          ###   ########.fr       */
+/*   Updated: 2024/04/04 15:23:06 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void				printenv(t_env **env);
 char				*get_env_value(char *key, t_env **env);
 char				*expander(char *line, t_env **env);
 
+int 				is_space(char c);
 char				**lexer(char *line);
 void				print_tokens(char **tokens);
 int					check_quote_problems(char *line);
