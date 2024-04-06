@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 05:43:39 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/04/04 15:23:06 by florian          ###   ########.fr       */
+/*   Updated: 2024/04/06 15:51:10 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,20 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+# define CMD 0
+# define ARG 1
+# define PIPE 2
+# define OUT 3
+# define IN 4
+# define APPEND 5
+# define HEREDOC 6
+
 typedef struct s_env
 {
 	char			*key;
 	char			*value;
 	struct s_env	*next;
+	struct s_env 	*prev;
 }					t_env;
 
 typedef struct s_token
@@ -32,6 +41,7 @@ typedef struct s_token
 	char			*value;
 	int				type;
 	struct s_token	*next;
+	struct s_token	*prev;
 }					t_token;
 
 t_env				**store_env(char **envp);

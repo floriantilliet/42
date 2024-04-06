@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 18:16:32 by florian           #+#    #+#             */
-/*   Updated: 2024/04/04 15:24:36 by florian          ###   ########.fr       */
+/*   Updated: 2024/04/06 15:51:12 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,25 +167,25 @@ int	get_token_type(char *token)
 	if (len == 1)
 	{
 		if (token[0] == '|')
-			return (1);
+			return (PIPE);
 		if (token[0] == '>')
-			return (2);
+			return (OUT);
 		if (token[0] == '<')
-			return (3);
+			return (IN);
 		else
-			return (0);
+			return (ARG);
 	}
 	else if (len == 2)
 	{
 		if (token[0] == '>' && token[1] == '>')
-			return (4);
+			return (APPEND);
 		if (token[0] == '<' && token[1] == '<')
-			return (5);
+			return (HEREDOC);
 		else
-			return (0);
+			return (ARG);
 	}
 	else
-		return (0);
+		return (ARG);
 }
 
 t_token	**tokenizer(char **tokens)
@@ -194,20 +194,31 @@ t_token	**tokenizer(char **tokens)
 	t_token	*current;
 	t_token	*new_node;
 	int		i;
+	int cmd_flag;
 
 	token_list = malloc(sizeof(t_token *));
 	if (!token_list)
 		return (NULL);
 	*token_list = NULL;
 	i = 0;
+	cmd_flag = 0;
 	while (tokens[i])
 	{
 		current = *token_list;
 		new_node = malloc(sizeof(t_token));
 		if (!new_node)
 			return (NULL);
+		if (i == 0)
+			new_node->prev = NULL;
 		new_node->value = ft_strdup(tokens[i]);
 		new_node->type = get_token_type(tokens[i]);
+		if (new_node->type == ARG && cmd_flag == 0)
+		{
+			new_node->type = CMD;
+			cmd_flag = 1;
+		}
+		else if (new_node->type == PIPE)
+			cmd_flag = 0;
 		new_node->next = NULL;
 		if (current == NULL)
 			*token_list = new_node;
@@ -216,6 +227,7 @@ t_token	**tokenizer(char **tokens)
 			while (current->next != NULL)
 				current = current->next;
 			current->next = new_node;
+			new_node->prev = current;
 		}
 		i++;
 	}
