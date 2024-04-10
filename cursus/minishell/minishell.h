@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 05:43:39 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/04/06 15:51:10 by florian          ###   ########.fr       */
+/*   Updated: 2024/04/10 13:50:47 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <signal.h>
 
 # define CMD 0
 # define ARG 1
@@ -60,5 +61,8 @@ void				print_token_list(t_token **token_list);
 void				free_char_tab(char **tab);
 void				free_env(t_env **env);
 void				free_token_list(t_token **token_list);
+
+void		signals();
+void 		sigint_handler(int code);
 
 #endif
