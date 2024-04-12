@@ -6,23 +6,23 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:14:26 by florian           #+#    #+#             */
-/*   Updated: 2024/04/04 12:20:23 by florian          ###   ########.fr       */
+/*   Updated: 2024/04/12 20:37:28 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void free_char_tab(char **tab)
+void	free_char_tab(char **tab)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (tab[i])
-    {
-        free(tab[i]);
-        i++;
-    }
-    free(tab);
+	i = 0;
+	while (tab[i])
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
 }
 
 void	free_env(t_env **env)
@@ -44,16 +44,16 @@ void	free_env(t_env **env)
 
 void	free_token_list(t_token **token_list)
 {
-    t_token	*current;
-    t_token	*next;
+	t_token *current;
+	t_token *next;
 
-    current = *token_list;
-    while (current)
-    {
-        next = current->next;
-        free(current->value);
-        free(current);
-        current = next;
-    }
-    free(token_list);
+	current = *token_list;
+	while (current)
+	{
+		next = current->next;
+		free(current->value);
+		free(current);
+		current = next;
+	}
+	free(token_list);
 }
