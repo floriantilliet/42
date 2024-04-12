@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 18:16:32 by florian           #+#    #+#             */
-/*   Updated: 2024/04/12 18:45:01 by florian          ###   ########.fr       */
+/*   Updated: 2024/04/12 20:31:23 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,13 +195,15 @@ t_token	**tokenizer(char **tokens)
 	t_token	*new_node;
 	int		i;
 	int cmd_flag;
-
+	int redirection_flag;
+	
 	token_list = malloc(sizeof(t_token *));
 	if (!token_list)
 		return (NULL);
 	*token_list = NULL;
 	i = 0;
 	cmd_flag = 0;
+	redirection_flag = 0;
 	while (tokens[i])
 	{
 		current = *token_list;
@@ -213,16 +215,15 @@ t_token	**tokenizer(char **tokens)
 		new_node->value = ft_strdup(tokens[i]);
 		new_node->type = get_token_type(tokens[i]);
 		if (new_node->type == IN || new_node->type == OUT || new_node->type == APPEND || new_node->type == HEREDOC)
-			cmd_flag = 2;
+				redirection_flag = 1;
 		if (new_node->type == ARG)
 		{
-			if(cmd_flag == 0)
+			if(cmd_flag == 0 && redirection_flag == 0)
 			{
 				new_node->type = CMD;
-				cmd_flag = 1;
+				cmd_flag = 1;;
 			}
-			else if (cmd_flag == 2)
-				cmd_flag = 0;
+			redirection_flag = 0;
 		}
 		else if (new_node->type == PIPE)
 			cmd_flag = 0;
