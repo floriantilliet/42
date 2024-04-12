@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 18:16:32 by florian           #+#    #+#             */
-/*   Updated: 2024/04/12 14:11:15 by florian          ###   ########.fr       */
+/*   Updated: 2024/04/12 14:53:24 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,10 +214,18 @@ t_token	**tokenizer(char **tokens)
 		new_node->type = get_token_type(tokens[i]);
 		if (new_node->type == ARG && cmd_flag == 0)
 		{
-			new_node->type = CMD;
-			cmd_flag = 1;
+			if (new_node->prev != NULL)
+			{
+				if (new_node->prev->type == IN)
+					new_node->type = ARG;
+			}
+			else
+			{
+				new_node->type = CMD;
+				cmd_flag = 1;
+			}
 		}
-		else if (new_node->type == PIPE || new_node->type == OUT || new_node->type == IN || new_node->type == APPEND || new_node->type == HEREDOC)
+		else if (new_node->type == PIPE)
 			cmd_flag = 0;
 		new_node->next = NULL;
 		if (current == NULL)
