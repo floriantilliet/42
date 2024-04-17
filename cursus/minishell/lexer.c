@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 18:16:32 by florian           #+#    #+#             */
-/*   Updated: 2024/04/12 20:37:22 by florian          ###   ########.fr       */
+/*   Updated: 2024/04/17 15:23:15 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,7 +223,6 @@ t_token	**tokenizer(char **tokens)
 			{
 				new_node->type = CMD;
 				cmd_flag = 1;
-				;
 			}
 			redirection_flag = 0;
 		}
@@ -243,6 +242,20 @@ t_token	**tokenizer(char **tokens)
 	}
 	free_char_tab(tokens);
 	return (token_list);
+}
+
+void	expand_token_list(t_token **token_list, t_env **env)
+{
+	t_token	*current;
+	// int	flag;
+
+	// flag = 0;
+	current = *token_list;
+	while(current)
+	{
+		current->value = expander(current->value, env);
+		current = current->next;
+	}
 }
 
 void	print_tokens(char **tokens)
