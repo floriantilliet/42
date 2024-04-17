@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 18:16:32 by florian           #+#    #+#             */
-/*   Updated: 2024/04/17 16:02:45 by florian          ###   ########.fr       */
+/*   Updated: 2024/04/17 16:03:27 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -244,42 +244,42 @@ t_token	**tokenizer(char **tokens)
 	return (token_list);
 }
 
-char *trimmer(char *str)
+char	*trimmer(char *str)
 {
-	int i;
-	int j;
-	char *res;
-	int len;
+	int		i;
+	int		j;
+	char	*res;
+	int		len;
 
 	len = ft_strlen(str);
 	res = ft_strdup("");
 	i = 0;
 	j = 0;
-	if(str[0] == '"' || str[0] == '\'')
+	if (str[0] == '"' || str[0] == '\'')
 	{
 		i++;
 		len--;
 	}
-	while(i < len)
+	while (i < len)
 	{
 		res[j] = str[i];
 		i++;
 		j++;
 	}
 	res[j] = '\0';
-	return(res);
+	return (res);
 }
 
 void	expand_token_list(t_token **token_list, t_env **env)
 {
 	t_token	*current;
-	int	flag;
+	int		flag;
 
 	flag = 0;
 	current = *token_list;
-	while(current)
+	while (current)
 	{
-		if(current->type == HEREDOC)
+		if (current->type == HEREDOC)
 		{
 			flag = 1;
 			current = current->next;
