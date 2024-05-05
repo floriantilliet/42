@@ -6,14 +6,14 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 05:43:39 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/05/05 17:51:50 by florian          ###   ########.fr       */
+/*   Updated: 2024/05/05 18:03:44 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "libft/libft.h"
+# include "../libft/libft.h"
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <signal.h>

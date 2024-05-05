@@ -6,11 +6,11 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 05:41:57 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/05/05 16:41:46 by florian          ###   ########.fr       */
+/*   Updated: 2024/05/05 18:03:20 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../include/minishell.h"
 
 void	handle_quotes(char *line, char *current_quote, int *expand, int *i)
 {

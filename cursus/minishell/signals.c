@@ -6,11 +6,11 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 13:13:24 by florian           #+#    #+#             */
-/*   Updated: 2024/05/05 14:51:24 by florian          ###   ########.fr       */
+/*   Updated: 2024/05/05 18:03:07 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "include/minishell.h"
 
 void	handle_sigint(int code)
 {
