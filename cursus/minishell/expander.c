@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 05:41:57 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/05/05 14:50:17 by florian          ###   ########.fr       */
+/*   Updated: 2024/05/05 16:13:19 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	*expander(char *line, t_env **env)
 	int		j;
 	char	current_quote;
 	int		expand;
+	char	*sub;
+	char	*tmp;
 
 	expand = 1;
 	res = ft_strdup("");
@@ -42,8 +44,12 @@ char	*expander(char *line, t_env **env)
 			}
 			else
 			{
-				res = ft_strjoin(res, ft_substr(line, i, 1));
-				i++;
+                sub = ft_substr(line, i, 1);
+                tmp = ft_strjoin(res, sub);
+                free(res);
+                free(sub);
+                res = tmp;
+                i++;
 			}
 		}
 		else
@@ -55,17 +61,30 @@ char	*expander(char *line, t_env **env)
 				while (line[i + j] != ' ' && line[i + j] != '\0' && line[i
 					+ j] != '$' && line[i + j] != '\'' && line[i + j] != '"')
 					j++;
-				if (j == 0)
-					res = ft_strjoin(res, "$");
+				if (j == 0)	
+                {
+                    tmp = ft_strjoin(res, "$");
+                    free(res);
+                    res = tmp;
+                }
 				else
 				{
-					res = ft_strjoin(res, get_env_value(ft_substr(line, i, j),
-								env));
-					i += j;
+                    sub = ft_substr(line, i, j);
+                    tmp = ft_strjoin(res, get_env_value(sub, env));
+                    free(res);
+                    free(sub);
+                    res = tmp;
+                    i += j;
 				}
 			}
 			if (line[i] != current_quote)
-				res = ft_strjoin(res, ft_substr(line, i, 1));
+			{
+                sub = ft_substr(line, i, 1);
+                tmp = ft_strjoin(res, sub);
+                free(res);
+                free(sub);
+                res = tmp;
+			}
 			i++;
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 05:43:39 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/05/05 15:07:47 by florian          ###   ########.fr       */
+/*   Updated: 2024/05/05 15:12:48 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,11 @@ char				*expander(char *line, t_env **env);
 // lexer.c
 
 int					is_space(char c);
-char				**lexer(char *line);
+char				**line_to_strings(char *line);
 void				print_tokens(char **tokens);
 int					check_quote_problems(char *line);
 int					count_tokens(char *line);
-t_token				**tokenizer(char **tokens);
+t_token				**strings_to_tokens(char **tokens);
 void				print_token_list(t_token **token_list);
 void				expand_token_list(t_token **token_list, t_env **env);
 

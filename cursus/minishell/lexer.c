@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 18:16:32 by florian           #+#    #+#             */
-/*   Updated: 2024/05/05 14:48:17 by florian          ###   ########.fr       */
+/*   Updated: 2024/05/05 16:17:03 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int	count_tokens(char *line)
 	return (j);
 }
 
-char	**lexer(char *line)
+char	**line_to_strings(char *line)
 {
 	char	**tokens;
 	int		i;
@@ -188,7 +188,7 @@ int	get_token_type(char *token)
 		return (ARG);
 }
 
-t_token	**tokenizer(char **tokens)
+t_token	**strings_to_tokens(char **tokens)
 {
 	t_token	**token_list;
 	t_token	*current;
@@ -252,7 +252,9 @@ char	*trimmer(char *str)
 	int		len;
 
 	len = ft_strlen(str);
-	res = ft_strdup("");
+	res = malloc(sizeof(char) * (len + 1));
+	if (!res)
+		return (NULL)
 	i = 0;
 	j = 0;
 	if (str[0] == '"' || str[0] == '\'')
@@ -274,6 +276,7 @@ void	expand_token_list(t_token **token_list, t_env **env)
 {
 	t_token	*current;
 	int		flag;
+	char	*tmp;
 
 	flag = 0;
 	current = *token_list;
@@ -285,15 +288,23 @@ void	expand_token_list(t_token **token_list, t_env **env)
 			current = current->next;
 		}
 		if (flag == 0)
-			current->value = expander(current->value, env);
+		{
+			tmp = expander(current->value, env);
+			free(current->value);
+			current->value = tmp;
+		}
 		else
-			current->value = trimmer(current->value);
+		{
+			tmp = trimmer(current->value);
+			free(current->value);
+			current->value = tmp;
+		}
 		flag = 0;
 		current = current->next;
 	}
 }
 
-void	print_tokens(char **tokens)
+void	print_strings(char **tokens)
 {
 	int	i;
 
