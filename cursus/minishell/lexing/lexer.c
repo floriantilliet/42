@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 18:16:32 by florian           #+#    #+#             */
-/*   Updated: 2024/05/05 18:57:07 by florian          ###   ########.fr       */
+/*   Updated: 2024/05/05 19:08:07 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,58 +40,6 @@ int	check_quote_problems(char *line)
 	if (current_quote != '\0')
 		return (0);
 	return (1);
-}
-
-int	count_tokens(char *line)
-{
-	int	i;
-	int	j;
-	int	k;
-	int	quote;
-
-	i = 0;
-	j = 0;
-	quote = 0;
-	while (line[i])
-	{
-		if (line[i] == '\'' || line[i] == '"')
-		{
-			k = 0;
-			quote = line[i];
-			k++;
-			while (line[i + k] != quote)
-				k++;
-			k++;
-			j++;
-			i += k;
-		}
-		if (line[i] == '|' || line[i] == '>' || line[i] == '<')
-		{
-			if (line[i + 1] == line[i])
-			{
-				j++;
-				i += 2;
-			}
-			else
-			{
-				j++;
-				i++;
-			}
-		}
-		if (is_space(line[i]))
-			i++;
-		else
-		{
-			k = 0;
-			while (line[i + k] && !is_space(line[i + k]) && line[i + k] != '\''
-				&& line[i + k] != '"' && line[i + k] != '|' && line[i
-				+ k] != '>' && line[i + k] != '<')
-				k++;
-			j++;
-			i += k;
-		}
-	}
-	return (j);
 }
 
 void	print_strings(char **tokens)
