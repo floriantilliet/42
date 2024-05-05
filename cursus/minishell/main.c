@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 05:41:13 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/05/05 20:58:13 by florian          ###   ########.fr       */
+/*   Updated: 2024/05/05 21:08:37 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,10 @@ int	main(int ac, char **av, char **envp)
 	env = NULL;
 	env = store_env(envp);
 	signals();
-	while ((line = readline("minishell $> ")) != NULL)
+	line = "\0";
+	while (line != NULL)
 	{
+		line = readline("minishell $> ");
 		if (line)
 		{
 			add_history(line);
