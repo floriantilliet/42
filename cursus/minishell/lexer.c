@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 18:16:32 by florian           #+#    #+#             */
-/*   Updated: 2024/05/05 17:16:13 by florian          ###   ########.fr       */
+/*   Updated: 2024/05/05 17:52:13 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -272,11 +272,28 @@ char	*trimmer(char *str)
 	return (res);
 }
 
+void	expand_token(t_token *current, t_env **env)
+{
+	char	*tmp;
+
+	tmp = expander(current->value, env);
+	free(current->value);
+	current->value = tmp;
+}
+
+void	trim_token(t_token *current)
+{
+	char	*tmp;
+
+	tmp = trimmer(current->value);
+	free(current->value);
+	current->value = tmp;
+}
+
 void	expand_token_list(t_token **token_list, t_env **env)
 {
 	t_token	*current;
 	int		flag;
-	char	*tmp;
 
 	flag = 0;
 	current = *token_list;
@@ -288,17 +305,9 @@ void	expand_token_list(t_token **token_list, t_env **env)
 			current = current->next;
 		}
 		if (flag == 0)
-		{
-			tmp = expander(current->value, env);
-			free(current->value);
-			current->value = tmp;
-		}
+			expand_token(current, env);
 		else
-		{
-			tmp = trimmer(current->value);
-			free(current->value);
-			current->value = tmp;
-		}
+			trim_token(current);
 		flag = 0;
 		current = current->next;
 	}
@@ -318,8 +327,8 @@ void	print_strings(char **tokens)
 
 void	print_token_list(t_token **token_list)
 {
-	t_token *current;
-	int i;
+	t_token	*current;
+	int		i;
 
 	current = *token_list;
 	i = 0;
