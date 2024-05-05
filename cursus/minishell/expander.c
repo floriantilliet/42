@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 05:41:57 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/04/17 16:03:32 by florian          ###   ########.fr       */
+/*   Updated: 2024/05/05 14:50:17 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,5 @@ char	*expander(char *line, t_env **env)
 			i++;
 		}
 	}
-	// if (current_quote != '\0')
-	// 	return ("Error: unclosed quote");
 	return (res);
 }

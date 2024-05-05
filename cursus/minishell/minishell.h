@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 05:43:39 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/04/17 15:21:15 by florian          ###   ########.fr       */
+/*   Updated: 2024/05/05 15:02:04 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ typedef struct s_token
 	struct s_token	*prev;
 }					t_token;
 
+t_env				*create_env_node(char *env_str);
+void				append_env_node(t_env **env, t_env *new_node);
 t_env				**store_env(char **envp);
 void				printenv(t_env **env);
 char				*get_env_value(char *key, t_env **env);
