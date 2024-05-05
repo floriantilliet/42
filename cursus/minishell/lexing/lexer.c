@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 18:16:32 by florian           #+#    #+#             */
-/*   Updated: 2024/05/05 18:42:56 by florian          ###   ########.fr       */
+/*   Updated: 2024/05/05 18:57:07 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,71 +92,6 @@ int	count_tokens(char *line)
 		}
 	}
 	return (j);
-}
-
-char	**line_to_strings(char *line)
-{
-	char	**tokens;
-	int		i;
-	int		j;
-	int		k;
-	int		quote;
-	int		len;
-
-	len = count_tokens(line);
-	tokens = malloc(sizeof(char *) * (len + 1));
-	if (!tokens)
-		return (NULL);
-	i = 0;
-	j = 0;
-	quote = 0;
-	while (line[i])
-	{
-		if (line[i] == '\'' || line[i] == '"')
-		{
-			k = 0;
-			quote = line[i];
-			k++;
-			while (line[i + k] != quote)
-				k++;
-			k++;
-			tokens[j] = ft_substr(line, i, k);
-			j++;
-			i += k;
-		}
-		else if (line[i] == '|' || line[i] == '>' || line[i] == '<')
-		{
-			if (line[i + 1] == line[i] && line[i] != '|')
-			{
-				tokens[j] = ft_substr(line, i, 2);
-				j++;
-				i += 2;
-			}
-			else
-			{
-				tokens[j] = ft_substr(line, i, 1);
-				j++;
-				i++;
-			}
-		}
-		else if (is_space(line[i]))
-			i++;
-		else
-		{
-			if (line[i] == '\0')
-				break ;
-			k = 0;
-			while (line[i + k] && !is_space(line[i + k]) && line[i + k] != '\''
-				&& line[i + k] != '"' && line[i + k] != '|' && line[i
-				+ k] != '>' && line[i + k] != '<')
-				k++;
-			tokens[j] = ft_substr(line, i, k);
-			i += k;
-			j++;
-		}
-	}
-	tokens[j] = NULL;
-	return (tokens);
 }
 
 void	print_strings(char **tokens)
