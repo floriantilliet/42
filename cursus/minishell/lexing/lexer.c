@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 18:16:32 by florian           #+#    #+#             */
-/*   Updated: 2024/05/05 18:22:21 by florian          ###   ########.fr       */
+/*   Updated: 2024/05/05 18:42:56 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,35 +157,6 @@ char	**line_to_strings(char *line)
 	}
 	tokens[j] = NULL;
 	return (tokens);
-}
-
-int	get_token_type(char *token)
-{
-	int	len;
-
-	len = ft_strlen(token);
-	if (len == 1)
-	{
-		if (token[0] == '|')
-			return (PIPE);
-		if (token[0] == '>')
-			return (OUT);
-		if (token[0] == '<')
-			return (IN);
-		else
-			return (ARG);
-	}
-	else if (len == 2)
-	{
-		if (token[0] == '>' && token[1] == '>')
-			return (APPEND);
-		if (token[0] == '<' && token[1] == '<')
-			return (HEREDOC);
-		else
-			return (ARG);
-	}
-	else
-		return (ARG);
 }
 
 void	print_strings(char **tokens)
