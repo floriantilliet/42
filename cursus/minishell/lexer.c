@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 18:16:32 by florian           #+#    #+#             */
-/*   Updated: 2024/05/05 16:41:54 by florian          ###   ########.fr       */
+/*   Updated: 2024/05/05 17:16:13 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -330,5 +330,4 @@ void	print_token_list(t_token **token_list)
 		current = current->next;
 		i++;
 	}
-	free_token_list(token_list);
 }
