@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 18:16:32 by florian           #+#    #+#             */
-/*   Updated: 2024/05/05 16:17:03 by florian          ###   ########.fr       */
+/*   Updated: 2024/05/05 16:41:54 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -254,7 +254,7 @@ char	*trimmer(char *str)
 	len = ft_strlen(str);
 	res = malloc(sizeof(char) * (len + 1));
 	if (!res)
-		return (NULL)
+		return (NULL);
 	i = 0;
 	j = 0;
 	if (str[0] == '"' || str[0] == '\'')
