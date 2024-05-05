@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 05:43:39 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/05/05 18:03:44 by florian          ###   ########.fr       */
+/*   Updated: 2024/05/05 18:23:22 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int					check_quote_problems(char *line);
 int					count_tokens(char *line);
 t_token				**strings_to_tokens(char **tokens);
 void				print_token_list(t_token **token_list);
+int					get_token_type(char *token);
 void				expand_token(t_token *current, t_env **env);
 void				trim_token(t_token *current);
 void				expand_token_list(t_token **token_list, t_env **env);
