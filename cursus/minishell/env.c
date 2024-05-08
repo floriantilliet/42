@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 05:41:11 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/05/05 21:29:34 by florian          ###   ########.fr       */
+/*   Updated: 2024/05/08 11:40:57 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,18 +69,6 @@ t_env	**store_env(char **envp)
 		envp++;
 	}
 	return (env);
-}
-
-void	printenv(t_env **env)
-{
-	t_env	*current;
-
-	current = *env;
-	while (current)
-	{
-		printf("%s=%s\n", current->key, current->value);
-		current = current->next;
-	}
 }
 
 char	*get_env_value(char *key, t_env **env)

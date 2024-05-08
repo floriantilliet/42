@@ -1,6 +1,6 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-SRC = $(wildcard *.c) $(wildcard lexing/*.c) 
+SRC = $(wildcard *.c) $(wildcard lexing/*.c) $(wildcard builtins/*.c)
 OBJ = $(SRC:.c=.o)
 EXECUTABLE = minishell
 
