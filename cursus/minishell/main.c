@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 05:41:13 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/05/05 21:09:41 by florian          ###   ########.fr       */
+/*   Updated: 2024/05/08 12:40:57 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,10 @@ int	main(int ac, char **av, char **envp)
 			else if (ft_strncmp(line, "env", 3) == 0)
 			{
 				printenv(env);
+			}
+			else if (ft_strncmp(line, "pwd", 3) == 0)
+			{
+				ft_pwd();
 			}
 			else
 			// printf("%s\n", expander(line, env));

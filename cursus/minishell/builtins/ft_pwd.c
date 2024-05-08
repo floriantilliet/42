@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_env.c                                           :+:      :+:    :+:   */
+/*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/08 11:40:47 by florian           #+#    #+#             */
-/*   Updated: 2024/05/08 12:28:59 by florian          ###   ########.fr       */
+/*   Created: 2024/05/08 12:27:36 by florian           #+#    #+#             */
+/*   Updated: 2024/05/08 12:43:30 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-// doit print dans l'ordre ascii!
-int	printenv(t_env **env)
+int	ft_pwd(void)
 {
-	t_env *current;
+	char	*cwd;
 
-	current = *env;
-	while (current)
+	cwd = getcwd(NULL, 0);
+	if (cwd)
 	{
-		printf("%s=%s\n", current->key, current->value);
-		current = current->next;
+		printf("%s\n", cwd);
+		return (free(cwd), 0);
 	}
-	return (0);
+	else
+	{
+		perror("pwd");
+		return (free(cwd), 1);
+	}
 }
