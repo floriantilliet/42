@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 11:40:47 by florian           #+#    #+#             */
-/*   Updated: 2024/05/08 12:28:59 by florian          ###   ########.fr       */
+/*   Updated: 2024/05/08 12:45:04 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // doit print dans l'ordre ascii!
 int	printenv(t_env **env)
 {
-	t_env *current;
+	t_env	*current;
 
 	current = *env;
 	while (current)
