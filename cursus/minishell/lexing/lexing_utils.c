@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.c                                            :+:      :+:    :+:   */
+/*   lexing_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 18:16:32 by florian           #+#    #+#             */
-/*   Updated: 2024/05/05 19:08:07 by florian          ###   ########.fr       */
+/*   Updated: 2024/06/02 11:37:55 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,29 +17,6 @@ int	is_space(char c)
 	if (c == ' ' || (c >= 9 && c <= 13))
 		return (1);
 	return (0);
-}
-
-int	check_quote_problems(char *line)
-{
-	int	i;
-	int	current_quote;
-
-	i = 0;
-	current_quote = 0;
-	while (line[i])
-	{
-		if (line[i] == '\'' || line[i] == '"')
-		{
-			if (current_quote == '\0')
-				current_quote = line[i];
-			else if (current_quote == line[i])
-				current_quote = '\0';
-		}
-		i++;
-	}
-	if (current_quote != '\0')
-		return (0);
-	return (1);
 }
 
 void	print_strings(char **tokens)

@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 05:43:39 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/05/08 12:41:21 by florian          ###   ########.fr       */
+/*   Updated: 2024/06/02 11:49:50 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,9 @@ int					get_token_type(char *token);
 void				expand_token(t_token *current, t_env **env);
 void				trim_token(t_token *current);
 void				expand_token_list(t_token **token_list, t_env **env);
+int					check_pipe_problems(char *line);
+int					check_redirection_problems(char *line);
+int					check_problems(char *line);
 
 // cleaning_utils.c
 

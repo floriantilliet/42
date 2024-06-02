@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 05:41:13 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/05/08 12:40:57 by florian          ###   ########.fr       */
+/*   Updated: 2024/06/02 11:58:36 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ int	main(int ac, char **av, char **envp)
 			else
 			// printf("%s\n", expander(line, env));
 			{
-				if (!check_quote_problems(line))
-					printf("Error: unclosed quote\n");
+				if (!check_problems(line))
+					;
 				else
 				{
 					tokens = (strings_to_tokens(line_to_strings(line)));
