@@ -6,13 +6,12 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 11:40:47 by florian           #+#    #+#             */
-/*   Updated: 2024/05/08 12:45:04 by florian          ###   ########.fr       */
+/*   Updated: 2024/06/03 16:26:17 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-// doit print dans l'ordre ascii!
 int	printenv(t_env **env)
 {
 	t_env	*current;

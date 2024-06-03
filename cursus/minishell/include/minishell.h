@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 05:43:39 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/06/02 12:52:34 by florian          ###   ########.fr       */
+/*   Updated: 2024/06/03 16:28:37 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void				expand_token(t_token *current, t_env **env);
 void				trim_token(t_token *current);
 void				expand_token_list(t_token **token_list, t_env **env);
 int					check_pipe_problems(char *line);
-int					redirection_flag_updater(char *line, int *i, int len)
+int					redirection_flag_updater(char *line, int *i, int len);
 int					check_redirection_problems(char *line);
 int					check_problems(char *line);
 

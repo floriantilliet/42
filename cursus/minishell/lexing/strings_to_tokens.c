@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 18:22:38 by florian           #+#    #+#             */
-/*   Updated: 2024/05/05 18:43:00 by florian          ###   ########.fr       */
+/*   Updated: 2024/06/03 16:25:23 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	get_token_type(char *token)
 		return (ARG);
 }
 
-static t_token	*create_token_node(char *value)
+t_token	*create_token_node(char *value)
 {
 	t_token	*new_node;
 
@@ -55,7 +55,7 @@ static t_token	*create_token_node(char *value)
 	return (new_node);
 }
 
-static void	add_token_to_list(t_token **token_list, t_token *new_node)
+void	add_token_to_list(t_token **token_list, t_token *new_node)
 {
 	t_token	*current;
 
@@ -71,7 +71,7 @@ static void	add_token_to_list(t_token **token_list, t_token *new_node)
 	}
 }
 
-static void	update_flags(t_token *new_node, int *cmd_flag,
+void	update_flags(t_token *new_node, int *cmd_flag,
 		int *redirection_flag)
 {
 	if (new_node->type == IN || new_node->type == OUT
