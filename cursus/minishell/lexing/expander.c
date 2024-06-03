@@ -6,13 +6,13 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 05:41:57 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/06/03 16:29:23 by florian          ###   ########.fr       */
+/*   Updated: 2024/06/03 16:33:51 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	handle_expand_quotes(char *line, char *current_quote, int *expand, int *i)
+void	handle_exp_quotes(char *line, char *current_quote, int *expand, int *i)
 {
 	if (*current_quote == '\0')
 	{
@@ -84,7 +84,7 @@ char	*expander(char *line, t_env **env)
 		if (line[i] == '\'' || line[i] == '"')
 		{
 			if (current_quote == '\0' || current_quote == line[i])
-				handle_expand_quotes(line, &current_quote, &expand, &i);
+				handle_exp_quotes(line, &current_quote, &expand, &i);
 			else
 				append_char(&res, line, &i);
 		}
