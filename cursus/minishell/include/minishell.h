@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 05:43:39 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/06/03 16:28:37 by florian          ###   ########.fr       */
+/*   Updated: 2024/06/03 17:06:35 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,5 +89,7 @@ void				sigint_handler(int code);
 // builtins
 
 int					ft_pwd(void);
+
+void				print_strings(char **tokens);
 
 #endif
