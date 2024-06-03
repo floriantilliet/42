@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 05:43:39 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/06/03 17:06:35 by florian          ###   ########.fr       */
+/*   Updated: 2024/06/03 17:45:03 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define IN 4
 # define APPEND 5
 # define HEREDOC 6
+# define IS_SPACE 7
 
 typedef struct s_env
 {
@@ -74,6 +75,7 @@ int					check_pipe_problems(char *line);
 int					redirection_flag_updater(char *line, int *i, int len);
 int					check_redirection_problems(char *line);
 int					check_problems(char *line);
+int					get_token_type(char *token);
 
 // cleaning_utils.c
 

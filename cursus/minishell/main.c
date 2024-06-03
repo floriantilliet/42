@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 05:41:13 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/06/03 16:43:48 by florian          ###   ########.fr       */
+/*   Updated: 2024/06/03 17:18:01 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ int	main(int ac, char **av, char **envp)
 				else
 				{
 					tokens = (strings_to_tokens(line_to_strings(line)));
-					print_strings(line_to_strings(line));
-					// expand_token_list(tokens, env);
-					// print_token_list(tokens);
+					// print_strings(line_to_strings(line));
+					expand_token_list(tokens, env);
+					print_token_list(tokens);
 					free_token_list(tokens);
 				}
 			}
