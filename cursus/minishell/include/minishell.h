@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 05:43:39 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/06/03 19:03:57 by florian          ###   ########.fr       */
+/*   Updated: 2024/06/04 13:33:38 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,13 @@ typedef struct s_token
 	struct s_token	*next;
 	struct s_token	*prev;
 }					t_token;
+
+typedef struct s_flags
+{
+	int				cmd_flag;
+	int				redirection_flag;
+	int				pipe_flag;
+}					t_flags;
 
 // env.c
 
@@ -98,5 +105,12 @@ void				free_new_list(t_token *new_list);
 char				*merge_values(char *merged_value, char *next_value);
 void				add_new_node(t_token **new_list, t_token **last_new_node,
 						char *value, int type);
+void				update_arg_cmd_flags(t_token *new_node, t_flags *flags);
+void				update_token_flags(t_token *new_node, t_flags *flags);
+void				update_arg_cmd_flags(t_token *new_node, t_flags *flags);
+void				update_token_flags(t_token *new_node, t_flags *flags);
+void				initialize_merge_vars(t_token **current,
+						t_token **token_list, t_flags *flags);
+t_token				**create_merged_list(t_token *new_list);
 
 #endif
