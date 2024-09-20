@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   strings_to_tokens.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 18:22:38 by florian           #+#    #+#             */
-/*   Updated: 2024/06/03 17:44:11 by florian          ###   ########.fr       */
+/*   Updated: 2024/09/12 11:12:16 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ t_token	*create_token_node(char *value)
 	new_node->type = get_token_type(value);
 	new_node->prev = NULL;
 	new_node->next = NULL;
+	new_node->file_n = NULL;
+	new_node->fd = -1;
 	return (new_node);
 }
 
@@ -60,7 +62,36 @@ void	update_flags(t_token *new_node, int *cmd_flag, int *redirection_flag)
 		*cmd_flag = 0;
 }
 
-t_token	**strings_to_tokens(char **tokens)
+void	check_env_var(char *str, t_env **env)
+{
+	int	i;
+	int	len;
+	int	quote_flag;
+
+	len = ft_strlen(str);
+	i = 0;
+	quote_flag = 0;
+	while (str[i])
+	{
+		if (str[i] == '\'')
+			break ;
+		if (str[i] == '\"')
+			handle_quotes(str, &len, &quote_flag);
+		if (str[i] == '$')
+		{
+			if (str[i + 1] == '?')
+				handle_dollar_question(str, &i, env, &len);
+			else if (!(is_space(str[i + 1]) || str[i + 1] == '\"' || !str[i
+						+ 1]))
+				handle_env_var(str, &i, &len, env);
+		}
+		i++;
+	}
+	if (quote_flag)
+		update_str_with_quotes(str);
+}
+
+t_token	**strings_to_tokens(char **tokens, t_env **env)
 {
 	t_token	**token_list;
 	t_token	*new_node;
@@ -68,15 +99,16 @@ t_token	**strings_to_tokens(char **tokens)
 	int		redirection_flag;
 	int		i;
 
-	token_list = malloc(sizeof(t_token *));
+	token_list = initialize_token_list();
 	if (!token_list)
 		return (NULL);
-	*token_list = NULL;
 	cmd_flag = 0;
 	redirection_flag = 0;
 	i = 0;
 	while (tokens[i])
 	{
+		if (!process_token(tokens, &i, env))
+			break ;
 		new_node = create_token_node(tokens[i]);
 		if (!new_node)
 			return (NULL);

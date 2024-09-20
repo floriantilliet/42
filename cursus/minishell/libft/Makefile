@@ -5,7 +5,11 @@ SRC			= ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
 				ft_strchr.c ft_strdup.c ft_striteri.c ft_strjoin.c ft_strlcat.c \
 				ft_strlcpy.c ft_strlen.c ft_strmapi.c ft_strncmp.c \
 				ft_strnstr.c ft_strrchr.c ft_strtrim.c ft_substr.c ft_tolower.c \
-				ft_toupper.c
+				ft_toupper.c get_next_line/get_next_line.c \
+				get_next_line/get_next_line_utils.c get_next_line/get_next_line_bonus.c \
+				get_next_line/get_next_line_utils_bonus.c \
+				printf/ft_format.c printf/ft_printf.c printf/ft_write.c
+
 
 OBJS		= ${SRC:.c=.o}
 

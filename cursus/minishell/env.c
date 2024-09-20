@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 05:41:11 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/05/08 11:40:57 by florian          ###   ########.fr       */
+/*   Updated: 2024/07/07 16:36:23 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ t_env	*create_env_node(char *env_str)
 	new_node->key[length] = '\0';
 	new_node->value = ft_strdup(equal_signs + 1);
 	new_node->next = NULL;
+	new_node->exit_code = 0;
 	return (new_node);
 }
 
@@ -86,4 +87,23 @@ char	*get_env_value(char *key, t_env **env)
 		current = current->next;
 	}
 	return ("");
+}
+
+void	increment_shlvl(t_env *env)
+{
+	char	*tmp;
+	int		shlvl;
+
+	while (env && ft_strcmp(env->key, "SHLVL"))
+		env = env->next;
+	if (!env)
+		return ;
+	shlvl = ft_atoi(env->value);
+	if (shlvl < 0)
+		shlvl = 0;
+	else
+		shlvl++;
+	tmp = ft_itoa(shlvl);
+	free(env->value);
+	env->value = tmp;
 }

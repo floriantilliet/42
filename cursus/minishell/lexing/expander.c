@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 05:41:57 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/06/03 16:33:51 by florian          ###   ########.fr       */
+/*   Updated: 2024/09/11 21:09:53 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,30 @@ void	append_char(char **res, char *line, int *i)
 	(*i)++;
 }
 
+void	expand_variable(char **res, char *sub, int j, t_env **env)
+{
+	char	*exit;
+	char	*sub2;
+	char	*tmp;
+	char	*tmp2;
+
+	if (sub[0] == '?')
+	{
+		exit = ft_itoa((*env)->exit_code);
+		sub2 = ft_substr(sub, 1, j - 1);
+		tmp2 = ft_strjoin(exit, sub2);
+		tmp = ft_strjoin(*res, tmp2);
+		free(tmp2);
+		free(exit);
+		free(sub2);
+	}
+	else
+		tmp = ft_strjoin(*res, get_env_value(sub, env));
+	free(*res);
+	free(sub);
+	*res = tmp;
+}
+
 void	handle_expansion(char **res, char *line, int *i, t_env **env)
 {
 	int		j;
@@ -60,10 +84,7 @@ void	handle_expansion(char **res, char *line, int *i, t_env **env)
 	else
 	{
 		sub = ft_substr(line, *i, j);
-		tmp = ft_strjoin(*res, get_env_value(sub, env));
-		free(*res);
-		free(sub);
-		*res = tmp;
+		expand_variable(res, sub, j, env);
 		*i += j;
 	}
 }

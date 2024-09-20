@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_token_list.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 18:13:10 by florian           #+#    #+#             */
-/*   Updated: 2024/06/03 16:25:46 by florian          ###   ########.fr       */
+/*   Updated: 2024/09/11 21:03:40 by ftilliet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,23 @@ void	trim_token(t_token *current)
 {
 	char	*tmp;
 
+	if (!current || !current->value)
+		return ;
 	tmp = trimmer(current->value);
 	free(current->value);
 	current->value = tmp;
+}
+
+void	initialise_fd(t_token **tokens)
+{
+	t_token	*lst;
+
+	lst = *tokens;
+	while (lst)
+	{
+		lst->fd = -1;
+		lst = lst->next;
+	}
 }
 
 void	expand_token_list(t_token **token_list, t_env **env)
@@ -64,6 +78,8 @@ void	expand_token_list(t_token **token_list, t_env **env)
 	int		flag;
 
 	flag = 0;
+	if (!token_list || !*token_list)
+		return ;
 	current = *token_list;
 	while (current)
 	{
@@ -75,8 +91,12 @@ void	expand_token_list(t_token **token_list, t_env **env)
 		if (flag == 0)
 			expand_token(current, env);
 		else
+		{
 			trim_token(current);
-		flag = 0;
-		current = current->next;
+			flag = 0;
+		}
+		if (current)
+			current = current->next;
 	}
+	initialise_fd(token_list);
 }
