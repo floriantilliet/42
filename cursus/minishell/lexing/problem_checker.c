@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 11:37:41 by florian           #+#    #+#             */
-/*   Updated: 2024/07/26 13:47:55 by florian          ###   ########.fr       */
+/*   Updated: 2024/09/30 16:09:39 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,10 @@ int	check_redirection_problems(char *line)
 		if ((line[i] == '>' || line[i] == '<'))
 		{
 			flag = 0;
-			i++;
 			flag = redirection_flag_updater(line, &i, len);
 			if (flag == 0)
 				return (0);
+			i++;
 		}
 		i++;
 	}
