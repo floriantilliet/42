@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_env_var_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ftilliet <ftilliet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 17:30:13 by ftilliet          #+#    #+#             */
-/*   Updated: 2024/09/12 11:18:45 by ftilliet         ###   ########.fr       */
+/*   Updated: 2024/10/01 14:12:38 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	find_env_var_length(char *str, int i)
 
 	j = 0;
 	while (str[i + j + 1] && !is_space(str[i + j + 1]) && str[i + j
-			+ 1] != '\"')
+			+ 1] != '\"' && str[i + j + 1] != '\'')
 		j++;
 	return (j);
 }
