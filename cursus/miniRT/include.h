@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 09:53:46 by florian           #+#    #+#             */
-/*   Updated: 2024/10/10 10:33:32 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/10 10:45:03 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include <fcntl.h>
 # include <math.h>
 # include <stdlib.h>
+
+# define EPSILON 0.00001
 
 typedef struct s_tuple
 {
