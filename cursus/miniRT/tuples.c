@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 10:34:42 by florian           #+#    #+#             */
-/*   Updated: 2024/10/10 11:20:34 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/10 11:51:44 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ t_tuple negate_tuple(t_tuple a)
     return (res);
 }
 
-t_tuple scalar_product(t_tuple a, double b)
+t_tuple multiply_tuple(t_tuple a, double b)
 {
     t_tuple res;
 
@@ -85,7 +85,7 @@ t_tuple scalar_product(t_tuple a, double b)
     return (res);
 }
 
-t_tuple scalar_division(t_tuple a, double b)
+t_tuple divide_tuple(t_tuple a, double b)
 {
     t_tuple res;
 
@@ -93,5 +93,44 @@ t_tuple scalar_division(t_tuple a, double b)
     res.y = a.y / b;
     res.z = a.z / b;
     res.w = a.w / b;
+    return (res);
+}
+
+double get_magnitude(t_tuple a)
+{
+    double res;
+
+    res = sqrt(a.x * a.x + a.y * a.y + a.z * a.z);
+    return (res);
+}
+
+t_tuple normalize_vector(t_tuple a)
+{
+    t_tuple res;
+    double magnitude;
+
+    magnitude = get_magnitude(a);
+    res.x = a.x / magnitude;
+    res.y = a.y / magnitude;
+    res.z = a.z / magnitude;
+    res.w = a.w / magnitude;
+    return (res);
+}
+
+double scalar_product(t_tuple a, t_tuple b)
+{
+    double res;
+
+    res = a.x * b.x + a.y * b.y + a.z * b.z;
+    return (res);
+}
+
+t_tuple cross_product(t_tuple a, t_tuple b)
+{
+    t_tuple res;
+
+    res = create_vector(a.y * b.z - a.z * b.y,
+                        a.z * b.x - a.x * b.z,
+                        a.x * b.y - a.y * b.x);
     return (res);
 }
