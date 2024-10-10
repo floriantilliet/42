@@ -1,33 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   include.h                                          :+:      :+:    :+:   */
+/*   tuples.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/10 09:53:46 by florian           #+#    #+#             */
-/*   Updated: 2024/10/10 10:33:32 by florian          ###   ########.fr       */
+/*   Created: 2024/10/10 10:34:42 by florian           #+#    #+#             */
+/*   Updated: 2024/10/10 10:37:25 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GRAPHICS_H
-# define GRAPHICS_H
+#include "include.h"
 
-# include "get_next_line/get_next_line_bonus.h"
-# include "libft/libft.h"
-# include "mlx/mlx.h"
-# include <X11/X.h>
-# include <X11/keysym.h>
-# include <fcntl.h>
-# include <math.h>
-# include <stdlib.h>
-
-typedef struct s_tuple
+t_tuple create_vector(double x, double y, double z)
 {
-	double		x;
-    double		y;
-    double		z;
-    int		w;
-}				t_tuple;
+    t_tuple vector;
 
-#endif
+    vector.x = x;
+    vector.y = y;
+    vector.z = z;
+    vector.w = 0;
+    return (vector);
+}
+
+t_tuple create_point(double x, double y, double z)
+{
+    t_tuple point;
+
+    point.x = x;
+    point.y = y;
+    point.z = z;
+    point.w = 1;
+    return (point);
+}
