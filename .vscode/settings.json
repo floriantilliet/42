@@ -17,7 +17,8 @@
         "functional": "c",
         "tuple": "c",
         "type_traits": "c",
-        "utility": "c"
+        "utility": "c",
+        "graphics.h": "c"
     },
     "editor.defaultFormatter": "keyhr.42-c-format"
 }
