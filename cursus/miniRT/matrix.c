@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 12:07:16 by florian           #+#    #+#             */
-/*   Updated: 2024/10/11 18:40:23 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/11 22:19:35 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -257,4 +257,9 @@ t_4matrix translation_mat(float x, float y, float z)
     res.mat[3][3] = 1;
 
     return res;
+}
+
+t_tuple translation(t_tuple a, float x, float y, float z)
+{
+    
 }
