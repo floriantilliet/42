@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 19:31:59 by florian           #+#    #+#             */
-/*   Updated: 2024/10/11 14:04:07 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/11 14:20:12 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,23 +48,30 @@ int	main(int ac, char **av)
     ac++;
     av++;
     // t_4matrix mat;
-    // mat.mat[0][0] = -2;
-    // mat.mat[0][1] = -8;
-    // mat.mat[0][2] = 3;
-    // mat.mat[0][3] = 5;
-    // mat.mat[1][0] = -3;
-    // mat.mat[1][1] = 1;
-    // mat.mat[1][2] = 7;
-    // mat.mat[1][3] = 3;
-    // mat.mat[2][0] = 1;
-    // mat.mat[2][1] = 2;
-    // mat.mat[2][2] = -9;
+    // mat.mat[0][0] = 8;
+    // mat.mat[0][1] = -5;
+    // mat.mat[0][2] = 9;
+    // mat.mat[0][3] = 2;
+    // mat.mat[1][0] = 7;
+    // mat.mat[1][1] = 5;
+    // mat.mat[1][2] = 6;
+    // mat.mat[1][3] = 1;
+    // mat.mat[2][0] = -6;
+    // mat.mat[2][1] = 0;
+    // mat.mat[2][2] = 9;
     // mat.mat[2][3] = 6;
-    // mat.mat[3][0] = -6;
-    // mat.mat[3][1] = 7;
-    // mat.mat[3][2] = 7;
-    // mat.mat[3][3] = -9;
-    // printf("%d\n" , determinant4(mat));
+    // mat.mat[3][0] = -3;
+    // mat.mat[3][1] = 0;
+    // mat.mat[3][2] = -9;
+    // mat.mat[3][3] = -4;
+    
+    // t_4matrix mat2 = inverse4(mat);
+    // for (int i = 0; i < 4; i++) {
+    //     for (int j = 0; j < 4; j++) {
+    //         printf("%f ", mat2.mat[i][j]);
+    //     }
+    //     printf("\n");
+    // }
     int color = ft_create_trgb(0, 255, 255, 255);
     ft_init_image(&data);
     ft_pixel_put(&data.img, 0, 0, color);

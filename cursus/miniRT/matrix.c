@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 12:07:16 by florian           #+#    #+#             */
-/*   Updated: 2024/10/11 13:58:58 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/11 14:19:19 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,14 +178,14 @@ t_2matrix sub3matrix(t_3matrix a, int row, int col)
     return res;
 }
 
-int determinant2(t_2matrix a)
+float determinant2(t_2matrix a)
 {
     return(a.mat[0][0] * a.mat[1][1] - a.mat[0][1] * a.mat[1][0]);     
 }
 
-int determinant3(t_3matrix a)
+float determinant3(t_3matrix a)
 {
-    int res;
+    float res;
     
     res = 0;
     res += a.mat[0][0] * determinant2(sub3matrix(a, 0, 0));
@@ -195,9 +195,9 @@ int determinant3(t_3matrix a)
 }
 
 
-int determinant4(t_4matrix a)
+float determinant4(t_4matrix a)
 {
-    int res;
+    float res;
     
     res = 0;
     res += a.mat[0][0] * determinant3(sub4matrix(a, 0, 0));
@@ -205,4 +205,28 @@ int determinant4(t_4matrix a)
     res += a.mat[0][2] * determinant3(sub4matrix(a, 0, 2));
     res -= a.mat[0][3] * determinant3(sub4matrix(a, 0, 3));
     return (res);
+}
+
+t_4matrix inverse4(t_4matrix a)
+{
+    t_4matrix res;
+    int i;
+    int j;
+    float det;
+
+    det = determinant4(a);
+    i = 0;
+    while (i < 4)
+    {
+        j = 0;
+        while (j < 4)
+        {
+            res.mat[i][j] = determinant3(sub4matrix(a, i, j))/det;
+            if ((i + j) % 2 == 1)
+                res.mat[i][j] *= -1;
+            j++;
+        }
+        i++;
+    }
+    return (mat_transpose(res));
 }
