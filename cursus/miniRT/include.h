@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 09:53:46 by florian           #+#    #+#             */
-/*   Updated: 2024/10/11 13:46:38 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/11 14:00:37 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,13 @@ typedef struct s_data
 
 int	ft_init_image(t_data *data);
 int	close_image(t_data *data);
+int mat_equal(t_4matrix a, t_4matrix b);
+t_4matrix mat_product(t_4matrix a, t_4matrix b);
+t_tuple mat_tuple_product(t_4matrix a, t_tuple b);
+t_3matrix sub4matrix(t_4matrix a, int row, int col);
+t_2matrix sub3matrix(t_3matrix a, int row, int col);
+int determinant2(t_2matrix a);
+int determinant3(t_3matrix a);
+int determinant4(t_4matrix a);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 19:31:59 by florian           #+#    #+#             */
-/*   Updated: 2024/10/11 11:15:53 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/11 14:04:07 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,30 @@ void	ft_pixel_put(t_img *img, unsigned int x, unsigned int y, int color)
 		*(unsigned int *)dst = color;
 	}
 }
-
+#include <stdio.h>
 int	main(int ac, char **av)
 {
     t_data data;
     ac++;
     av++;
+    // t_4matrix mat;
+    // mat.mat[0][0] = -2;
+    // mat.mat[0][1] = -8;
+    // mat.mat[0][2] = 3;
+    // mat.mat[0][3] = 5;
+    // mat.mat[1][0] = -3;
+    // mat.mat[1][1] = 1;
+    // mat.mat[1][2] = 7;
+    // mat.mat[1][3] = 3;
+    // mat.mat[2][0] = 1;
+    // mat.mat[2][1] = 2;
+    // mat.mat[2][2] = -9;
+    // mat.mat[2][3] = 6;
+    // mat.mat[3][0] = -6;
+    // mat.mat[3][1] = 7;
+    // mat.mat[3][2] = 7;
+    // mat.mat[3][3] = -9;
+    // printf("%d\n" , determinant4(mat));
     int color = ft_create_trgb(0, 255, 255, 255);
     ft_init_image(&data);
     ft_pixel_put(&data.img, 0, 0, color);
