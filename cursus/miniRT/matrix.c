@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 12:07:16 by florian           #+#    #+#             */
-/*   Updated: 2024/10/11 14:19:19 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/11 18:40:23 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,4 +229,32 @@ t_4matrix inverse4(t_4matrix a)
         i++;
     }
     return (mat_transpose(res));
+}
+
+t_4matrix translation_mat(float x, float y, float z)
+{
+    t_4matrix res;
+    int i;
+    int j;
+    
+    i = 0;
+    while (i < 4)
+    {
+        j = 0;
+        while (j < 4)
+        {
+            if (i != j)
+                res.mat[i][j] = 0;
+            else
+                res.mat[i][j] = 1;
+            j++;
+        }
+        i++;
+    }
+    res.mat[0][3] = x;
+    res.mat[1][3] = y;
+    res.mat[2][3] = z;
+    res.mat[3][3] = 1;
+
+    return res;
 }

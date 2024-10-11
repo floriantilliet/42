@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 09:53:46 by florian           #+#    #+#             */
-/*   Updated: 2024/10/11 14:18:33 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/11 18:46:36 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct s_tuple
 	double		x;
     double		y;
     double		z;
-    int		w;
+    double		w;
 }				t_tuple;
 
 typedef struct		s_4matrix{
@@ -73,5 +73,7 @@ float determinant2(t_2matrix a);
 float determinant3(t_3matrix a);
 float determinant4(t_4matrix a);
 t_4matrix inverse4(t_4matrix a);
+t_4matrix translation_mat(float x, float y, float z);
+t_tuple	create_point(double x, double y, double z);
 
 #endif

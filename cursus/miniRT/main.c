@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 19:31:59 by florian           #+#    #+#             */
-/*   Updated: 2024/10/11 14:20:12 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/11 18:49:46 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,13 @@ int	main(int ac, char **av)
     //     }
     //     printf("\n");
     // }
+    t_tuple point;
+    point = create_point(-3,4,5);
+    t_4matrix mat;
+    mat = translation_mat(5, -3, 2);
+    t_tuple point2 =mat_tuple_product(mat, point);
+    
+    printf("Transformed point: (%f, %f, %f, %f)\n", point2.x, point2.y, point2.z, point2.w);
     int color = ft_create_trgb(0, 255, 255, 255);
     ft_init_image(&data);
     ft_pixel_put(&data.img, 0, 0, color);
