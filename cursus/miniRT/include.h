@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 09:53:46 by florian           #+#    #+#             */
-/*   Updated: 2024/10/11 11:00:09 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/11 13:46:38 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,18 @@ typedef struct s_tuple
     double		z;
     int		w;
 }				t_tuple;
+
+typedef struct		s_4matrix{
+	double			mat[4][4];
+}					t_4matrix;
+
+typedef struct		s_3matrix{
+	double			mat[3][3];
+}					t_3matrix;
+
+typedef struct		s_2matrix{
+	double			mat[2][2];
+}					t_2matrix;
 
 typedef struct s_img
 {
