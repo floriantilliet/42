@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 12:07:16 by florian           #+#    #+#             */
-/*   Updated: 2024/10/11 13:58:04 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/11 13:58:58 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,8 +186,6 @@ int determinant2(t_2matrix a)
 int determinant3(t_3matrix a)
 {
     int res;
-    int i;
-    int j;
     
     res = 0;
     res += a.mat[0][0] * determinant2(sub3matrix(a, 0, 0));
@@ -200,8 +198,6 @@ int determinant3(t_3matrix a)
 int determinant4(t_4matrix a)
 {
     int res;
-    int i;
-    int j;
     
     res = 0;
     res += a.mat[0][0] * determinant3(sub4matrix(a, 0, 0));
