@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 09:53:46 by florian           #+#    #+#             */
-/*   Updated: 2024/10/12 09:48:44 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/12 10:15:06 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,16 @@ typedef struct		s_2matrix{
 	double			mat[2][2];
 }					t_2matrix;
 
+typedef struct s_shearing_params
+{
+	float		xy;
+	float		xz;
+	float		yx;
+	float		yz;
+	float		zx;
+	float		zy;
+}				t_shearing_params;
+
 typedef struct s_img
 {
 	void		*mlx_img;
@@ -81,5 +91,6 @@ t_4matrix rotation_x_mat(float angle);
 t_4matrix rotation_y_mat(float angle);
 t_4matrix rotation_z_mat(float angle);
 t_4matrix scaling_mat(float x, float y, float z);
+t_4matrix shearing_mat(t_shearing_params params);
 
 #endif

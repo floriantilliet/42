@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 19:31:59 by florian           #+#    #+#             */
-/*   Updated: 2024/10/12 09:49:03 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/12 10:24:43 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,9 @@ int	main(int ac, char **av)
     //     printf("\n");
     // }
     t_tuple point;
-    point = create_point(0,1,0);
+    point = create_point(1,0,1);
     t_4matrix mat;
-    mat = rotation_z_mat(PI/4);
-    // mat = inverse4(mat);
+    mat = scaling_mat(5,5,5);
     t_tuple point2 =mat_tuple_product(mat, point);
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 4; j++) {

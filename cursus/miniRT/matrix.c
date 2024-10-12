@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 12:07:16 by florian           #+#    #+#             */
-/*   Updated: 2024/10/12 09:48:10 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/12 10:14:00 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -296,5 +296,19 @@ t_4matrix rotation_z_mat(float angle)
     res.mat[0][1] = -sin(angle);
     res.mat[1][0] = sin(angle);
     res.mat[1][1] = cos(angle);
+    return (res);
+}
+
+t_4matrix shearing_mat(t_shearing_params params)
+{
+    t_4matrix res;
+
+    res = identity4();
+    res.mat[0][1] = params.xy;
+    res.mat[0][2] = params.xz;
+    res.mat[1][0] = params.yx;
+    res.mat[1][2] = params.yz;
+    res.mat[2][0] = params.zx;
+    res.mat[2][1] = params.zy;
     return (res);
 }
