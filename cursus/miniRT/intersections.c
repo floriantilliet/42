@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 15:09:11 by florian           #+#    #+#             */
-/*   Updated: 2024/10/12 17:16:58 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/13 00:45:41 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ float hit(t_intersections **intersections)
 	t_intersections *current;
 	float min;
 	
+	if (!intersections)
+		return (-1);
 	current = *intersections;
 	min = current->t;
 	while (current)

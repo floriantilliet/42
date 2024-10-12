@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 09:53:46 by florian           #+#    #+#             */
-/*   Updated: 2024/10/12 18:19:29 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/13 00:31:35 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 # include <stdlib.h>
 
 # define EPSILON 0.00001
-# define WINDOW_WIDTH 1280
-# define WINDOW_HEIGHT 1024
+# define WINDOW_WIDTH 100
+# define WINDOW_HEIGHT 100
 # define DEG_TO_RAD 3.14159265358979323846 / 180.0
 # define PI 3.14159265358979323846
 
@@ -135,5 +135,6 @@ float hit(t_intersections **intersections);
 t_ray transform_ray(t_ray ray, t_4matrix matrix);
 void    add_transformation(t_objects *object, t_4matrix transformation);
 t_4matrix	identity4(void);
+t_tuple	normalize_vector(t_tuple a);
 
 #endif
