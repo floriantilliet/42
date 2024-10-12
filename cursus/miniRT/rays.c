@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 10:49:03 by florian           #+#    #+#             */
-/*   Updated: 2024/10/12 11:00:00 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/12 17:49:09 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,14 @@ t_tuple	get_position(t_ray ray, double t)
     t_tuple	res;
 
     res = add_floats(ray.origin, multiply_tuple(ray.direction, t));
+    return (res);
+}
+
+t_ray transform_ray(t_ray ray, t_4matrix matrix)
+{
+    t_ray	res;
+
+    res.origin = mat_tuple_product(matrix, ray.origin);
+    res.direction = mat_tuple_product(matrix, ray.direction);
     return (res);
 }

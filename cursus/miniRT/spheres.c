@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 12:00:14 by florian           #+#    #+#             */
-/*   Updated: 2024/10/12 16:08:01 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/12 18:15:42 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ t_objects	*create_object(t_tuple origin, t_intersections **intersections)
 		return (NULL);
 	new_object->origin = origin;
     new_object->intersections = intersections;
+    new_object->transformation = identity4();
 	return (new_object);
 }
 
@@ -50,6 +51,11 @@ void	add_object(t_objects **objects, t_objects *new_objects)
 	}
 }
 
+void    add_transformation(t_objects *object, t_4matrix transformation)
+{
+    (*object).transformation = mat_product((*object).transformation, transformation);
+}
+
 void sphere_intersections(t_ray ray, t_objects *sphere)
 {
     float a;
@@ -58,6 +64,7 @@ void sphere_intersections(t_ray ray, t_objects *sphere)
     float discriminant;
     t_tuple sphere_to_ray;
     
+    ray = transform_ray(ray, inverse4((*sphere).transformation));
     sphere_to_ray = substract_floats(ray.origin, (*sphere).origin);
     a = scalar_product(ray.direction, ray.direction);
     b = 2 * scalar_product(ray.direction, sphere_to_ray);
@@ -70,12 +77,8 @@ void sphere_intersections(t_ray ray, t_objects *sphere)
     }
     else
     {
-        // float t1;
-        // float t2;
         printf("Two intersections\n");
         add_intersection((*sphere).intersections, create_intersection((-b - sqrt(discriminant)) / (2 * a)));
         add_intersection((*sphere).intersections, create_intersection((-b + sqrt(discriminant)) / (2 * a)));
-        // t1 = (-b - sqrt(discriminant)) / (2 * a);
-        // t2 = (-b + sqrt(discriminant)) / (2 * a);
     }
 }

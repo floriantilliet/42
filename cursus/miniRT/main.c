@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 19:31:59 by florian           #+#    #+#             */
-/*   Updated: 2024/10/12 16:45:05 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/12 18:20:20 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,11 @@ int	main(int ac, char **av)
     objects = init_objects();
     new_object = create_object(create_point(0, 0, 0), intersections);
     add_object(objects, new_object);
-    sphere_intersections(create_ray(create_point(0, 0, 0), create_vector(0, 0, 1)), new_object);
-    sphere_intersections(create_ray(create_point(0, 0, 5), create_vector(0, 0, 1)), new_object);
-    sphere_intersections(create_ray(create_point(0, 1, -5), create_vector(0, 0, 1)), new_object);
+    add_transformation(new_object, translation_mat(5, 0, 0));
+    sphere_intersections(create_ray(create_point(0, 0, -5), create_vector(0, 0, 1)), new_object);
 
     print_intersections(new_object->intersections);
-
+    
     int color = ft_create_trgb(0, 255, 255, 255);
     ft_init_image(&data);
     ft_pixel_put(&data.img, 1, 1, color);

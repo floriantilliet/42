@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 09:53:46 by florian           #+#    #+#             */
-/*   Updated: 2024/10/12 16:16:12 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/12 18:19:29 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ typedef struct s_objects
 {
 	int			id;
 	t_tuple		origin;
+	t_4matrix	transformation;
 	struct s_objects	*next;
 	t_intersections		**intersections;
 }				t_objects;
@@ -130,6 +131,9 @@ t_objects	*create_object(t_tuple origin, t_intersections **intersections);
 void	add_object(t_objects **objects, t_objects *new_objects);
 void free_intersections(t_intersections **intersections);
 void print_intersections(t_intersections **intersections);
-
+float hit(t_intersections **intersections);
+t_ray transform_ray(t_ray ray, t_4matrix matrix);
+void    add_transformation(t_objects *object, t_4matrix transformation);
+t_4matrix	identity4(void);
 
 #endif

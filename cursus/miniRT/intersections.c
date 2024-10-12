@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 15:09:11 by florian           #+#    #+#             */
-/*   Updated: 2024/10/12 16:16:03 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/12 17:16:58 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,20 @@ void print_intersections(t_intersections **intersections)
         printf("t: %f\n", current->t);
         current = current->next;
     }
+}
+
+float hit(t_intersections **intersections)
+{
+	t_intersections *current;
+	float min;
+	
+	current = *intersections;
+	min = current->t;
+	while (current)
+	{
+		if (current->t < min && current->t > 0)
+			min = current->t;
+		current = current->next;
+	}
+	return (min);
 }
