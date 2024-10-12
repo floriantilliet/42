@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 09:53:46 by florian           #+#    #+#             */
-/*   Updated: 2024/10/11 18:46:36 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/12 09:48:44 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 # define EPSILON 0.00001
 # define WINDOW_WIDTH 1280
 # define WINDOW_HEIGHT 1024
+# define DEG_TO_RAD 3.14159265358979323846 / 180.0
+# define PI 3.14159265358979323846
 
 typedef struct s_tuple
 {
@@ -75,5 +77,9 @@ float determinant4(t_4matrix a);
 t_4matrix inverse4(t_4matrix a);
 t_4matrix translation_mat(float x, float y, float z);
 t_tuple	create_point(double x, double y, double z);
+t_4matrix rotation_x_mat(float angle);
+t_4matrix rotation_y_mat(float angle);
+t_4matrix rotation_z_mat(float angle);
+t_4matrix scaling_mat(float x, float y, float z);
 
 #endif
