@@ -6,12 +6,14 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 09:53:46 by florian           #+#    #+#             */
-/*   Updated: 2024/10/12 10:15:06 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/12 16:16:12 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GRAPHICS_H
 # define GRAPHICS_H
+
+#include <stdio.h>
 
 # include "get_next_line/get_next_line_bonus.h"
 # include "libft/libft.h"
@@ -58,6 +60,26 @@ typedef struct s_shearing_params
 	float		zy;
 }				t_shearing_params;
 
+typedef struct s_ray
+{
+	t_tuple		origin;
+	t_tuple		direction;
+}				t_ray;
+
+typedef struct s_intersections
+{
+	double	t;
+	struct s_intersections	*next;
+}				t_intersections;
+
+typedef struct s_objects
+{
+	int			id;
+	t_tuple		origin;
+	struct s_objects	*next;
+	t_intersections		**intersections;
+}				t_objects;
+
 typedef struct s_img
 {
 	void		*mlx_img;
@@ -87,10 +109,27 @@ float determinant4(t_4matrix a);
 t_4matrix inverse4(t_4matrix a);
 t_4matrix translation_mat(float x, float y, float z);
 t_tuple	create_point(double x, double y, double z);
+t_tuple	create_vector(double x, double y, double z);
 t_4matrix rotation_x_mat(float angle);
 t_4matrix rotation_y_mat(float angle);
 t_4matrix rotation_z_mat(float angle);
 t_4matrix scaling_mat(float x, float y, float z);
 t_4matrix shearing_mat(t_shearing_params params);
+t_tuple	add_floats(t_tuple a, t_tuple b);
+t_tuple	substract_floats(t_tuple a, t_tuple b);
+t_tuple multiply_tuple(t_tuple a, double b);
+t_ray	create_ray(t_tuple origin, t_tuple direction);
+t_tuple	get_position(t_ray ray, double t);
+void sphere_intersections(t_ray ray, t_objects *sphere);
+double	scalar_product(t_tuple a, t_tuple b);
+t_intersections	**init_intersections(void);
+t_intersections	*create_intersection(float t);
+void	add_intersection(t_intersections **intersections, t_intersections *new_intersection);
+t_objects	**init_objects(void);
+t_objects	*create_object(t_tuple origin, t_intersections **intersections);
+void	add_object(t_objects **objects, t_objects *new_objects);
+void free_intersections(t_intersections **intersections);
+void print_intersections(t_intersections **intersections);
+
 
 #endif
