@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 19:31:59 by florian           #+#    #+#             */
-/*   Updated: 2024/10/13 00:46:40 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/13 11:46:48 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,26 +68,29 @@ int	main(int ac, char **av)
     int x = 0;
     float world_y;
     float world_x;
-    int wall_size = 7;
-    int pixel_size =wall_size / WINDOW_WIDTH;
+    float wall_size = 7;
+    float pixel_size =wall_size / WINDOW_WIDTH;
     while (y < WINDOW_HEIGHT - 1)
     {
         world_y = (WINDOW_HEIGHT / 2) - y * pixel_size;
+        x = 0;
         while (x < WINDOW_WIDTH - 1)
         {
-            world_x = x * pixel_size - (WINDOW_WIDTH / 2);
-            printf("x: %f, y: %f\n", world_x, world_y);
+            world_x = -(WINDOW_HEIGHT/2) + x * pixel_size;
+            printf("x, y, pixel_size, world_x, world_y: %d, %d, %f, %f, %f\n", x, y, pixel_size, world_x, world_y);
             t_tuple position = create_point(world_x, world_y, 10);
-            t_ray ray = create_ray(create_point(0, 0, -5), normalize_vector(substract_floats(position, create_point(0, 0, -5))));
+            t_tuple ray_origin = create_point(0, 0, -5);
+            t_ray ray = create_ray(ray_origin, normalize_vector(substract_floats(ray_origin, position)));
             sphere_intersections(ray, new_object);
-            if (new_object->intersections)
-                ft_pixel_put(&data.img, world_x, world_y, color);
+            if (hit(new_object->intersections))
+                ft_pixel_put(&data.img, x, y, color);
             x++;
         }
         y++;
     }
-    
-    ft_pixel_put(&data.img, 1, 1, color);
+    printf("Done\n");
+    print_intersections(new_object->intersections);
+    // ft_pixel_put(&data.img, 1, 1, color);
     // ft_pixel_put(&data.img, 2, 2, color);
     // ft_pixel_put(&data.img, 3, 3, color);
     // ft_pixel_put(&data.img, 4, 4, color);

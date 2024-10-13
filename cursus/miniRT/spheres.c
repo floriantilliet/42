@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 12:00:14 by florian           #+#    #+#             */
-/*   Updated: 2024/10/12 18:15:42 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/13 11:19:17 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,13 @@ void sphere_intersections(t_ray ray, t_objects *sphere)
     b = 2 * scalar_product(ray.direction, sphere_to_ray);
     c = scalar_product(sphere_to_ray, sphere_to_ray) - 1;
     discriminant = b * b - 4 * a * c;
-
     if (discriminant < 0)
     {
-        printf("No intersection\n");
+        // printf("No intersection\n");
     }
     else
     {
-        printf("Two intersections\n");
+        // printf("Two intersections\n");
         add_intersection((*sphere).intersections, create_intersection((-b - sqrt(discriminant)) / (2 * a)));
         add_intersection((*sphere).intersections, create_intersection((-b + sqrt(discriminant)) / (2 * a)));
     }
