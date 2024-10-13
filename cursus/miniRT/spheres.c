@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 12:00:14 by florian           #+#    #+#             */
-/*   Updated: 2024/10/13 14:43:59 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/13 20:19:34 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,4 +95,12 @@ t_tuple sphere_normal(t_objects *sphere, t_tuple world_point)
     world_normal = mat_tuple_product(mat_transpose(inverse4((*sphere).transformation)), object_normal);
     world_normal.w = 0;
     return(normalize_vector(world_normal));
+}
+
+t_tuple sphere_reflect(t_tuple in, t_tuple normal)
+{
+    t_tuple res;
+    
+    res = substract_floats(in, multiply_tuple(normal, 2 * scalar_product(in, normal)));
+    return(res);
 }

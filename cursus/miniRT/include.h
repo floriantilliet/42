@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 09:53:46 by florian           #+#    #+#             */
-/*   Updated: 2024/10/13 14:44:20 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/13 20:02:56 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,5 +138,6 @@ t_4matrix	identity4(void);
 t_tuple	normalize_vector(t_tuple a);
 t_4matrix	mat_transpose(t_4matrix a);
 t_tuple sphere_normal(t_objects *sphere, t_tuple world_point);
+t_tuple sphere_reflect(t_tuple in, t_tuple normal);
 
 #endif
