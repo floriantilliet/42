@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 09:53:46 by florian           #+#    #+#             */
-/*   Updated: 2024/10/13 11:29:18 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/13 12:43:47 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ t_tuple	substract_floats(t_tuple a, t_tuple b);
 t_tuple multiply_tuple(t_tuple a, double b);
 t_ray	create_ray(t_tuple origin, t_tuple direction);
 t_tuple	get_position(t_ray ray, double t);
-void sphere_intersections(t_ray ray, t_objects *sphere);
+int sphere_intersections(t_ray ray, t_objects *sphere);
 double	scalar_product(t_tuple a, t_tuple b);
 t_intersections	**init_intersections(void);
 t_intersections	*create_intersection(float t);

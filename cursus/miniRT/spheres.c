@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 12:00:14 by florian           #+#    #+#             */
-/*   Updated: 2024/10/13 11:19:17 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/13 13:06:02 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void    add_transformation(t_objects *object, t_4matrix transformation)
     (*object).transformation = mat_product((*object).transformation, transformation);
 }
 
-void sphere_intersections(t_ray ray, t_objects *sphere)
+int sphere_intersections(t_ray ray, t_objects *sphere)
 {
     float a;
     float b;
@@ -73,11 +73,13 @@ void sphere_intersections(t_ray ray, t_objects *sphere)
     if (discriminant < 0)
     {
         // printf("No intersection\n");
+        return(0);
     }
     else
     {
         // printf("Two intersections\n");
         add_intersection((*sphere).intersections, create_intersection((-b - sqrt(discriminant)) / (2 * a)));
         add_intersection((*sphere).intersections, create_intersection((-b + sqrt(discriminant)) / (2 * a)));
+        return(1);
     }
 }
