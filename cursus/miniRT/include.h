@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 09:53:46 by florian           #+#    #+#             */
-/*   Updated: 2024/10/13 14:16:55 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/13 14:44:20 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 # include <stdlib.h>
 
 # define EPSILON 0.00001
-# define WINDOW_WIDTH 300
-# define WINDOW_HEIGHT 300
+# define WINDOW_WIDTH 1000
+# define WINDOW_HEIGHT 1000
 # define DEG_TO_RAD 3.14159265358979323846 / 180.0
 # define PI 3.14159265358979323846
 
