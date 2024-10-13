@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 12:00:14 by florian           #+#    #+#             */
-/*   Updated: 2024/10/13 13:06:02 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/13 13:51:41 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,17 @@ int sphere_intersections(t_ray ray, t_objects *sphere)
         add_intersection((*sphere).intersections, create_intersection((-b + sqrt(discriminant)) / (2 * a)));
         return(1);
     }
+}
+
+t_tuple sphere_normal(t_objects *sphere, t_tuple world_point)
+{
+    t_tuple object_point;
+    t_tuple object_normal;
+    t_tuple world_normal;
+    
+    object_point = mat_tuple_product(inverse4((*sphere).transformation), world_point);
+    object_normal = substract_floats(object_point, create_point(0, 0, 0));
+    world_normal = mat_tuple_product(mat_transpose(inverse4((*sphere).transformation)), object_normal);
+    world_normal.w = 0;
+    return(normalize_vector(world_normal));
 }
