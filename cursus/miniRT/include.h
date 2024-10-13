@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 09:53:46 by florian           #+#    #+#             */
-/*   Updated: 2024/10/13 20:02:56 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/13 21:16:30 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,26 @@ typedef struct s_objects
 	int			id;
 	t_tuple		origin;
 	t_4matrix	transformation;
-	struct s_objects	*next;
 	t_intersections		**intersections;
+	t_material	material;
+	struct s_objects	*next;
+
 }				t_objects;
+
+typedef struct s_light
+{
+	t_tuple		position;
+	t_tuple		intensity;
+}				t_light;
+
+typedef struct s_material
+{
+	t_tuple		color;
+	float		ambient;
+	float		diffuse;
+	float		specular;
+	float		shininess;
+}				t_material;
 
 typedef struct s_img
 {
