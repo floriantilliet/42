@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 09:53:46 by florian           #+#    #+#             */
-/*   Updated: 2024/10/13 21:16:30 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/14 10:01:51 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,15 @@ typedef struct s_intersections
 	struct s_intersections	*next;
 }				t_intersections;
 
+typedef struct s_material
+{
+	t_tuple		color;
+	float		ambient;
+	float		diffuse;
+	float		specular;
+	float		shininess;
+}				t_material;
+
 typedef struct s_objects
 {
 	int			id;
@@ -88,15 +97,6 @@ typedef struct s_light
 	t_tuple		position;
 	t_tuple		intensity;
 }				t_light;
-
-typedef struct s_material
-{
-	t_tuple		color;
-	float		ambient;
-	float		diffuse;
-	float		specular;
-	float		shininess;
-}				t_material;
 
 typedef struct s_img
 {
@@ -156,5 +156,6 @@ t_tuple	normalize_vector(t_tuple a);
 t_4matrix	mat_transpose(t_4matrix a);
 t_tuple sphere_normal(t_objects *sphere, t_tuple world_point);
 t_tuple sphere_reflect(t_tuple in, t_tuple normal);
-
+int	ft_create_trgb(unsigned char t, unsigned char r, unsigned char g, unsigned char b);
+t_material create_material(t_tuple color, float ambient, float diffuse, float specular, float shininess);
 #endif
