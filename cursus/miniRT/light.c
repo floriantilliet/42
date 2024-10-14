@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 21:00:48 by florian           #+#    #+#             */
-/*   Updated: 2024/10/14 15:20:10 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/14 15:50:47 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,8 @@ t_tuple lighting(t_material material, t_light light, t_tuple point, t_tuple eye_
             specular = multiply_color(light.intensity, material.specular * factor);
         }
     }
+    printf("ambient: %f %f %f\n", ambient.x, ambient.y, ambient.z);
+    printf("diffuse: %f %f %f\n", diffuse.x, diffuse.y, diffuse.z);
+    printf("specular: %f %f %f\n", specular.x, specular.y, specular.z);
     return(add_colors(add_colors(ambient, diffuse), specular));
 }
