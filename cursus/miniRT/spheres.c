@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 12:00:14 by florian           #+#    #+#             */
-/*   Updated: 2024/10/13 21:25:55 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/14 15:11:25 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_objects	*create_object(t_tuple origin, t_intersections **intersections)
 	new_object->origin = origin;
     new_object->intersections = intersections;
     new_object->transformation = identity4();
-    new_object->material = create_material(create_point(1, 1, 1), 0.1, 0.9, 0.9, 200);
+    new_object->material = create_material(create_vector(1, 1, 1), 0.1, 0.9, 0.9, 200);
 	return (new_object);
 }
 

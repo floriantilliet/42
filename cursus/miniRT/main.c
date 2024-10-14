@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 19:31:59 by florian           #+#    #+#             */
-/*   Updated: 2024/10/14 12:14:47 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/14 15:27:49 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,14 @@ int	main(int ac, char **av)
     new_object = create_object(create_point(0, 0, 0), intersections);
     add_object(objects, new_object);
     
-    new_object-> material = create_material(create_point(1, 0.2, 1), 0.1, 0.9, 0.9, 200);
     t_light light = create_light(create_point(-10, 10, -10), create_point(1, 1, 1));
+    new_object->material.color = create_vector(1, 0.2, 1);
+    // t_tuple eyev = create_vector(0, -sqrt(2)/2, -sqrt(2)/2);
+    // t_tuple normalv = create_vector(0, 0, -1);
     
-    int color = ft_create_trgb(0, 255, 0, 0);
+    // t_tuple result = lighting(new_object->material, light, create_point(0, 0, 0), eyev, normalv);
+    // printf("r: %f, g: %f, b: %f\n", result.x, result.y, result.z);
+
     ft_init_image(&data);
 
     int y = 0;
@@ -82,7 +86,8 @@ int	main(int ac, char **av)
             t_tuple normal = sphere_normal(new_object, position);
             t_tuple eye = multiply_tuple(ray.direction, -1);
             t_tuple col = lighting(new_object->material, light, position, eye, normal);
-            color = tuple_to_trgb(col);
+            printf("r: %f, g: %f, b: %f\n", col.x, col.y, col.z);
+            int color = tuple_to_trgb(col);
             if (sphere_intersections(ray, new_object))
                 ft_pixel_put(&data.img, x, y, color);
             // if (hit(new_object->intersections))
