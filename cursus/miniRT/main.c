@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 19:31:59 by florian           #+#    #+#             */
-/*   Updated: 2024/10/14 15:51:24 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/14 16:17:25 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,46 +57,48 @@ int	main(int ac, char **av)
     new_object = create_object(create_point(0, 0, 0), intersections);
     add_object(objects, new_object);
     
-    t_light light = create_light(create_point(0, 0, -10), create_point(1, 1, 1));
-    // new_object->material.color = create_vector(1, 0.2, 1);
-    t_tuple eyev = create_vector(0, 0, -1);
-    t_tuple normalv = create_vector(0, 0, -1);
+    t_light light = create_light(create_point(-10, 10, -10), create_point(1, 1, 1));
+    new_object->material.color = create_vector(1, 0.2, 1);
+    // t_tuple eyev = create_vector(0, 0, -1);
+    // t_tuple normalv = create_vector(0, 0, -1);
     
-    t_tuple result = lighting(new_object->material, light, create_point(0, 0, 0), eyev, normalv);
-    printf("r: %f, g: %f, b: %f\n", result.x, result.y, result.z);
+    // t_tuple result = lighting(new_object->material, light, create_point(0, 0, 0), eyev, normalv);
+    // printf("r: %f, g: %f, b: %f\n", result.x, result.y, result.z);
 
     ft_init_image(&data);
 
-    // int y = 0;
-    // int x = 0;
-    // float world_y;
-    // float world_x;
-    // float wall_size = 7;
-    // float pixel_size =wall_size / WINDOW_WIDTH;
-    // while (y < WINDOW_HEIGHT - 1)
-    // {
-    //     world_y = (wall_size / 2) - y * pixel_size;
-    //     x = 0;
-    //     while (x < WINDOW_WIDTH - 1)
-    //     {
-    //         world_x = - (wall_size/2) + x * pixel_size;
-    //         t_tuple position = create_point(world_x, world_y, 10);
-    //         t_tuple ray_origin = create_point(0, 0, -5);
-    //         t_ray ray = create_ray(ray_origin, normalize_vector(substract_floats(position, ray_origin)));
-    //         t_tuple normal = sphere_normal(new_object, position);
-    //         t_tuple eye = multiply_tuple(ray.direction, -1);
-    //         t_tuple col = lighting(new_object->material, light, position, eye, normal);
-    //         // printf("r: %f, g: %f, b: %f\n", col.x, col.y, col.z);
-    //         int color = tuple_to_trgb(col);
-    //         if (sphere_intersections(ray, new_object))
-    //             ft_pixel_put(&data.img, x, y, color);
-    //         // if (hit(new_object->intersections))
-    //             // ft_pixel_put(&data.img, x, y, color);
-    //         x++;
-    //     }
-    //     y++;
-    // }
-    // printf("Done\n");
+    int y = 0;
+    int x = 0;
+    float world_y;
+    float world_x;
+    float wall_size = 7;
+    float pixel_size =wall_size / WINDOW_WIDTH;
+    while (y < WINDOW_HEIGHT - 1)
+    {
+        world_y = (wall_size / 2) - y * pixel_size;
+        x = 0;
+        while (x < WINDOW_WIDTH - 1)
+        {
+            world_x = - (wall_size/2) + x * pixel_size;
+            t_tuple position = create_point(world_x, world_y, 10);
+            t_tuple ray_origin = create_point(0, 0, -5);
+            t_ray ray = create_ray(ray_origin, normalize_vector(substract_floats(position, ray_origin)));
+            float X = 0;
+            if (sphere_intersections(ray, new_object, &X))
+            {
+                t_tuple normal = sphere_normal(new_object, get_position(ray, X));
+                t_tuple eye = multiply_tuple(ray.direction, -1);
+                t_tuple col = lighting(new_object->material, light, position, eye, normal);
+                int color = tuple_to_trgb(col);
+                ft_pixel_put(&data.img, x, y, color);
+            }
+            // if (hit(new_object->intersections))
+                // ft_pixel_put(&data.img, x, y, color);
+            x++;
+        }
+        y++;
+    }
+    printf("Done\n");
     // ft_pixel_put(&data.img, 1, 1, color);
     // ft_pixel_put(&data.img, 2, 2, color);
     // ft_pixel_put(&data.img, 3, 3, color);

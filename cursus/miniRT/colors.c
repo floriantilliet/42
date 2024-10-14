@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 10:18:39 by florian           #+#    #+#             */
-/*   Updated: 2024/10/13 21:12:58 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/14 16:21:21 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,14 @@ int tuple_to_trgb(t_tuple color)
 
     t = 0;
     r = (int)(color.x * 255.0);
+    if (r > 255)
+        r = 255;
     g = (int)(color.y * 255.0);
+    if (g > 255)
+        g = 255;
     b = (int)(color.z * 255.0);
+    if (b > 255)
+        b = 255;
     return (ft_create_trgb(t, r, g, b));
 }
 

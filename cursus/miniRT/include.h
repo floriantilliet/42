@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 09:53:46 by florian           #+#    #+#             */
-/*   Updated: 2024/10/14 12:15:07 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/14 16:31:20 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 # include <stdlib.h>
 
 # define EPSILON 0.00001
-# define WINDOW_WIDTH 1000
-# define WINDOW_HEIGHT 1000
+# define WINDOW_WIDTH 800
+# define WINDOW_HEIGHT 800
 # define DEG_TO_RAD 3.14159265358979323846 / 180.0
 # define PI 3.14159265358979323846
 
@@ -138,7 +138,7 @@ t_tuple	substract_floats(t_tuple a, t_tuple b);
 t_tuple multiply_tuple(t_tuple a, double b);
 t_ray	create_ray(t_tuple origin, t_tuple direction);
 t_tuple	get_position(t_ray ray, double t);
-int sphere_intersections(t_ray ray, t_objects *sphere);
+int sphere_intersections(t_ray ray, t_objects *sphere, float *hit);
 double	scalar_product(t_tuple a, t_tuple b);
 t_intersections	**init_intersections(void);
 t_intersections	*create_intersection(float t);
