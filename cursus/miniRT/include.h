@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 09:53:46 by florian           #+#    #+#             */
-/*   Updated: 2024/10/14 10:01:51 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/14 12:15:07 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,4 +158,12 @@ t_tuple sphere_normal(t_objects *sphere, t_tuple world_point);
 t_tuple sphere_reflect(t_tuple in, t_tuple normal);
 int	ft_create_trgb(unsigned char t, unsigned char r, unsigned char g, unsigned char b);
 t_material create_material(t_tuple color, float ambient, float diffuse, float specular, float shininess);
+t_tuple add_colors(t_tuple color1, t_tuple color2);
+t_tuple substract_colors(t_tuple color1, t_tuple color2);
+t_tuple multiply_color(t_tuple color, double scalar);
+t_tuple color_product(t_tuple color1, t_tuple color2);
+int tuple_to_trgb(t_tuple color);
+t_tuple lighting(t_material material, t_light light, t_tuple point, t_tuple eye_vector, t_tuple normal_vector);
+t_light create_light(t_tuple position, t_tuple intensity);
+
 #endif
