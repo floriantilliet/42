@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 19:31:59 by florian           #+#    #+#             */
-/*   Updated: 2024/10/14 16:17:25 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/15 11:32:25 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	main(int ac, char **av)
     objects = init_objects();
     new_object = create_object(create_point(0, 0, 0), intersections);
     add_object(objects, new_object);
+    // new_object->transformation = translation_mat(-1.5, 1.5, 5);
     
     t_light light = create_light(create_point(-10, 10, -10), create_point(1, 1, 1));
     new_object->material.color = create_vector(1, 0.2, 1);
