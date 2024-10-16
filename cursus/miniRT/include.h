@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 09:53:46 by florian           #+#    #+#             */
-/*   Updated: 2024/10/16 17:26:56 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/16 19:01:32 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,13 +141,9 @@ t_ray	create_ray(t_tuple origin, t_tuple direction);
 t_tuple	get_position(t_ray ray, double t);
 int sphere_intersections(t_ray ray, t_objects *sphere);
 double	scalar_product(t_tuple a, t_tuple b);
-float *init_intersections(void);
-float *add_intersection(float *intersections, float t);
 t_objects	**init_objects(void);
 t_objects	*create_object(t_tuple origin, t_array *intersections);
 void	add_object(t_objects **objects, t_objects *new_objects);
-void print_intersections(float *intersections);
-float hit(float *intersections);
 t_ray transform_ray(t_ray ray, t_4matrix matrix);
 void    add_transformation(t_objects *object, t_4matrix transformation);
 t_4matrix	identity4(void);
@@ -169,4 +165,6 @@ t_array *initArray(size_t initialSize);
 void insertArray(t_array *a, float element);
 void printArray(t_array *a);
 float hitArray(t_array *a);
+
+
 #endif

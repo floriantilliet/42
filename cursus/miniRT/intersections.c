@@ -6,74 +6,11 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 15:09:11 by florian           #+#    #+#             */
-/*   Updated: 2024/10/16 17:39:08 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/16 19:29:26 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
-
-float *init_intersections(void)
-{
-    return NULL;
-}
-
-float *add_intersection(float *intersections, float t)
-{
-    float *new_intersections;
-    int current_size = 0;
-
-    if (intersections != NULL)
-    {
-        while (intersections[current_size] != -1.0f)
-            current_size++;
-    }
-
-    new_intersections = realloc(intersections, sizeof(float) * (current_size + 1 + 1)); // Add space for the new value and a new terminator
-    if (!new_intersections)
-        return intersections; // Return old array if reallocation fails
-
-    new_intersections[current_size] = t;
-    new_intersections[current_size + 1] = -1.0f; // Update the terminator
-    return new_intersections;
-}
-
-void free_intersections(float *intersections)
-{
-    free(intersections);
-}
-
-void print_intersections(float *intersections)
-{
-    int i = 0;
-    if (intersections == NULL)
-    {
-        return;
-    }
-    while (intersections[i] != -1.0f)
-    {
-        printf("t: %f\n", intersections[i]);
-        i++;
-    }
-}
-
-float hit(float *intersections)
-{
-    float min = -1.0f;
-    int i = 0;
-
-    if (intersections == NULL)
-        return min;
-
-    while (intersections[i] != -1.0f)
-    {
-        if (intersections[i] > 0 && (min == -1.0f || intersections[i] < min))
-        {
-            min = intersections[i];
-        }
-        i++;
-    }
-    return min;
-}
 
 t_array *initArray(size_t initialSize)
 {
