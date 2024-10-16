@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 09:53:46 by florian           #+#    #+#             */
-/*   Updated: 2024/10/16 19:01:32 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/16 20:40:16 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,12 @@ typedef struct s_array
   size_t size;
 }			   t_array;
 
+typedef struct s_intersections
+{
+	t_array		*array;
+	size_t		count;
+}				t_intersections;
+
 typedef struct s_material
 {
 	t_tuple		color;
@@ -98,6 +104,13 @@ typedef struct s_light
 	t_tuple		position;
 	t_tuple		intensity;
 }				t_light;
+
+typedef struct s_world
+{
+	t_objects **objects;
+	t_light		light;
+	
+}			t_world;
 
 typedef struct s_img
 {
@@ -165,6 +178,7 @@ t_array *initArray(size_t initialSize);
 void insertArray(t_array *a, float element);
 void printArray(t_array *a);
 float hitArray(t_array *a);
+t_array concatenateArray(t_array *a, t_array *b);
 
 
 #endif

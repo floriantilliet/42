@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 15:09:11 by florian           #+#    #+#             */
-/*   Updated: 2024/10/16 19:29:26 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/16 20:41:19 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,29 @@ void freeArray(t_array *a)
   free(a->array);
   a->array = NULL;
   a->used = a->size = 0;
+}
+
+t_array concatenateArray(t_array *a, t_array *b)
+{
+  size_t i;
+  t_array new_array;
+
+  new_array = *initArray(a->size + b->size);
+  i = 0;
+  while (i < a->used)
+  {
+    insertArray(&new_array, a->array[i]);
+    i++;
+  }
+  i = 0;
+  while (i < b->used)
+  {
+    insertArray(&new_array, b->array[i]);
+    i++;
+  }
+  freeArray(a);
+  freeArray(b);
+  return (new_array);
 }
 
 void printArray(t_array *a)
