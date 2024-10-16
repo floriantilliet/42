@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 09:53:46 by florian           #+#    #+#             */
-/*   Updated: 2024/10/14 16:31:20 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/16 09:24:00 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,12 @@ typedef struct s_ray
 	t_tuple		direction;
 }				t_ray;
 
-typedef struct s_intersections
-{
-	double	t;
-	struct s_intersections	*next;
-}				t_intersections;
+typedef struct s_array
+{ 
+  float *array;
+  size_t used;
+  size_t size;
+}			   t_array;
 
 typedef struct s_material
 {
@@ -86,7 +87,7 @@ typedef struct s_objects
 	int			id;
 	t_tuple		origin;
 	t_4matrix	transformation;
-	t_intersections		**intersections;
+	t_array		*intersections;
 	t_material	material;
 	struct s_objects	*next;
 
@@ -138,17 +139,15 @@ t_tuple	substract_floats(t_tuple a, t_tuple b);
 t_tuple multiply_tuple(t_tuple a, double b);
 t_ray	create_ray(t_tuple origin, t_tuple direction);
 t_tuple	get_position(t_ray ray, double t);
-int sphere_intersections(t_ray ray, t_objects *sphere, float *hit);
+int sphere_intersections(t_ray ray, t_objects *sphere);
 double	scalar_product(t_tuple a, t_tuple b);
-t_intersections	**init_intersections(void);
-t_intersections	*create_intersection(float t);
-void	add_intersection(t_intersections **intersections, t_intersections *new_intersection);
+float *init_intersections(void);
+float *add_intersection(float *intersections, float t);
 t_objects	**init_objects(void);
-t_objects	*create_object(t_tuple origin, t_intersections **intersections);
+t_objects	*create_object(t_tuple origin, t_array *intersections);
 void	add_object(t_objects **objects, t_objects *new_objects);
-void free_intersections(t_intersections **intersections);
-void print_intersections(t_intersections **intersections);
-float hit(t_intersections **intersections);
+void print_intersections(float *intersections);
+float hit(float *intersections);
 t_ray transform_ray(t_ray ray, t_4matrix matrix);
 void    add_transformation(t_objects *object, t_4matrix transformation);
 t_4matrix	identity4(void);
@@ -166,4 +165,8 @@ int tuple_to_trgb(t_tuple color);
 t_tuple lighting(t_material material, t_light light, t_tuple point, t_tuple eye_vector, t_tuple normal_vector);
 t_light create_light(t_tuple position, t_tuple intensity);
 
+t_array *initArray(size_t initialSize);
+void insertArray(t_array *a, float element);
+float hit_array(t_array *intersections);
+void printArray(t_array *a);
 #endif

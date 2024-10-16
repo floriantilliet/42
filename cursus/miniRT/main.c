@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 19:31:59 by florian           #+#    #+#             */
-/*   Updated: 2024/10/15 11:32:25 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/16 09:24:14 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,10 @@ int	main(int ac, char **av)
     ac++;
     av++;
     
-    t_intersections **intersections;
+    t_array *intersections = initArray(2);
     t_objects **objects;
     t_objects *new_object;
     
-    intersections = init_intersections();
     objects = init_objects();
     new_object = create_object(create_point(0, 0, 0), intersections);
     add_object(objects, new_object);
@@ -84,19 +83,16 @@ int	main(int ac, char **av)
             t_tuple position = create_point(world_x, world_y, 10);
             t_tuple ray_origin = create_point(0, 0, -5);
             t_ray ray = create_ray(ray_origin, normalize_vector(substract_floats(position, ray_origin)));
-            float X = 0;
-            if (sphere_intersections(ray, new_object, &X))
+            if (sphere_intersections(ray, new_object))
             {
-                t_tuple normal = sphere_normal(new_object, get_position(ray, X));
+                t_tuple normal = sphere_normal(new_object, get_position(ray, new_object->intersections->array[new_object->intersections->used - 1]));
                 t_tuple eye = multiply_tuple(ray.direction, -1);
                 t_tuple col = lighting(new_object->material, light, position, eye, normal);
                 int color = tuple_to_trgb(col);
                 ft_pixel_put(&data.img, x, y, color);
             }
-            // if (hit(new_object->intersections))
-                // ft_pixel_put(&data.img, x, y, color);
             x++;
-        }
+            }
         y++;
     }
     printf("Done\n");

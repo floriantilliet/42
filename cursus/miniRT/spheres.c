@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 12:00:14 by florian           #+#    #+#             */
-/*   Updated: 2024/10/14 16:17:04 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/16 09:23:54 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_objects	**init_objects(void)
 	return (objects);
 }
 
-t_objects	*create_object(t_tuple origin, t_intersections **intersections)
+t_objects	*create_object(t_tuple origin, t_array *intersections)
 {
 	t_objects	*new_object;
 
@@ -57,7 +57,7 @@ void    add_transformation(t_objects *object, t_4matrix transformation)
     (*object).transformation = mat_product((*object).transformation, transformation);
 }
 
-int sphere_intersections(t_ray ray, t_objects *sphere, float *hit)
+int sphere_intersections(t_ray ray, t_objects *sphere)
 {
     float a;
     float b;
@@ -81,9 +81,7 @@ int sphere_intersections(t_ray ray, t_objects *sphere, float *hit)
         // printf("Two intersections\n");
         // add_intersection((*sphere).intersections, create_intersection((-b - sqrt(discriminant)) / (2 * a)));
         // add_intersection((*sphere).intersections, create_intersection((-b + sqrt(discriminant)) / (2 * a)));
-        *hit = (-b - sqrt(discriminant)) / (2 * a);
-        hit++;
-        hit--;
+        insertArray((*sphere).intersections, (-b - sqrt(discriminant)) / (2 * a));
         return(1);
     }
 }
