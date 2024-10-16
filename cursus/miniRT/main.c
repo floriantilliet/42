@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 19:31:59 by florian           #+#    #+#             */
-/*   Updated: 2024/10/16 09:24:14 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/16 17:39:23 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	main(int ac, char **av)
             t_ray ray = create_ray(ray_origin, normalize_vector(substract_floats(position, ray_origin)));
             if (sphere_intersections(ray, new_object))
             {
-                t_tuple normal = sphere_normal(new_object, get_position(ray, new_object->intersections->array[new_object->intersections->used - 1]));
+                t_tuple normal = sphere_normal(new_object, get_position(ray, hitArray(new_object->intersections)));
                 t_tuple eye = multiply_tuple(ray.direction, -1);
                 t_tuple col = lighting(new_object->material, light, position, eye, normal);
                 int color = tuple_to_trgb(col);
@@ -94,7 +94,7 @@ int	main(int ac, char **av)
             x++;
             }
         y++;
-    }
+    }  
     printf("Done\n");
     // ft_pixel_put(&data.img, 1, 1, color);
     // ft_pixel_put(&data.img, 2, 2, color);

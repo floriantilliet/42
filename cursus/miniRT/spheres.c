@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 12:00:14 by florian           #+#    #+#             */
-/*   Updated: 2024/10/16 09:23:54 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/16 17:28:56 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,8 @@ int sphere_intersections(t_ray ray, t_objects *sphere)
     else
     {
         // printf("Two intersections\n");
-        // add_intersection((*sphere).intersections, create_intersection((-b - sqrt(discriminant)) / (2 * a)));
-        // add_intersection((*sphere).intersections, create_intersection((-b + sqrt(discriminant)) / (2 * a)));
         insertArray((*sphere).intersections, (-b - sqrt(discriminant)) / (2 * a));
+        insertArray((*sphere).intersections, (-b + sqrt(discriminant)) / (2 * a));
         return(1);
     }
 }

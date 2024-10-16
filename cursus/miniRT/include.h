@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 09:53:46 by florian           #+#    #+#             */
-/*   Updated: 2024/10/16 09:24:00 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/16 17:26:56 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,6 @@ t_light create_light(t_tuple position, t_tuple intensity);
 
 t_array *initArray(size_t initialSize);
 void insertArray(t_array *a, float element);
-float hit_array(t_array *intersections);
 void printArray(t_array *a);
+float hitArray(t_array *a);
 #endif

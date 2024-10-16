@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 15:09:11 by florian           #+#    #+#             */
-/*   Updated: 2024/10/16 09:18:00 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/16 17:39:08 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,8 @@ t_array *initArray(size_t initialSize)
   return a;
 }
 
-void insertArray(t_array *a, float element) {
+void insertArray(t_array *a, float element)
+{
   // a->used is the number of used entries, because a->array[a->used++] updates a->used only *after* the array has been accessed.
   // Therefore a->used can go up to a->size 
   if (a->used == a->size) {
@@ -101,31 +102,27 @@ void insertArray(t_array *a, float element) {
   a->array[a->used++] = element;
 }
 
-void freeArray(t_array *a) {
+void freeArray(t_array *a)
+{
   free(a->array);
   a->array = NULL;
   a->used = a->size = 0;
 }
 
-void printArray(t_array *a) {
+void printArray(t_array *a)
+{
   for (size_t i = 0; i < a->used; i++)
 	printf("%f\n", a->array[i]);
 }
 
-float hitArray(t_array *a) {
-	float min = -1.0f;
-	size_t i = 0;
-
-	if (a->array == NULL)
-		return min;
-
-	while (i < a->used)
-	{
-		if (a->array[i] > 0 && (min == -1.0f || a->array[i] < min))
-		{
-			min = a->array[i];
-		}
-		i++;
-	}
-	return min;
+float hitArray(t_array *a)
+{
+  if (a->array[a->used - 2] >= 0 && a->array[a->used - 1])
+    return(fmin(a->array[a->used - 2], a->array[a->used - 1]));
+  else if (a->array[a->used - 2] >= 0)
+    return (a->array[a->used - 2]);
+  else if (a->array[a->used - 1] >= 0)
+    return (a->array[a->used - 1]);
+  else
+    return (-1); 
 }
