@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 12:00:14 by florian           #+#    #+#             */
-/*   Updated: 2024/10/16 17:28:56 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/18 14:12:23 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_objects	**init_objects(void)
 	return (objects);
 }
 
-t_objects	*create_object(t_tuple origin, t_array *intersections)
+t_objects	*create_object(t_tuple origin)
 {
 	t_objects	*new_object;
 
@@ -31,7 +31,6 @@ t_objects	*create_object(t_tuple origin, t_array *intersections)
 	if (!new_object)
 		return (NULL);
 	new_object->origin = origin;
-    new_object->intersections = intersections;
     new_object->transformation = identity4();
     new_object->material = create_material(create_vector(1, 1, 1), 0.1, 0.9, 0.9, 200);
 	return (new_object);
@@ -57,7 +56,7 @@ void    add_transformation(t_objects *object, t_4matrix transformation)
     (*object).transformation = mat_product((*object).transformation, transformation);
 }
 
-int sphere_intersections(t_ray ray, t_objects *sphere)
+t_array *sphere_intersections(t_ray ray, t_objects *sphere)
 {
     float a;
     float b;
@@ -73,15 +72,15 @@ int sphere_intersections(t_ray ray, t_objects *sphere)
     discriminant = b * b - 4 * a * c;
     if (discriminant < 0)
     {
-        // printf("No intersection\n");
-        return(0);
+        return(NULL);
     }
     else
     {
         // printf("Two intersections\n");
-        insertArray((*sphere).intersections, (-b - sqrt(discriminant)) / (2 * a));
-        insertArray((*sphere).intersections, (-b + sqrt(discriminant)) / (2 * a));
-        return(1);
+        t_array *intersections = initArray(2);
+        insertArray(intersections, (-b - sqrt(discriminant)) / (2 * a));
+        insertArray(intersections, (-b + sqrt(discriminant)) / (2 * a));
+        return(intersections);
     }
 }
 

@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 19:31:59 by florian           #+#    #+#             */
-/*   Updated: 2024/10/16 17:39:23 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/18 14:21:36 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,11 @@ int	main(int ac, char **av)
     ac++;
     av++;
     
-    t_array *intersections = initArray(2);
     t_objects **objects;
     t_objects *new_object;
     
     objects = init_objects();
-    new_object = create_object(create_point(0, 0, 0), intersections);
+    new_object = create_object(create_point(0, 0, 0));
     add_object(objects, new_object);
     // new_object->transformation = translation_mat(-1.5, 1.5, 5);
     
@@ -73,6 +72,7 @@ int	main(int ac, char **av)
     float world_x;
     float wall_size = 7;
     float pixel_size =wall_size / WINDOW_WIDTH;
+    t_array *xs = initArray(2);
     while (y < WINDOW_HEIGHT - 1)
     {
         world_y = (wall_size / 2) - y * pixel_size;
@@ -83,9 +83,10 @@ int	main(int ac, char **av)
             t_tuple position = create_point(world_x, world_y, 10);
             t_tuple ray_origin = create_point(0, 0, -5);
             t_ray ray = create_ray(ray_origin, normalize_vector(substract_floats(position, ray_origin)));
-            if (sphere_intersections(ray, new_object))
+            xs = sphere_intersections(ray, new_object);
+            if (hitArray(xs) != -1)
             {
-                t_tuple normal = sphere_normal(new_object, get_position(ray, hitArray(new_object->intersections)));
+                t_tuple normal = sphere_normal(new_object, get_position(ray, hitArray(xs)));
                 t_tuple eye = multiply_tuple(ray.direction, -1);
                 t_tuple col = lighting(new_object->material, light, position, eye, normal);
                 int color = tuple_to_trgb(col);
