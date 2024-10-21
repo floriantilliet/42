@@ -6,13 +6,13 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 15:09:11 by florian           #+#    #+#             */
-/*   Updated: 2024/10/18 14:21:05 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/21 11:54:09 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-t_array *initArray(size_t initialSize)
+t_array *init_array(size_t initialSize)
 {
   t_array *a = malloc(sizeof(t_array));
   if (a == NULL)
@@ -28,7 +28,7 @@ t_array *initArray(size_t initialSize)
   return a;
 }
 
-void insertArray(t_array *a, float element)
+void insert_array(t_array *a, float element)
 {
   // a->used is the number of used entries, because a->array[a->used++] updates a->used only *after* the array has been accessed.
   // Therefore a->used can go up to a->size 
@@ -39,43 +39,43 @@ void insertArray(t_array *a, float element)
   a->array[a->used++] = element;
 }
 
-void freeArray(t_array *a)
+void free_array(t_array *a)
 {
   free(a->array);
   a->array = NULL;
   a->used = a->size = 0;
 }
 
-t_array concatenateArray(t_array *a, t_array *b)
+t_array concatenate_array(t_array *a, t_array *b)
 {
   size_t i;
   t_array new_array;
 
-  new_array = *initArray(a->size + b->size);
+  new_array = *init_array(a->size + b->size);
   i = 0;
   while (i < a->used)
   {
-    insertArray(&new_array, a->array[i]);
+    insert_array(&new_array, a->array[i]);
     i++;
   }
   i = 0;
   while (i < b->used)
   {
-    insertArray(&new_array, b->array[i]);
+    insert_array(&new_array, b->array[i]);
     i++;
   }
-  freeArray(a);
-  freeArray(b);
+  free_array(a);
+  free_array(b);
   return (new_array);
 }
 
-void printArray(t_array *a)
+void print_array(t_array *a)
 {
   for (size_t i = 0; i < a->used; i++)
 	printf("%f\n", a->array[i]);
 }
 
-float hitArray(t_array *a)
+float hit_array(t_array *a)
 {
   float min = -1;
   size_t i = 0;
