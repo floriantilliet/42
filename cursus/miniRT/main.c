@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 19:31:59 by florian           #+#    #+#             */
-/*   Updated: 2024/10/28 17:23:27 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/28 17:38:36 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,13 @@ int	main(int ac, char **av)
     t_objects *new_object;
     
     objects = init_objects();
-    new_object = create_object(identity4(), create_material(create_vector(1, 0.2, 1), 0.1, 0.9, 0.9, 200));
+    new_object = create_object(identity4(), create_material(create_vector(0.8, 1.0, 0.6), 0.1, 0.7, 0.2, 200));
+    add_object(objects, new_object);
+    new_object = create_object(scaling_mat(0.5, 0.5, 0.5), create_material(create_vector(0.2, 1, 0.2), 0.1, 0.9, 0.9, 200));
     add_object(objects, new_object);
     // new_object->transformation = translation_mat(-1.5, 1.5, 5);
     
     t_light light = create_light(create_point(-10, 10, -10), create_point(1, 1, 1));
-    new_object->material.color = create_vector(1, 0.2, 1);
     // t_tuple eyev = create_vector(0, 0, -1);
     // t_tuple normalv = create_vector(0, 0, -1);
     
