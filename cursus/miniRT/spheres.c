@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 12:00:14 by florian           #+#    #+#             */
-/*   Updated: 2024/10/21 11:54:34 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/28 17:25:54 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,15 @@ t_objects	**init_objects(void)
 	return (objects);
 }
 
-t_objects	*create_object(t_tuple origin)
+t_objects	*create_object(t_4matrix transformation, t_material material)
 {
 	t_objects	*new_object;
 
 	new_object = malloc(sizeof(t_objects));
 	if (!new_object)
 		return (NULL);
-	new_object->origin = origin;
-    new_object->transformation = identity4();
-    new_object->material = create_material(create_vector(1, 1, 1), 0.1, 0.9, 0.9, 200);
+    new_object->transformation = transformation;
+    new_object->material = material;
 	return (new_object);
 }
 
@@ -65,7 +64,7 @@ t_array *sphere_intersections(t_ray ray, t_objects *sphere)
     t_tuple sphere_to_ray;
     
     ray = transform_ray(ray, inverse4((*sphere).transformation));
-    sphere_to_ray = substract_floats(ray.origin, (*sphere).origin);
+    sphere_to_ray = substract_floats(ray.origin, create_point(0, 0, 0)); //origin of sphere
     a = scalar_product(ray.direction, ray.direction);
     b = 2 * scalar_product(ray.direction, sphere_to_ray);
     c = scalar_product(sphere_to_ray, sphere_to_ray) - 1;

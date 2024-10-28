@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 09:53:46 by florian           #+#    #+#             */
-/*   Updated: 2024/10/21 11:53:25 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/28 17:22:43 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ typedef struct s_material
 typedef struct s_objects
 {
 	int			id;
-	t_tuple		origin;
 	t_4matrix	transformation;
 	t_material	material;
 	struct s_objects	*next;
@@ -154,7 +153,7 @@ t_tuple	get_position(t_ray ray, double t);
 t_array *sphere_intersections(t_ray ray, t_objects *sphere);
 double	scalar_product(t_tuple a, t_tuple b);
 t_objects	**init_objects(void);
-t_objects	*create_object(t_tuple origin);
+t_objects	*create_object(t_4matrix transformation, t_material material);
 void	add_object(t_objects **objects, t_objects *new_objects);
 t_ray transform_ray(t_ray ray, t_4matrix matrix);
 void    add_transformation(t_objects *object, t_4matrix transformation);
