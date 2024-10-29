@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 15:09:11 by florian           #+#    #+#             */
-/*   Updated: 2024/10/21 11:54:09 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/29 15:03:15 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,27 +46,51 @@ void free_array(t_array *a)
   a->used = a->size = 0;
 }
 
-t_array concatenate_array(t_array *a, t_array *b)
+t_array *concatenate_array(t_array *a, t_array *b)
 {
   size_t i;
-  t_array new_array;
+  t_array *new_array;
 
-  new_array = *init_array(a->size + b->size);
+  new_array = init_array(a->size + b->size);
   i = 0;
   while (i < a->used)
   {
-    insert_array(&new_array, a->array[i]);
+    insert_array(new_array, a->array[i]);
     i++;
   }
   i = 0;
   while (i < b->used)
   {
-    insert_array(&new_array, b->array[i]);
+    insert_array(new_array, b->array[i]);
     i++;
   }
   free_array(a);
   free_array(b);
   return (new_array);
+}
+
+void sort_array(t_array *a)
+{
+  size_t i;
+  size_t j;
+  float temp;
+
+  i = 0;
+  while (i < a->used)
+  {
+    j = i + 1;
+    while (j < a->used)
+    {
+      if (a->array[i] > a->array[j])
+      {
+        temp = a->array[i];
+        a->array[i] = a->array[j];
+        a->array[j] = temp;
+      }
+      j++;
+    }
+    i++;
+  }
 }
 
 void print_array(t_array *a)

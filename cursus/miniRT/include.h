@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 09:53:46 by florian           #+#    #+#             */
-/*   Updated: 2024/10/28 17:22:43 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/29 15:03:23 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,12 +171,15 @@ t_tuple color_product(t_tuple color1, t_tuple color2);
 int tuple_to_trgb(t_tuple color);
 t_tuple lighting(t_material material, t_light light, t_tuple point, t_tuple eye_vector, t_tuple normal_vector);
 t_light create_light(t_tuple position, t_tuple intensity);
+t_array *intersect_world(t_ray ray, t_world *world);
+t_world *init_world(void);
 
 t_array *init_array(size_t initialSize);
 void insert_array(t_array *a, float element);
 void print_array(t_array *a);
 float hit_array(t_array *a);
-t_array concatenate_array(t_array *a, t_array *b);
+t_array *concatenate_array(t_array *a, t_array *b);
+void sort_array(t_array *a);
 
 
 #endif
