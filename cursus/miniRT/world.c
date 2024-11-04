@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 20:03:23 by florian           #+#    #+#             */
-/*   Updated: 2024/11/04 16:06:44 by florian          ###   ########.fr       */
+/*   Updated: 2024/11/04 16:14:25 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,9 @@ t_computations prepare_computations(t_intersection intersection, t_ray ray)
     else
         comps.inside = 0;
     return(comps);
+}
+
+t_tuple shade_hit(t_world *world, t_computations comps)
+{
+    return (lighting(comps.object->material, world->light, comps.point, comps.eyev, comps.normalv));
 }
