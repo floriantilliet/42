@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 09:53:46 by florian           #+#    #+#             */
-/*   Updated: 2024/11/04 15:38:08 by florian          ###   ########.fr       */
+/*   Updated: 2024/11/04 16:06:02 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ typedef struct s_computations
 	t_tuple point;
 	t_tuple eyev;
 	t_tuple normalv;
+	int inside;
 }			t_computations;
 
 typedef struct s_world
@@ -182,6 +183,7 @@ t_tuple lighting(t_material material, t_light light, t_tuple point, t_tuple eye_
 t_light create_light(t_tuple position, t_tuple intensity);
 t_array *intersect_world(t_ray ray, t_world *world);
 t_world *init_world(void);
+t_computations prepare_computations(t_intersection intersection, t_ray ray);
 
 t_array *init_array(size_t initialSize);
 void insert_array(t_array *a, float element, t_objects *object);

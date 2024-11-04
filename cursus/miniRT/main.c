@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 19:31:59 by florian           #+#    #+#             */
-/*   Updated: 2024/11/04 15:16:23 by florian          ###   ########.fr       */
+/*   Updated: 2024/11/04 16:10:01 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,13 @@ int	main(int ac, char **av)
     xs2 = init_array(2);
     xs2 = intersect_world(create_ray(create_point(0, 0, -5), create_vector(0, 0, 1)), world);
     print_array(xs2);
-    
+    t_computations comps = prepare_computations(xs2->array[0], create_ray(create_point(0, 0, 0), create_vector(0, 0, 1)));
+    printf("t: %f\n", comps.t);
+    printf("Object: %f\n", comps.object->material.diffuse);
+    printf("Point: %f, %f, %f\n", comps.point.x, comps.point.y, comps.point.z);
+    printf("Eye: %f, %f, %f\n", comps.eyev.x, comps.eyev.y, comps.eyev.z);
+    printf("Normal: %f, %f, %f\n", comps.normalv.x, comps.normalv.y, comps.normalv.z);
+    printf("Inside: %d\n", comps.inside);
     ft_init_image(&data);
 
     int y = 0;
