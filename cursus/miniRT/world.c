@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 20:03:23 by florian           #+#    #+#             */
-/*   Updated: 2024/10/29 15:03:42 by florian          ###   ########.fr       */
+/*   Updated: 2024/11/04 15:56:35 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,16 @@ t_array *intersect_world(t_ray ray, t_world *world)
     }
     sort_array(intersections);
     return (intersections);
+}
+
+t_computations prepare_computations(t_intersection intersection, t_ray ray)
+{
+    t_computations comps;
+    
+    comps.t = intersection.t;
+    comps.object = intersection.object;
+    comps.point = get_position(ray, comps.t);
+    comps.eyev = multiply_tuple(ray.direction, -1);
+    comps.normalv = sphere_normal(comps.object, comps.point);
+    return(comps);
 }

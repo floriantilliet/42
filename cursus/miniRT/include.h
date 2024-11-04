@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 09:53:46 by florian           #+#    #+#             */
-/*   Updated: 2024/10/29 15:03:23 by florian          ###   ########.fr       */
+/*   Updated: 2024/11/04 15:38:08 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,19 +66,6 @@ typedef struct s_ray
 	t_tuple		direction;
 }				t_ray;
 
-typedef struct s_array
-{ 
-  float *array;
-  size_t used;
-  size_t size;
-}			   t_array;
-
-typedef struct s_intersections
-{
-	t_array		*array;
-	size_t		count;
-}				t_intersections;
-
 typedef struct s_material
 {
 	t_tuple		color;
@@ -97,11 +84,33 @@ typedef struct s_objects
 
 }				t_objects;
 
+typedef struct s_intersection
+{
+	float		t;
+	t_objects	*object;
+}				t_intersection;
+
+typedef struct s_array
+{ 
+  t_intersection *array;
+  size_t used;
+  size_t size;
+}			   t_array;
+
 typedef struct s_light
 {
 	t_tuple		position;
 	t_tuple		intensity;
 }				t_light;
+
+typedef struct s_computations
+{
+	float t;
+	t_objects *object;
+	t_tuple point;
+	t_tuple eyev;
+	t_tuple normalv;
+}			t_computations;
 
 typedef struct s_world
 {
@@ -175,7 +184,7 @@ t_array *intersect_world(t_ray ray, t_world *world);
 t_world *init_world(void);
 
 t_array *init_array(size_t initialSize);
-void insert_array(t_array *a, float element);
+void insert_array(t_array *a, float element, t_objects *object);
 void print_array(t_array *a);
 float hit_array(t_array *a);
 t_array *concatenate_array(t_array *a, t_array *b);
