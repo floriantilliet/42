@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 20:03:23 by florian           #+#    #+#             */
-/*   Updated: 2024/11/04 16:14:25 by florian          ###   ########.fr       */
+/*   Updated: 2024/11/04 16:20:03 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,18 @@ t_computations prepare_computations(t_intersection intersection, t_ray ray)
 t_tuple shade_hit(t_world *world, t_computations comps)
 {
     return (lighting(comps.object->material, world->light, comps.point, comps.eyev, comps.normalv));
+}
+
+t_tuple color_at(t_world *world, t_ray ray)
+{
+    t_array *intersections;
+    t_computations comps;
+    t_tuple color;
+
+    intersections = intersect_world(ray, world);
+    if (hit_array(intersections) == -1)
+        return (create_point(0, 0, 0));
+    comps = prepare_computations(intersections->array[0], ray);
+    color = shade_hit(world, comps);
+    return (color);
 }
