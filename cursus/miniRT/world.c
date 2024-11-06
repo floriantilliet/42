@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 20:03:23 by florian           #+#    #+#             */
-/*   Updated: 2024/11/04 16:20:03 by florian          ###   ########.fr       */
+/*   Updated: 2024/11/06 11:12:27 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,29 @@ t_tuple color_at(t_world *world, t_ray ray)
     comps = prepare_computations(intersections->array[0], ray);
     color = shade_hit(world, comps);
     return (color);
+}
+
+t_4matrix view_tranform(t_tuple from, t_tuple to, t_tuple up)
+{
+    t_tuple forward;
+    t_tuple upn;
+    t_tuple left;
+    t_tuple true_up;
+    t_4matrix orientation;
+
+    forward = normalize_vector(substract_floats(to, from));
+    upn = normalize_vector(up);
+    left = cross_product(forward, upn);
+    true_up = cross_product(left, forward);
+    orientation = identity4();
+    orientation.mat[0][0] = left.x;
+    orientation.mat[0][1] = left.y;
+    orientation.mat[0][2] = left.z;
+    orientation.mat[1][0] = true_up.x;
+    orientation.mat[1][1] = true_up.y;
+    orientation.mat[1][2] = true_up.z;
+    orientation.mat[2][0] = -forward.x;
+    orientation.mat[2][1] = -forward.y;
+    orientation.mat[2][2] = -forward.z;
+    return (mat_product(orientation, translation_mat(-from.x, -from.y, -from.z)));
 }
