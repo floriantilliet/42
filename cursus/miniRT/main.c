@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 19:31:59 by florian           #+#    #+#             */
-/*   Updated: 2024/11/10 13:03:47 by florian          ###   ########.fr       */
+/*   Updated: 2024/11/10 13:38:32 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	main(int ac, char **av)
     add_object(world->objects, new_object);
     
     t_camera camera;
-    camera = create_camera(WINDOW_HEIGHT, WINDOW_WIDTH, PI/3);
+    camera = create_camera(WINDOW_HEIGHT, WINDOW_WIDTH, 2*PI/3);
     camera.transform = view_transform(create_point(0, 1.5, -5), create_point(0, 1, 0), create_vector(0, 1, 0));
     ft_init_image(&data);
     render(world, camera, data);

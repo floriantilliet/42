@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 20:03:23 by florian           #+#    #+#             */
-/*   Updated: 2024/11/10 12:45:46 by florian          ###   ########.fr       */
+/*   Updated: 2024/11/10 13:40:49 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,10 @@ t_tuple color_at(t_world *world, t_ray ray)
 
     intersections = intersect_world(ray, world);
     if (hit_array(intersections) == -1)
-        return (create_point(0, 0, 0));
+        return (create_point(1, 0, 0));
     comps = prepare_computations(intersections->array[0], ray);
     color = shade_hit(world, comps);
+    // printf("Color: %f %f %f\n", color.x, color.y, color.z);
     return (color);
 }
 
@@ -164,6 +165,7 @@ void render(t_world *world, t_camera camera, t_data data)
         {
             ray = ray_for_pixel(camera, x, y);
             color = tuple_to_trgb(color_at(world, ray));
+            // printf("x: %d y: %d\n", x, y);
             ft_pixel_put(&data.img, x, y, color);
             x++;
         }
