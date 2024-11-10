@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 19:31:59 by florian           #+#    #+#             */
-/*   Updated: 2024/11/04 16:16:47 by florian          ###   ########.fr       */
+/*   Updated: 2024/11/10 13:03:47 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,6 @@ int	ft_create_trgb(unsigned char t, unsigned char r, unsigned char g,
 	return ((t << 24) | (r << 16) | (g << 8) | b);
 }
 
-void	ft_pixel_put(t_img *img, unsigned int x, unsigned int y, int color)
-{
-	char	*dst;
-
-	if (x <= WINDOW_WIDTH - 1 && y <= WINDOW_HEIGHT - 1)
-	{
-		dst = img->addr + (y * img->line_len + x * (img->bpp / 8));
-		*(unsigned int *)dst = color;
-	}
-}
-
 int	main(int ac, char **av)
 {
     t_data data;
@@ -54,62 +43,61 @@ int	main(int ac, char **av)
     
     world = init_world();
     world->objects = init_objects();
-    new_object = create_object(identity4(), create_material(create_vector(0.8, 1.0, 0.6), 0.1, 0.7, 0.2, 200));
+    new_object = create_object(scaling_mat(10, 0.01, 10), create_material(create_vector(1, 0.9, 0.9), 0.1, 0.9, 0, 200));
     add_object(world->objects, new_object);
-    new_object = create_object(scaling_mat(0.5, 0.5, 0.5), create_material(create_vector(0.2, 1, 0.2), 0.1, 0.9, 0.9, 200));
+    t_4matrix transform; 
+    transform = mat_product(translation_mat(0, 0, 5), rotation_y_mat(-PI/4));
+    transform = mat_product(transform, rotation_x_mat(PI/2));
+    transform = mat_product(transform, scaling_mat(10, 0.01, 10));
+    new_object = create_object(transform, create_material(create_vector(1, 0.9, 0.9), 0.1, 0.9, 0, 200));
     add_object(world->objects, new_object);
-    // new_object->transformation = translation_mat(-1.5, 1.5, 5);
+    transform = mat_product(translation_mat(0, 0, 5), rotation_y_mat(PI/4));
+    transform = mat_product(transform, rotation_x_mat(PI/2));
+    transform = mat_product(transform, scaling_mat(10, 0.01, 10));
+    new_object = create_object(transform, create_material(create_vector(1, 0.9, 0.9), 0.1, 0.9, 0, 200));    // new_object->transformation = translation_mat(-1.5, 1.5, 5);
+    add_object(world->objects, new_object);
+    new_object = create_object(translation_mat(-0.5, 1, 0.5), create_material(create_vector(0.1, 1, 0.5), 0.1, 0.7, 0.3, 200));
+    add_object(world->objects, new_object);
+    new_object = create_object(mat_product(translation_mat(1.5, 0.5, -0.5), scaling_mat(0.5, 0.5, 0.5)), create_material(create_vector(0.5, 1, 0.1), 0.1, 0.7, 0.3, 200));
+    add_object(world->objects, new_object);
+    new_object = create_object(mat_product(translation_mat(-1.5, 0.33, -0.75), scaling_mat(0.3, 0.33, 0.33)), create_material(create_vector(1, 0.8, 0.1), 0.1, 0.7, 0.3, 200));
+    add_object(world->objects, new_object);
     
-    t_light light = create_light(create_point(-10, 10, -10), create_point(1, 1, 1));
-    // t_tuple eyev = create_vector(0, 0, -1);
-    // t_tuple normalv = create_vector(0, 0, -1);
-    
-    // t_tuple result = lighting(new_object->material, light, create_point(0, 0, 0), eyev, normalv);
-    // printf("r: %f, g: %f, b: %f\n", result.x, result.y, result.z);  
-    
-    t_array *xs2;
-    xs2 = init_array(2);
-    xs2 = intersect_world(create_ray(create_point(0, 0, -5), create_vector(0, 0, 1)), world);
-    print_array(xs2);
-    t_computations comps = prepare_computations(xs2->array[0], create_ray(create_point(0, 0, 0), create_vector(0, 0, 1)));
-    printf("t: %f\n", comps.t);
-    printf("Object: %f\n", comps.object->material.diffuse);
-    printf("Point: %f, %f, %f\n", comps.point.x, comps.point.y, comps.point.z);
-    printf("Eye: %f, %f, %f\n", comps.eyev.x, comps.eyev.y, comps.eyev.z);
-    printf("Normal: %f, %f, %f\n", comps.normalv.x, comps.normalv.y, comps.normalv.z);
-    printf("Inside: %d\n", comps.inside);
+    t_camera camera;
+    camera = create_camera(WINDOW_HEIGHT, WINDOW_WIDTH, PI/3);
+    camera.transform = view_transform(create_point(0, 1.5, -5), create_point(0, 1, 0), create_vector(0, 1, 0));
     ft_init_image(&data);
-
-    int y = 0;
-    int x = 0;
-    float world_y;
-    float world_x;
-    float wall_size = 7;
-    float pixel_size =wall_size / WINDOW_WIDTH;
-    t_array *xs = init_array(2);
-    while (y < WINDOW_HEIGHT - 1)
-    {
-        world_y = (wall_size / 2) - y * pixel_size;
-        x = 0;
-        while (x < WINDOW_WIDTH - 1)
-        {
-            world_x = - (wall_size/2) + x * pixel_size;
-            t_tuple position = create_point(world_x, world_y, 10);
-            t_tuple ray_origin = create_point(0, 0, -5);
-            t_ray ray = create_ray(ray_origin, normalize_vector(substract_floats(position, ray_origin)));
-            xs = sphere_intersections(ray, new_object);
-            if (hit_array(xs) != -1)
-            {
-                t_tuple normal = sphere_normal(new_object, get_position(ray, hit_array(xs)));
-                t_tuple eye = multiply_tuple(ray.direction, -1);
-                t_tuple col = lighting(new_object->material, light, position, eye, normal);
-                int color = tuple_to_trgb(col);
-                ft_pixel_put(&data.img, x, y, color);
-            }
-            x++;
-            }
-        y++;
-    }  
+    render(world, camera, data);
+    // int y = 0;
+    // int x = 0;
+    // float world_y;
+    // float world_x;
+    // float wall_size = 7;
+    // float pixel_size =wall_size / WINDOW_WIDTH;
+    // t_array *xs = init_array(2);
+    // while (y < WINDOW_HEIGHT - 1)
+    // {
+    //     world_y = (wall_size / 2) - y * pixel_size;
+    //     x = 0;
+    //     while (x < WINDOW_WIDTH - 1)
+    //     {
+    //         world_x = - (wall_size/2) + x * pixel_size;
+    //         t_tuple position = create_point(world_x, world_y, 10);
+    //         t_tuple ray_origin = create_point(0, 0, -5);
+    //         t_ray ray = create_ray(ray_origin, normalize_vector(substract_floats(position, ray_origin)));
+    //         xs = sphere_intersections(ray, new_object);
+    //         if (hit_array(xs) != -1)
+    //         {
+    //             t_tuple normal = sphere_normal(new_object, get_position(ray, hit_array(xs)));
+    //             t_tuple eye = multiply_tuple(ray.direction, -1);
+    //             t_tuple col = lighting(new_object->material, light, position, eye, normal);
+    //             int color = tuple_to_trgb(col);
+    //             ft_pixel_put(&data.img, x, y, color);
+    //         }
+    //         x++;
+    //         }
+    //     y++;
+    // }  
     printf("Done\n");
     // ft_pixel_put(&data.img, 1, 1, color);
     // ft_pixel_put(&data.img, 2, 2, color);

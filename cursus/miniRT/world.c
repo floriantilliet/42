@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 20:03:23 by florian           #+#    #+#             */
-/*   Updated: 2024/11/06 11:12:27 by florian          ###   ########.fr       */
+/*   Updated: 2024/11/10 12:45:46 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ t_tuple color_at(t_world *world, t_ray ray)
     return (color);
 }
 
-t_4matrix view_tranform(t_tuple from, t_tuple to, t_tuple up)
+t_4matrix view_transform(t_tuple from, t_tuple to, t_tuple up)
 {
     t_tuple forward;
     t_tuple upn;
@@ -101,4 +101,72 @@ t_4matrix view_tranform(t_tuple from, t_tuple to, t_tuple up)
     orientation.mat[2][1] = -forward.y;
     orientation.mat[2][2] = -forward.z;
     return (mat_product(orientation, translation_mat(-from.x, -from.y, -from.z)));
+}
+
+t_camera create_camera(float hsize, float vsize, float field_of_view)
+{
+    t_camera camera;
+    float half_view;
+    float aspect;
+    
+    camera.hsize = hsize;
+    camera.vsize = vsize;
+    camera.field_of_view = field_of_view;
+    camera.transform = identity4();
+    half_view = tan(camera.field_of_view / 2);
+    aspect = camera.hsize / camera.vsize;
+    if (aspect >= 1)
+    {
+        camera.half_width = half_view;
+        camera.half_height = half_view / aspect;
+    }
+    else
+    {
+        camera.half_width = half_view * aspect;
+        camera.half_height = half_view;
+    }
+    camera.pixel_size = (camera.half_width * 2) / camera.hsize;
+    return (camera);
+}
+
+t_ray ray_for_pixel(t_camera camera, float px, float py)
+{
+    float xoffset;
+    float yoffset;
+    float world_x;
+    float world_y;
+    t_tuple pixel;
+    t_tuple origin;
+    t_tuple direction;
+
+    xoffset = (px + 0.5) * camera.pixel_size;
+    yoffset = (py + 0.5) * camera.pixel_size;
+    world_x = camera.half_width - xoffset;
+    world_y = camera.half_height - yoffset;
+    pixel = mat_tuple_product(inverse4(camera.transform), create_point(world_x, world_y, -1));
+    origin = mat_tuple_product(inverse4(camera.transform), create_point(0, 0, 0));
+    direction = normalize_vector(substract_floats(pixel, origin));
+    return (create_ray(origin, direction));
+}
+
+void render(t_world *world, t_camera camera, t_data data)
+{
+    int x;
+    int y;
+    int color;
+    t_ray ray;
+
+    y = 0;
+    while (y < camera.vsize)
+    {
+        x = 0;
+        while (x < camera.hsize)
+        {
+            ray = ray_for_pixel(camera, x, y);
+            color = tuple_to_trgb(color_at(world, ray));
+            ft_pixel_put(&data.img, x, y, color);
+            x++;
+        }
+        y++;
+    }
 }

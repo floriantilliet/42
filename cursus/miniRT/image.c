@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 10:28:29 by florian           #+#    #+#             */
-/*   Updated: 2024/10/11 10:34:57 by florian          ###   ########.fr       */
+/*   Updated: 2024/11/10 12:11:03 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,15 @@ int	close_image(t_data *data)
 	free(data->mlx_ptr);
 	exit(0);
 	return (0);
+}
+
+void	ft_pixel_put(t_img *img, unsigned int x, unsigned int y, int color)
+{
+	char	*dst;
+
+	if (x <= WINDOW_WIDTH - 1 && y <= WINDOW_HEIGHT - 1)
+	{
+		dst = img->addr + (y * img->line_len + x * (img->bpp / 8));
+		*(unsigned int *)dst = color;
+	}
 }

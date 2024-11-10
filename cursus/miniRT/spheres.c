@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 12:00:14 by florian           #+#    #+#             */
-/*   Updated: 2024/11/04 15:40:46 by florian          ###   ########.fr       */
+/*   Updated: 2024/11/10 12:48:03 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,11 @@ t_array *sphere_intersections(t_ray ray, t_objects *sphere)
     discriminant = b * b - 4 * a * c;
     if (discriminant < 0)
     {
-        return(NULL);
+        t_array *intersections = init_array(2);
+        return(intersections);
     }
     else
     {
-        // printf("Two intersections\n");
         t_array *intersections = init_array(2);
         insert_array(intersections, (-b - sqrt(discriminant)) / (2 * a), sphere);
         insert_array(intersections, (-b + sqrt(discriminant)) / (2 * a), sphere);

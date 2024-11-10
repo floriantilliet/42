@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 09:53:46 by florian           #+#    #+#             */
-/*   Updated: 2024/11/06 11:11:13 by florian          ###   ########.fr       */
+/*   Updated: 2024/11/10 12:40:25 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,17 @@ typedef struct s_computations
 	int inside;
 }			t_computations;
 
+typedef struct s_camera
+{
+	float		hsize;
+	float		vsize;
+	float	field_of_view;
+	t_4matrix	transform;
+	float	half_width;
+	float	half_height;
+	float	pixel_size;
+}			t_camera;
+
 typedef struct s_world
 {
 	t_objects **objects;
@@ -185,6 +196,10 @@ t_light create_light(t_tuple position, t_tuple intensity);
 t_array *intersect_world(t_ray ray, t_world *world);
 t_world *init_world(void);
 t_computations prepare_computations(t_intersection intersection, t_ray ray);
+t_camera create_camera(float hsize, float vsize, float field_of_view);
+void	ft_pixel_put(t_img *img, unsigned int x, unsigned int y, int color);
+void render(t_world *world, t_camera camera, t_data data);
+t_4matrix view_transform(t_tuple from, t_tuple to, t_tuple up);
 
 t_array *init_array(size_t initialSize);
 void insert_array(t_array *a, float element, t_objects *object);
@@ -192,6 +207,5 @@ void print_array(t_array *a);
 float hit_array(t_array *a);
 t_array *concatenate_array(t_array *a, t_array *b);
 void sort_array(t_array *a);
-
 
 #endif
