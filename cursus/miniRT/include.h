@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 09:53:46 by florian           #+#    #+#             */
-/*   Updated: 2024/11/10 12:40:25 by florian          ###   ########.fr       */
+/*   Updated: 2024/11/11 21:55:32 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,12 @@ typedef struct		s_2matrix{
 
 typedef struct s_shearing_params
 {
-	float		xy;
-	float		xz;
-	float		yx;
-	float		yz;
-	float		zx;
-	float		zy;
+	double		xy;
+	double		xz;
+	double		yx;
+	double		yz;
+	double		zx;
+	double		zy;
 }				t_shearing_params;
 
 typedef struct s_ray
@@ -69,10 +69,10 @@ typedef struct s_ray
 typedef struct s_material
 {
 	t_tuple		color;
-	float		ambient;
-	float		diffuse;
-	float		specular;
-	float		shininess;
+	double		ambient;
+	double		diffuse;
+	double		specular;
+	double		shininess;
 }				t_material;
 
 typedef struct s_objects
@@ -86,7 +86,7 @@ typedef struct s_objects
 
 typedef struct s_intersection
 {
-	float		t;
+	double		t;
 	t_objects	*object;
 }				t_intersection;
 
@@ -105,7 +105,7 @@ typedef struct s_light
 
 typedef struct s_computations
 {
-	float t;
+	double t;
 	t_objects *object;
 	t_tuple point;
 	t_tuple eyev;
@@ -115,13 +115,13 @@ typedef struct s_computations
 
 typedef struct s_camera
 {
-	float		hsize;
-	float		vsize;
-	float	field_of_view;
+	double		hsize;
+	double		vsize;
+	double	field_of_view;
 	t_4matrix	transform;
-	float	half_width;
-	float	half_height;
-	float	pixel_size;
+	double	half_width;
+	double	half_height;
+	double	pixel_size;
 }			t_camera;
 
 typedef struct s_world
@@ -154,20 +154,20 @@ t_4matrix mat_product(t_4matrix a, t_4matrix b);
 t_tuple mat_tuple_product(t_4matrix a, t_tuple b);
 t_3matrix sub4matrix(t_4matrix a, int row, int col);
 t_2matrix sub3matrix(t_3matrix a, int row, int col);
-float determinant2(t_2matrix a);
-float determinant3(t_3matrix a);
-float determinant4(t_4matrix a);
+double determinant2(t_2matrix a);
+double determinant3(t_3matrix a);
+double determinant4(t_4matrix a);
 t_4matrix inverse4(t_4matrix a);
-t_4matrix translation_mat(float x, float y, float z);
+t_4matrix translation_mat(double x, double y, double z);
 t_tuple	create_point(double x, double y, double z);
 t_tuple	create_vector(double x, double y, double z);
-t_4matrix rotation_x_mat(float angle);
-t_4matrix rotation_y_mat(float angle);
-t_4matrix rotation_z_mat(float angle);
-t_4matrix scaling_mat(float x, float y, float z);
+t_4matrix rotation_x_mat(double angle);
+t_4matrix rotation_y_mat(double angle);
+t_4matrix rotation_z_mat(double angle);
+t_4matrix scaling_mat(double x, double y, double z);
 t_4matrix shearing_mat(t_shearing_params params);
-t_tuple	add_floats(t_tuple a, t_tuple b);
-t_tuple	substract_floats(t_tuple a, t_tuple b);
+t_tuple	add_doubles(t_tuple a, t_tuple b);
+t_tuple	substract_doubles(t_tuple a, t_tuple b);
 t_tuple multiply_tuple(t_tuple a, double b);
 t_ray	create_ray(t_tuple origin, t_tuple direction);
 t_tuple	get_position(t_ray ray, double t);
@@ -185,7 +185,7 @@ t_4matrix	mat_transpose(t_4matrix a);
 t_tuple sphere_normal(t_objects *sphere, t_tuple world_point);
 t_tuple sphere_reflect(t_tuple in, t_tuple normal);
 int	ft_create_trgb(unsigned char t, unsigned char r, unsigned char g, unsigned char b);
-t_material create_material(t_tuple color, float ambient, float diffuse, float specular, float shininess);
+t_material create_material(t_tuple color, double ambient, double diffuse, double specular, double shininess);
 t_tuple add_colors(t_tuple color1, t_tuple color2);
 t_tuple substract_colors(t_tuple color1, t_tuple color2);
 t_tuple multiply_color(t_tuple color, double scalar);
@@ -196,15 +196,16 @@ t_light create_light(t_tuple position, t_tuple intensity);
 t_array *intersect_world(t_ray ray, t_world *world);
 t_world *init_world(void);
 t_computations prepare_computations(t_intersection intersection, t_ray ray);
-t_camera create_camera(float hsize, float vsize, float field_of_view);
+t_camera create_camera(double hsize, double vsize, double field_of_view);
 void	ft_pixel_put(t_img *img, unsigned int x, unsigned int y, int color);
 void render(t_world *world, t_camera camera, t_data data);
 t_4matrix view_transform(t_tuple from, t_tuple to, t_tuple up);
+int hit_index(t_array *a, double t);
 
 t_array *init_array(size_t initialSize);
-void insert_array(t_array *a, float element, t_objects *object);
+void insert_array(t_array *a, double element, t_objects *object);
 void print_array(t_array *a);
-float hit_array(t_array *a);
+double hit_array(t_array *a);
 t_array *concatenate_array(t_array *a, t_array *b);
 void sort_array(t_array *a);
 

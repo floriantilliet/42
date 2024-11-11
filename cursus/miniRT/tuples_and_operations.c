@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 10:34:42 by florian           #+#    #+#             */
-/*   Updated: 2024/10/13 00:15:58 by florian          ###   ########.fr       */
+/*   Updated: 2024/11/11 21:21:30 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,14 @@ t_tuple	create_point(double x, double y, double z)
 	return (point);
 }
 
-int	floats_equal(double a, double b)
+int	doubles_equal(double a, double b)
 {
 	if (fabs(a - b) < EPSILON)
 		return (1);
 	return (0);
 }
 
-t_tuple	add_floats(t_tuple a, t_tuple b)
+t_tuple	add_doubles(t_tuple a, t_tuple b)
 {
 	t_tuple	res;
 
@@ -52,7 +52,7 @@ t_tuple	add_floats(t_tuple a, t_tuple b)
 	return (res);
 }
 
-t_tuple	substract_floats(t_tuple a, t_tuple b)
+t_tuple	substract_doubles(t_tuple a, t_tuple b)
 {
 	t_tuple	res;
 

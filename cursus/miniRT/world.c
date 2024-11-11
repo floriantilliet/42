@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 20:03:23 by florian           #+#    #+#             */
-/*   Updated: 2024/11/10 13:40:49 by florian          ###   ########.fr       */
+/*   Updated: 2024/11/11 22:13:51 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,11 @@ t_tuple color_at(t_world *world, t_ray ray)
     t_array *intersections;
     t_computations comps;
     t_tuple color;
-
+    
     intersections = intersect_world(ray, world);
     if (hit_array(intersections) == -1)
         return (create_point(1, 0, 0));
-    comps = prepare_computations(intersections->array[0], ray);
+    comps = prepare_computations(intersections->array[hit_index(intersections, hit_array(intersections))], ray);
     color = shade_hit(world, comps);
     // printf("Color: %f %f %f\n", color.x, color.y, color.z);
     return (color);
@@ -87,7 +87,7 @@ t_4matrix view_transform(t_tuple from, t_tuple to, t_tuple up)
     t_tuple true_up;
     t_4matrix orientation;
 
-    forward = normalize_vector(substract_floats(to, from));
+    forward = normalize_vector(substract_doubles(to, from));
     upn = normalize_vector(up);
     left = cross_product(forward, upn);
     true_up = cross_product(left, forward);
@@ -104,11 +104,11 @@ t_4matrix view_transform(t_tuple from, t_tuple to, t_tuple up)
     return (mat_product(orientation, translation_mat(-from.x, -from.y, -from.z)));
 }
 
-t_camera create_camera(float hsize, float vsize, float field_of_view)
+t_camera create_camera(double hsize, double vsize, double field_of_view)
 {
     t_camera camera;
-    float half_view;
-    float aspect;
+    double half_view;
+    double aspect;
     
     camera.hsize = hsize;
     camera.vsize = vsize;
@@ -130,12 +130,12 @@ t_camera create_camera(float hsize, float vsize, float field_of_view)
     return (camera);
 }
 
-t_ray ray_for_pixel(t_camera camera, float px, float py)
+t_ray ray_for_pixel(t_camera camera, double px, double py)
 {
-    float xoffset;
-    float yoffset;
-    float world_x;
-    float world_y;
+    double xoffset;
+    double yoffset;
+    double world_x;
+    double world_y;
     t_tuple pixel;
     t_tuple origin;
     t_tuple direction;
@@ -146,7 +146,7 @@ t_ray ray_for_pixel(t_camera camera, float px, float py)
     world_y = camera.half_height - yoffset;
     pixel = mat_tuple_product(inverse4(camera.transform), create_point(world_x, world_y, -1));
     origin = mat_tuple_product(inverse4(camera.transform), create_point(0, 0, 0));
-    direction = normalize_vector(substract_floats(pixel, origin));
+    direction = normalize_vector(substract_doubles(pixel, origin));
     return (create_ray(origin, direction));
 }
 

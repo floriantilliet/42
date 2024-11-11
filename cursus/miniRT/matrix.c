@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 12:07:16 by florian           #+#    #+#             */
-/*   Updated: 2024/10/13 13:43:33 by florian          ###   ########.fr       */
+/*   Updated: 2024/11/11 21:21:30 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,14 +166,14 @@ t_2matrix	sub3matrix(t_3matrix a, int row, int col)
 	return (res);
 }
 
-float	determinant2(t_2matrix a)
+double	determinant2(t_2matrix a)
 {
 	return (a.mat[0][0] * a.mat[1][1] - a.mat[0][1] * a.mat[1][0]);
 }
 
-float	determinant3(t_3matrix a)
+double	determinant3(t_3matrix a)
 {
-	float	res;
+	double	res;
 
 	res = 0;
 	res += a.mat[0][0] * determinant2(sub3matrix(a, 0, 0));
@@ -182,9 +182,9 @@ float	determinant3(t_3matrix a)
 	return (res);
 }
 
-float	determinant4(t_4matrix a)
+double	determinant4(t_4matrix a)
 {
-	float	res;
+	double	res;
 
 	res = 0;
 	res += a.mat[0][0] * determinant3(sub4matrix(a, 0, 0));
@@ -199,7 +199,7 @@ t_4matrix	inverse4(t_4matrix a)
 	t_4matrix	res;
 	int			i;
 	int			j;
-	float		det;
+	double		det;
 
 	det = determinant4(a);
 	i = 0;
@@ -241,7 +241,7 @@ t_4matrix	identity4(void)
 	return (res);
 }
 
-t_4matrix	translation_mat(float x, float y, float z)
+t_4matrix	translation_mat(double x, double y, double z)
 {
 	t_4matrix	res;
 
@@ -252,7 +252,7 @@ t_4matrix	translation_mat(float x, float y, float z)
 	return (res);
 }
 
-t_4matrix	scaling_mat(float x, float y, float z)
+t_4matrix	scaling_mat(double x, double y, double z)
 {
 	t_4matrix	res;
 
@@ -263,7 +263,7 @@ t_4matrix	scaling_mat(float x, float y, float z)
 	return (res);
 }
 
-t_4matrix	rotation_x_mat(float angle)
+t_4matrix	rotation_x_mat(double angle)
 {
 	t_4matrix	res;
 
@@ -275,7 +275,7 @@ t_4matrix	rotation_x_mat(float angle)
 	return (res);
 }
 
-t_4matrix	rotation_y_mat(float angle)
+t_4matrix	rotation_y_mat(double angle)
 {
 	t_4matrix res;
 
@@ -287,7 +287,7 @@ t_4matrix	rotation_y_mat(float angle)
 	return (res);
 }
 
-t_4matrix rotation_z_mat(float angle)
+t_4matrix rotation_z_mat(double angle)
 {
     t_4matrix res;
 

@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 15:09:11 by florian           #+#    #+#             */
-/*   Updated: 2024/11/10 13:23:17 by florian          ###   ########.fr       */
+/*   Updated: 2024/11/11 21:55:21 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_array *init_array(size_t initialSize)
   return a;
 }
 
-void insert_array(t_array *a, float element, t_objects *object)
+void insert_array(t_array *a, double element, t_objects *object)
 {
   // a->used is the number of used entries, because a->array[a->used++] updates a->used only *after* the array has been accessed.
   // Therefore a->used can go up to a->size 
@@ -99,13 +99,12 @@ void print_array(t_array *a)
   for (size_t i = 0; i < a->used; i++)
   {
   	printf("%f\n", a->array[i].t);
-    printf("Material: %f\n", a->array[i].object->material.diffuse);
   }
 }
 
-float hit_array(t_array *a)
+double hit_array(t_array *a)
 {
-  float min = -1;
+  double min = -1;
   size_t i = 0;
   if (a == NULL)
     return -1;
@@ -120,3 +119,14 @@ float hit_array(t_array *a)
   return min;
 }
 
+int hit_index(t_array *a, double t)
+{
+  size_t i = 0;
+  while (i < a->used)
+  {
+    if (a->array[i].t == t)
+      return i;
+    i++;
+  }
+  return -1;
+}

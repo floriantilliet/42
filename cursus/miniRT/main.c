@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 19:31:59 by florian           #+#    #+#             */
-/*   Updated: 2024/11/10 13:38:32 by florian          ###   ########.fr       */
+/*   Updated: 2024/11/11 21:40:43 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,16 +64,16 @@ int	main(int ac, char **av)
     add_object(world->objects, new_object);
     
     t_camera camera;
-    camera = create_camera(WINDOW_HEIGHT, WINDOW_WIDTH, 2*PI/3);
+    camera = create_camera(WINDOW_HEIGHT, WINDOW_WIDTH, PI/3);
     camera.transform = view_transform(create_point(0, 1.5, -5), create_point(0, 1, 0), create_vector(0, 1, 0));
     ft_init_image(&data);
     render(world, camera, data);
     // int y = 0;
     // int x = 0;
-    // float world_y;
-    // float world_x;
-    // float wall_size = 7;
-    // float pixel_size =wall_size / WINDOW_WIDTH;
+    // double world_y;
+    // double world_x;
+    // double wall_size = 7;
+    // double pixel_size =wall_size / WINDOW_WIDTH;
     // t_array *xs = init_array(2);
     // while (y < WINDOW_HEIGHT - 1)
     // {
@@ -84,7 +84,7 @@ int	main(int ac, char **av)
     //         world_x = - (wall_size/2) + x * pixel_size;
     //         t_tuple position = create_point(world_x, world_y, 10);
     //         t_tuple ray_origin = create_point(0, 0, -5);
-    //         t_ray ray = create_ray(ray_origin, normalize_vector(substract_floats(position, ray_origin)));
+    //         t_ray ray = create_ray(ray_origin, normalize_vector(substract_doubles(position, ray_origin)));
     //         xs = sphere_intersections(ray, new_object);
     //         if (hit_array(xs) != -1)
     //         {
