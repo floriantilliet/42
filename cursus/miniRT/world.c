@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 20:03:23 by florian           #+#    #+#             */
-/*   Updated: 2024/11/13 11:28:53 by florian          ###   ########.fr       */
+/*   Updated: 2024/11/13 12:05:30 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,17 @@ t_computations	prepare_computations(t_intersection intersection, t_ray ray)
 	}
 	else
 		comps.inside = 0;
+	comps.over_point = add_doubles(comps.point, multiply_tuple(comps.normalv,
+				EPSILON));
 	return (comps);
 }
 
 t_tuple	shade_hit(t_world *world, t_computations comps)
 {
+	int shadowed;
+	shadowed = is_shadowed(world, comps.over_point);
 	return (lighting(comps.object->material, world->light, comps.point,
-			comps.eyev, comps.normalv));
+			comps.eyev, comps.normalv, shadowed));
 }
 
 t_tuple	color_at(t_world *world, t_ray ray)

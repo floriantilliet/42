@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 21:00:48 by florian           #+#    #+#             */
-/*   Updated: 2024/11/11 21:58:04 by florian          ###   ########.fr       */
+/*   Updated: 2024/11/13 12:11:03 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_material	create_material(t_tuple color, double ambient, double diffuse,
 }
 
 t_tuple	lighting(t_material material, t_light light, t_tuple point,
-		t_tuple eye_vector, t_tuple normal_vector)
+		t_tuple eye_vector, t_tuple normal_vector, int shadowed)
 {
 	t_tuple effective_color = color_product(material.color, light.intensity);
 	t_tuple lightv = normalize_vector(substract_doubles(light.position, point));
@@ -44,7 +44,7 @@ t_tuple	lighting(t_material material, t_light light, t_tuple point,
 	double light_dot_normal = scalar_product(lightv, normal_vector);
 	t_tuple diffuse;
 	t_tuple specular;
-	if (light_dot_normal < 0)
+	if (shadowed == 1 || light_dot_normal < 0)
 	{
 		diffuse = create_vector(0, 0, 0);
 		specular = create_vector(0, 0, 0);

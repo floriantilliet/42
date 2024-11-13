@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 09:53:46 by florian           #+#    #+#             */
-/*   Updated: 2024/11/13 11:33:10 by florian          ###   ########.fr       */
+/*   Updated: 2024/11/13 11:59:13 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ typedef struct s_computations
 	double t;
 	t_objects *object;
 	t_tuple point;
+	t_tuple over_point;
 	t_tuple eyev;
 	t_tuple normalv;
 	int inside;
@@ -191,7 +192,7 @@ t_tuple substract_colors(t_tuple color1, t_tuple color2);
 t_tuple multiply_color(t_tuple color, double scalar);
 t_tuple color_product(t_tuple color1, t_tuple color2);
 int tuple_to_trgb(t_tuple color);
-t_tuple lighting(t_material material, t_light light, t_tuple point, t_tuple eye_vector, t_tuple normal_vector);
+t_tuple lighting(t_material material, t_light light, t_tuple point, t_tuple eye_vector, t_tuple normal_vector, int shadowed);
 t_light create_light(t_tuple position, t_tuple intensity);
 t_array *intersect_world(t_ray ray, t_world *world);
 t_world *init_world(void);
@@ -202,6 +203,7 @@ void render(t_world *world, t_camera camera, t_data data);
 t_4matrix view_transform(t_tuple from, t_tuple to, t_tuple up);
 int hit_index(t_array *a, double t);
 double	get_magnitude(t_tuple a);
+int is_shadowed(t_world *world, t_tuple point);
 
 t_array *init_array(size_t initialSize);
 void insert_array(t_array *a, double element, t_objects *object);
