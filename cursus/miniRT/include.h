@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 09:53:46 by florian           #+#    #+#             */
-/*   Updated: 2024/11/11 21:55:32 by florian          ###   ########.fr       */
+/*   Updated: 2024/11/13 11:19:05 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,7 +205,7 @@ int hit_index(t_array *a, double t);
 t_array *init_array(size_t initialSize);
 void insert_array(t_array *a, double element, t_objects *object);
 void print_array(t_array *a);
-double hit_array(t_array *a);
+t_intersection hit_array(t_array *a);
 t_array *concatenate_array(t_array *a, t_array *b);
 void sort_array(t_array *a);
 

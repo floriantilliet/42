@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 15:09:11 by florian           #+#    #+#             */
-/*   Updated: 2024/11/11 21:55:21 by florian          ###   ########.fr       */
+/*   Updated: 2024/11/13 11:27:46 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,21 +102,32 @@ void print_array(t_array *a)
   }
 }
 
-double hit_array(t_array *a)
+t_intersection hit_array(t_array *a)
 {
   double min = -1;
   size_t i = 0;
+  t_intersection hit;
+  t_objects *temp_object;
+  
   if (a == NULL)
-    return -1;
+  {
+    hit.t = -1;
+    hit.object = NULL;
+    return hit;
+  }
   while (i < a->used)
   {
     if (a->array[i].t >= 0 && (min == -1 || a->array[i].t < min))
     {
       min = a->array[i].t;
+      temp_object = a->array[i].object;
     }
     i++;
   }
-  return min;
+  i--;
+  hit.t = min;
+  hit.object = temp_object;
+  return(hit);
 }
 
 int hit_index(t_array *a, double t)

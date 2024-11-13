@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 20:03:23 by florian           #+#    #+#             */
-/*   Updated: 2024/11/11 22:28:29 by florian          ###   ########.fr       */
+/*   Updated: 2024/11/13 11:28:53 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,13 @@ t_tuple	color_at(t_world *world, t_ray ray)
 	t_array			*intersections;
 	t_computations	comps;
 	t_tuple			color;
+	t_intersection	hit;
 
 	intersections = intersect_world(ray, world);
-	if (hit_array(intersections) == -1)
-		return (create_point(1, 0, 0));
-	comps = prepare_computations(intersections->array[hit_index(intersections,
-				hit_array(intersections))], ray);
+	hit = hit_array(intersections);
+	if (hit.object == NULL)
+		return (create_point(0, 0, 0));
+	comps = prepare_computations(hit, ray);
 	color = shade_hit(world, comps);
 	return (color);
 }
