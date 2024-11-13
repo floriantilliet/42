@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 19:31:59 by florian           #+#    #+#             */
-/*   Updated: 2024/11/11 21:40:43 by florian          ###   ########.fr       */
+/*   Updated: 2024/11/13 15:44:40 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	main(int ac, char **av)
     add_object(world->objects, new_object);
     new_object = create_object(mat_product(translation_mat(1.5, 0.5, -0.5), scaling_mat(0.5, 0.5, 0.5)), create_material(create_vector(0.5, 1, 0.1), 0.1, 0.7, 0.3, 200));
     add_object(world->objects, new_object);
-    new_object = create_object(mat_product(translation_mat(-1.5, 0.33, -0.75), scaling_mat(0.3, 0.33, 0.33)), create_material(create_vector(1, 0.8, 0.1), 0.1, 0.7, 0.3, 200));
+    new_object = create_object(mat_product(translation_mat(-1.5, 0.33, -0.75), scaling_mat(0.33, 0.33, 0.33)), create_material(create_vector(1, 0.8, 0.1), 0.1, 0.7, 0.3, 200));
     add_object(world->objects, new_object);
     
     t_camera camera;
