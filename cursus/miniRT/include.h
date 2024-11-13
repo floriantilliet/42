@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 09:53:46 by florian           #+#    #+#             */
-/*   Updated: 2024/11/13 11:19:05 by florian          ###   ########.fr       */
+/*   Updated: 2024/11/13 11:33:10 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,6 +201,7 @@ void	ft_pixel_put(t_img *img, unsigned int x, unsigned int y, int color);
 void render(t_world *world, t_camera camera, t_data data);
 t_4matrix view_transform(t_tuple from, t_tuple to, t_tuple up);
 int hit_index(t_array *a, double t);
+double	get_magnitude(t_tuple a);
 
 t_array *init_array(size_t initialSize);
 void insert_array(t_array *a, double element, t_objects *object);
